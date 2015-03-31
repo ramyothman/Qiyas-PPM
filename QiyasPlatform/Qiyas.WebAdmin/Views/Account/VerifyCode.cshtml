@@ -1,0 +1,29 @@
+﻿@model Qiyas.WebAdmin.Models.VerifyCodeViewModel
+@{
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+    ViewBag.Title = Resources.MainResource.VerifyTitle;
+}
+
+@using (Html.BeginForm("VerifyCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("provider", @Model.Provider)
+    @Html.Hidden("rememberMe", @Model.RememberMe)
+    <h4>@Resources.MainResource.VerifyMainLabel</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group verify-code-submit">
+        @Html.TextBoxFor(m => m.Code, new { @class = "form-control", @placeholder = Resources.ModelResource.Code })
+        <input type="submit" class="btn btn-default" value="&#xf053;" />
+    </div>
+    <div class="form-options clearfix">
+        <div class="text-left">
+            <label class="checkbox"><input data-val="true" id="RememberBrowser" name="RememberBrowser" type="checkbox" value="true" class="pull-right"><span>@Html.LabelFor(m => m.RememberBrowser)</span></label>
+        </div>
+    </div>
+    
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

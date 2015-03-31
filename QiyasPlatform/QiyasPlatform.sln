@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{4FC23EBC-9E2A-47FF-9E07-766B801DCFA6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logic", "Logic", "{D8E79C2A-1A3E-4B33-B21B-A407AD988E04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{2F1B3488-09BB-4CAD-ACD8-66A0A5FCC470}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qiyas.DataAccessLayer", "Qiyas.DataAccessLayer\Qiyas.DataAccessLayer.csproj", "{5C7861A1-EEEA-4A10-8036-F1C8B5E453E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qiyas.BusinessLogicLayer", "Qiyas.BusinessLogicLayer\Qiyas.BusinessLogicLayer.csproj", "{B299E9A7-F8AA-4EA1-A350-E4C5A47F41A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qiyas.CommonWeb", "Qiyas.CommonWeb\Qiyas.CommonWeb.csproj", "{E093144E-30A6-4270-A29F-133044793677}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{72FAF0D1-1734-4FA4-9095-F68D6B863E4B}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qiyas.WebAdmin", "Qiyas.WebAdmin\Qiyas.WebAdmin.csproj", "{48D0C8E5-7747-45D7-88B9-E0A920F2DFF1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{BECE590A-CCC0-45F3-8223-66F4CF486524}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C7861A1-EEEA-4A10-8036-F1C8B5E453E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C7861A1-EEEA-4A10-8036-F1C8B5E453E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C7861A1-EEEA-4A10-8036-F1C8B5E453E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C7861A1-EEEA-4A10-8036-F1C8B5E453E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B299E9A7-F8AA-4EA1-A350-E4C5A47F41A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B299E9A7-F8AA-4EA1-A350-E4C5A47F41A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B299E9A7-F8AA-4EA1-A350-E4C5A47F41A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B299E9A7-F8AA-4EA1-A350-E4C5A47F41A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E093144E-30A6-4270-A29F-133044793677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E093144E-30A6-4270-A29F-133044793677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E093144E-30A6-4270-A29F-133044793677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E093144E-30A6-4270-A29F-133044793677}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48D0C8E5-7747-45D7-88B9-E0A920F2DFF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48D0C8E5-7747-45D7-88B9-E0A920F2DFF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48D0C8E5-7747-45D7-88B9-E0A920F2DFF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48D0C8E5-7747-45D7-88B9-E0A920F2DFF1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5C7861A1-EEEA-4A10-8036-F1C8B5E453E1} = {D8E79C2A-1A3E-4B33-B21B-A407AD988E04}
+		{B299E9A7-F8AA-4EA1-A350-E4C5A47F41A3} = {D8E79C2A-1A3E-4B33-B21B-A407AD988E04}
+		{E093144E-30A6-4270-A29F-133044793677} = {2F1B3488-09BB-4CAD-ACD8-66A0A5FCC470}
+		{48D0C8E5-7747-45D7-88B9-E0A920F2DFF1} = {2F1B3488-09BB-4CAD-ACD8-66A0A5FCC470}
+	EndGlobalSection
+EndGlobal

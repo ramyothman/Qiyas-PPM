@@ -1,0 +1,86 @@
+@{
+	var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView";
+
+        settings.CallbackRouteValues = new { Controller = "ExamType", Action = "ExamTypeGridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "ExamType", Action = "ExamTypeGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ExamType", Action = "ExamTypeGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ExamType", Action = "ExamTypeGridViewPartialDelete" };
+        settings.KeyFieldName = "ExaminationTypeID";
+        
+        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
+        settings.SettingsBehavior.ConfirmDelete = true;
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.SettingsCommandButton.NewButton.Text = @Resources.MainResource.New;
+        settings.SettingsCommandButton.EditButton.Text = " ";
+        settings.SettingsCommandButton.EditButton.Styles.Style.CssClass = "fa fa fa-pencil";
+        settings.SettingsCommandButton.DeleteButton.Text = " ";
+        settings.SettingsCommandButton.DeleteButton.Styles.Style.CssClass = "fa fa-trash-o";
+        settings.SettingsCommandButton.CancelButton.Text = @Resources.MainResource.Cancel;
+        settings.SettingsCommandButton.ClearFilterButton.Text = @Resources.MainResource.Clear;
+        settings.SettingsCommandButton.UpdateButton.Text = @Resources.MainResource.Save;
+        settings.SettingsCommandButton.UpdateButton.ButtonType = GridViewCommandButtonType.Button;
+        settings.SettingsCommandButton.CancelButton.ButtonType = GridViewCommandButtonType.Button;
+        settings.CommandColumn.Width = new System.Web.UI.WebControls.Unit("60px");
+		settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+        
+        settings.SettingsSearchPanel.Visible = true;
+        settings.SettingsSearchPanel.ShowClearButton = true;
+        settings.Styles.SearchPanel.CssClass = "dxgvSearchPanel_MetropolisBlue search_devexpress";
+        
+        settings.SettingsText.CommandClearSearchPanelFilter = @Resources.MainResource.Clear;
+        settings.SettingsText.SearchPanelEditorNullText = @Resources.MainResource.SearchNullText;
+        settings.SettingsText.PopupEditFormCaption = @Resources.MainResource.EditFormExamTypeTitle;
+        settings.SettingsText.ConfirmDelete = @Resources.MainResource.DeleteMessage;
+        settings.SettingsText.EmptyDataRow = @Resources.MainResource.NoData;
+        settings.SettingsPager.Summary.Text = Resources.MainResource.PageSummaryText;
+        
+        settings.Width = new System.Web.UI.WebControls.Unit("100%");
+        settings.RightToLeft = DefaultBoolean.True;
+		settings.SettingsPager.Visible = true;
+		settings.Settings.ShowFilterRow = true;
+		settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Styles.AlternatingRow.BackColor = System.Drawing.Color.FromName("#f9f9f9");
+        
+        settings.SettingsPopup.EditForm.Width = new System.Web.UI.WebControls.Unit("350px");
+        settings.SettingsPopup.EditForm.Modal = true;
+        settings.SettingsPopup.EditForm.CloseOnEscape = AutoBoolean.True;
+        settings.SettingsPopup.EditForm.HorizontalAlign = PopupHorizontalAlign.WindowCenter;
+        settings.SettingsPopup.EditForm.VerticalAlign = PopupVerticalAlign.WindowCenter;
+        
+        
+        settings.Columns.Add(column => {
+            column.FieldName = "Name";
+            column.EditFormSettings.ColumnSpan = 2;
+            column.Caption = @Resources.ModelResource.ExamTypeName;
+            
+            column.ColumnType = MVCxGridViewColumnType.TextBox;
+            var textProperties = column.PropertiesEdit as TextBoxProperties;
+            textProperties.ValidationSettings.RequiredField.IsRequired = true;
+            textProperties.ValidationSettings.RequiredField.ErrorText = "*";
+            textProperties.ValidationSettings.Display = Display.Dynamic;
+            textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+        });
+
+        
+        
+        
+        settings.Columns.Add(column => {
+            column.FieldName = "IsActive";
+            column.Caption = @Resources.ModelResource.IsActive;
+            column.Width = new System.Web.UI.WebControls.Unit("50px");
+            column.ColumnType = MVCxGridViewColumnType.CheckBox;
+            (column.PropertiesEdit as CheckBoxProperties).DisplayTextChecked = @Resources.MainResource.IsActiveTrue;
+            (column.PropertiesEdit as CheckBoxProperties).DisplayTextUnchecked = @Resources.MainResource.IsActiveFalse;
+        });
+        
+			});
+		if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

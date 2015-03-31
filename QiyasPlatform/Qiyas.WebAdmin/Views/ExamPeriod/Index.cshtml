@@ -1,0 +1,73 @@
+﻿@model Qiyas.BusinessLogicLayer.Entity.PPM.ExamPeriod
+
+@{
+    ViewBag.Title = Resources.MainResource.ExamPeriodTitle;
+}
+
+
+<div class="page-title">
+    <h1>
+        @Resources.MainResource.ExamPeriodTitle
+    </h1>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+                @Html.Action("ExamPeriodGridViewPartial")
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+<script src="~/Scripts/jquery.plugin.js"></script>
+<!--<script src="jquery.calendars.all.js"></script><!-- Use instead of calendars, plus, and picker below -->
+<script src="~/Scripts/calendar/jquery.calendars.js"></script>
+<script src="~/Scripts/calendar/jquery.calendars.plus.js"></script>
+<script src="~/Scripts/calendar/jquery.calendars.picker.js"></script>
+<!--<script src="jquery.calendars.picker.ext.js"></script><!-- Include for ThemeRoller styling -->
+<script src="~/Scripts/calendar/jquery.calendars.ummalqura.js"></script>
+
+<script>
+    function InitStartDate(s, e) {
+        var calendar = $.calendars.instance('ummalqura');
+        $('#ExamPeriodGridView_DXPEForm_DXEditor5_I').calendarsPicker({ calendar: calendar });
+    }
+
+    function InitEndDate(s, e) {
+        var calendar = $.calendars.instance('ummalqura');
+        $('#ExamPeriodGridView_DXPEForm_DXEditor6_I').calendarsPicker({ calendar: calendar });
+    }
+
+    function GetName(s, e) {
+        if (ExamPeriodGridView.GetEditor('ExamTypeID') == null)
+            return;
+        var examType = '';
+        //alert('1');
+        if (ExamPeriodGridView.GetEditor('ExamTypeID').GetValue() > 0)
+            examType = ExamPeriodGridView.GetEditor('ExamTypeID').GetText();
+        //alert('2');
+        var examYear = '';
+        if (ExamPeriodGridView.GetEditor('ExamYear').GetValue() > 0)
+            examYear = ExamPeriodGridView.GetEditor('ExamYear').GetValue();
+        //alert('3');
+        var examGender = '';
+        if (ExamPeriodGridView.GetEditor('StudentGenderID').GetValue() > 0)
+            examGender = ExamPeriodGridView.GetEditor('StudentGenderID').GetText();
+        //alert('4');
+        var name = '';
+        if (examType != '')
+            name += examType + ' ';
+        if (examYear != '')
+            name += '' + examYear + ' ';
+        if (examGender != '')
+            name += examGender;
+
+        ExamPeriodGridView.GetEditor('ExamPeriodName').SetValue(name);
+
+    }
+</script>
+}

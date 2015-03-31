@@ -1,0 +1,17 @@
+﻿@Html.DevExpress().ComboBox(settings =>
+{
+    settings.CallbackRouteValues = new { Controller = "City", Action = "ComboBoxCityPartial" };
+    settings.Name = "CityID";
+    settings.Width = new System.Web.UI.WebControls.Unit("100%");
+    settings.Properties.TextField = "Name";
+    settings.Properties.ValueField = "CityID";
+    settings.Properties.ValueType = typeof(int);
+    settings.Properties.ValidationSettings.RequiredField.IsRequired = true;
+    settings.Properties.ValidationSettings.RequiredField.ErrorText = "*";
+    settings.Properties.ValidationSettings.Display = Display.Dynamic;
+    settings.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+    
+    settings.Properties.EnableSynchronization = DefaultBoolean.False;
+
+    settings.Properties.ClientSideEvents.BeginCallback = "CitiesCombo_BeginCallback";
+}).BindList(Model).Bind(ViewData["CityID"]).GetHtml()

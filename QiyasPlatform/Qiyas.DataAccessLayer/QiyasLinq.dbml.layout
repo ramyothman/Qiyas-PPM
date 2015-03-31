@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 15.625, 20.375" name="QiyasLinq">
+  <DataContextMoniker Name="/QiyasLinqDataContext" />
+  <nestedChildShapes>
+    <classShape Id="663c7909-940d-416d-82e8-6c3114e45b55" absoluteBounds="0.625, 1.5, 2, 1.3862939453125">
+      <DataClassMoniker Name="/QiyasLinqDataContext/BusinessEntity" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0bf8f802-74ff-43a9-8ece-ac101c35be43" absoluteBounds="0.64, 1.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7498575b-1058-4894-932d-54f0ea06cd8f" absoluteBounds="3.375, 2.375, 2, 3.6939111328124996">
+      <DataClassMoniker Name="/QiyasLinqDataContext/Person" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3ebf3f8f-56df-47d8-9392-7492fda0a873" absoluteBounds="3.39, 2.835, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.625 : 2.63064697265625); (2.63541666666667 : 2.63064697265625 : JumpStart); (2.80208333333333 : 2.63064697265625 : JumpEnd); (3.375 : 2.63064697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/QiyasLinqDataContext/BusinessEntity/BusinessEntity_Person" />
+      <nodes>
+        <classShapeMoniker Id="663c7909-940d-416d-82e8-6c3114e45b55" />
+        <classShapeMoniker Id="7498575b-1058-4894-932d-54f0ea06cd8f" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="df03bed0-216e-4c76-bce7-d54f63ce02d5" absoluteBounds="7.375, 1.125, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/QiyasLinqDataContext/UserClaim" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dcdef109-56cf-48fc-987a-185a742d977d" absoluteBounds="7.39, 1.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.375 : 2.63544840494792); (7.375 : 2.63544840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/QiyasLinqDataContext/Person/Person_UserClaim" />
+      <nodes>
+        <classShapeMoniker Id="7498575b-1058-4894-932d-54f0ea06cd8f" />
+        <classShapeMoniker Id="df03bed0-216e-4c76-bce7-d54f63ce02d5" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="641c08d8-c29f-4f7d-91f1-c87fe0fbc965" absoluteBounds="5.125, 6.5, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/QiyasLinqDataContext/UserLoginProvider" />
+      <nestedChildShapes>
+        <elementListCompartment Id="97cea8cb-4564-4a41-a6bc-378f9c035e3b" absoluteBounds="5.14, 6.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.2499995 : 6.0689111328125); (4.2499995 : 7.38544840494792); (5.125 : 7.38544840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/QiyasLinqDataContext/Person/Person_UserLoginProvider" />
+      <nodes>
+        <classShapeMoniker Id="7498575b-1058-4894-932d-54f0ea06cd8f" />
+        <classShapeMoniker Id="641c08d8-c29f-4f7d-91f1-c87fe0fbc965" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="7f066be8-4d65-42fe-9929-135bf9f0d2ab" absoluteBounds="3.625, 0.5, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/QiyasLinqDataContext/Role" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2c3ffb47-634a-4a43-a915-5bcfd68dbe3e" absoluteBounds="3.6399999999999997, 0.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d83d6193-73dd-433d-9a0b-f5867360d10b" absoluteBounds="0.75, 4, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/QiyasLinqDataContext/PersonRole" />
+      <nestedChildShapes>
+        <elementListCompartment Id="921644a2-a03a-4db8-ae2b-86e2ccb00b00" absoluteBounds="0.76499999999999968, 4.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.625 : 0.96875); (2.71875 : 0.96875); (2.71875 : 4)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/QiyasLinqDataContext/Role/Role_PersonRole" />
+      <nodes>
+        <classShapeMoniker Id="7f066be8-4d65-42fe-9929-135bf9f0d2ab" />
+        <classShapeMoniker Id="d83d6193-73dd-433d-9a0b-f5867360d10b" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="f94319b7-76fd-43e8-8434-2d8f1fbfee37" absoluteBounds="7.25, 3.375, 2, 5.0400211588541657">
+      <DataClassMoniker Name="/QiyasLinqDataContext/Credential" />
+      <nestedChildShapes>
+        <elementListCompartment Id="13584f6d-dd98-4fb0-8cca-dec8c370c148" absoluteBounds="7.265, 3.835, 1.9700000000000002, 4.4800211588541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.25 : 6.28445556640625); (4.33333283333333 : 6.28445556640625 : JumpStart); (4.16666616666667 : 6.28445556640625 : JumpEnd); (2.65625 : 6.28445556640625); (2.65625 : 5.57859537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/QiyasLinqDataContext/Credential/Credential_PersonRole" />
+      <nodes>
+        <classShapeMoniker Id="f94319b7-76fd-43e8-8434-2d8f1fbfee37" />
+        <classShapeMoniker Id="d83d6193-73dd-433d-9a0b-f5867360d10b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.375 : 4.72195556640625); (7.25 : 4.72195556640625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/QiyasLinqDataContext/Person/Person_Credential" />
+      <nodes>
+        <classShapeMoniker Id="7498575b-1058-4894-932d-54f0ea06cd8f" />
+        <classShapeMoniker Id="f94319b7-76fd-43e8-8434-2d8f1fbfee37" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="6f1568a7-a166-4fb3-be2c-1397005df2ab" absoluteBounds="4, 11.25, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/QiyasLinqDataContext/StudentGender" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ee9b73d2-f5a5-4c31-928a-46b1f34df723" absoluteBounds="4.015, 11.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c6ab9a88-3816-4dc8-9890-bb13fde77af8" absoluteBounds="1.75, 10.25, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/QiyasLinqDataContext/PackagingType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e3f00861-e703-40b8-aa3a-23e3758b94cf" absoluteBounds="1.7650000000000001, 10.71, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="40bd05e1-29eb-4d79-835b-3bb7fb3f316b" absoluteBounds="4.25, 9.25, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/QiyasLinqDataContext/OperationStatus" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8a4a6b75-65b5-45b9-887f-3604dc0a55c4" absoluteBounds="4.265, 9.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7e0857a0-6b0b-44e8-8679-45d15644973d" absoluteBounds="0.5, 8.125, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/QiyasLinqDataContext/ExamType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="443cb842-a63c-4c54-b0b3-3d41fe42ea96" absoluteBounds="0.51500000000000012, 8.585, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="049f27f7-e607-41ee-9c8d-e1f85d396477" absoluteBounds="5.125, 12.875, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/QiyasLinqDataContext/ExamSpeciality" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0faf993a-721d-4cc7-a5dd-ff6887438f46" absoluteBounds="5.14, 13.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 8.60937325); (4.125 : 8.60937325); (4.125 : 11); (6.25 : 11); (6.25 : 12.5); (6.125 : 12.5); (6.125 : 12.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/QiyasLinqDataContext/ExamType/ExamType_ExamSpeciality" />
+      <nodes>
+        <classShapeMoniker Id="7e0857a0-6b0b-44e8-8679-45d15644973d" />
+        <classShapeMoniker Id="049f27f7-e607-41ee-9c8d-e1f85d396477" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="374735a9-69cf-451f-b9a7-2006c84f7cde" absoluteBounds="3.375, 13.375, 2, 3.1170068359375">
+      <DataClassMoniker Name="/QiyasLinqDataContext/ExamPeriod" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2d6a8b1b-4f46-4e8c-b2c4-6ac2b4f51aed" absoluteBounds="3.39, 13.835, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 9.1562505); (3.875 : 9.1562505); (3.875 : 13.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/QiyasLinqDataContext/ExamType/ExamType_ExamPeriod" />
+      <nodes>
+        <classShapeMoniker Id="7e0857a0-6b0b-44e8-8679-45d15644973d" />
+        <classShapeMoniker Id="374735a9-69cf-451f-b9a7-2006c84f7cde" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.53125 : 12.4439925130208); (4.53125 : 13.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/QiyasLinqDataContext/StudentGender/StudentGender_ExamPeriod" />
+      <nodes>
+        <classShapeMoniker Id="6f1568a7-a166-4fb3-be2c-1397005df2ab" />
+        <classShapeMoniker Id="374735a9-69cf-451f-b9a7-2006c84f7cde" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="5a2140d4-56fb-4eb1-817f-4cc1afc9536b" absoluteBounds="3.375, 17, 2, 3.1170068359375">
+      <DataClassMoniker Name="/QiyasLinqDataContext/BookPrintingOperation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="62cdf64f-face-44ae-8653-c670a5b1b959" absoluteBounds="3.3899999999999997, 17.46, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.25 : 9.84699625651042); (3.9375 : 9.84699625651042); (3.9375 : 13.3125); (3.3125 : 13.3125); (3.3125 : 16.90625); (4.375 : 16.90625); (4.375 : 17)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/QiyasLinqDataContext/OperationStatus/OperationStatus_BookPrintingOperation" />
+      <nodes>
+        <classShapeMoniker Id="40bd05e1-29eb-4d79-835b-3bb7fb3f316b" />
+        <classShapeMoniker Id="5a2140d4-56fb-4eb1-817f-4cc1afc9536b" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="28943446-d77c-4ab2-8f2a-ed5db2871f63" absoluteBounds="8, 15.5, 2, 1.9631982421875">
+      <DataClassMoniker Name="/QiyasLinqDataContext/BookPackingOperation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cc265aa1-5748-40b5-8696-39db2c6538b4" absoluteBounds="8.015, 15.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="71c3b4dd-4587-40fb-8231-8ebf08a378eb" absoluteBounds="10, 3.875, 2, 1.3862939453125">
+      <DataClassMoniker Name="/QiyasLinqDataContext/CountryRegion" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7f7288e6-784f-4cd7-b2c8-9f11c1b48cb2" absoluteBounds="10.015, 4.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e1508d02-4c96-4070-aae7-1b3b0d3831e6" absoluteBounds="13.375, 3.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/QiyasLinqDataContext/StateProvince" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6abc36c0-7f11-4895-a630-f31899b0dd69" absoluteBounds="13.39, 4.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(12 : 4.56814697265625); (12.0729166666667 : 4.56814697265625 : JumpStart); (12.2395833333333 : 4.56814697265625 : JumpEnd); (13.375 : 4.56814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/QiyasLinqDataContext/CountryRegion/CountryRegion_StateProvince" />
+      <nodes>
+        <classShapeMoniker Id="71c3b4dd-4587-40fb-8231-8ebf08a378eb" />
+        <classShapeMoniker Id="e1508d02-4c96-4070-aae7-1b3b0d3831e6" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="ea41b9a8-06ef-4eec-8edb-f937ee9dce1b" absoluteBounds="11.75, 1.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/QiyasLinqDataContext/City" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ae07b79f-3e3d-49ea-ad80-4ddbb22f34a4" absoluteBounds="11.765, 2.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(13.5625 : 3.75); (13.5625 : 3.45359537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/QiyasLinqDataContext/StateProvince/StateProvince_City" />
+      <nodes>
+        <classShapeMoniker Id="e1508d02-4c96-4070-aae7-1b3b0d3831e6" />
+        <classShapeMoniker Id="ea41b9a8-06ef-4eec-8edb-f937ee9dce1b" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="ff9b3102-89ad-4a20-b949-2ba42213ef90" absoluteBounds="10.25, 9.5, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/QiyasLinqDataContext/ExamCenter" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d4c0896c-6b60-4566-9990-cc78f81a3b89" absoluteBounds="10.265, 9.96, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(12.15625 : 3.45359537760417); (12.15625 : 9.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/QiyasLinqDataContext/City/City_ExamCenter" />
+      <nodes>
+        <classShapeMoniker Id="ea41b9a8-06ef-4eec-8edb-f937ee9dce1b" />
+        <classShapeMoniker Id="ff9b3102-89ad-4a20-b949-2ba42213ef90" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6 : 12.1022001139323); (6.16666666666667 : 12.1022001139323 : JumpStart); (6.33333333333333 : 12.1022001139323 : JumpEnd); (6.54166666666667 : 12.1022001139323 : JumpStart); (6.70833333333333 : 12.1022001139323 : JumpEnd); (10.25 : 12.1022001139323)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/QiyasLinqDataContext/StudentGender/StudentGender_ExamCenter" />
+      <nodes>
+        <classShapeMoniker Id="6f1568a7-a166-4fb3-be2c-1397005df2ab" />
+        <classShapeMoniker Id="ff9b3102-89ad-4a20-b949-2ba42213ef90" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="05498f4b-4142-45b2-ab53-f5342b8c7af4" absoluteBounds="10.75, 13.625, 2, 3.5016097005208326">
+      <DataClassMoniker Name="/QiyasLinqDataContext/ViewExamCenter" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2786188c-5550-4efa-8cc6-3cca4ee7ac8b" absoluteBounds="10.765, 14.085, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9b9168fc-9eab-4fc1-a794-ff1fa6784dd1" absoluteBounds="8.5, 13.125, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/QiyasLinqDataContext/ExamModel" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e730870c-234d-4bfe-b963-3528c4d50806" absoluteBounds="8.515, 13.585, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cab57183-4ee3-4087-b47a-7ef3b252e45a" absoluteBounds="0.5, 13.375, 2, 4.2708154296875">
+      <DataClassMoniker Name="/QiyasLinqDataContext/ExamView" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3b0d766a-4e4f-42cf-b633-947e52a228df" absoluteBounds="0.515, 13.835, 1.9700000000000002, 3.7108154296875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e98a4160-6be9-4311-ab14-d7a382015252" absoluteBounds="6.875, 9.5, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/QiyasLinqDataContext/PackageWeight" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c21687ec-cab1-46df-bce2-d08e9c4a5035" absoluteBounds="6.89, 9.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c912f72c-af3b-4382-aa0e-2607aef75740" absoluteBounds="5.875, 15.75, 2, 3.5016097005208326">
+      <DataClassMoniker Name="/QiyasLinqDataContext/Exam" />
+      <nestedChildShapes>
+        <elementListCompartment Id="605a6df0-4d9e-4304-a55b-a20e2e796db2" absoluteBounds="5.89, 16.21, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.875 : 18.1258048502604); (5.375 : 18.1258048502604)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/QiyasLinqDataContext/Exam/Exam_BookPrintingOperation" />
+      <nodes>
+        <classShapeMoniker Id="c912f72c-af3b-4382-aa0e-2607aef75740" />
+        <classShapeMoniker Id="5a2140d4-56fb-4eb1-817f-4cc1afc9536b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.5 : 15.2228011067708); (6.5 : 15.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/QiyasLinqDataContext/ExamSpeciality/ExamSpeciality_Exam" />
+      <nodes>
+        <classShapeMoniker Id="049f27f7-e607-41ee-9c8d-e1f85d396477" />
+        <classShapeMoniker Id="c912f72c-af3b-4382-aa0e-2607aef75740" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6 : 11.8469962565104); (6.16666666666667 : 11.8469962565104 : JumpStart); (6.33333333333333 : 11.8469962565104 : JumpEnd); (6.625 : 11.8469962565104); (6.625 : 12.625); (7.375 : 12.625); (7.375 : 15.375); (7.218752 : 15.375); (7.218752 : 15.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/QiyasLinqDataContext/StudentGender/StudentGender_Exam" />
+      <nodes>
+        <classShapeMoniker Id="6f1568a7-a166-4fb3-be2c-1397005df2ab" />
+        <classShapeMoniker Id="c912f72c-af3b-4382-aa0e-2607aef75740" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

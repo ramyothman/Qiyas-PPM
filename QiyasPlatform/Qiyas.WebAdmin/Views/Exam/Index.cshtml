@@ -1,0 +1,64 @@
+﻿@model Qiyas.BusinessLogicLayer.Entity.PPM.Exam
+
+@{
+    ViewBag.Title = Resources.MainResource.ExamTitle;
+}
+
+
+<div class="page-title">
+    <h1>
+        @Resources.MainResource.ExamTitle
+    </h1>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+                
+                @Html.Action("ExamGridViewPartial")
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function ExamTypeCombo_SelectedIndexChanged(s, e) {
+            ExamSpecialityID.PerformCallback();
+        }
+
+        function ExamSpecialityCombo_BeginCallback(s, e) {
+            e.customArgs['ExamTypeID'] = ExamGridView.GetEditor('ExamTypeID').GetValue();
+        }
+
+        function GetExamName(s, e) {
+            if (ExamGridView.GetEditor('ExamTypeID') == null)
+                return;
+            var examType = '';
+            
+            if (ExamGridView.GetEditor('ExamTypeID').GetValue() > 0)
+                examType = ExamGridView.GetEditor('ExamTypeID').GetText();
+            
+            var examSpeciality = '';
+            if (ExamSpecialityID.GetValue() > 0)
+                examSpeciality = ExamSpecialityID.GetText();
+            
+            var examGender = '';
+            if (ExamGridView.GetEditor('StudentGenderID').GetValue() > 0)
+                examGender = ExamGridView.GetEditor('StudentGenderID').GetText();
+            
+            var name = 'اختبار ';
+            if (examType != '')
+                name += examType + ' ';
+            if (examSpeciality != '')
+                name += 'تخصص ' + examSpeciality + ' ';
+            if (examGender != '')
+                name += examGender;
+            
+            ExamGridView.GetEditor('ExamName').SetValue(name);
+            
+
+        }
+    </script>
+}

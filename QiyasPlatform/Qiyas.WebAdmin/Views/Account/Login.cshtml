@@ -1,0 +1,32 @@
+﻿@using Qiyas.WebAdmin.Models
+@model LoginViewModel
+@{
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+    ViewBag.Title = Resources.MainResource.LoginPageTitle;
+}
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = Resources.MainResource.LoginPageUserName })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = Resources.MainResource.LoginPagePassword })
+        <input type="submit" class="pull-right" value="&#xf053;" />
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        
+    </div>
+    
+    <div class="form-options clearfix">
+        <div class="pull-right">@Html.ActionLink(@Resources.MainResource.LoginPageForgotPassword, "ForgotPassword")</div>
+        <div class="text-left">
+            <label class="checkbox"><input data-val="true" id="RememberMe" name="RememberMe" type="checkbox" value="true" class="pull-right" /><span>@Resources.MainResource.LoginPageRememberMe</span></label>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

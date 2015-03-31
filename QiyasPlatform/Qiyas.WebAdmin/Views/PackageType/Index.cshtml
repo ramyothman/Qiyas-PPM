@@ -1,0 +1,52 @@
+﻿@model Qiyas.BusinessLogicLayer.Entity.PPM.PackagingType
+
+@{
+    ViewBag.Title = Resources.MainResource.PackageTypeTitle;
+}
+
+<div class="page-title">
+    <h1>
+        @Resources.MainResource.PackageTypeTitle
+    </h1>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+                @Html.Action("PackageTypeGridViewPartial")
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function PackageType_CalculateFields(s, e) {
+            if (PackageTypeGridView.GetEditor('BooksPerPackage') == null)
+                return;
+            var booksPerPackage = PackageTypeGridView.GetEditor('BooksPerPackage').GetValue();
+            var examModelCount = PackageTypeGridView.GetEditor('ExamModelCount').GetValue();
+            var total = booksPerPackage * examModelCount;
+            PackageTypeGridView.GetEditor('Total').SetValue(total);
+            var name = '';
+            if (examModelCount == 1) {
+                name = 'موحد (' + booksPerPackage + ')';
+            }
+            else if (examModelCount > 1) {
+                name = 'متعدد(' + booksPerPackage + 'x' + examModelCount + ')';
+            }
+            PackageTypeGridView.GetEditor('PackageName').SetValue(name);
+            
+        }
+
+        function InitializeFields(s, e) {
+            if (s != null && s.GetClientVisible()) {
+                if (s.GetValue() == null) {
+                    s.SetValue(1);
+                    if(s != null && s.GetClientVisible())
+                        PackageType_CalculateFields(null, null);
+                }
+            }
+        }
+    </script>
+}

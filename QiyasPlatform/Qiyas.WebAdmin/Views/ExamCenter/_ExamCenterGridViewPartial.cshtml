@@ -1,0 +1,198 @@
+@{
+	var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "grid";
+        settings.CallbackRouteValues = new { Controller = "ExamCenter", Action = "ExamCenterGridViewPartial" };
+
+		settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "ExamCenter", Action = "ExamCenterGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ExamCenter", Action = "ExamCenterGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ExamCenter", Action = "ExamCenterGridViewPartialDelete" };
+        settings.KeyFieldName = "ExaminationCenterID";
+
+        settings.SettingsBehavior.ConfirmDelete = true;
+        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
+
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.SettingsCommandButton.NewButton.Text = @Resources.MainResource.New;
+        settings.SettingsCommandButton.EditButton.Text = " ";
+        settings.SettingsCommandButton.EditButton.Styles.Style.CssClass = "fa fa fa-pencil";
+        settings.SettingsCommandButton.DeleteButton.Text = " ";
+        settings.SettingsCommandButton.DeleteButton.Styles.Style.CssClass = "fa fa-trash-o";
+        settings.SettingsCommandButton.CancelButton.Text = @Resources.MainResource.Cancel;
+        settings.SettingsCommandButton.ClearFilterButton.Text = @Resources.MainResource.Clear;
+        settings.SettingsCommandButton.UpdateButton.Text = @Resources.MainResource.Save;
+        settings.SettingsCommandButton.UpdateButton.ButtonType = GridViewCommandButtonType.Button;
+        settings.SettingsCommandButton.CancelButton.ButtonType = GridViewCommandButtonType.Button;
+        settings.CommandColumn.Width = new System.Web.UI.WebControls.Unit("60px");
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.SettingsSearchPanel.Visible = true;
+        settings.SettingsSearchPanel.ShowClearButton = true;
+        settings.Styles.SearchPanel.CssClass = "dxgvSearchPanel_MetropolisBlue search_devexpress";
+
+        settings.SettingsText.CommandClearSearchPanelFilter = @Resources.MainResource.Clear;
+        settings.SettingsText.SearchPanelEditorNullText = @Resources.MainResource.SearchNullText;
+        settings.SettingsText.PopupEditFormCaption = @Resources.MainResource.StateProvinceEditFormTitle;
+        settings.SettingsText.ConfirmDelete = @Resources.MainResource.DeleteMessage;
+        settings.SettingsText.EmptyDataRow = @Resources.MainResource.NoData;
+        settings.SettingsPager.Summary.Text = Resources.MainResource.PageSummaryText;
+
+        settings.SettingsPopup.EditForm.Width = new System.Web.UI.WebControls.Unit("350px");
+        settings.SettingsPopup.EditForm.Modal = true;
+        settings.SettingsPopup.EditForm.CloseOnEscape = AutoBoolean.True;
+        settings.SettingsPopup.EditForm.HorizontalAlign = PopupHorizontalAlign.WindowCenter;
+        settings.SettingsPopup.EditForm.VerticalAlign = PopupVerticalAlign.WindowCenter;
+
+
+        settings.Width = new System.Web.UI.WebControls.Unit("100%");
+        settings.RightToLeft = DefaultBoolean.True;
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Styles.AlternatingRow.BackColor = System.Drawing.Color.FromName("#f9f9f9");
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "StateProvinceName";
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.Caption = @Resources.ModelResource.StateProvinceName;
+                    column.Width = new System.Web.UI.WebControls.Unit("20%");
+                    column.EditFormSettings.Visible = DefaultBoolean.False;
+                    column.ColumnType = MVCxGridViewColumnType.TextBox;
+                });
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "CityName";
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.Width = new System.Web.UI.WebControls.Unit("20%");
+                    column.Caption = @Resources.ModelResource.StateProvinceName;
+                    column.EditFormSettings.Visible = DefaultBoolean.False;
+                    column.ColumnType = MVCxGridViewColumnType.TextBox;
+                });
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "StateProvinceID";
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.Caption = @Resources.ModelResource.StateProvinceName;
+                    column.Width = new System.Web.UI.WebControls.Unit("20%");
+                    column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Right;
+                    column.ColumnType = MVCxGridViewColumnType.ComboBox;
+                    column.Visible = false;
+                    column.EditFormSettings.Visible = DefaultBoolean.True;
+                    var comboProperties = column.PropertiesEdit as ComboBoxProperties;
+                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.Persons.StateProvinceLogic().GetAll());
+                    comboProperties.TextField = "Name";
+                    comboProperties.ValueField = "StateProvinceID";
+                    
+                    comboProperties.ValueType = typeof(int);
+                    comboProperties.ValidationSettings.RequiredField.IsRequired = true;
+                    comboProperties.ValidationSettings.RequiredField.ErrorText = "*";
+                    comboProperties.ValidationSettings.Display = Display.Dynamic;
+                    comboProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+
+                    comboProperties.EnableSynchronization = DefaultBoolean.False;
+
+                    comboProperties.ClientSideEvents.SelectedIndexChanged = "StateCombo_SelectedIndexChanged";
+                    
+                });
+                
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "CityID";
+                    column.Visible = false;
+                    column.EditFormSettings.Visible = DefaultBoolean.True;
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.Caption = @Resources.ModelResource.CityName;
+                    column.Width = new System.Web.UI.WebControls.Unit("20%");
+                    column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Right;
+                    column.ColumnType = MVCxGridViewColumnType.ComboBox;
+
+                    var comboProperties = column.PropertiesEdit as ComboBoxProperties;
+                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.Persons.CityLogic().GetAll());
+                    comboProperties.TextField = "Name";
+                    comboProperties.ValueField = "CityID";
+                    comboProperties.ValueType = typeof(int);
+                    comboProperties.ValidationSettings.RequiredField.IsRequired = true;
+                    comboProperties.ValidationSettings.RequiredField.ErrorText = "*";
+                    comboProperties.ValidationSettings.Display = Display.Dynamic;
+                    comboProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+
+                    /*Edit Mode*/
+                    column.SetEditItemTemplateContent(c =>
+                    {
+                        var stateID = c.Grid.GetRowValues(c.Grid.EditingRowVisibleIndex, "StateProvinceID");
+
+                        var cityID = c.Grid.GetRowValues(c.Grid.EditingRowVisibleIndex, c.Column.FieldName);
+                        ViewData["CityID"] = cityID;
+                        
+                        var cities = (cityID == null)
+                            ? (new Qiyas.BusinessLogicLayer.Components.Persons.CityLogic().GetAll())
+                            : (new Qiyas.BusinessLogicLayer.Components.Persons.CityLogic().GetAllByStateProvinceID(Convert.ToInt32(stateID)));
+
+                        Html.RenderPartial("~/Views/City/ComboBoxCityPartial.cshtml", cities);
+                    });
+                    /*Edit Mode*/
+
+                });
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "Name";
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.Caption = @Resources.ModelResource.ExamCenterName;
+
+                    column.ColumnType = MVCxGridViewColumnType.TextBox;
+                    var textProperties = column.PropertiesEdit as TextBoxProperties;
+                    textProperties.ValidationSettings.RequiredField.IsRequired = true;
+                    textProperties.ValidationSettings.RequiredField.ErrorText = "*";
+                    textProperties.ValidationSettings.Display = Display.Dynamic;
+                    textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                });
+				settings.Columns.Add(column =>
+                {
+                    column.FieldName = "CenterCode";
+                    column.EditFormSettings.ColumnSpan = 1;
+                    column.Caption = @Resources.ModelResource.CenterCode;
+
+                    column.ColumnType = MVCxGridViewColumnType.TextBox;
+                    var textProperties = column.PropertiesEdit as TextBoxProperties;
+                    textProperties.ValidationSettings.RequiredField.IsRequired = true;
+                    textProperties.ValidationSettings.RequiredField.ErrorText = "*";
+                    textProperties.ValidationSettings.Display = Display.Dynamic;
+                    textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                });
+                
+				
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "StudentGenderID";
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.Caption = @Resources.ModelResource.StudentGenderName;
+                    column.Width = new System.Web.UI.WebControls.Unit("20%");
+                    column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Right;
+                    column.ColumnType = MVCxGridViewColumnType.ComboBox;
+                    var comboProperties = column.PropertiesEdit as ComboBoxProperties;
+                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.StudentGenderLogic().GetAll());
+                    comboProperties.TextField = "Name";
+                    comboProperties.ValueField = "StudentGenderID";
+                    comboProperties.ValueType = typeof(int);
+                    comboProperties.ValidationSettings.RequiredField.IsRequired = true;
+                    comboProperties.ValidationSettings.RequiredField.ErrorText = "*";
+                    comboProperties.ValidationSettings.Display = Display.Dynamic;
+                    comboProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                });
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "IsActive";
+                    column.Caption = @Resources.ModelResource.IsActive;
+                    column.Width = new System.Web.UI.WebControls.Unit("50px");
+                    column.ColumnType = MVCxGridViewColumnType.CheckBox;
+                    (column.PropertiesEdit as CheckBoxProperties).DisplayTextChecked = @Resources.MainResource.IsActiveTrue;
+                    (column.PropertiesEdit as CheckBoxProperties).DisplayTextUnchecked = @Resources.MainResource.IsActiveFalse;
+                });
+			});
+		if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

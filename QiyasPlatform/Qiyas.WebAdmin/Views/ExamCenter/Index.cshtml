@@ -1,0 +1,36 @@
+﻿@model Qiyas.BusinessLogicLayer.Entity.PPM.ExamCenter
+
+@{
+    ViewBag.Title = Resources.MainResource.ExamCenterTitle;
+}
+
+
+<div class="page-title">
+    <h1>
+        @Resources.MainResource.ExamCenterTitle
+    </h1>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+                @Html.Action("ExamCenterGridViewPartial")
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function StateCombo_SelectedIndexChanged(s, e) {
+            CityID.PerformCallback();
+        }
+        function CitiesCombo_BeginCallback(s, e) {
+            e.customArgs['StateProvinceID'] = grid.GetEditor('StateProvinceID').GetValue();
+        }
+    </script>
+}
+
+

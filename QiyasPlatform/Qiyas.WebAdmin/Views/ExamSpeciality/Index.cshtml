@@ -1,0 +1,26 @@
+﻿@model Qiyas.BusinessLogicLayer.Entity.PPM.ExamSpeciality
+
+@{
+    ViewBag.Title = Resources.MainResource.ExamSpecialityTitle;
+}
+
+
+<div class="page-title">
+    <h1>
+        @Resources.MainResource.ExamSpecialityTitle
+    </h1>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+                
+                @Html.Action("GridViewPartial")
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

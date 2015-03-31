@@ -1,0 +1,163 @@
+@{
+	var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "BookPrintingOperationGridView";
+        settings.CallbackRouteValues = new { Controller = "BookPrintingOperation", Action = "BookPrintingOperationGridViewPartial" };
+
+	    settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "BookPrintingOperation", Action = "BookPrintingOperationGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "BookPrintingOperation", Action = "BookPrintingOperationGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "BookPrintingOperation", Action = "BookPrintingOperationGridViewPartialDelete" };
+        settings.KeyFieldName = "BookPrintingOperationID";
+
+        settings.SettingsBehavior.ConfirmDelete = true;
+        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
+
+
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.SettingsCommandButton.NewButton.Text = @Resources.MainResource.New;
+        settings.SettingsCommandButton.EditButton.Text = " ";
+        settings.SettingsCommandButton.EditButton.Styles.Style.CssClass = "fa fa fa-pencil";
+        settings.SettingsCommandButton.DeleteButton.Text = " ";
+        settings.SettingsCommandButton.DeleteButton.Styles.Style.CssClass = "fa fa-trash-o";
+        settings.SettingsCommandButton.CancelButton.Text = @Resources.MainResource.Cancel;
+        settings.SettingsCommandButton.ClearFilterButton.Text = @Resources.MainResource.Clear;
+        settings.SettingsCommandButton.UpdateButton.Text = @Resources.MainResource.Save;
+        settings.SettingsCommandButton.UpdateButton.ButtonType = GridViewCommandButtonType.Button;
+        settings.SettingsCommandButton.CancelButton.ButtonType = GridViewCommandButtonType.Button;
+        settings.CommandColumn.Width = new System.Web.UI.WebControls.Unit("60px");
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.SettingsSearchPanel.Visible = true;
+        settings.SettingsSearchPanel.ShowClearButton = true;
+        settings.Styles.SearchPanel.CssClass = "dxgvSearchPanel_MetropolisBlue search_devexpress";
+
+        settings.SettingsText.CommandClearSearchPanelFilter = @Resources.MainResource.Clear;
+        settings.SettingsText.SearchPanelEditorNullText = @Resources.MainResource.SearchNullText;
+        settings.SettingsText.PopupEditFormCaption = @Resources.MainResource.BookPrintingOperationEditFormTitle;
+        settings.SettingsText.ConfirmDelete = @Resources.MainResource.DeleteMessage;
+        settings.SettingsText.EmptyDataRow = @Resources.MainResource.NoData;
+        settings.SettingsPager.Summary.Text = Resources.MainResource.PageSummaryText;
+
+        settings.SettingsPopup.EditForm.Width = new System.Web.UI.WebControls.Unit("350px");
+        settings.SettingsPopup.EditForm.Modal = true;
+        settings.SettingsPopup.EditForm.CloseOnEscape = AutoBoolean.True;
+        settings.SettingsPopup.EditForm.HorizontalAlign = PopupHorizontalAlign.WindowCenter;
+        settings.SettingsPopup.EditForm.VerticalAlign = PopupVerticalAlign.WindowCenter;
+
+        settings.Width = new System.Web.UI.WebControls.Unit("100%");
+        settings.RightToLeft = DefaultBoolean.True;
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Styles.AlternatingRow.BackColor = System.Drawing.Color.FromName("#f9f9f9");
+
+				//settings.Columns.Add("Name");
+				
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "ExamID";
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.Caption = @Resources.ModelResource.ExamCode;
+                    column.VisibleIndex = 1;
+                    column.Width = new System.Web.UI.WebControls.Unit("20%");
+                    column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Right;
+                    column.ColumnType = MVCxGridViewColumnType.ComboBox;
+                    var comboProperties = column.PropertiesEdit as ComboBoxProperties;
+                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.ExamLogic().GetAll());
+                    comboProperties.TextField = "ExamCode";
+                    comboProperties.ValueField = "ExamID";
+                    comboProperties.ValueType = typeof(int);
+                    comboProperties.ValidationSettings.RequiredField.IsRequired = true;
+                    comboProperties.ValidationSettings.RequiredField.ErrorText = "*";
+                    comboProperties.ValidationSettings.Display = Display.Dynamic;
+                    comboProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                });
+				
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "PrintsForOneModel";
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.VisibleIndex = 2;
+                    
+                    column.Caption = @Resources.ModelResource.PrintsForOneModel;
+                    column.Name = "PrintsForOneModel";
+
+                    column.Width = new System.Web.UI.WebControls.Unit("60px");
+                    column.ColumnType = MVCxGridViewColumnType.SpinEdit;
+                    var textProperties = column.PropertiesEdit as SpinEditProperties;
+                    textProperties.ValidationSettings.RequiredField.IsRequired = true;
+                    textProperties.ValidationSettings.RequiredField.ErrorText = "*";
+                    textProperties.ValidationSettings.Display = Display.Dynamic;
+                    textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                    //textProperties.Width = new System.Web.UI.WebControls.Unit("100px");
+                    textProperties.NumberType = SpinEditNumberType.Integer;
+                });
+				
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "ExamsNeededForA3";
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.VisibleIndex = 3;
+                    
+                    column.Caption = @Resources.ModelResource.ExamsNeededForA3;
+                    column.Name = "ExamsNeededForA3";
+
+                    column.Width = new System.Web.UI.WebControls.Unit("60px");
+                    column.ColumnType = MVCxGridViewColumnType.SpinEdit;
+                    var textProperties = column.PropertiesEdit as SpinEditProperties;
+                    textProperties.ValidationSettings.RequiredField.IsRequired = true;
+                    textProperties.ValidationSettings.RequiredField.ErrorText = "*";
+                    textProperties.ValidationSettings.Display = Display.Dynamic;
+                    textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                    //textProperties.Width = new System.Web.UI.WebControls.Unit("100px");
+                    textProperties.NumberType = SpinEditNumberType.Integer;
+                });
+				//settings.Columns.Add("ExamsNeededForA4");
+				//settings.Columns.Add("");
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "ExamsNeededForCD";
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.VisibleIndex = 4;
+                    
+                    column.Caption = @Resources.ModelResource.ExamsNeededForCD;
+                    column.Name = "ExamsNeededForCD";
+
+                    column.Width = new System.Web.UI.WebControls.Unit("60px");
+                    column.ColumnType = MVCxGridViewColumnType.SpinEdit;
+                    var textProperties = column.PropertiesEdit as SpinEditProperties;
+                    textProperties.ValidationSettings.RequiredField.IsRequired = true;
+                    textProperties.ValidationSettings.RequiredField.ErrorText = "*";
+                    textProperties.ValidationSettings.Display = Display.Dynamic;
+                    textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                    //textProperties.Width = new System.Web.UI.WebControls.Unit("100px");
+                    textProperties.NumberType = SpinEditNumberType.Integer;
+                });
+				
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "OperationStatusID";
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.VisibleIndex = 5;
+                    column.Caption = @Resources.ModelResource.OperationStatusName;
+                    column.Width = new System.Web.UI.WebControls.Unit("20%");
+                    column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Right;
+                    column.ColumnType = MVCxGridViewColumnType.ComboBox;
+                    var comboProperties = column.PropertiesEdit as ComboBoxProperties;
+                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.OperationStatuLogic().GetAll());
+                    comboProperties.TextField = "Name";
+                    comboProperties.ValueField = "OperationStatusID";
+                    comboProperties.ValueType = typeof(int);
+                    comboProperties.ValidationSettings.RequiredField.IsRequired = true;
+                    comboProperties.ValidationSettings.RequiredField.ErrorText = "*";
+                    comboProperties.ValidationSettings.Display = Display.Dynamic;
+                    comboProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                });
+			});
+		if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

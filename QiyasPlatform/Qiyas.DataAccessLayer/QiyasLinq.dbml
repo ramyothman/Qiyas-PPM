@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Qiyas" Class="QiyasLinqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=RBM-MLAP;Initial Catalog=Qiyas;User ID=sa" SettingsObjectName="Qiyas.DataAccessLayer.Properties.Settings" SettingsPropertyName="QiyasConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="Person.BusinessEntity" Member="BusinessEntities">
+    <Type Name="BusinessEntity">
+      <Column Name="BusinessEntityId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="BusinessEntity_Person" Member="Person" ThisKey="BusinessEntityId" OtherKey="BusinessEntityId" Type="Person" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="Person.Person" Member="Persons">
+    <Type Name="Person">
+      <Column Name="BusinessEntityId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NameStyle" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="EmailPromotion" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NationalityCode" Type="System.String" DbType="Char(3)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="DateofBirth" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PersonImage" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Association Name="Person_UserClaim" Member="UserClaims" ThisKey="BusinessEntityId" OtherKey="UserId" Type="UserClaim" />
+      <Association Name="Person_UserLoginProvider" Member="UserLoginProviders" ThisKey="BusinessEntityId" OtherKey="UserId" Type="UserLoginProvider" />
+      <Association Name="Person_Credential" Member="Credential" ThisKey="BusinessEntityId" OtherKey="BusinessEntityId" Type="Credential" Cardinality="One" />
+      <Association Name="BusinessEntity_Person" Member="BusinessEntity" ThisKey="BusinessEntityId" OtherKey="BusinessEntityId" Type="BusinessEntity" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="RoleSecurity.UserClaim" Member="UserClaims">
+    <Type Name="UserClaim">
+      <Column Name="UserClaimId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ClaimValue" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ClaimType" Type="System.String" DbType="NChar(150)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Person_UserClaim" Member="Person" ThisKey="UserId" OtherKey="BusinessEntityId" Type="Person" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="RoleSecurity.UserLoginProvider" Member="UserLoginProviders">
+    <Type Name="UserLoginProvider">
+      <Column Name="UserLoginProviderId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LoginProvider" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="ProviderKey" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Person_UserLoginProvider" Member="Person" ThisKey="UserId" OtherKey="BusinessEntityId" Type="Person" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="RoleSecurity.Role" Member="Roles">
+    <Type Name="Role">
+      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Role_PersonRole" Member="PersonRoles" ThisKey="RoleId" OtherKey="RoleId" Type="PersonRole" />
+    </Type>
+  </Table>
+  <Table Name="RoleSecurity.PersonRole" Member="PersonRoles">
+    <Type Name="PersonRole">
+      <Column Name="PersonRoleId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PersonId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Role_PersonRole" Member="Role" ThisKey="RoleId" OtherKey="RoleId" Type="Role" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Credential_PersonRole" Member="Credential" ThisKey="PersonId" OtherKey="BusinessEntityId" Type="Credential" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="Person.Credential" Member="Credentials">
+    <Type Name="Credential">
+      <Column Name="BusinessEntityId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordSalt" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ActivationCode" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="IsActivated" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="EmailConfirmationCode" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="EmailConfirmed" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PhoneNumberConfirmationCode" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="PhoneNumberConfirmed" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="LockoutEnabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TwoFactorEnabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="LockoutEndDateUtc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Credential_PersonRole" Member="PersonRoles" ThisKey="BusinessEntityId" OtherKey="PersonId" Type="PersonRole" />
+      <Association Name="Person_Credential" Member="Person" ThisKey="BusinessEntityId" OtherKey="BusinessEntityId" Type="Person" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="PPM.StudentGender" Member="StudentGenders">
+    <Type Name="StudentGender">
+      <Column Name="StudentGenderID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="StudentGender_ExamPeriod" Member="ExamPeriods" ThisKey="StudentGenderID" OtherKey="StudentGenderID" Type="ExamPeriod" />
+      <Association Name="StudentGender_ExamCenter" Member="ExamCenters" ThisKey="StudentGenderID" OtherKey="StudentGenderID" Type="ExamCenter" />
+      <Association Name="StudentGender_Exam" Member="Exams" ThisKey="StudentGenderID" OtherKey="StudentGenderID" Type="Exam" />
+    </Type>
+  </Table>
+  <Table Name="PPM.PackagingType" Member="PackagingTypes">
+    <Type Name="PackagingType">
+      <Column Name="PackagingTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ExamModelCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BooksPerPackage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Total" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="PPM.OperationStatus" Member="OperationStatus">
+    <Type Name="OperationStatus">
+      <Column Name="OperationStatusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="OperationStatus_BookPrintingOperation" Member="BookPrintingOperations" ThisKey="OperationStatusID" OtherKey="OperationStatusID" Type="BookPrintingOperation" />
+    </Type>
+  </Table>
+  <Table Name="PPM.ExamType" Member="ExamTypes">
+    <Type Name="ExamType">
+      <Column Name="ExaminationTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="ExamType_ExamSpeciality" Member="ExamSpecialities" ThisKey="ExaminationTypeID" OtherKey="ExamTypeID" Type="ExamSpeciality" />
+      <Association Name="ExamType_ExamPeriod" Member="ExamPeriods" ThisKey="ExaminationTypeID" OtherKey="ExamTypeID" Type="ExamPeriod" />
+    </Type>
+  </Table>
+  <Table Name="PPM.ExamSpeciality" Member="ExamSpecialities">
+    <Type Name="ExamSpeciality">
+      <Column Name="ExamSpecialityID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ExamTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="ExamSpeciality_Exam" Member="Exams" ThisKey="ExamSpecialityID" OtherKey="ExamSpecialityID" Type="Exam" />
+      <Association Name="ExamType_ExamSpeciality" Member="ExamType" ThisKey="ExamTypeID" OtherKey="ExaminationTypeID" Type="ExamType" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="PPM.ExamPeriod" Member="ExamPeriods">
+    <Type Name="ExamPeriod">
+      <Column Name="ExamPeriodID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ExamTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StudentGenderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="ExamType_ExamPeriod" Member="ExamType" ThisKey="ExamTypeID" OtherKey="ExaminationTypeID" Type="ExamType" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="StudentGender_ExamPeriod" Member="StudentGender" ThisKey="StudentGenderID" OtherKey="StudentGenderID" Type="StudentGender" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="PPM.BookPrintingOperation" Member="BookPrintingOperations">
+    <Type Name="BookPrintingOperation">
+      <Column Name="BookPrintingOperationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ExamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PrintsForOneModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForA3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForA4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForCD" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="OperationStatus_BookPrintingOperation" Member="OperationStatus" ThisKey="OperationStatusID" OtherKey="OperationStatusID" Type="OperationStatus" IsForeignKey="true" />
+      <Association Name="Exam_BookPrintingOperation" Member="Exam" ThisKey="ExamID" OtherKey="ExamID" Type="Exam" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="PPM.BookPackingOperation" Member="BookPackingOperations">
+    <Type Name="BookPackingOperation">
+      <Column Name="BookPackingOperationID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="Person.CountryRegion" Member="CountryRegions">
+    <Type Name="CountryRegion">
+      <Column Name="CountryRegionCode" Type="System.String" DbType="Char(3) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="CountryRegion_StateProvince" Member="StateProvinces" ThisKey="CountryRegionCode" OtherKey="CountryRegionCode" Type="StateProvince" />
+    </Type>
+  </Table>
+  <Table Name="Person.StateProvince" Member="StateProvinces">
+    <Type Name="StateProvince">
+      <Column Name="StateProvinceId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StateProvinceCode" Type="System.String" DbType="NChar(3)" CanBeNull="true" />
+      <Column Name="CountryRegionCode" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" />
+      <Column Name="IsOnlyStateProvince" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="RowGuid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="StateProvince_City" Member="Cities" ThisKey="StateProvinceId" OtherKey="StateRegionID" Type="City" />
+      <Association Name="CountryRegion_StateProvince" Member="CountryRegion" ThisKey="CountryRegionCode" OtherKey="CountryRegionCode" Type="CountryRegion" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="Person.City" Member="Cities">
+    <Type Name="City">
+      <Column Name="CityID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StateRegionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="City_ExamCenter" Member="ExamCenters" ThisKey="CityID" OtherKey="CityID" Type="ExamCenter" />
+      <Association Name="StateProvince_City" Member="StateProvince" ThisKey="StateRegionID" OtherKey="StateProvinceId" Type="StateProvince" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="PPM.ExamCenter" Member="ExamCenters">
+    <Type Name="ExamCenter">
+      <Column Name="ExaminationCenterID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CenterCode" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="CityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StudentGenderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="City_ExamCenter" Member="City" ThisKey="CityID" OtherKey="CityID" Type="City" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="StudentGender_ExamCenter" Member="StudentGender" ThisKey="StudentGenderID" OtherKey="StudentGenderID" Type="StudentGender" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ViewExamCenter" Member="ViewExamCenters">
+    <Type Name="ViewExamCenter">
+      <Column Name="ExaminationCenterID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CenterCode" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="CityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StudentGenderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="StateRegionID" AutoSync="Never" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" />
+      <Column Name="CityName" AutoSync="Never" Type="System.String" DbType="NVarChar(50)" IsDbGenerated="true" CanBeNull="true" />
+      <Column Name="StateProvinceName" AutoSync="Never" Type="System.String" DbType="NVarChar(50) NOT NULL" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CountryName" AutoSync="Never" Type="System.String" DbType="NVarChar(50) NOT NULL" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="PPM.ExamModel" Member="ExamModels">
+    <Type Name="ExamModel">
+      <Column Name="ExamModelID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExamView" Member="ExamViews">
+    <Type Name="ExamView">
+      <Column Name="ExamID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ExamCode" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ExamSpecialityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StudentGenderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumberofSections" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumberofPages" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeForSection" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ExamSpecialityName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ExamTypeName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ExamTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StudentGenderName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="PPM.PackageWeight" Member="PackageWeights">
+    <Type Name="PackageWeight">
+      <Column Name="PackageWeightID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Weight" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="PackageCode" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="PPM.Exam" Member="Exams">
+    <Type Name="Exam">
+      <Column Name="ExamID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ExamCode" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ExamSpecialityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StudentGenderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumberofSections" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumberofPages" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeForSection" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Exam_BookPrintingOperation" Member="BookPrintingOperations" ThisKey="ExamID" OtherKey="ExamID" Type="BookPrintingOperation" />
+      <Association Name="ExamSpeciality_Exam" Member="ExamSpeciality" ThisKey="ExamSpecialityID" OtherKey="ExamSpecialityID" Type="ExamSpeciality" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="StudentGender_Exam" Member="StudentGender" ThisKey="StudentGenderID" OtherKey="StudentGenderID" Type="StudentGender" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

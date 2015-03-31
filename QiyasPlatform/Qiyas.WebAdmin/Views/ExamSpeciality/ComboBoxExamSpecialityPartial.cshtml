@@ -1,0 +1,19 @@
+﻿@Html.DevExpress().ComboBox(settings =>
+{
+    settings.CallbackRouteValues = new { Controller = "ExamSpeciality", Action = "ComboBoxExamSpecialityPartial" };
+    settings.Name = "ExamSpecialityID";
+    settings.ClientEnabled = true;
+    settings.ClientVisible = true;
+    settings.Width = new System.Web.UI.WebControls.Unit("100%");
+    settings.Properties.TextField = "Name";
+    settings.Properties.ValueField = "ExamSpecialityID";
+    settings.Properties.ValueType = typeof(int);
+    settings.Properties.ValidationSettings.RequiredField.IsRequired = true;
+    settings.Properties.ValidationSettings.RequiredField.ErrorText = "*";
+    settings.Properties.ValidationSettings.Display = Display.Dynamic;
+    settings.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+    
+    settings.Properties.EnableSynchronization = DefaultBoolean.True;
+    settings.Properties.ClientSideEvents.ValueChanged = "GetExamName";
+    settings.Properties.ClientSideEvents.BeginCallback = "ExamSpecialityCombo_BeginCallback";
+}).BindList(Model).Bind(ViewData["ExamSpecialityID"]).GetHtml()

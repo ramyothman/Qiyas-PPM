@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddPhoneSuccess" xml:space="preserve">
+    <value>تم إضافة رقم الهاتف</value>
+  </data>
+  <data name="BookPrintingOperationEditFormTitle" xml:space="preserve">
+    <value>حفظ عملية طباعة كتب</value>
+  </data>
+  <data name="BookPrintingOperationTitle" xml:space="preserve">
+    <value>إدارة عمليات طباعة الكتب</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>الغاء</value>
+  </data>
+  <data name="ChangePasswordSuccess" xml:space="preserve">
+    <value>تم تغيير كلمة المرور</value>
+  </data>
+  <data name="CitiesAssociatedToState" xml:space="preserve">
+    <value>يوجد مدن مرتبطه بهذه المنطقة الإدارية يرجي حذفها أولا</value>
+  </data>
+  <data name="CityExistsCheck" xml:space="preserve">
+    <value>هذه المدينة توجد بالنظام</value>
+  </data>
+  <data name="CityHasAssociatedData" xml:space="preserve">
+    <value>يوجد بيانات مرتبطه بهذه المدينة يرجى حذفها اولا</value>
+  </data>
+  <data name="CityTitle" xml:space="preserve">
+    <value>إدارة المدن</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>الغاء البحث</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="DeleteMessage" xml:space="preserve">
+    <value>هل تريد حذف هذا البيان؟</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="EditFormExamTypeTitle" xml:space="preserve">
+    <value>حفظ نوع الإختبار</value>
+  </data>
+  <data name="EmailExists" xml:space="preserve">
+    <value>هذا البريد الإلكتروني موجود بالنظام</value>
+  </data>
+  <data name="EmailTemplateError" xml:space="preserve">
+    <value>  لا يمكن فتح الملف ({0}) يرجي التأكد من وجود الملف </value>
+  </data>
+  <data name="EnterEmail" xml:space="preserve">
+    <value>أدخل بريدك الألكتروني</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>حدث خطأ بالنظام</value>
+  </data>
+  <data name="ExamCenterExistsCheck" xml:space="preserve">
+    <value>هذا المركز يوجد بالنظام</value>
+  </data>
+  <data name="ExamCenterHasAssociatedData" xml:space="preserve">
+    <value>يوجد بيانات مرتبطة بهذا المركز</value>
+  </data>
+  <data name="ExamCenterTitle" xml:space="preserve">
+    <value>إدارة مراكز الإختبارات</value>
+  </data>
+  <data name="ExamCodeCantBeModified" xml:space="preserve">
+    <value>لا يمكن تعديل رمز المركز</value>
+  </data>
+  <data name="ExamEditFormTitle" xml:space="preserve">
+    <value>حفظ إختبار</value>
+  </data>
+  <data name="ExamExists" xml:space="preserve">
+    <value>هذا الإختبار يوجد بالنظام</value>
+  </data>
+  <data name="ExamModelEditFormTitle" xml:space="preserve">
+    <value>حفظ نموذج إختبار</value>
+  </data>
+  <data name="ExamModelExists" xml:space="preserve">
+    <value>هذا النموذج موجود بالنظام</value>
+  </data>
+  <data name="ExamModelTitle" xml:space="preserve">
+    <value>إدارة نماذج الإختبارات</value>
+  </data>
+  <data name="ExamPeriodEditFormTitle" xml:space="preserve">
+    <value>حفظ فترة إختبار</value>
+  </data>
+  <data name="ExamPeriodTitle" xml:space="preserve">
+    <value>إدارة فترات اللإختبارات</value>
+  </data>
+  <data name="ExamSpecialityEditFormTitle" xml:space="preserve">
+    <value>حفظ تخصص إختبار</value>
+  </data>
+  <data name="ExamSpecialityTitle" xml:space="preserve">
+    <value>إدارة تخصصات الإختبارات</value>
+  </data>
+  <data name="ExamTitle" xml:space="preserve">
+    <value>إدارة الإختبارات</value>
+  </data>
+  <data name="ExamTypeExists" xml:space="preserve">
+    <value>يوجد نوع الاختبار هذا بالنظام</value>
+  </data>
+  <data name="ExamTypeTitle" xml:space="preserve">
+    <value>إدارة أنواع الأختبارات</value>
+  </data>
+  <data name="ExternalLoginRemoved" xml:space="preserve">
+    <value>تم حذف الدخول الخارجي</value>
+  </data>
+  <data name="FailedToVerifyPhone" xml:space="preserve">
+    <value>تأكيد الهاتف لم يتم بنجاح</value>
+  </data>
+  <data name="ForgotPasswordConfirmationLabel" xml:space="preserve">
+    <value> راجع بريدك الإلكتروني لتعيين كلمة المرور الجديدة</value>
+  </data>
+  <data name="ForgotPasswordConfirmationTitle" xml:space="preserve">
+    <value>تأكيد نسيان كلمة المرور</value>
+  </data>
+  <data name="ForgotPasswordPageTitle" xml:space="preserve">
+    <value>لا تتذكر كلمة المرور؟ </value>
+  </data>
+  <data name="InvalidCodeValidation" xml:space="preserve">
+    <value>كود غير صحيح</value>
+  </data>
+  <data name="InvalidLoginAttempt" xml:space="preserve">
+    <value>يوجد خطأ في البريد الاكتروني او كلمة المرور</value>
+  </data>
+  <data name="IsActiveFalse" xml:space="preserve">
+    <value>غير فعال</value>
+  </data>
+  <data name="IsActiveTrue" xml:space="preserve">
+    <value>فعال</value>
+  </data>
+  <data name="LockoutMessage" xml:space="preserve">
+    <value>هذا الحساب تم حجبه يرجى المحاولة لاحقا او الرجوع لإدارة الخدمات الالكترونية</value>
+  </data>
+  <data name="LockoutTitle" xml:space="preserve">
+    <value>حساب محجوب</value>
+  </data>
+  <data name="LoginPageForgotPassword" xml:space="preserve">
+    <value>نسيت كلمة المرور؟</value>
+  </data>
+  <data name="LoginPagePassword" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="LoginPageRememberMe" xml:space="preserve">
+    <value>تذكرني</value>
+  </data>
+  <data name="LoginPageTitle" xml:space="preserve">
+    <value>صفحة الدخول</value>
+  </data>
+  <data name="LoginPageUserName" xml:space="preserve">
+    <value>اسم المستخدم او البريد الالكتروني</value>
+  </data>
+  <data name="Logoff" xml:space="preserve">
+    <value>خروج</value>
+  </data>
+  <data name="ManageUserTitle" xml:space="preserve">
+    <value>إدارة المستخدمين</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>جديد</value>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>لا يوجد بيانات</value>
+  </data>
+  <data name="NoUserError" xml:space="preserve">
+    <value>هذا المستخدم ليس موجود بالنظام</value>
+  </data>
+  <data name="PackageTypeExists" xml:space="preserve">
+    <value>يوجد بيانات نوع التحزيم هذا بالنظام</value>
+  </data>
+  <data name="PackageTypeTitle" xml:space="preserve">
+    <value>إدارة أنواع التحزيم</value>
+  </data>
+  <data name="PackageWeightEditFormTitle" xml:space="preserve">
+    <value>حفظ وزن الحزمة</value>
+  </data>
+  <data name="PackageWeightTitle" xml:space="preserve">
+    <value>إدارة وزن الحزم</value>
+  </data>
+  <data name="PageSummaryText" xml:space="preserve">
+    <value>صفحة {0} من {1} عدد الصفحات {2}</value>
+  </data>
+  <data name="PasswordCheckError" xml:space="preserve">
+    <value>كلمة المرور يجب ان تحتوي علي الاقل على رقم واحد و علي حرف صغير من (a-z) و علي حرف كبير من (A-Z)</value>
+    <comment>Passwords must have at least one digit ('0'-'9'). Passwords must have at least one uppercase ('A'-'Z').</comment>
+  </data>
+  <data name="PleaseCorrectErrors" xml:space="preserve">
+    <value>من فضلك صحح الأخطاء</value>
+  </data>
+  <data name="QiyasTitle" xml:space="preserve">
+    <value>قياس</value>
+  </data>
+  <data name="RemovePhoneSuccess" xml:space="preserve">
+    <value>تم حذف رقم الهاتف</value>
+  </data>
+  <data name="RequiredPassword" xml:space="preserve">
+    <value>يجب ادخال كلمة المرور</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>إعادة تعيين كلمة المرور</value>
+  </data>
+  <data name="ResetPasswordConfirmationMainClickHereLinkLabel" xml:space="preserve">
+    <value>إضغط هنا للدخول</value>
+  </data>
+  <data name="ResetPasswordConfirmationMainLabel" xml:space="preserve">
+    <value>تم إعادة تعيين كلمة المرور بنجاح.</value>
+  </data>
+  <data name="ResetPasswordConfirmationMainPleaseLabel" xml:space="preserve">
+    <value>من فضلك </value>
+  </data>
+  <data name="ResetPasswordConfirmationTitle" xml:space="preserve">
+    <value>تأكيد تغيير كلمة المرور</value>
+  </data>
+  <data name="ResetPasswordInvalidCode" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ResetPasswordInvalidToken" xml:space="preserve">
+    <value>الكود المستخدم غير صالح</value>
+  </data>
+  <data name="ResetPasswordTitle" xml:space="preserve">
+    <value>إعادة تعيين كلمة المرور</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="SearchNullText" xml:space="preserve">
+    <value>ادخل بيانات البحث</value>
+  </data>
+  <data name="SecurityCodeMessage" xml:space="preserve">
+    <value>رقمك التأكيدي هو: </value>
+  </data>
+  <data name="SendCodeSelectProviderLabel" xml:space="preserve">
+    <value>إرسال عن طريق</value>
+  </data>
+  <data name="SendCodeSubmit" xml:space="preserve">
+    <value>إرسال</value>
+  </data>
+  <data name="SendCodeTitle" xml:space="preserve">
+    <value>ارسال الكود</value>
+  </data>
+  <data name="SetPasswordSuccess" xml:space="preserve">
+    <value>تم وضع كلمة المرور</value>
+  </data>
+  <data name="SetTwoFactorSuccess" xml:space="preserve">
+    <value>تم تفعيل نظام الحماية الثنائي</value>
+  </data>
+  <data name="StateProvinceEditFormTitle" xml:space="preserve">
+    <value>حفظ منطقة إدارية</value>
+  </data>
+  <data name="StateProvinceExists" xml:space="preserve">
+    <value>هذه المنطقة الإدارية توجد بالنظام</value>
+  </data>
+  <data name="StateProvinceTitle" xml:space="preserve">
+    <value>إدارة المناطق الإدارية</value>
+  </data>
+  <data name="TwoWayAuthTitle" xml:space="preserve">
+    <value>رمز تأكيد الحساب</value>
+  </data>
+  <data name="UserEditFormTitle" xml:space="preserve">
+    <value>حفظ مستخدم</value>
+  </data>
+  <data name="UserHasDependentData" xml:space="preserve">
+    <value>يوجد بيانات مرتبطه بهذا المستخدم يرجى حذفها اولا</value>
+  </data>
+  <data name="UserNameExists" xml:space="preserve">
+    <value>هذا المستخدم موجود بالنظام</value>
+  </data>
+  <data name="VerifyMainLabel" xml:space="preserve">
+    <value>إدخل الكود التأكيدي</value>
+  </data>
+  <data name="VerifyTitle" xml:space="preserve">
+    <value>تحقق من المستخدم</value>
+  </data>
+</root>
