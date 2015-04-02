@@ -1,0 +1,28 @@
+﻿CREATE TABLE [Person].[PersonExtra] (
+    [PersonExtraId]               INT            NOT NULL,
+    [NationalIdType]              NCHAR (1)      NULL,
+    [NationalId]                  NVARCHAR (20)  NULL,
+    [Gender]                      NCHAR (1)      NULL,
+    [Religion]                    NVARCHAR (50)  NULL,
+    [BirthDate]                   DATETIME       NULL,
+    [BirthPlace]                  NVARCHAR (50)  NULL,
+    [MaritalStatus]               NVARCHAR (50)  NULL,
+    [SpauseName]                  NVARCHAR (50)  NULL,
+    [FatherGuardianName]          NVARCHAR (150) NULL,
+    [FatherGuardianAddress]       NVARCHAR (250) NULL,
+    [FatherGuardianContactNumber] NVARCHAR (50)  NULL,
+    [EmergencyContactName]        NVARCHAR (150) NULL,
+    [EmergencyContactAddress]     NVARCHAR (250) NULL,
+    [EmergencyContactNumber]      NVARCHAR (50)  NULL,
+    [EmergencyContactEmail]       NVARCHAR (150) NULL,
+    [SponsorId]                   INT            NULL,
+    [SponsorStartDate]            DATETIME       NULL,
+    [SponsorEndDate]              DATETIME       NULL,
+    [SponsorCategoryId]           INT            NULL,
+    [IsGraduateTransfer]          BIT            NULL,
+    [ReasonForSeekingTransfer]    NVARCHAR (250) NULL,
+    [LevelRequired]               NVARCHAR (50)  NULL,
+    [OtherInformation]            NTEXT          NULL,
+    CONSTRAINT [PK_PersonExtra] PRIMARY KEY CLUSTERED ([PersonExtraId] ASC)
+);
+

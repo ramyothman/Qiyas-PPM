@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>QiyasDatabase</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{2ad71294-9f44-482b-b9f1-f5697cf420c6}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>QiyasDatabase</RootNamespace>
+    <AssemblyName>QiyasDatabase</AssemblyName>
+    <ModelCollation>1025,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>Arabic_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="HumanResources\" />
+    <Folder Include="HumanResources\Tables\" />
+    <Folder Include="RoleSecurity\" />
+    <Folder Include="RoleSecurity\Tables\" />
+    <Folder Include="Person\" />
+    <Folder Include="Person\Tables\" />
+    <Folder Include="ContentManagement\" />
+    <Folder Include="ContentManagement\Tables\" />
+    <Folder Include="PPM\" />
+    <Folder Include="PPM\Tables\" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="Security\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="HumanResources\Tables\DepartmentLanguages.sql" />
+    <Build Include="HumanResources\Tables\Departments.sql" />
+    <Build Include="HumanResources\Tables\Divisions.sql" />
+    <Build Include="RoleSecurity\Tables\UserClaim.sql" />
+    <Build Include="HumanResources\Tables\Employees.sql" />
+    <Build Include="HumanResources\Tables\OrganizationLanguages.sql" />
+    <Build Include="HumanResources\Tables\Organizations.sql" />
+    <Build Include="Person\Tables\Address.sql" />
+    <Build Include="Person\Tables\AddressType.sql" />
+    <Build Include="Person\Tables\BusinessEntity.sql" />
+    <Build Include="Person\Tables\BusinessEntityAddress.sql" />
+    <Build Include="RoleSecurity\Tables\UserLoginProvider.sql" />
+    <Build Include="Person\Tables\BusinessEntityContact.sql" />
+    <Build Include="Person\Tables\ContactType.sql" />
+    <Build Include="Person\Tables\CountryRegion.sql" />
+    <Build Include="Person\Tables\EducationType.sql" />
+    <Build Include="Person\Tables\Credential.sql" />
+    <Build Include="Person\Tables\EmailAddress.sql" />
+    <Build Include="Person\Tables\EmailAddressType.sql" />
+    <Build Include="Person\Tables\PersonDependent.sql" />
+    <Build Include="Person\Tables\PersonEducation.sql" />
+    <Build Include="Person\Tables\PersonExtra.sql" />
+    <Build Include="Person\Tables\PersonInternship.sql" />
+    <Build Include="Person\Tables\City.sql" />
+    <Build Include="Person\Tables\PersonLanguageProficiency.sql" />
+    <Build Include="ContentManagement\Tables\ContentEntity.sql" />
+    <Build Include="Person\Tables\PersonLanguages.sql" />
+    <Build Include="PPM\Tables\StudentGender.sql" />
+    <Build Include="ContentManagement\Tables\SystemFolder.sql" />
+    <Build Include="Person\Tables\PersonPersonTypes.sql" />
+    <Build Include="PPM\Tables\ExamCenter.sql" />
+    <Build Include="ContentManagement\Tables\SystemPage.sql" />
+    <Build Include="Person\Tables\PersonPhone.sql" />
+    <Build Include="RoleSecurity\Tables\PersonRole.sql" />
+    <Build Include="Person\Tables\PersonPublication.sql" />
+    <Build Include="RoleSecurity\Tables\Role.sql" />
+    <Build Include="Person\Tables\PersonType.sql" />
+    <Build Include="PPM\Tables\PackagingType.sql" />
+    <Build Include="RoleSecurity\Tables\RolePrivilege.sql" />
+    <Build Include="Person\Tables\PersonWorkExperience.sql" />
+    <Build Include="PPM\Tables\ExamType.sql" />
+    <Build Include="RoleSecurity\Tables\SecurityAccessType.sql" />
+    <Build Include="Person\Tables\PhoneNumberType.sql" />
+    <Build Include="PPM\Tables\ExamSpeciality.sql" />
+    <Build Include="RoleSecurity\Tables\SystemFunction.sql" />
+    <Build Include="Person\Tables\StateProvince.sql" />
+    <Build Include="RoleSecurity\Tables\UserMonitor.sql" />
+    <Build Include="PPM\Tables\ExamPeriod.sql" />
+    <Build Include="PPM\Tables\OperationStatus.sql" />
+    <Build Include="PPM\Tables\BookPrintingOperation.sql" />
+    <Build Include="Person\Tables\Person.sql" />
+    <Build Include="PPM\Tables\BookPackingOperation.sql" />
+    <Build Include="PPM\Tables\ExamModel.sql" />
+    <Build Include="PPM\Tables\PackageWeight.sql" />
+    <Build Include="PPM\Tables\Exam.sql" />
+    <Build Include="dbo\Views\ViewExamCenter.sql" />
+    <Build Include="dbo\Views\ExamView.sql" />
+    <Build Include="Security\ContentManagement.sql" />
+    <Build Include="Security\HumanResources.sql" />
+    <Build Include="Security\Organization.sql" />
+    <Build Include="Security\Person.sql" />
+    <Build Include="Security\PPM.sql" />
+    <Build Include="Security\RoleSecurity.sql" />
+  </ItemGroup>
+</Project>
