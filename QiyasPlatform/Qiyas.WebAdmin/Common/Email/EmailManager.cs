@@ -92,6 +92,45 @@ namespace Qiyas.WebAdmin.Common.Email
             
         }
 
+        public static bool SendEmailViaSendGrid(string Destination, string Subject, string Body, string FromEmail, string FromName)
+        {
+            
+            var myMessage = new SendGridMessage();
+            myMessage.AddTo(Destination);
+            myMessage.From = new System.Net.Mail.MailAddress(
+                                FromEmail, FromName);
+            myMessage.Subject = Subject;
+            myMessage.Text = Body;
+            myMessage.Html = Body;
+            //myMessage.EnableTemplateEngine("b9f5bd23-2f6c-4ce6-9e42-e78ec282d984");
+            var credentials = new NetworkCredential(
+                       BusinessLogicLayer.Common.SendGridUserName,
+                       BusinessLogicLayer.Common.SendGridPassword
+                       );
+
+            // Create a Web transport for sending email.
+            var transportWeb = new Web(credentials);
+            try
+            {
+                if (transportWeb != null)
+                {
+                    transportWeb.Deliver(myMessage);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return false;
+            // Send the email.
+
+        }
+
 
         public static bool sendMail(string body, string subject, string toUser)
         {
