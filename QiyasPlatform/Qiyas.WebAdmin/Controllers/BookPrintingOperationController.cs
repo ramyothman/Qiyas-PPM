@@ -7,6 +7,11 @@ using DevExpress.Web.Mvc;
 
 namespace Qiyas.WebAdmin.Controllers
 {
+    public enum OperationStatus
+    {
+        Printing = 1,
+        Packing = 2
+    }
     public class BookPrintingOperationController : Controller
     {
         // GET: BookPrintingOperation
@@ -30,7 +35,17 @@ namespace Qiyas.WebAdmin.Controllers
             {
                 try
                 {
-                    // Insert here a code to insert the new item in your model
+                    BusinessLogicLayer.Entity.PPM.BookPrintingOperation printing = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation();
+                    printing.ExamsNeededForA3 = item.ExamsNeededForA3;
+                    printing.ExamsNeededForA4 = item.ExamsNeededForA4;
+                    printing.ExamsNeededForCD = item.ExamsNeededForCD;
+                    printing.ExamID = item.ExamID;
+                    printing.Name = item.Name;
+                    printing.OperationStatusID = (int)OperationStatus.Printing;
+                    printing.PrintsForOneModel = item.PrintsForOneModel;
+                    printing.ModifiedDate = DateTime.Now;
+                    printing.CreatedDate = DateTime.Now;
+                    printing.Save();
                 }
                 catch (Exception e)
                 {
@@ -38,7 +53,7 @@ namespace Qiyas.WebAdmin.Controllers
                 }
             }
             else
-                ViewData["EditError"] = "Please, correct all errors.";
+                ViewData["EditError"] = Resources.MainResource.PleaseCorrectErrors;
             var model = new BusinessLogicLayer.Components.PPM.BookPrintingOperationLogic().GetAll();
             return PartialView("_BookPrintingOperationGridViewPartial", model);
         }
@@ -50,7 +65,16 @@ namespace Qiyas.WebAdmin.Controllers
             {
                 try
                 {
-                    // Insert here a code to update the item in your model
+                    BusinessLogicLayer.Entity.PPM.BookPrintingOperation printing = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(item.BookPrintingOperationID);
+                    printing.ExamsNeededForA3 = item.ExamsNeededForA3;
+                    printing.ExamsNeededForA4 = item.ExamsNeededForA4;
+                    printing.ExamsNeededForCD = item.ExamsNeededForCD;
+                    printing.ExamID = item.ExamID;
+                    printing.Name = item.Name;
+                    printing.PrintsForOneModel = item.PrintsForOneModel;
+                    printing.ModifiedDate = DateTime.Now;
+                    printing.CreatedDate = DateTime.Now;
+                    printing.Save();
                 }
                 catch (Exception e)
                 {
@@ -70,7 +94,12 @@ namespace Qiyas.WebAdmin.Controllers
             {
                 try
                 {
-                    // Insert here a code to delete the item from your model
+                    BusinessLogicLayer.Components.PPM.BookPrintingOperationLogic logic = new BusinessLogicLayer.Components.PPM.BookPrintingOperationLogic();
+                    if (!logic.HasDependencies(BookPrintingOperationID))
+                    {
+                        BusinessLogicLayer.Entity.PPM.BookPrintingOperation type = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(BookPrintingOperationID);
+                        type.Delete();
+                    }
                 }
                 catch (Exception e)
                 {

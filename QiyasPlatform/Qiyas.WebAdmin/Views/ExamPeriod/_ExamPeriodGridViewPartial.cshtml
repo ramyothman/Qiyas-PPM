@@ -1,16 +1,16 @@
 @{
 	var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "BookPrintingOperationGridView";
-        settings.CallbackRouteValues = new { Controller = "BookPrintingOperation", Action = "BookPrintingOperationGridViewPartial" };
+        settings.Name = "ExamPeriodGridView";
+        settings.CallbackRouteValues = new { Controller = "ExamPeriod", Action = "ExamPeriodGridViewPartial" };
 
-	    settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "BookPrintingOperation", Action = "BookPrintingOperationGridViewPartialAddNew" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "BookPrintingOperation", Action = "BookPrintingOperationGridViewPartialUpdate" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "BookPrintingOperation", Action = "BookPrintingOperationGridViewPartialDelete" };
-        settings.KeyFieldName = "BookPrintingOperationID";
+		settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "ExamPeriod", Action = "ExamPeriodGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ExamPeriod", Action = "ExamPeriodGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ExamPeriod", Action = "ExamPeriodGridViewPartialDelete" };
+        settings.KeyFieldName = "ExamPeriodID";
+
 
         settings.SettingsBehavior.ConfirmDelete = true;
         settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
-
 
         settings.CommandColumn.ShowNewButtonInHeader = true;
         settings.SettingsCommandButton.NewButton.Text = @Resources.MainResource.New;
@@ -18,7 +18,6 @@
         settings.SettingsCommandButton.EditButton.Styles.Style.CssClass = "fa fa fa-pencil";
         settings.SettingsCommandButton.DeleteButton.Text = " ";
         settings.SettingsCommandButton.DeleteButton.Styles.Style.CssClass = "fa fa-trash-o";
-        
         settings.SettingsCommandButton.CancelButton.Text = @Resources.MainResource.Cancel;
         settings.SettingsCommandButton.ClearFilterButton.Text = @Resources.MainResource.Clear;
         settings.SettingsCommandButton.UpdateButton.Text = @Resources.MainResource.Save;
@@ -36,7 +35,7 @@
 
         settings.SettingsText.CommandClearSearchPanelFilter = @Resources.MainResource.Clear;
         settings.SettingsText.SearchPanelEditorNullText = @Resources.MainResource.SearchNullText;
-        settings.SettingsText.PopupEditFormCaption = @Resources.MainResource.BookPrintingOperationEditFormTitle;
+        settings.SettingsText.PopupEditFormCaption = @Resources.MainResource.ExamPeriodEditFormTitle;
         settings.SettingsText.ConfirmDelete = @Resources.MainResource.DeleteMessage;
         settings.SettingsText.EmptyDataRow = @Resources.MainResource.NoData;
         settings.SettingsPager.Summary.Text = Resources.MainResource.PageSummaryText;
@@ -47,6 +46,7 @@
         settings.SettingsPopup.EditForm.HorizontalAlign = PopupHorizontalAlign.WindowCenter;
         settings.SettingsPopup.EditForm.VerticalAlign = PopupVerticalAlign.WindowCenter;
 
+
         settings.Width = new System.Web.UI.WebControls.Unit("100%");
         settings.RightToLeft = DefaultBoolean.True;
         settings.SettingsPager.Visible = true;
@@ -54,36 +54,38 @@
         settings.SettingsBehavior.AllowSelectByRowClick = true;
         settings.Styles.AlternatingRow.BackColor = System.Drawing.Color.FromName("#f9f9f9");
 
-				//settings.Columns.Add("Name");
-				
+
+
                 settings.Columns.Add(column =>
                 {
-                    column.FieldName = "ExamID";
-                    column.EditFormSettings.ColumnSpan = 2;
-                    column.Caption = @Resources.ModelResource.ExamCode;
+                    column.FieldName = "ExamTypeID";
+                    column.Name = "ExamTypeID";
                     column.VisibleIndex = 1;
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.Caption = @Resources.ModelResource.ExamTypeName;
                     column.Width = new System.Web.UI.WebControls.Unit("20%");
                     column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Right;
                     column.ColumnType = MVCxGridViewColumnType.ComboBox;
                     var comboProperties = column.PropertiesEdit as ComboBoxProperties;
-                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.ExamLogic().GetAll());
-                    comboProperties.TextField = "ExamCode";
-                    comboProperties.ValueField = "ExamID";
+                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.ExamTypeLogic().GetAll());
+                    comboProperties.TextField = "Name";
+                    comboProperties.ValueField = "ExaminationTypeID";
                     comboProperties.ValueType = typeof(int);
                     comboProperties.ValidationSettings.RequiredField.IsRequired = true;
                     comboProperties.ValidationSettings.RequiredField.ErrorText = "*";
                     comboProperties.ValidationSettings.Display = Display.Dynamic;
                     comboProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                    comboProperties.ClientSideEvents.ValueChanged = "GetName";
                 });
-				
                 settings.Columns.Add(column =>
                 {
-                    column.FieldName = "PrintsForOneModel";
+                    column.FieldName = "ExamYear";
                     column.EditFormSettings.ColumnSpan = 2;
                     column.VisibleIndex = 2;
-                    
-                    column.Caption = @Resources.ModelResource.PrintsForOneModel;
-                    column.Name = "PrintsForOneModel";
+                    column.Visible = false;
+                    column.EditFormSettings.Visible = DefaultBoolean.True;
+                    column.Caption = @Resources.ModelResource.ExamYear;
+                    column.Name = "ExamYear";
 
                     column.Width = new System.Web.UI.WebControls.Unit("60px");
                     column.ColumnType = MVCxGridViewColumnType.SpinEdit;
@@ -92,70 +94,82 @@
                     textProperties.ValidationSettings.RequiredField.ErrorText = "*";
                     textProperties.ValidationSettings.Display = Display.Dynamic;
                     textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
-                    //textProperties.Width = new System.Web.UI.WebControls.Unit("100px");
+                    textProperties.Width = new System.Web.UI.WebControls.Unit("100px");
+                    textProperties.MinValue = 1300;
+                    textProperties.MaxValue = 1500;
                     textProperties.NumberType = SpinEditNumberType.Integer;
+                    textProperties.ClientSideEvents.ValueChanged = "GetName";
                 });
-				
                 settings.Columns.Add(column =>
                 {
-                    column.FieldName = "ExamsNeededForA3";
+                    column.FieldName = "StudentGenderID";
                     column.EditFormSettings.ColumnSpan = 2;
                     column.VisibleIndex = 3;
-                    
-                    column.Caption = @Resources.ModelResource.ExamsNeededForA3;
-                    column.Name = "ExamsNeededForA3";
-
-                    column.Width = new System.Web.UI.WebControls.Unit("60px");
-                    column.ColumnType = MVCxGridViewColumnType.SpinEdit;
-                    var textProperties = column.PropertiesEdit as SpinEditProperties;
-                    textProperties.ValidationSettings.RequiredField.IsRequired = true;
-                    textProperties.ValidationSettings.RequiredField.ErrorText = "*";
-                    textProperties.ValidationSettings.Display = Display.Dynamic;
-                    textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
-                    //textProperties.Width = new System.Web.UI.WebControls.Unit("100px");
-                    textProperties.NumberType = SpinEditNumberType.Integer;
-                });
-				//settings.Columns.Add("ExamsNeededForA4");
-				//settings.Columns.Add("");
-                settings.Columns.Add(column =>
-                {
-                    column.FieldName = "ExamsNeededForCD";
-                    column.EditFormSettings.ColumnSpan = 2;
-                    column.VisibleIndex = 4;
-                    
-                    column.Caption = @Resources.ModelResource.ExamsNeededForCD;
-                    column.Name = "ExamsNeededForCD";
-
-                    column.Width = new System.Web.UI.WebControls.Unit("60px");
-                    column.ColumnType = MVCxGridViewColumnType.SpinEdit;
-                    var textProperties = column.PropertiesEdit as SpinEditProperties;
-                    textProperties.ValidationSettings.RequiredField.IsRequired = true;
-                    textProperties.ValidationSettings.RequiredField.ErrorText = "*";
-                    textProperties.ValidationSettings.Display = Display.Dynamic;
-                    textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
-                    //textProperties.Width = new System.Web.UI.WebControls.Unit("100px");
-                    textProperties.NumberType = SpinEditNumberType.Integer;
-                });
-				
-                settings.Columns.Add(column =>
-                {
-                    column.FieldName = "OperationStatusID";
-                    column.EditFormSettings.ColumnSpan = 2;
-                    column.VisibleIndex = 5;
-                    column.EditFormSettings.Visible = DefaultBoolean.False;
-                    column.Caption = @Resources.ModelResource.OperationStatusName;
+                    column.Name = "StudentGenderID";
+                    column.Caption = @Resources.ModelResource.StudentGenderName;
                     column.Width = new System.Web.UI.WebControls.Unit("20%");
                     column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Right;
                     column.ColumnType = MVCxGridViewColumnType.ComboBox;
                     var comboProperties = column.PropertiesEdit as ComboBoxProperties;
-                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.OperationStatuLogic().GetAll());
+                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.StudentGenderLogic().GetAll());
                     comboProperties.TextField = "Name";
-                    comboProperties.ValueField = "OperationStatusID";
+                    comboProperties.ValueField = "StudentGenderID";
                     comboProperties.ValueType = typeof(int);
                     comboProperties.ValidationSettings.RequiredField.IsRequired = true;
                     comboProperties.ValidationSettings.RequiredField.ErrorText = "*";
                     comboProperties.ValidationSettings.Display = Display.Dynamic;
                     comboProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                    comboProperties.ClientSideEvents.ValueChanged = "GetName";
+                });
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "Name";
+                    column.Name = "ExamPeriodName";
+                    column.VisibleIndex = 4;
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.Caption = @Resources.ModelResource.ExamPeriodName;
+
+                    column.ColumnType = MVCxGridViewColumnType.TextBox;
+                    var textProperties = column.PropertiesEdit as TextBoxProperties;
+                    textProperties.ValidationSettings.RequiredField.IsRequired = true;
+                    textProperties.ValidationSettings.RequiredField.ErrorText = "*";
+                    textProperties.ValidationSettings.Display = Display.Dynamic;
+                    textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                });
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "StartDateHijri";
+                    column.VisibleIndex = 5;
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.Caption = @Resources.ModelResource.StartDate;
+                    column.CellStyle.CssClass = column.CellStyle.CssClass + " calendar_class";
+                    column.Name = "StartDateHijri";
+                    column.ColumnType = MVCxGridViewColumnType.TextBox;
+                    var textProperties = column.PropertiesEdit as TextBoxProperties;
+                    
+                    textProperties.ClientSideEvents.Init = "InitStartDate";
+                });
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "EndDateHijri";
+                    column.VisibleIndex = 6;
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.Caption = @Resources.ModelResource.EndDate;
+                    column.CellStyle.CssClass = column.CellStyle.CssClass + " calendar_class";
+                    column.ColumnType = MVCxGridViewColumnType.TextBox;
+                    var textProperties = column.PropertiesEdit as TextBoxProperties;
+                    
+                    textProperties.ClientSideEvents.Init = "InitEndDate";
+                });
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "IsActive";
+                    column.VisibleIndex = 7;
+                    column.Caption = @Resources.ModelResource.IsActive;
+                    column.Width = new System.Web.UI.WebControls.Unit("50px");
+                    column.ColumnType = MVCxGridViewColumnType.CheckBox;
+                    (column.PropertiesEdit as CheckBoxProperties).DisplayTextChecked = @Resources.MainResource.IsActiveTrue;
+                    (column.PropertiesEdit as CheckBoxProperties).DisplayTextUnchecked = @Resources.MainResource.IsActiveFalse;
                 });
 			});
 		if (ViewData["EditError"] != null){

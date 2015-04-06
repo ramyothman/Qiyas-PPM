@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{2ad71294-9f44-482b-b9f1-f5697cf420c6}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -20,7 +20,7 @@
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <SqlServerVerification>False</SqlServerVerification>
+    <SqlServerVerification>True</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
     <DefaultCollation>Arabic_CI_AS</DefaultCollation>
@@ -137,5 +137,9 @@
     <Build Include="Security\Person.sql" />
     <Build Include="Security\PPM.sql" />
     <Build Include="Security\RoleSecurity.sql" />
+    <Build Include="dbo\Views\ViewTest.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CompleteSchema.sql" />
   </ItemGroup>
 </Project>
