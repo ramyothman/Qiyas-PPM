@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to إضافة / تعديل طلب تحزيم.
+        /// </summary>
+        internal static string BookPackingTitle {
+            get {
+                return ResourceManager.GetString("BookPackingTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to حفظ عملية طباعة كتب.
         /// </summary>
         internal static string BookPrintingOperationEditFormTitle {
@@ -291,6 +300,15 @@ namespace Resources {
         internal static string ExamModelExists {
             get {
                 return ResourceManager.GetString("ExamModelExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نماذج الإختبار.
+        /// </summary>
+        internal static string ExamModels {
+            get {
+                return ResourceManager.GetString("ExamModels", resourceCulture);
             }
         }
         
@@ -588,6 +606,15 @@ namespace Resources {
         internal static string PackageWeightTitle {
             get {
                 return ResourceManager.GetString("PackageWeightTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تحزيم.
+        /// </summary>
+        internal static string PackCustomButton {
+            get {
+                return ResourceManager.GetString("PackCustomButton", resourceCulture);
             }
         }
         

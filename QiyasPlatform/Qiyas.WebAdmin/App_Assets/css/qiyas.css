@@ -86,4 +86,7 @@ a.dxbButton_MetropolisBlue {
   .main-footer p {
     font-size: 12px; }
 
+.dxeRadioButtonList_MetropolisBlue, .dxeCheckBoxList_MetropolisBlue {
+  border: none !important; }
+
 /*# sourceMappingURL=qiyas.css.map */

@@ -21,3 +21,17 @@
     </div>
 </div>
 
+@section Scripts {
+    <script type="text/javascript">
+        function CustomButtonClick(s, e, url) {
+            var key = s.GetRowKey(e.visibleIndex);
+
+            if (e.buttonID === "btnPacking") {
+                var destUrl = url + "/" + key;
+                window.location.href = destUrl;
+            }
+        }
+    </script>
+}
+
+

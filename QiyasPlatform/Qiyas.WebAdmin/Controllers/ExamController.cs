@@ -49,6 +49,20 @@ namespace Qiyas.WebAdmin.Controllers
                         exam.ModifiedDate = DateTime.Now;
                         exam.CreatedDate = DateTime.Now;
                         exam.Save();
+                        string[] itemsExamModels = Request["ExamModelCheckBoxList"].Split('|');
+                        var examModels = new BusinessLogicLayer.Components.PPM.ExamModelLogic().GetAll();
+                        for (int i = 1; i < itemsExamModels.Length; i++)
+                        {
+                            int examModelIndex = 0;
+                            if (i == itemsExamModels.Length - 1)
+                                Int32.TryParse(itemsExamModels[i], out examModelIndex);
+                            else
+                                Int32.TryParse(itemsExamModels[i].Remove(itemsExamModels[i].Length - 1, 1), out examModelIndex);
+                            BusinessLogicLayer.Entity.PPM.ExamModelItem mitem = new BusinessLogicLayer.Entity.PPM.ExamModelItem();
+                            mitem.ExamID = exam.ExamID;
+                            mitem.ExamModelID = examModels[examModelIndex].ExamModelID;
+                            mitem.Save();
+                        }
                     }
                     else
                     {
@@ -89,7 +103,10 @@ namespace Qiyas.WebAdmin.Controllers
                 {
                     if (!ExamExists(item.Name, item.ExamID))
                     {
+                        
                         BusinessLogicLayer.Entity.PPM.Exam exam = new BusinessLogicLayer.Entity.PPM.Exam(item.ExamID);
+                        
+
                         exam.ExamCode = item.ExamCode;
                         exam.ExamSpecialityID = item.ExamSpecialityID;
                         exam.ExamTypeID = item.ExamTypeID;
@@ -102,8 +119,24 @@ namespace Qiyas.WebAdmin.Controllers
                         exam.ExamTypeID = item.ExamTypeID;
                         exam.IsActive = item.IsActive;
                         exam.ModifiedDate = DateTime.Now;
-                        exam.CreatedDate = DateTime.Now;
+                        //exam.CreatedDate = DateTime.Now;
                         exam.Save();
+                        BusinessLogicLayer.Components.PPM.ExamModelItemLogic logic = new BusinessLogicLayer.Components.PPM.ExamModelItemLogic();
+                        logic.DeleteByExamID(exam.ExamID);
+                        string[] itemsExamModels = Request["ExamModelCheckBoxList"].Split('|');
+                        var examModels = new BusinessLogicLayer.Components.PPM.ExamModelLogic().GetAll();
+                        for (int i = 1; i < itemsExamModels.Length; i++ )
+                        {
+                            int examModelIndex = 0;
+                            if(i == itemsExamModels.Length - 1)
+                                Int32.TryParse(itemsExamModels[i], out examModelIndex);
+                            else
+                                Int32.TryParse(itemsExamModels[i].Remove(itemsExamModels[i].Length - 1, 1), out examModelIndex);
+                            BusinessLogicLayer.Entity.PPM.ExamModelItem mitem = new BusinessLogicLayer.Entity.PPM.ExamModelItem();
+                            mitem.ExamID = exam.ExamID;
+                            mitem.ExamModelID = examModels[examModelIndex].ExamModelID;
+                            mitem.Save();
+                        }
                     }
                     else
                     {

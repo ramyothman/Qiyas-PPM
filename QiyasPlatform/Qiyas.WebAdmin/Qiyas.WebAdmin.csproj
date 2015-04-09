@@ -239,6 +239,7 @@
     <Compile Include="Common\Security\CustomRoleStore.cs" />
     <Compile Include="Common\Security\CustomUserStore.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BookPackingOperationController.cs" />
     <Compile Include="Controllers\BookPrintingOperationController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ExamCenterController.cs" />
@@ -252,6 +253,8 @@
     <Compile Include="Controllers\PackageTypeController.cs" />
     <Compile Include="Controllers\PackageWeightController.cs" />
     <Compile Include="Controllers\StateProvinceController.cs" />
+    <Compile Include="Controllers\TestBatchController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -259,6 +262,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Modelcs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -1230,10 +1234,16 @@
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\BookPrintingOperation\Index.cshtml" />
     <Content Include="Views\BookPrintingOperation\_BookPrintingOperationGridViewPartial.cshtml" />
+    <Content Include="Views\ExamModel\_ExamModelCheckBoxList.cshtml" />
+    <Content Include="Views\BookPackingOperation\Index.cshtml" />
+    <Content Include="Views\BookPackingOperation\_PackingGridViewPartial.cshtml" />
+    <Content Include="Views\TestBatch\Index.cshtml" />
+    <Content Include="Views\TestBatch\_GridViewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

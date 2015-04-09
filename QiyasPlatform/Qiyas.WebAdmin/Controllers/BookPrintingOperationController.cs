@@ -20,6 +20,7 @@ namespace Qiyas.WebAdmin.Controllers
             return View();
         }
 
+        #region Grid View Events
         [ValidateInput(false)]
         public ActionResult BookPrintingOperationGridViewPartial()
         {
@@ -109,5 +110,19 @@ namespace Qiyas.WebAdmin.Controllers
             var model = new BusinessLogicLayer.Components.PPM.BookPrintingOperationLogic().GetAll();
             return PartialView("_BookPrintingOperationGridViewPartial", model);
         }
+        #endregion
+
+        #region Custom Grid View Button Events
+        
+        public ActionResult PackExam(int ID)
+        {
+            string url = string.Format("{0}/Index/{1}", Url.Action("Index", "BookPackingOperation"), ID);
+            var model = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(ID);
+            if (model == null)
+                return View();
+            else
+                return Redirect(url);
+        }
+        #endregion
     }
 }

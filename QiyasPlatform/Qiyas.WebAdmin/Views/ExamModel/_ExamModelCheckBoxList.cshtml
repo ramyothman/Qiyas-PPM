@@ -1,0 +1,22 @@
+﻿
+@Html.DevExpress().CheckBoxList(settings =>
+{
+    settings.Name = "ExamModelCheckBoxList";
+    settings.Width = new System.Web.UI.WebControls.Unit("100%");
+    settings.Properties.TextField = "Name";
+    settings.Properties.ValueField = "ExamModelID";
+    settings.Properties.ValueType = typeof(int);
+    settings.Properties.RepeatLayout = System.Web.UI.WebControls.RepeatLayout.Flow;
+    settings.Properties.RepeatDirection = System.Web.UI.WebControls.RepeatDirection.Horizontal;
+    settings.Properties.RepeatColumns = 5;
+    settings.Properties.RootStyle.Border.BorderStyle = System.Web.UI.WebControls.BorderStyle.None;
+    settings.PreRender = (sender, e) =>
+    {
+        ASPxCheckBoxList cbl = (ASPxCheckBoxList)sender;
+        // examModels = new Qiyas.BusinessLogicLayer.Entity.PPM.Exam(Convert.ToInt32(ViewData["ExamID"])).ExamModels;
+        foreach (ListEditItem item in cbl.Items)
+        {
+            item.Selected =  Qiyas.BusinessLogicLayer.Components.PPM.ExamModelItemLogic.Contains((List<Qiyas.BusinessLogicLayer.Entity.PPM.ExamModelItem>)Model, (int)item.Value);
+        }
+    };
+}).BindList(new Qiyas.BusinessLogicLayer.Components.PPM.ExamModelLogic().GetAll()).Bind(ViewData["ExamModels"]).GetHtml()

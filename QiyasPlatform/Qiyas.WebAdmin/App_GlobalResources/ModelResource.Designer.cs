@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مخصص من.
+        /// </summary>
+        internal static string AllocatedFrom {
+            get {
+                return ResourceManager.GetString("AllocatedFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to مسلسل عمليات تحزيم الكتب.
         /// </summary>
         internal static string BookPackingOperationID {
@@ -304,6 +313,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to نماذج الإختبار.
+        /// </summary>
+        internal static string ExamModels {
+            get {
+                return ResourceManager.GetString("ExamModels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to وصف الإختبار.
         /// </summary>
         internal static string ExamName {
@@ -502,6 +520,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to عدد الحزم.
+        /// </summary>
+        internal static string PackageTotal {
+            get {
+                return ResourceManager.GetString("PackageTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to مسلسل وزن التحزيم.
         /// </summary>
         internal static string PackageWeightID {
@@ -534,6 +561,33 @@ namespace Resources {
         internal static string PackagingTypeName {
             get {
                 return ResourceManager.GetString("PackagingTypeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مسلسل طريقة الحساب.
+        /// </summary>
+        internal static string PackingCalculationTypeID {
+            get {
+                return ResourceManager.GetString("PackingCalculationTypeID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to طريقة الحساب.
+        /// </summary>
+        internal static string PackingCalculationTypeName {
+            get {
+                return ResourceManager.GetString("PackingCalculationTypeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to القيمة.
+        /// </summary>
+        internal static string PackingValue {
+            get {
+                return ResourceManager.GetString("PackingValue", resourceCulture);
             }
         }
         

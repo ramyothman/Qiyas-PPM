@@ -77,6 +77,48 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             set{ this.entity.ModifiedDate = value; }
             get{ return this.entity.ModifiedDate; }
         }
+
+        [Display(Name = "BookPrintingOperationID")]
+        public int? BookPrintingOperationID
+        {
+            set { this.entity.BookPrintingOperationID = value; }
+            get { return this.entity.BookPrintingOperationID; }
+        }
+    
+        [Display(Name = "PackagingTypeID")]
+        public int? PackagingTypeID
+        {            
+            set{ this.entity.PackagingTypeID = value; }
+            get{ return this.entity.PackagingTypeID; }
+        }
+    
+        [Display(Name = "PackingCalculationTypeID")]
+        public int? PackingCalculationTypeID
+        {            
+            set{ this.entity.PackingCalculationTypeID = value; }
+            get{ return this.entity.PackingCalculationTypeID; }
+        }
+    
+        [Display(Name = "AllocatedFrom")]
+        public string AllocatedFrom
+        {            
+            set{ this.entity.AllocatedFrom = value; }
+            get{ return this.entity.AllocatedFrom; }
+        }
+    
+        [Display(Name = "PackingValue")]
+        public int? PackingValue
+        {            
+            set{ this.entity.PackingValue = value; }
+            get{ return this.entity.PackingValue; }
+        }
+    
+        [Display(Name = "PackageTotal")]
+        public int? PackageTotal
+        {            
+            set{ this.entity.PackageTotal = value; }
+            get{ return this.entity.PackageTotal; }
+        }
     
         #endregion    
     

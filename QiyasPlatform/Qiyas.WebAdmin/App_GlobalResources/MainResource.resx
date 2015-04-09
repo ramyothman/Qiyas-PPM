@@ -195,6 +195,9 @@
   <data name="ExamModelExists" xml:space="preserve">
     <value>هذا النموذج موجود بالنظام</value>
   </data>
+  <data name="ExamModels" xml:space="preserve">
+    <value>نماذج الإختبار</value>
+  </data>
   <data name="ExamModelTitle" xml:space="preserve">
     <value>إدارة نماذج الإختبارات</value>
   </data>
@@ -387,5 +390,11 @@
   </data>
   <data name="VerifyTitle" xml:space="preserve">
     <value>تحقق من المستخدم</value>
+  </data>
+  <data name="PackCustomButton" xml:space="preserve">
+    <value>تحزيم</value>
+  </data>
+  <data name="BookPackingTitle" xml:space="preserve">
+    <value>إضافة / تعديل طلب تحزيم</value>
   </data>
 </root>

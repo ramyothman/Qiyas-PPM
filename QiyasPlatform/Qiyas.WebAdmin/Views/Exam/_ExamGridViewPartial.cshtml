@@ -165,8 +165,34 @@
                     textProperties.ValidationSettings.Display = Display.Dynamic;
                     textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
                 });
-                
-                
+
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "ExamModels";
+                    column.Visible = false;
+                    column.EditFormSettings.Visible = DefaultBoolean.True;
+                    column.VisibleIndex = 6;
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.Caption = @Resources.ModelResource.ExamModels;
+                    column.Width = new System.Web.UI.WebControls.Unit("20%");
+                    column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Right;
+                    //column.ColumnType = MVCxGridViewColumnType.CheckBox;
+
+                    /*Edit Mode*/
+                    column.SetEditItemTemplateContent(c =>
+                    {
+                        var examID = Convert.ToInt32(c.Grid.GetRowValues(c.Grid.EditingRowVisibleIndex, "ExamID"));
+                        ViewData["ExamID"] = examID;
+                        var examModels = new Qiyas.BusinessLogicLayer.Entity.PPM.Exam(examID).ExamModels;
+                        ViewData["ExamModels"] = examModels;
+
+                        //var examModels = new Qiyas.BusinessLogicLayer.Components.PPM.ExamModelLogic().GetAll();
+
+                        Html.RenderPartial("~/Views/ExamModel/_ExamModelCheckBoxList.cshtml", examModels);
+                    });
+                    /*Edit Mode*/
+
+                });
                 settings.Columns.Add(column =>
                 {
                     column.FieldName = "NumberofSections";

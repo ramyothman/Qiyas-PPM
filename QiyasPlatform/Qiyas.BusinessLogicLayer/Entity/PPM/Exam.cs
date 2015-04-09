@@ -22,6 +22,31 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             }
             get { return _ExamTypeID; }
         }
+
+        private List<BusinessLogicLayer.Entity.PPM.ExamModelItem> _ExamModels;
+        public List<BusinessLogicLayer.Entity.PPM.ExamModelItem> ExamModels
+        {
+            set { _ExamModels = value; }
+            get
+            {
+                if(_ExamModels == null)
+                {
+                    if(this.HasObject)
+                    {
+                        _ExamModels = this.entity.ExamModelItems.Select(c => new Qiyas.BusinessLogicLayer.Entity.PPM.ExamModelItem(c) { context = this.context }).ToList();
+                    }
+                    
+                    if (_ExamModels == null)
+                        _ExamModels = new List<ExamModelItem>();
+                }
+                return _ExamModels;
+            }
+        }
+
+        
+
+
+
     }
 }
       

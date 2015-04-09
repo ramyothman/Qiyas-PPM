@@ -330,4 +330,22 @@
   <data name="Weight" xml:space="preserve">
     <value>وزن الحزمة</value>
   </data>
+  <data name="ExamModels" xml:space="preserve">
+    <value>نماذج الإختبار</value>
+  </data>
+  <data name="PackingCalculationTypeID" xml:space="preserve">
+    <value>مسلسل طريقة الحساب</value>
+  </data>
+  <data name="AllocatedFrom" xml:space="preserve">
+    <value>مخصص من</value>
+  </data>
+  <data name="PackingValue" xml:space="preserve">
+    <value>القيمة</value>
+  </data>
+  <data name="PackageTotal" xml:space="preserve">
+    <value>عدد الحزم</value>
+  </data>
+  <data name="PackingCalculationTypeName" xml:space="preserve">
+    <value>طريقة الحساب</value>
+  </data>
 </root>

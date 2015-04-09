@@ -116,6 +116,10 @@
     <Compile Include="Components\PPM\ExamLogic.Logic.cs">
       <DependentUpon>ExamLogic.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\PPM\ExamModelItemLogic.cs" />
+    <Compile Include="Components\PPM\ExamModelItemLogic.Logic.cs">
+      <DependentUpon>ExamModelItemLogic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\PPM\ExamModelLogic.cs" />
     <Compile Include="Components\PPM\ExamModelLogic.Logic.cs">
       <DependentUpon>ExamModelLogic.cs</DependentUpon>
@@ -143,6 +147,10 @@
     <Compile Include="Components\PPM\PackagingTypeLogic.cs" />
     <Compile Include="Components\PPM\PackagingTypeLogic.Logic.cs">
       <DependentUpon>PackagingTypeLogic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PPM\PackingCalculationTypeLogic.cs" />
+    <Compile Include="Components\PPM\PackingCalculationTypeLogic.Logic.cs">
+      <DependentUpon>PackingCalculationTypeLogic.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\PPM\StudentGenderLogic.cs" />
     <Compile Include="Components\PPM\StudentGenderLogic.Logic.cs">
@@ -184,6 +192,10 @@
     <Compile Include="Entity\PPM\ExamModel.Model.cs">
       <DependentUpon>ExamModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entity\PPM\ExamModelItem.cs" />
+    <Compile Include="Entity\PPM\ExamModelItem.Model.cs">
+      <DependentUpon>ExamModelItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entity\PPM\ExamPeriod.cs" />
     <Compile Include="Entity\PPM\ExamPeriod.Model.cs">
       <DependentUpon>ExamPeriod.cs</DependentUpon>
@@ -207,6 +219,10 @@
     <Compile Include="Entity\PPM\PackagingType.cs" />
     <Compile Include="Entity\PPM\PackagingType.Model.cs">
       <DependentUpon>PackagingType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\PackingCalculationType.cs" />
+    <Compile Include="Entity\PPM\PackingCalculationType.Model.cs">
+      <DependentUpon>PackingCalculationType.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity\PPM\StudentGender.cs" />
     <Compile Include="Entity\PPM\StudentGender.Model.cs">
