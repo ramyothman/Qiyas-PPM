@@ -397,4 +397,10 @@
   <data name="BookPackingTitle" xml:space="preserve">
     <value>إضافة / تعديل طلب تحزيم</value>
   </data>
+  <data name="EnterPackingParentID" xml:space="preserve">
+    <value>يجب إدخال النوع المخصص منه</value>
+  </data>
+  <data name="TotalPackGreaterThanOverallTotal" xml:space="preserve">
+    <value>مجموع الحزم لجميع أنواع التحزيم يجب ان يتساوى مع كمية الطباعة المحددة بطلب الطباعة </value>
+  </data>
 </root>

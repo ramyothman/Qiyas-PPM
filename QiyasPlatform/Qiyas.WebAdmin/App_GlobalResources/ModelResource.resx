@@ -348,4 +348,7 @@
   <data name="PackingCalculationTypeName" xml:space="preserve">
     <value>طريقة الحساب</value>
   </data>
+  <data name="PackingParentID" xml:space="preserve">
+    <value>مخصص من</value>
+  </data>
 </root>

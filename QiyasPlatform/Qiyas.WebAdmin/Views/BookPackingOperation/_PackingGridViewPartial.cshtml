@@ -1,3 +1,5 @@
+@using Qiyas.WebAdmin.Common.Helpers
+
 @{
 	var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "grid";
@@ -102,12 +104,18 @@
                 });
                 settings.Columns.Add(column =>
                 {
-                    column.FieldName = "AllocatedFrom";
+                    column.FieldName = "PackingParentID";
                     column.VisibleIndex = 3;
                     column.EditFormSettings.ColumnSpan = 2;
                     column.Width = new System.Web.UI.WebControls.Unit("20%");
                     column.Caption = @Resources.ModelResource.AllocatedFrom;
-                    column.ColumnType = MVCxGridViewColumnType.TextBox;
+                    column.ColumnType = MVCxGridViewColumnType.ComboBox;
+                    var comboProperties = column.PropertiesEdit as ComboBoxProperties;
+                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.BookPackingOperationLogic().GetPackagingTypeByBookPrintingID(Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID));
+                    comboProperties.TextField = "PackagingTypeName";
+                    comboProperties.ValueField = "BookPackingOperationID";
+
+                    comboProperties.ValueType = typeof(int);
                 });
 				
                 settings.Columns.Add(column =>
@@ -133,17 +141,19 @@
                 {
                     column.FieldName = "PackageTotal";
                     column.EditFormSettings.ColumnSpan = 2;
-                    column.VisibleIndex = 5;
+                    column.VisibleIndex = 5;                    
+                    column.EditFormSettings.Visible = DefaultBoolean.False;
+                    column.EditFormSettings.VisibleIndex = -1;
                     column.Caption = @Resources.ModelResource.PackageTotal;
                     column.Name = "PackageTotal";
-
+                    column.ReadOnly = true;
                     column.Width = new System.Web.UI.WebControls.Unit("60px");
                     column.ColumnType = MVCxGridViewColumnType.SpinEdit;
                     var textProperties = column.PropertiesEdit as SpinEditProperties;
-                    textProperties.ValidationSettings.RequiredField.IsRequired = true;
-                    textProperties.ValidationSettings.RequiredField.ErrorText = "*";
-                    textProperties.ValidationSettings.Display = Display.Dynamic;
-                    textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                    //textProperties.ValidationSettings.RequiredField.IsRequired = true;
+                    //textProperties.ValidationSettings.RequiredField.ErrorText = "*";
+                    //textProperties.ValidationSettings.Display = Display.Dynamic;
+                    //textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
                     textProperties.Width = new System.Web.UI.WebControls.Unit("100px");
                     textProperties.NumberType = SpinEditNumberType.Integer;
                 });

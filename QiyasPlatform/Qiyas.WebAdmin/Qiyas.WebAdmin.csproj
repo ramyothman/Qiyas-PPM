@@ -235,6 +235,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Common\Email\EmailManager.cs" />
     <Compile Include="Common\Email\EmailManagerException.cs" />
+    <Compile Include="Common\Helpers\Helper.cs" />
     <Compile Include="Common\Helpers\Tools.cs" />
     <Compile Include="Common\Security\CustomRoleStore.cs" />
     <Compile Include="Common\Security\CustomUserStore.cs" />

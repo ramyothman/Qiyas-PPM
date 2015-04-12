@@ -354,6 +354,18 @@ namespace Qiyas.DataAccessLayer
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), examID);
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetTotalPrintingPackageByPrintingID", IsComposable=true)]
+		public System.Nullable<int> GetTotalPrintingPackageByPrintingID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetTotalPrintingPackageA3ByPrintingID", IsComposable=true)]
+		public System.Nullable<int> GetTotalPrintingPackageA3ByPrintingID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD).ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Person.BusinessEntity")]
@@ -7587,6 +7599,12 @@ namespace Qiyas.DataAccessLayer
 		
 		private System.Nullable<int> _PackageTotal;
 		
+		private System.Nullable<int> _PackingParentID;
+		
+		private EntitySet<BookPackingOperation> _BookPackingOperations;
+		
+		private EntityRef<BookPackingOperation> _BookPackingOperation1;
+		
 		private EntityRef<BookPrintingOperation> _BookPrintingOperation;
 		
 		private EntityRef<PackagingType> _PackagingType;
@@ -7621,10 +7639,14 @@ namespace Qiyas.DataAccessLayer
     partial void OnPackingValueChanged();
     partial void OnPackageTotalChanging(System.Nullable<int> value);
     partial void OnPackageTotalChanged();
+    partial void OnPackingParentIDChanging(System.Nullable<int> value);
+    partial void OnPackingParentIDChanged();
     #endregion
 		
 		public BookPackingOperation()
 		{
+			this._BookPackingOperations = new EntitySet<BookPackingOperation>(new Action<BookPackingOperation>(this.attach_BookPackingOperations), new Action<BookPackingOperation>(this.detach_BookPackingOperations));
+			this._BookPackingOperation1 = default(EntityRef<BookPackingOperation>);
 			this._BookPrintingOperation = default(EntityRef<BookPrintingOperation>);
 			this._PackagingType = default(EntityRef<PackagingType>);
 			this._PackingCalculationType = default(EntityRef<PackingCalculationType>);
@@ -7883,6 +7905,77 @@ namespace Qiyas.DataAccessLayer
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingParentID", DbType="Int")]
+		public System.Nullable<int> PackingParentID
+		{
+			get
+			{
+				return this._PackingParentID;
+			}
+			set
+			{
+				if ((this._PackingParentID != value))
+				{
+					if (this._BookPackingOperation1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPackingParentIDChanging(value);
+					this.SendPropertyChanging();
+					this._PackingParentID = value;
+					this.SendPropertyChanged("PackingParentID");
+					this.OnPackingParentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackingOperation_BookPackingOperation", Storage="_BookPackingOperations", ThisKey="BookPackingOperationID", OtherKey="PackingParentID")]
+		public EntitySet<BookPackingOperation> BookPackingOperations
+		{
+			get
+			{
+				return this._BookPackingOperations;
+			}
+			set
+			{
+				this._BookPackingOperations.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackingOperation_BookPackingOperation", Storage="_BookPackingOperation1", ThisKey="PackingParentID", OtherKey="BookPackingOperationID", IsForeignKey=true)]
+		public BookPackingOperation BookPackingOperation1
+		{
+			get
+			{
+				return this._BookPackingOperation1.Entity;
+			}
+			set
+			{
+				BookPackingOperation previousValue = this._BookPackingOperation1.Entity;
+				if (((previousValue != value) 
+							|| (this._BookPackingOperation1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._BookPackingOperation1.Entity = null;
+						previousValue.BookPackingOperations.Remove(this);
+					}
+					this._BookPackingOperation1.Entity = value;
+					if ((value != null))
+					{
+						value.BookPackingOperations.Add(this);
+						this._PackingParentID = value.BookPackingOperationID;
+					}
+					else
+					{
+						this._PackingParentID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("BookPackingOperation1");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPrintingOperation_BookPackingOperation", Storage="_BookPrintingOperation", ThisKey="BookPrintingOperationID", OtherKey="BookPrintingOperationID", IsForeignKey=true, DeleteRule="CASCADE")]
 		public BookPrintingOperation BookPrintingOperation
 		{
@@ -8003,6 +8096,18 @@ namespace Qiyas.DataAccessLayer
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_BookPackingOperations(BookPackingOperation entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPackingOperation1 = this;
+		}
+		
+		private void detach_BookPackingOperations(BookPackingOperation entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPackingOperation1 = null;
 		}
 	}
 }

@@ -84,6 +84,13 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             set { this.entity.BookPrintingOperationID = value; }
             get { return this.entity.BookPrintingOperationID; }
         }
+
+        [Display(Name = "PackingParentID")]
+        public int? PackingParentID
+        {
+            set { this.entity.PackingParentID = value; }
+            get { return this.entity.PackingParentID; }
+        }
     
         [Display(Name = "PackagingTypeID")]
         public int? PackagingTypeID

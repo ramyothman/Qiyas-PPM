@@ -583,6 +583,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مخصص من.
+        /// </summary>
+        internal static string PackingParentID {
+            get {
+                return ResourceManager.GetString("PackingParentID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to القيمة.
         /// </summary>
         internal static string PackingValue {

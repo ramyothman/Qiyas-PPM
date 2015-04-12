@@ -223,6 +223,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to يجب إدخال النوع المخصص منه.
+        /// </summary>
+        internal static string EnterPackingParentID {
+            get {
+                return ResourceManager.GetString("EnterPackingParentID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to حدث خطأ بالنظام.
         /// </summary>
         internal static string Error {
@@ -840,6 +849,15 @@ namespace Resources {
         internal static string StateProvinceTitle {
             get {
                 return ResourceManager.GetString("StateProvinceTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مجموع الحزم لجميع أنواع التحزيم يجب ان يتساوى مع كمية الطباعة المحددة بطلب الطباعة .
+        /// </summary>
+        internal static string TotalPackGreaterThanOverallTotal {
+            get {
+                return ResourceManager.GetString("TotalPackGreaterThanOverallTotal", resourceCulture);
             }
         }
         

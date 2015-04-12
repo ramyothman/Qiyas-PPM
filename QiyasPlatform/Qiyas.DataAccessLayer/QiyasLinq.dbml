@@ -357,6 +357,9 @@
       <Column Name="AllocatedFrom" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="PackingValue" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PackageTotal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackingParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="BookPackingOperation_BookPackingOperation" Member="BookPackingOperations" ThisKey="BookPackingOperationID" OtherKey="PackingParentID" Type="BookPackingOperation" />
+      <Association Name="BookPackingOperation_BookPackingOperation" Member="BookPackingOperation1" ThisKey="PackingParentID" OtherKey="BookPackingOperationID" Type="BookPackingOperation" IsForeignKey="true" />
       <Association Name="BookPrintingOperation_BookPackingOperation" Member="BookPrintingOperation" ThisKey="BookPrintingOperationID" OtherKey="BookPrintingOperationID" Type="BookPrintingOperation" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="PackagingType_BookPackingOperation" Member="PackagingType" ThisKey="PackagingTypeID" OtherKey="PackagingTypeID" Type="PackagingType" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="PackingCalculationType_BookPackingOperation" Member="PackingCalculationType" ThisKey="PackingCalculationTypeID" OtherKey="PackingCalculationTypeID" Type="PackingCalculationType" IsForeignKey="true" />
@@ -364,6 +367,14 @@
   </Table>
   <Function Name="dbo.DeleteExamModelItemByExamID" Method="DeleteExamModelItemByExamID">
     <Parameter Name="ExamID" Parameter="examID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetTotalPrintingPackageByPrintingID" Method="GetTotalPrintingPackageByPrintingID" IsComposable="true">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetTotalPrintingPackageA3ByPrintingID" Method="GetTotalPrintingPackageA3ByPrintingID" IsComposable="true">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
 </Database>
