@@ -72,6 +72,8 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Views\" />
     <Folder Include="Security\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="HumanResources\Tables\DepartmentLanguages.sql" />
@@ -138,6 +140,11 @@
     <Build Include="Security\PPM.sql" />
     <Build Include="Security\RoleSecurity.sql" />
     <Build Include="dbo\Views\ViewTest.sql" />
+    <Build Include="PPM\Tables\PackingCalculationType.sql" />
+    <Build Include="PPM\Tables\ExamModelItem.sql" />
+    <Build Include="dbo\Functions\GetTotalPrintingPackageByPrintingID.sql" />
+    <Build Include="dbo\Functions\GetTotalPrintingPackageA3ByPrintingID.sql" />
+    <Build Include="dbo\Stored Procedures\DeleteExamModelItemByExamID.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompleteSchema.sql" />
