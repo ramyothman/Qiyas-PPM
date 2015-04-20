@@ -127,8 +127,8 @@
                         ViewData["CityID"] = cityID;
                         
                         var cities = (cityID == null)
-                            ? (new Qiyas.BusinessLogicLayer.Components.Persons.CityLogic().GetAll())
-                            : (new Qiyas.BusinessLogicLayer.Components.Persons.CityLogic().GetAllByStateProvinceID(Convert.ToInt32(stateID)));
+                            ? (new Qiyas.BusinessLogicLayer.Components.Persons.CityLogic().GetAllActive())
+                            : (new Qiyas.BusinessLogicLayer.Components.Persons.CityLogic().GetAllActiveByStateProvinceID(Convert.ToInt32(stateID)));
 
                         Html.RenderPartial("~/Views/City/ComboBoxCityPartial.cshtml", cities);
                     });

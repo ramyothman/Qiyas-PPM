@@ -12,6 +12,11 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
 {
     public partial class ExamPeriodLogic
     {
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<Qiyas.BusinessLogicLayer.Entity.PPM.ExamPeriod> GetAllActive()
+        {
+            return db.ExamPeriods.Where(c => c.IsActive == true).Select(c => new Qiyas.BusinessLogicLayer.Entity.PPM.ExamPeriod(c) { context = db }).ToList();
+        }
 
         public Qiyas.BusinessLogicLayer.Entity.PPM.ExamPeriod GetByName(string name)
         {

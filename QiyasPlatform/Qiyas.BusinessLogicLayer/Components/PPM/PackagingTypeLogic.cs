@@ -13,6 +13,22 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
     public partial class PackagingTypeLogic
     {
 
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<Qiyas.BusinessLogicLayer.Entity.PPM.PackagingType> GetAllActive()
+        {
+            return db.PackagingTypes.Where(c => c.IsActive == true).Select(c => new Qiyas.BusinessLogicLayer.Entity.PPM.PackagingType(c) { context = db }).ToList();
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<Qiyas.BusinessLogicLayer.Entity.PPM.PackagingType> GetAllForPrint(int ID)
+        {
+            BusinessLogicLayer.Entity.PPM.BookPrintingOperation type = new Entity.PPM.BookPrintingOperation(ID);
+            BusinessLogicLayer.Components.PPM.ExamLogic logic = new ExamLogic();
+
+            int count = logic.GetExamModelCount(type.ExamID.Value);
+            return db.PackagingTypes.Where(c => c.IsActive == true && (c.ExamModelCount == count || c.ExamModelCount == 1)).Select(c => new Qiyas.BusinessLogicLayer.Entity.PPM.PackagingType(c) { context = db }).ToList();
+        }
+
         public BusinessLogicLayer.Entity.PPM.PackagingType GetByBookCountandExamModelCount(int BookCount, int ExamModelCount)
         {
             BusinessLogicLayer.Entity.PPM.PackagingType package = null;

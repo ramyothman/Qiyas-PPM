@@ -12,6 +12,11 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
 {
     public partial class ExamModelLogic
     {
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<Qiyas.BusinessLogicLayer.Entity.PPM.ExamModel> GetAllActive()
+        {
+            return db.ExamModels.Where(c => c.IsActive == true).Select(c => new Qiyas.BusinessLogicLayer.Entity.PPM.ExamModel(c) { context = db }).ToList();
+        }
 
         public Entity.PPM.ExamModel GetByName(string name)
         {

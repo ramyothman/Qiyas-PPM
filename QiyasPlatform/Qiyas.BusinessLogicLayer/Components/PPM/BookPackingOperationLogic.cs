@@ -52,6 +52,18 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
             var result = db.GetTotalPrintingPackageA3ByPrintingID(ID);
             return result.HasValue ? result.Value : 0;
         }
+
+        public int GetTotalItems(int ID)
+        {
+            var result = db.GetTotalPrintingPackageItemsByPrintingID(ID);
+            return result.HasValue ? result.Value : 0;
+        }
+
+        public int GetTotalItemsA3(int ID)
+        {
+            var result = db.GetTotalPrintingPackageItemsA3ByPrintingID(ID);
+            return result.HasValue ? result.Value : 0;
+        }
     }
 }
       

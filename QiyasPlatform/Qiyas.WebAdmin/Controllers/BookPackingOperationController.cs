@@ -75,8 +75,14 @@ namespace Qiyas.WebAdmin.Controllers
                         BusinessLogicLayer.Components.PPM.BookPackingOperationLogic logic = new BusinessLogicLayer.Components.PPM.BookPackingOperationLogic();
                         BusinessLogicLayer.Entity.PPM.PackagingType ptype = new BusinessLogicLayer.Entity.PPM.PackagingType(item.PackagingTypeID.Value);
                         int totalItems = ptype.BooksPerPackage == 3 && ptype.ExamModelCount == 1 ? printingOperation.ExamsNeededForA3.Value : printingOperation.PrintsForOneModel.Value;
-                        int currentTotal = ptype.BooksPerPackage == 3 && ptype.ExamModelCount == 1 ? logic.GetTotalA3(printingOperation.BookPrintingOperationID) : logic.GetTotal(printingOperation.BookPrintingOperationID);
-                        if(totalItems < (totalPackage + currentTotal))
+                        int currentTotal = ptype.BooksPerPackage == 3 && ptype.ExamModelCount == 1 ? logic.GetTotalItemsA3(printingOperation.BookPrintingOperationID) : logic.GetTotalItems(printingOperation.BookPrintingOperationID);
+                        int totalPrint = (totalPackage * ptype.BooksPerPackage.Value + currentTotal);
+                        int count = new BusinessLogicLayer.Components.PPM.ExamLogic().GetExamModelCount(printingOperation.ExamID.Value);
+                        if(count > 1)
+                        {
+                            totalItems = totalItems * count;
+                        }
+                        if(totalItems < totalPrint)
                         {
                             isValid = false;
                             ViewData["EditError"] = Resources.MainResource.TotalPackGreaterThanOverallTotal;
@@ -191,7 +197,12 @@ namespace Qiyas.WebAdmin.Controllers
                         int totalItems = ptype.BooksPerPackage == 3 && ptype.ExamModelCount == 1 ? printingOperation.ExamsNeededForA3.Value : printingOperation.PrintsForOneModel.Value;
                         int currentTotal = ptype.BooksPerPackage == 3 && ptype.ExamModelCount == 1 ? logic.GetTotalA3(printingOperation.BookPrintingOperationID) : logic.GetTotal(printingOperation.BookPrintingOperationID);
                         currentTotal -= entity.PackageTotal.Value;
-                        if (totalItems < (totalPackage + currentTotal))
+                        int totalPrint = (totalPackage + currentTotal) * ptype.BooksPerPackage.Value;
+                        if (ptype.ExamModelCount > 1)
+                        {
+                            totalItems = totalItems * ptype.ExamModelCount.Value;
+                        }
+                        if (totalItems < totalPrint)
                         {
                             isValid = false;
                             ViewData["EditError"] = Resources.MainResource.TotalPackGreaterThanOverallTotal;
@@ -252,18 +263,24 @@ namespace Qiyas.WebAdmin.Controllers
         private int TotalPackages(BusinessLogicLayer.Entity.PPM.BookPackingOperation item)
         {
             int total = 0;
+            
             BusinessLogicLayer.Entity.PPM.PackagingType ptype = new BusinessLogicLayer.Entity.PPM.PackagingType(item.PackagingTypeID.Value);
+            
             if(ptype == null)
                 return 0;
+            
             BusinessLogicLayer.Entity.PPM.BookPrintingOperation printingOperation = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(PrintingOperationID);
             if (printingOperation == null)
                 return 0;
+            
             int totalItems = ptype.BooksPerPackage == 3 && ptype.ExamModelCount == 1 ? printingOperation.ExamsNeededForA3.Value : printingOperation.PrintsForOneModel.Value;
 
             if(item.PackingCalculationTypeID == 1)
             {
+                
                 double t = item.PackingValue.Value / 100.00;
                 total = Convert.ToInt32(Math.Ceiling(totalItems * t));
+                
             }
             else if(item.PackingCalculationTypeID == 2)
             {

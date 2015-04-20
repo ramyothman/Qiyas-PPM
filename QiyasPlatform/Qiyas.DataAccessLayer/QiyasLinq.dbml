@@ -377,4 +377,16 @@
     <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.GetExamModelCount" Method="GetExamModelCount" IsComposable="true">
+    <Parameter Name="ExamID" Parameter="examID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetTotalPrintingPackageItemsA3ByPrintingID" Method="GetTotalPrintingPackageItemsA3ByPrintingID" IsComposable="true">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetTotalPrintingPackageItemsByPrintingID" Method="GetTotalPrintingPackageItemsByPrintingID" IsComposable="true">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>

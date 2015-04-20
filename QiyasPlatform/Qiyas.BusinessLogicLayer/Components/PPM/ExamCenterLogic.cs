@@ -30,6 +30,12 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
                 return null;
             }
         }
+
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<Qiyas.BusinessLogicLayer.Entity.PPM.ExamCenter> GetAllActive()
+        {
+            return db.ViewExamCenters.Where(c => c.IsActive == true).Select(c => new Qiyas.BusinessLogicLayer.Entity.PPM.ExamCenter(c) { context = db }).ToList();
+        }
         
     }
 }

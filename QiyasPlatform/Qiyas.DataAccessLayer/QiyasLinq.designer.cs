@@ -366,6 +366,24 @@ namespace Qiyas.DataAccessLayer
 		{
 			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD).ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetExamModelCount", IsComposable=true)]
+		public System.Nullable<int> GetExamModelCount([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ExamID", DbType="Int")] System.Nullable<int> examID)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), examID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetTotalPrintingPackageItemsA3ByPrintingID", IsComposable=true)]
+		public System.Nullable<int> GetTotalPrintingPackageItemsA3ByPrintingID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetTotalPrintingPackageItemsByPrintingID", IsComposable=true)]
+		public System.Nullable<int> GetTotalPrintingPackageItemsByPrintingID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD).ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Person.BusinessEntity")]

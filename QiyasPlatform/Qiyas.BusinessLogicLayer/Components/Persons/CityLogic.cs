@@ -19,6 +19,18 @@ namespace Qiyas.BusinessLogicLayer.Components.Persons
             return db.Cities.Where(c => c.StateRegionID == StateProvinceID).OrderBy(c => c.Name).Select(c => new Qiyas.BusinessLogicLayer.Entity.Persons.City(c) { context = db }).ToList();
         }
 
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<Qiyas.BusinessLogicLayer.Entity.Persons.City> GetAllActiveByStateProvinceID(int StateProvinceID)
+        {
+            return db.Cities.Where(c => c.StateRegionID == StateProvinceID && c.IsActive == true).OrderBy(c => c.Name).Select(c => new Qiyas.BusinessLogicLayer.Entity.Persons.City(c) { context = db }).ToList();
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<Qiyas.BusinessLogicLayer.Entity.Persons.City> GetAllActive()
+        {
+            return db.Cities.Where(c => c.IsActive == true).Select(c => new Qiyas.BusinessLogicLayer.Entity.Persons.City(c) { context = db }).ToList();
+        }
+
         public BusinessLogicLayer.Entity.Persons.City GetByName(string state)
         {
             try

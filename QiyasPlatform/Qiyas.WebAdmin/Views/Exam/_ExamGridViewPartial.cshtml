@@ -78,7 +78,7 @@
                     column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Right;
                     column.ColumnType = MVCxGridViewColumnType.ComboBox;
                     var comboProperties = column.PropertiesEdit as ComboBoxProperties;
-                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.ExamTypeLogic().GetAll());
+                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.ExamTypeLogic().GetAllActive());
                     comboProperties.TextField = "Name";
                     comboProperties.ValueField = "ExaminationTypeID";
                     comboProperties.ValueType = typeof(int);
@@ -102,7 +102,7 @@
                     column.ColumnType = MVCxGridViewColumnType.ComboBox;
 
                     var comboProperties = column.PropertiesEdit as ComboBoxProperties;
-                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.ExamSpecialityLogic().GetAll());
+                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.ExamSpecialityLogic().GetAllActive());
                     comboProperties.TextField = "Name";
                     comboProperties.ValueField = "ExamSpecialityID";
                     
@@ -121,8 +121,8 @@
                         ViewData["ExamSpecialityID"] = cityID;
 
                         var cities = (cityID == null)
-                            ? (new Qiyas.BusinessLogicLayer.Components.PPM.ExamSpecialityLogic().GetAll())
-                            : (new Qiyas.BusinessLogicLayer.Components.PPM.ExamSpecialityLogic().GetAllByExamTypeID(Convert.ToInt32(stateID)));
+                            ? (new Qiyas.BusinessLogicLayer.Components.PPM.ExamSpecialityLogic().GetAllActive())
+                            : (new Qiyas.BusinessLogicLayer.Components.PPM.ExamSpecialityLogic().GetAllActiveByExamTypeID(Convert.ToInt32(stateID)));
 
                         Html.RenderPartial("~/Views/ExamSpeciality/ComboBoxExamSpecialityPartial.cshtml", cities);
                     });

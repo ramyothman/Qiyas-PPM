@@ -118,7 +118,7 @@ namespace Qiyas.WebAdmin.Controllers
         public ActionResult ComboBoxCityPartial()
         {
             int stateID = (Request.Params["StateProvinceID"] != null) ? int.Parse(Request.Params["StateProvinceID"]) : -1;
-            return PartialView(new BusinessLogicLayer.Components.Persons.CityLogic().GetAllByStateProvinceID(stateID));
+            return PartialView(new BusinessLogicLayer.Components.Persons.CityLogic().GetAllActiveByStateProvinceID(stateID));
         }
         #endregion
 

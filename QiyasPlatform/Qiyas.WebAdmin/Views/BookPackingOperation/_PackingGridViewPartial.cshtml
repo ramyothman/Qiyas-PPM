@@ -69,7 +69,7 @@
                     column.ColumnType = MVCxGridViewColumnType.ComboBox;
                     
                     var comboProperties = column.PropertiesEdit as ComboBoxProperties;
-                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.PackagingTypeLogic().GetAll());
+                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.PackagingTypeLogic().GetAllForPrint(Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID));
                     comboProperties.TextField = "Name";
                     comboProperties.ValueField = "PackagingTypeID";
 

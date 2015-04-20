@@ -40,6 +40,12 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
             return exams;
         }
 
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<Qiyas.BusinessLogicLayer.Entity.PPM.Exam> GetAllActive()
+        {
+            return db.Exams.Where(c => c.IsActive == true).Select(c => new Qiyas.BusinessLogicLayer.Entity.PPM.Exam(c) { context = db }).ToList();
+        }
+
         public Qiyas.BusinessLogicLayer.Entity.PPM.Exam GetByName(string name)
         {
             Qiyas.BusinessLogicLayer.Entity.PPM.Exam examType = null;
@@ -51,6 +57,11 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
         public bool HasDependencies(int ExaminationTypeID)
         {
             return false;
+        }
+
+        public int GetExamModelCount(int ExamID)
+        {
+            return db.GetExamModelCount(ExamID).Value;
         }
     }
 }
