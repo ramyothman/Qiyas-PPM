@@ -34,7 +34,7 @@
 
         settings.SettingsText.CommandClearSearchPanelFilter = @Resources.MainResource.Clear;
         settings.SettingsText.SearchPanelEditorNullText = @Resources.MainResource.SearchNullText;
-        settings.SettingsText.PopupEditFormCaption = @Resources.MainResource.StateProvinceEditFormTitle;
+        settings.SettingsText.PopupEditFormCaption = @Resources.MainResource.ExamCenterEditTitle;
         settings.SettingsText.ConfirmDelete = @Resources.MainResource.DeleteMessage;
         settings.SettingsText.EmptyDataRow = @Resources.MainResource.NoData;
         settings.SettingsPager.Summary.Text = Resources.MainResource.PageSummaryText;
@@ -66,7 +66,7 @@
                     column.FieldName = "CityName";
                     column.EditFormSettings.ColumnSpan = 2;
                     column.Width = new System.Web.UI.WebControls.Unit("20%");
-                    column.Caption = @Resources.ModelResource.StateProvinceName;
+                    column.Caption = @Resources.ModelResource.CityName;
                     column.EditFormSettings.Visible = DefaultBoolean.False;
                     column.ColumnType = MVCxGridViewColumnType.TextBox;
                 });

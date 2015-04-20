@@ -403,4 +403,19 @@
   <data name="TotalPackGreaterThanOverallTotal" xml:space="preserve">
     <value>مجموع الحزم لجميع أنواع التحزيم يجب ان يتساوى مع كمية الطباعة المحددة بطلب الطباعة </value>
   </data>
+  <data name="ValidYear" xml:space="preserve">
+    <value>يرجي ادخال سنة بين 1300 و 1500 </value>
+  </data>
+  <data name="ExamCenterEditTitle" xml:space="preserve">
+    <value>حفظ مركز إختبار</value>
+  </data>
+  <data name="ReceiveExamPackTitle" xml:space="preserve">
+    <value>استلام الحزم بمستودع التخزين</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>استعراض</value>
+  </data>
+  <data name="BookRepack" xml:space="preserve">
+    <value>إعادة تحزيم الكتب</value>
+  </data>
 </root>

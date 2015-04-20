@@ -55,6 +55,7 @@
     <Reference Include="DevExpress.PivotGrid.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.RichEdit.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.SpellChecker.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Spreadsheet.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -237,11 +238,18 @@
     <Compile Include="Common\Email\EmailManagerException.cs" />
     <Compile Include="Common\Helpers\Helper.cs" />
     <Compile Include="Common\Helpers\Tools.cs" />
+    <Compile Include="Common\Reports\PackReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Common\Reports\PackReport.Designer.cs">
+      <DependentUpon>PackReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\Security\CustomRoleStore.cs" />
     <Compile Include="Common\Security\CustomUserStore.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookPackingOperationController.cs" />
     <Compile Include="Controllers\BookPrintingOperationController.cs" />
+    <Compile Include="Controllers\BookRePackController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ExamCenterController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
@@ -253,6 +261,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PackageTypeController.cs" />
     <Compile Include="Controllers\PackageWeightController.cs" />
+    <Compile Include="Controllers\ReceiveExamPackController.cs" />
     <Compile Include="Controllers\StateProvinceController.cs" />
     <Compile Include="Controllers\TestBatchController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -1240,6 +1249,10 @@
     <Content Include="Views\BookPackingOperation\_PackingGridViewPartial.cshtml" />
     <Content Include="Views\TestBatch\Index.cshtml" />
     <Content Include="Views\TestBatch\_GridViewPartial.cshtml" />
+    <Content Include="Views\ReceiveExamPack\Index.cshtml" />
+    <Content Include="Views\ReceiveExamPack\_PrintGridViewPartial.cshtml" />
+    <Content Include="Views\BookRePack\Index.cshtml" />
+    <Content Include="Views\BookRePack\_RepackGridViewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1270,6 +1283,12 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>ModelResource.Designer.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Common\Reports\PackReport.resx">
+      <DependentUpon>PackReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

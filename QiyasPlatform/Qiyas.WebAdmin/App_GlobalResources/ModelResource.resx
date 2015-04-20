@@ -351,4 +351,13 @@
   <data name="PackingParentID" xml:space="preserve">
     <value>مخصص من</value>
   </data>
+  <data name="ModelCount" xml:space="preserve">
+    <value>عدد النماذج</value>
+  </data>
+  <data name="TotalPacks" xml:space="preserve">
+    <value>مجموع الحزم</value>
+  </data>
+  <data name="PackNumber" xml:space="preserve">
+    <value>رقم الحزمة</value>
+  </data>
 </root>

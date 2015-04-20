@@ -1,0 +1,45 @@
+﻿@model Qiyas.BusinessLogicLayer.Entity.PPM.BookPrintingOperation
+
+@{
+    ViewBag.Title = Resources.MainResource.BookRepack;
+}
+
+<div class="page-title">
+    <h1>
+        @Resources.MainResource.BookRepack
+    </h1>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+                @using (Html.BeginForm("Repack", "BookRePack", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+    <div class="col-lg-4 pull-right">
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.PackNumber, new { @class = "col-md-5  pull-right control-label" })
+            <div class="col-md-4  pull-right">
+                @Html.TextBoxFor(m => m.PackNumber, new { @class = "form-control" })
+            </div>
+        </div>
+        <br /><br />
+
+        </div>
+        @Html.Action("RepackGridViewPartial")
+        <br /><br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" name="Save" value="إعادة تحزيم" class="btn btn-default btn-primary" />
+
+            </div>
+        </div>
+        }
+    </div>
+        </div>
+    </div>
+</div>
+
+
+

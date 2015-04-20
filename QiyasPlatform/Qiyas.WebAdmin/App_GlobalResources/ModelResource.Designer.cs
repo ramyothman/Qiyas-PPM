@@ -439,6 +439,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to عدد النماذج.
+        /// </summary>
+        internal static string ModelCount {
+            get {
+                return ResourceManager.GetString("ModelCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to عدلت بواسطة.
         /// </summary>
         internal static string ModifiedByID {
@@ -601,6 +610,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to رقم الحزمة.
+        /// </summary>
+        internal static string PackNumber {
+            get {
+                return ResourceManager.GetString("PackNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to كلمة المرور.
         /// </summary>
         internal static string Password {
@@ -741,6 +759,15 @@ namespace Resources {
         internal static string Total {
             get {
                 return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مجموع الحزم.
+        /// </summary>
+        internal static string TotalPacks {
+            get {
+                return ResourceManager.GetString("TotalPacks", resourceCulture);
             }
         }
         

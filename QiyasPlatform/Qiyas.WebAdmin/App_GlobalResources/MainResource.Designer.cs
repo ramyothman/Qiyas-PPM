@@ -97,6 +97,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to إعادة تحزيم الكتب.
+        /// </summary>
+        internal static string BookRepack {
+            get {
+                return ResourceManager.GetString("BookRepack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to الغاء.
         /// </summary>
         internal static string Cancel {
@@ -237,6 +246,15 @@ namespace Resources {
         internal static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حفظ مركز إختبار.
+        /// </summary>
+        internal static string ExamCenterEditTitle {
+            get {
+                return ResourceManager.GetString("ExamCenterEditTitle", resourceCulture);
             }
         }
         
@@ -664,6 +682,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to استلام الحزم بمستودع التخزين.
+        /// </summary>
+        internal static string ReceiveExamPackTitle {
+            get {
+                return ResourceManager.GetString("ReceiveExamPackTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to تم حذف رقم الهاتف.
         /// </summary>
         internal static string RemovePhoneSuccess {
@@ -898,6 +925,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to يرجي ادخال سنة بين 1300 و 1500 .
+        /// </summary>
+        internal static string ValidYear {
+            get {
+                return ResourceManager.GetString("ValidYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to إدخل الكود التأكيدي.
         /// </summary>
         internal static string VerifyMainLabel {
@@ -912,6 +948,15 @@ namespace Resources {
         internal static string VerifyTitle {
             get {
                 return ResourceManager.GetString("VerifyTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to استعراض.
+        /// </summary>
+        internal static string View {
+            get {
+                return ResourceManager.GetString("View", resourceCulture);
             }
         }
     }
