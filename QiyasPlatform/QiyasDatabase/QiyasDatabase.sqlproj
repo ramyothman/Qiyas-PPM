@@ -145,6 +145,10 @@
     <Build Include="dbo\Functions\GetTotalPrintingPackageByPrintingID.sql" />
     <Build Include="dbo\Functions\GetTotalPrintingPackageA3ByPrintingID.sql" />
     <Build Include="dbo\Stored Procedures\DeleteExamModelItemByExamID.sql" />
+    <Build Include="dbo\Functions\GetTotalPrintingPackageItemsByPrintingID.sql" />
+    <Build Include="dbo\Functions\GetTotalPrintingPackageItemsA3ByPrintingID.sql" />
+    <Build Include="dbo\Functions\GetPackageTypeTotal.sql" />
+    <Build Include="dbo\Functions\GetExamModelCount.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompleteSchema.sql" />
