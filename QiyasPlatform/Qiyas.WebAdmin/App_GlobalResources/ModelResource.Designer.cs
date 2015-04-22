@@ -88,6 +88,42 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BookPackItemID.
+        /// </summary>
+        internal static string BookPackItemID {
+            get {
+                return ResourceManager.GetString("BookPackItemID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BookPackItemModelID.
+        /// </summary>
+        internal static string BookPackItemModelID {
+            get {
+                return ResourceManager.GetString("BookPackItemModelID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BookPackItemOperationID.
+        /// </summary>
+        internal static string BookPackItemOperationID {
+            get {
+                return ResourceManager.GetString("BookPackItemOperationID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string BookPackItemOperationName {
+            get {
+                return ResourceManager.GetString("BookPackItemOperationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to مسلسل عمليات طباعة الكتب.
         /// </summary>
         internal static string BookPrintingOperationID {
@@ -169,6 +205,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ContainerRequestID.
+        /// </summary>
+        internal static string ContainerRequestID {
+            get {
+                return ResourceManager.GetString("ContainerRequestID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ContainerRequestPackID.
+        /// </summary>
+        internal static string ContainerRequestPackID {
+            get {
+                return ResourceManager.GetString("ContainerRequestPackID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to كود الدولة.
         /// </summary>
         internal static string CountryRegionCode {
@@ -183,6 +237,15 @@ namespace Resources {
         internal static string CountryRegionName {
             get {
                 return ResourceManager.GetString("CountryRegionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to أنشئت بواسطة.
+        /// </summary>
+        internal static string CreatedBy {
+            get {
+                return ResourceManager.GetString("CreatedBy", resourceCulture);
             }
         }
         
@@ -241,11 +304,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ExamCenterID.
+        /// </summary>
+        internal static string ExamCenterID {
+            get {
+                return ResourceManager.GetString("ExamCenterID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to اسم المركز.
         /// </summary>
         internal static string ExamCenterName {
             get {
                 return ResourceManager.GetString("ExamCenterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ExamCenterRequiredExamsID.
+        /// </summary>
+        internal static string ExamCenterRequiredExamsID {
+            get {
+                return ResourceManager.GetString("ExamCenterRequiredExamsID", resourceCulture);
             }
         }
         
@@ -349,6 +430,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ExamRequirementItemID.
+        /// </summary>
+        internal static string ExamRequirementItemID {
+            get {
+                return ResourceManager.GetString("ExamRequirementItemID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to كمية الطباعة لنموذج A3.
         /// </summary>
         internal static string ExamsNeededForA3 {
@@ -421,6 +511,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الملف.
+        /// </summary>
+        internal static string FileNeedsPath {
+            get {
+                return ResourceManager.GetString("FileNeedsPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to فعال.
         /// </summary>
         internal static string IsActive {
@@ -444,6 +543,15 @@ namespace Resources {
         internal static string ModelCount {
             get {
                 return ResourceManager.GetString("ModelCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عدلت بواسطة.
+        /// </summary>
+        internal static string ModifiedBy {
+            get {
+                return ResourceManager.GetString("ModifiedBy", resourceCulture);
             }
         }
         
@@ -574,6 +682,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to كود الحزمة.
+        /// </summary>
+        internal static string PackCode {
+            get {
+                return ResourceManager.GetString("PackCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to مسلسل طريقة الحساب.
         /// </summary>
         internal static string PackingCalculationTypeID {
@@ -619,6 +736,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ParentID.
+        /// </summary>
+        internal static string ParentID {
+            get {
+                return ResourceManager.GetString("ParentID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to كلمة المرور.
         /// </summary>
         internal static string Password {
@@ -655,6 +781,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RequestPreparationStatusID.
+        /// </summary>
+        internal static string RequestPreparationStatusID {
+            get {
+                return ResourceManager.GetString("RequestPreparationStatusID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string RequestPreparationStatusName {
+            get {
+                return ResourceManager.GetString("RequestPreparationStatusName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to يرجي إدخال {0}.
         /// </summary>
         internal static string RequiredValidation {
@@ -669,6 +813,33 @@ namespace Resources {
         internal static string RowGuid {
             get {
                 return ResourceManager.GetString("RowGuid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to كود حقيبة الشحن.
+        /// </summary>
+        internal static string ShippingBagCode {
+            get {
+                return ResourceManager.GetString("ShippingBagCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ShippingBagID.
+        /// </summary>
+        internal static string ShippingBagID {
+            get {
+                return ResourceManager.GetString("ShippingBagID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ShippingBagItemID.
+        /// </summary>
+        internal static string ShippingBagItemID {
+            get {
+                return ResourceManager.GetString("ShippingBagItemID", resourceCulture);
             }
         }
         

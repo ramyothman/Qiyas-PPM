@@ -250,6 +250,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to لا يمكن حذف هذا التحزيم يوجد بيانات مرتبطة به.
+        /// </summary>
+        internal static string ErrorDeletingPack {
+            get {
+                return ResourceManager.GetString("ErrorDeletingPack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to حفظ مركز إختبار.
         /// </summary>
         internal static string ExamCenterEditTitle {
@@ -601,6 +610,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تم الترقيم بنجاح.
+        /// </summary>
+        internal static string NumberingPackSuccess {
+            get {
+                return ResourceManager.GetString("NumberingPackSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to يوجد بيانات نوع التحزيم هذا بالنظام.
         /// </summary>
         internal static string PackageTypeExists {
@@ -786,6 +804,15 @@ namespace Resources {
         internal static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تم الحفظ بنجاح.
+        /// </summary>
+        internal static string SaveSuccess {
+            get {
+                return ResourceManager.GetString("SaveSuccess", resourceCulture);
             }
         }
         

@@ -360,4 +360,61 @@
   <data name="PackNumber" xml:space="preserve">
     <value>رقم الحزمة</value>
   </data>
+  <data name="BookPackItemID" xml:space="preserve">
+    <value>BookPackItemID</value>
+  </data>
+  <data name="PackCode" xml:space="preserve">
+    <value>كود الحزمة</value>
+  </data>
+  <data name="ParentID" xml:space="preserve">
+    <value>ParentID</value>
+  </data>
+  <data name="BookPackItemModelID" xml:space="preserve">
+    <value>BookPackItemModelID</value>
+  </data>
+  <data name="BookPackItemOperationID" xml:space="preserve">
+    <value>BookPackItemOperationID</value>
+  </data>
+  <data name="BookPackItemOperationName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ContainerRequestID" xml:space="preserve">
+    <value>ContainerRequestID</value>
+  </data>
+  <data name="ExamCenterRequiredExamsID" xml:space="preserve">
+    <value>ExamCenterRequiredExamsID</value>
+  </data>
+  <data name="CreatedBy" xml:space="preserve">
+    <value>أنشئت بواسطة</value>
+  </data>
+  <data name="ModifiedBy" xml:space="preserve">
+    <value>عدلت بواسطة</value>
+  </data>
+  <data name="ContainerRequestPackID" xml:space="preserve">
+    <value>ContainerRequestPackID</value>
+  </data>
+  <data name="ExamCenterID" xml:space="preserve">
+    <value>ExamCenterID</value>
+  </data>
+  <data name="RequestPreparationStatusID" xml:space="preserve">
+    <value>RequestPreparationStatusID</value>
+  </data>
+  <data name="FileNeedsPath" xml:space="preserve">
+    <value>الملف</value>
+  </data>
+  <data name="ExamRequirementItemID" xml:space="preserve">
+    <value>ExamRequirementItemID</value>
+  </data>
+  <data name="RequestPreparationStatusName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ShippingBagID" xml:space="preserve">
+    <value>ShippingBagID</value>
+  </data>
+  <data name="ShippingBagCode" xml:space="preserve">
+    <value>كود حقيبة الشحن</value>
+  </data>
+  <data name="ShippingBagItemID" xml:space="preserve">
+    <value>ShippingBagItemID</value>
+  </data>
 </root>

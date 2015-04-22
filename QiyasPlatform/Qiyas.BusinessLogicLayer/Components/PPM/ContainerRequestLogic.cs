@@ -10,15 +10,9 @@ using System.ComponentModel;
 
 namespace Qiyas.BusinessLogicLayer.Components.PPM
 {
-    public partial class BookPrintingOperationLogic
+    public partial class ContainerRequestLogic
     {
-
-
-
-        public bool HasDependencies(int BookPrintingOperationID)
-        {
-            return false;
-        }
+        
     }
 }
       

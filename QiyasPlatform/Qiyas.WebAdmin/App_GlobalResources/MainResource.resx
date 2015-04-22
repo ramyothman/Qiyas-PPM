@@ -418,4 +418,13 @@
   <data name="BookRepack" xml:space="preserve">
     <value>إعادة تحزيم الكتب</value>
   </data>
+  <data name="ErrorDeletingPack" xml:space="preserve">
+    <value>لا يمكن حذف هذا التحزيم يوجد بيانات مرتبطة به</value>
+  </data>
+  <data name="SaveSuccess" xml:space="preserve">
+    <value>تم الحفظ بنجاح</value>
+  </data>
+  <data name="NumberingPackSuccess" xml:space="preserve">
+    <value>تم الترقيم بنجاح</value>
+  </data>
 </root>

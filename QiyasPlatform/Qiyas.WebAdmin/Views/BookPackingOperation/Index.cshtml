@@ -14,9 +14,17 @@
         <div class="widget-container fluid-height clearfix">
             <div class="widget-content padded clearfix">
 
-                @using (Html.BeginForm("SavePackage", "BookPackingOperation", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                @using (Html.BeginForm("SavePackage", "BookPackingOperation", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "packForm", @name = "packForm" }))
                 {
                     @Html.AntiForgeryToken()
+                    if (ViewBag.HasError)
+                    {
+                        <div class="alert alert-danger">@ViewBag.NotifyMessage</div>
+                    }
+                    else if (!string.IsNullOrEmpty(ViewBag.NotifyMessage))
+                    {
+                        <div class="alert alert-success">@ViewBag.NotifyMessage</div>
+                    }
                     <div class="col-lg-4 pull-right">
                         @Html.ValidationSummary("", new { @class = "text-danger" })
                         <div class="form-group">
@@ -52,9 +60,9 @@
                     <br /><br />
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" name="Save" value="حفظ" class="btn btn-default btn-primary" />
-                            <input type="submit" name="Delete" value="حذف" class="btn btn-default btn-primary" />
-                            <input type="submit" name="NumberingPacks" value="ترقيم الحزم" class="btn btn-default btn-primary" />
+                            <input type="submit" name="SavePack" id="SavePack" value="حفظ" class="btn btn-default btn-primary" />
+                            <input type="submit" name="DeletePack" id="DeletePack" value="حذف" class="btn btn-default btn-primary" />
+                            <input type="submit" name="NumberingPacks" id="NumberingPacks" value="ترقيم الحزم" class="btn btn-default btn-primary" />
                             <input type="submit" name="Print" value="طباعة ملصقات" class="btn btn-default btn-primary" />
                             <input type="submit" name="BackButton" value="عودة" class="btn btn-default " />
                         </div>
@@ -66,3 +74,24 @@
     </div>
 </div>
 
+@section Scripts {
+    <script type="text/javascript">
+    $("#SavePack").click(function () {
+        var form = $("form#packForm");
+        form.attr("action", "@Url.Action("SavePack", "BookPackingOperation")");
+        form.submit();
+    });
+
+    $("#DeletePack").click(function () {
+        var form = $("form#packForm");
+        form.attr("action", "@Url.Action("DeletePack", "BookPackingOperation")");
+        form.submit();
+    });
+
+    $("#NumberingPacks").click(function () {
+        var form = $("form#packForm");
+        form.attr("action", "@Url.Action("NumberingPack", "BookPackingOperation")");
+        form.submit();
+    });
+    </script>
+}

@@ -104,13 +104,37 @@
     <Compile Include="Components\PPM\BookPackingOperationLogic.Logic.cs">
       <DependentUpon>BookPackingOperationLogic.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\PPM\BookPackItemLogic.cs" />
+    <Compile Include="Components\PPM\BookPackItemLogic.Logic.cs">
+      <DependentUpon>BookPackItemLogic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PPM\BookPackItemModelLogic.cs" />
+    <Compile Include="Components\PPM\BookPackItemModelLogic.Logic.cs">
+      <DependentUpon>BookPackItemModelLogic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PPM\BookPackItemOperationLogic.cs" />
+    <Compile Include="Components\PPM\BookPackItemOperationLogic.Logic.cs">
+      <DependentUpon>BookPackItemOperationLogic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\PPM\BookPrintingOperationLogic.cs" />
     <Compile Include="Components\PPM\BookPrintingOperationLogic.Logic.cs">
       <DependentUpon>BookPrintingOperationLogic.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\PPM\ContainerRequestLogic.cs" />
+    <Compile Include="Components\PPM\ContainerRequestLogic.Logic.cs">
+      <DependentUpon>ContainerRequestLogic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PPM\ContainerRequestPackLogic.cs" />
+    <Compile Include="Components\PPM\ContainerRequestPackLogic.Logic.cs">
+      <DependentUpon>ContainerRequestPackLogic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\PPM\ExamCenterLogic.cs" />
     <Compile Include="Components\PPM\ExamCenterLogic.Logic.cs">
       <DependentUpon>ExamCenterLogic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PPM\ExamCenterRequiredExamsLogic.cs" />
+    <Compile Include="Components\PPM\ExamCenterRequiredExamsLogic.Logic.cs">
+      <DependentUpon>ExamCenterRequiredExamsLogic.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\PPM\ExamLogic.cs" />
     <Compile Include="Components\PPM\ExamLogic.Logic.cs">
@@ -127,6 +151,10 @@
     <Compile Include="Components\PPM\ExamPeriodLogic.cs" />
     <Compile Include="Components\PPM\ExamPeriodLogic.Logic.cs">
       <DependentUpon>ExamPeriodLogic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PPM\ExamRequirementItemLogic.cs" />
+    <Compile Include="Components\PPM\ExamRequirementItemLogic.Logic.cs">
+      <DependentUpon>ExamRequirementItemLogic.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\PPM\ExamSpecialityLogic.cs" />
     <Compile Include="Components\PPM\ExamSpecialityLogic.Logic.cs">
@@ -152,6 +180,18 @@
     <Compile Include="Components\PPM\PackingCalculationTypeLogic.Logic.cs">
       <DependentUpon>PackingCalculationTypeLogic.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\PPM\RequestPreparationStatusLogic.cs" />
+    <Compile Include="Components\PPM\RequestPreparationStatusLogic.Logic.cs">
+      <DependentUpon>RequestPreparationStatusLogic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PPM\ShippingBagItemLogic.cs" />
+    <Compile Include="Components\PPM\ShippingBagItemLogic.Logic.cs">
+      <DependentUpon>ShippingBagItemLogic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PPM\ShippingBagLogic.cs" />
+    <Compile Include="Components\PPM\ShippingBagLogic.Logic.cs">
+      <DependentUpon>ShippingBagLogic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\PPM\StudentGenderLogic.cs" />
     <Compile Include="Components\PPM\StudentGenderLogic.Logic.cs">
       <DependentUpon>StudentGenderLogic.cs</DependentUpon>
@@ -176,9 +216,29 @@
     <Compile Include="Entity\PPM\BookPackingOperation.Model.cs">
       <DependentUpon>BookPackingOperation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entity\PPM\BookPackItem.cs" />
+    <Compile Include="Entity\PPM\BookPackItem.Model.cs">
+      <DependentUpon>BookPackItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\BookPackItemModel.cs" />
+    <Compile Include="Entity\PPM\BookPackItemModel.Model.cs">
+      <DependentUpon>BookPackItemModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\BookPackItemOperation.cs" />
+    <Compile Include="Entity\PPM\BookPackItemOperation.Model.cs">
+      <DependentUpon>BookPackItemOperation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entity\PPM\BookPrintingOperation.cs" />
     <Compile Include="Entity\PPM\BookPrintingOperation.Model.cs">
       <DependentUpon>BookPrintingOperation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\ContainerRequest.cs" />
+    <Compile Include="Entity\PPM\ContainerRequest.Model.cs">
+      <DependentUpon>ContainerRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\ContainerRequestPack.cs" />
+    <Compile Include="Entity\PPM\ContainerRequestPack.Model.cs">
+      <DependentUpon>ContainerRequestPack.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity\PPM\Exam.cs" />
     <Compile Include="Entity\PPM\Exam.Model.cs">
@@ -187,6 +247,10 @@
     <Compile Include="Entity\PPM\ExamCenter.cs" />
     <Compile Include="Entity\PPM\ExamCenter.Model.cs">
       <DependentUpon>ExamCenter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\ExamCenterRequiredExams.cs" />
+    <Compile Include="Entity\PPM\ExamCenterRequiredExams.Model.cs">
+      <DependentUpon>ExamCenterRequiredExams.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity\PPM\ExamModel.cs" />
     <Compile Include="Entity\PPM\ExamModel.Model.cs">
@@ -199,6 +263,10 @@
     <Compile Include="Entity\PPM\ExamPeriod.cs" />
     <Compile Include="Entity\PPM\ExamPeriod.Model.cs">
       <DependentUpon>ExamPeriod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\ExamRequirementItem.cs" />
+    <Compile Include="Entity\PPM\ExamRequirementItem.Model.cs">
+      <DependentUpon>ExamRequirementItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity\PPM\ExamSpeciality.cs" />
     <Compile Include="Entity\PPM\ExamSpeciality.Model.cs">
@@ -223,6 +291,18 @@
     <Compile Include="Entity\PPM\PackingCalculationType.cs" />
     <Compile Include="Entity\PPM\PackingCalculationType.Model.cs">
       <DependentUpon>PackingCalculationType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\RequestPreparationStatus.cs" />
+    <Compile Include="Entity\PPM\RequestPreparationStatus.Model.cs">
+      <DependentUpon>RequestPreparationStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\ShippingBag.cs" />
+    <Compile Include="Entity\PPM\ShippingBag.Model.cs">
+      <DependentUpon>ShippingBag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\ShippingBagItem.cs" />
+    <Compile Include="Entity\PPM\ShippingBagItem.Model.cs">
+      <DependentUpon>ShippingBagItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity\PPM\StudentGender.cs" />
     <Compile Include="Entity\PPM\StudentGender.Model.cs">

@@ -149,6 +149,19 @@
     <Build Include="dbo\Functions\GetTotalPrintingPackageItemsA3ByPrintingID.sql" />
     <Build Include="dbo\Functions\GetPackageTypeTotal.sql" />
     <Build Include="dbo\Functions\GetExamModelCount.sql" />
+    <Build Include="PPM\Tables\ShippingBagItem.sql" />
+    <Build Include="PPM\Tables\ShippingBag.sql" />
+    <Build Include="PPM\Tables\RequestPreparationStatus.sql" />
+    <Build Include="PPM\Tables\ExamRequirementItem.sql" />
+    <Build Include="PPM\Tables\ExamCenterRequiredExams.sql" />
+    <Build Include="PPM\Tables\ContainerRequestPack.sql" />
+    <Build Include="PPM\Tables\ContainerRequest.sql" />
+    <Build Include="PPM\Tables\BookPackItemOperation.sql" />
+    <Build Include="PPM\Tables\BookPackItemModel.sql" />
+    <Build Include="PPM\Tables\BookPackItem.sql" />
+    <Build Include="dbo\Functions\GetLastPackSerialForExamID.sql" />
+    <Build Include="dbo\Stored Procedures\GetPackedByPrintingID.sql" />
+    <Build Include="dbo\Stored Procedures\DeleteBookPackingOperationByBookPrintingID.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompleteSchema.sql" />

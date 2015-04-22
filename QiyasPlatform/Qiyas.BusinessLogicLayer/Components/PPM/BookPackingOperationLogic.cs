@@ -23,6 +23,34 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
         }
 
         [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation> GetPackedByBookPrintingID(int ID)
+        {
+            List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation> operations = new List<Entity.PPM.BookPackingOperation>();
+            var packed = db.GetPackedByPrintingID(ID);
+            foreach(var item in packed)
+            {
+                Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation nitem = new Entity.PPM.BookPackingOperation();
+                nitem.AllocatedFrom = item.AllocatedFrom;
+                nitem.BookPackingOperationID = item.BookPackingOperationID;
+                nitem.BookPrintingOperationID = item.BookPrintingOperationID;
+                nitem.CreatedDate = item.CreatedDate;
+                nitem.CreatorID = item.CreatorID;
+                nitem.ModifiedByID = item.ModifiedByID;
+                nitem.ModifiedDate = item.ModifiedDate;
+                nitem.Name = item.Name;
+                nitem.PackageTotal = item.PackageTotal;
+                nitem.PackagingTypeID = item.PackagingTypeID;
+                nitem.PackingCalculationTypeID = item.PackingCalculationTypeID;
+                nitem.PackingParentID = item.PackingParentID;
+                nitem.PackingValue = item.PackingValue;
+                nitem.isNew = false;
+                operations.Add(nitem);
+            }
+
+            return operations;
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select)]
         public List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation> GetPackagingTypeByBookPrintingID(int ID)
         {
             var list = (from c in db.BookPackingOperations where c.BookPrintingOperationID == ID select new {c.PackagingTypeID}).ToList();
@@ -63,6 +91,16 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
         {
             var result = db.GetTotalPrintingPackageItemsA3ByPrintingID(ID);
             return result.HasValue ? result.Value : 0;
+        }
+
+        public void DeletePacksByPrintingID(int ID)
+        {
+            db.DeleteBookPackingOperationByBookPrintingID(ID);
+        }
+
+        public int GetLastPackSerial(int ExamID)
+        {
+            return db.GetLastPackSerialForExamID(ExamID).Value;
         }
     }
 }
