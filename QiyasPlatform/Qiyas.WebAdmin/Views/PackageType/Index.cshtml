@@ -30,10 +30,10 @@
             PackageTypeGridView.GetEditor('Total').SetValue(total);
             var name = '';
             if (examModelCount == 1) {
-                name = 'موحد (' + booksPerPackage + ')';
+                name = '(' + booksPerPackage + ') موحد';
             }
             else if (examModelCount > 1) {
-                name = 'متعدد(' + booksPerPackage + 'x' + examModelCount + ')';
+                name = '(' + booksPerPackage + 'x' + examModelCount + ') متعدد';
             }
             PackageTypeGridView.GetEditor('PackageName').SetValue(name);
             

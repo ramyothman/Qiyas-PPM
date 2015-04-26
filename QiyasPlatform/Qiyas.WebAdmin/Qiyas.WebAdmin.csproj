@@ -122,6 +122,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -249,6 +250,12 @@
     </Compile>
     <Compile Include="Common\Reports\PrintItemPack.Designer.cs">
       <DependentUpon>PrintItemPack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Reports\TestReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Common\Reports\TestReport.Designer.cs">
+      <DependentUpon>TestReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\Security\CustomRoleStore.cs" />
     <Compile Include="Common\Security\CustomUserStore.cs" />
@@ -1259,6 +1266,8 @@
     <Content Include="Views\ReceiveExamPack\_PrintGridViewPartial.cshtml" />
     <Content Include="Views\BookRePack\Index.cshtml" />
     <Content Include="Views\BookRePack\_RepackGridViewPartial.cshtml" />
+    <Content Include="Views\BookPackingOperation\PrintPacks.cshtml" />
+    <Content Include="Views\BookPackingOperation\_PrintPacksTitleDocumentViewerPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1297,7 +1306,10 @@
     <EmbeddedResource Include="Common\Reports\PrintItemPack.resx">
       <DependentUpon>PrintItemPack.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Common\Reports\TestReport.resx">
+      <DependentUpon>TestReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licensesa.licx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

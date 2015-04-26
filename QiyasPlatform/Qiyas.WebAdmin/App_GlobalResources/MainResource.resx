@@ -427,4 +427,7 @@
   <data name="NumberingPackSuccess" xml:space="preserve">
     <value>تم الترقيم بنجاح</value>
   </data>
+  <data name="PrintPacksTitle" xml:space="preserve">
+    <value>طباعة الباركود</value>
+  </data>
 </root>

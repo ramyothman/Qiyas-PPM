@@ -500,6 +500,8 @@
       <Column Name="Weight" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="OperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="BookPackItem_BookPackItemModel" Member="BookPackItemModels" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="BookPackItemModel" />
       <Association Name="BookPackItem_BookPackItemOperation" Member="BookPackItemOperations" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="BookPackItemOperation" />
       <Association Name="BookPackItem_ContainerRequestPack" Member="ContainerRequestPacks" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="ContainerRequestPack" />
@@ -521,6 +523,9 @@
       <Column Name="Speciality" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="ModelandNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="BookPrintingOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageTypeName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="StartBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.DeleteExamModelItemByExamID" Method="DeleteExamModelItemByExamID">

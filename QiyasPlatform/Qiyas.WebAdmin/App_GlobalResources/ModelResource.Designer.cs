@@ -538,6 +538,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to التسلسل الأخير.
+        /// </summary>
+        internal static string LastBookSerial {
+            get {
+                return ResourceManager.GetString("LastBookSerial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to عدد النماذج.
         /// </summary>
         internal static string ModelCount {
@@ -840,6 +849,15 @@ namespace Resources {
         internal static string ShippingBagItemID {
             get {
                 return ResourceManager.GetString("ShippingBagItemID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to بداية التسلسل.
+        /// </summary>
+        internal static string StartBookSerial {
+            get {
+                return ResourceManager.GetString("StartBookSerial", resourceCulture);
             }
         }
         

@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using DevExpress.Web.Mvc;
 using Qiyas.BusinessLogicLayer;
+using System.Security.Cryptography;
+using System.Text;
 namespace Qiyas.WebAdmin.Controllers
 {
     public class BookPackingOperationController : Controller
@@ -43,6 +45,22 @@ namespace Qiyas.WebAdmin.Controllers
             PrintingOperationID = ID;
             return View(model);
 
+        }
+
+        public ActionResult PrintPacks(int ID = 0)
+        {
+            string url = string.Format("{0}", Url.Action("Index", "BookPrintingOperation"));
+            var model = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(ID);
+            if (model == null || !model.HasObject)
+            {
+                return RedirectToAction("Index", "BookPrintingOperation");
+            }
+            MainID = ID;
+            ViewBag.HasError = false;
+            ViewBag.NotifyMessage = "";
+            ViewBag.PrintingID = ID;
+            PrintingOperationID = ID;
+            return View(model);
         }
 
         #region Grid Operations
@@ -421,6 +439,8 @@ namespace Qiyas.WebAdmin.Controllers
                 //serial = 1;
                 var packType = (from x in packageTypes where x.PackagingTypeID == pack.PackagingTypeID select x).FirstOrDefault();
                 var exists = (from x in oldPacks where x.BookPackingOperationID == pack.BookPackingOperationID select x ).FirstOrDefault();
+                int bookStart = 0;
+                int bookLast = 0;
                 if(exists == null || !exists.HasObject)
                 {
                     for(int i = 0; i < pack.PackageTotal.Value; i++)
@@ -433,6 +453,8 @@ namespace Qiyas.WebAdmin.Controllers
                         
                         string modelCode = "";
                         List<BusinessLogicLayer.Entity.PPM.BookPackItemModel> itemModels = new List<BusinessLogicLayer.Entity.PPM.BookPackItemModel>();
+                        bookStart = bookLast + 1;
+                        bookLast += bookStart + (i + 1) * packType.BooksPerPackage.Value;
                         foreach (BusinessLogicLayer.Entity.PPM.ExamModelItem examModel in exam.ExamModels)
                         {
                             if(packType.ExamModelCount > 1)
@@ -441,6 +463,8 @@ namespace Qiyas.WebAdmin.Controllers
                                 newModel.BookPackItemID = item.BookPackItemID;
                                 newModel.ExamModelID = examModel.ExamModelID;
                                 modelCode += examModel.ExamModelID + "-";
+                                item.StartBookSerial = bookStart;
+                                item.LastBookSerial = bookLast;
                                 itemModels.Add(newModel);
                             }
                             else
@@ -449,9 +473,12 @@ namespace Qiyas.WebAdmin.Controllers
                                 BusinessLogicLayer.Entity.PPM.BookPackItem itemUnit = new BusinessLogicLayer.Entity.PPM.BookPackItem();
                                 itemUnit.BookPackingOperationID = pack.BookPackingOperationID;
                                 itemUnit.OperationStatusID = 2;
-
+                                
+                                itemUnit.StartBookSerial = bookStart;
+                                itemUnit.LastBookSerial = bookLast;
                                 itemUnit.PackSerial = serial;
-                                itemUnit.PackCode = PrintingOperationID + "-" + pack.BookPackingOperationID + "-" + pack.PackagingTypeID + "-" + examModel.ExamModelID + "-" + serial;
+                                //itemUnit.PackCode = PrintingOperationID + "-" + pack.BookPackingOperationID + "-" + pack.PackagingTypeID + "-" + examModel.ExamModelID + "-" + serial;
+                                itemUnit.PackCode = RandomString(12);
                                 BusinessLogicLayer.Entity.PPM.BookPackItemModel newModel = new BusinessLogicLayer.Entity.PPM.BookPackItemModel();
                                 newModel.BookPackItemID = item.BookPackItemID;
                                 newModel.ExamModelID = examModel.ExamModelID;
@@ -467,7 +494,8 @@ namespace Qiyas.WebAdmin.Controllers
                         {
                             if (!string.IsNullOrEmpty(modelCode))
                                 modelCode = modelCode.Remove(modelCode.Length - 1, 1);
-                            item.PackCode = PrintingOperationID + "-" + pack.BookPackingOperationID + "-" + pack.PackagingTypeID + "-" + modelCode + "-" + serial;
+                            //item.PackCode = PrintingOperationID + "-" + pack.BookPackingOperationID + "-" + pack.PackagingTypeID + "-" + modelCode + "-" + serial;
+                            item.PackCode = RandomString(12);
                             item.ItemModels = itemModels;
                             items.Add(item);
                             serial++;
@@ -500,6 +528,52 @@ namespace Qiyas.WebAdmin.Controllers
             ViewBag.HasError = false;
             ViewBag.NotifyMessage = Resources.MainResource.NumberingPackSuccess;
             return View("Index", model);
+        }
+
+        string RandomString(int length, string allowedChars = "0123456789")
+        {
+            if (length < 0) throw new ArgumentOutOfRangeException("length", "length cannot be less than zero.");
+            if (string.IsNullOrEmpty(allowedChars)) throw new ArgumentException("allowedChars may not be empty.");
+
+            const int byteSize = 0x100;
+            var allowedCharSet = new HashSet<char>(allowedChars).ToArray();
+            if (byteSize < allowedCharSet.Length) throw new ArgumentException(String.Format("allowedChars may contain no more than {0} characters.", byteSize));
+
+            // Guid.NewGuid and System.Random are not particularly random. By using a
+            // cryptographically-secure random number generator, the caller is always
+            // protected, regardless of use.
+            using (var rng = new System.Security.Cryptography.RNGCryptoServiceProvider())
+            {
+                var result = new StringBuilder();
+                var buf = new byte[128];
+                while (result.Length < length)
+                {
+                    rng.GetBytes(buf);
+                    for (var i = 0; i < buf.Length && result.Length < length; ++i)
+                    {
+                        // Divide the byte into allowedCharSet-sized groups. If the
+                        // random value falls into the last group and the last group is
+                        // too small to choose from the entire allowedCharSet, ignore
+                        // the value in order to avoid biasing the result.
+                        var outOfRangeStart = byteSize - (byteSize % allowedCharSet.Length);
+                        if (outOfRangeStart <= buf[i]) continue;
+                        result.Append(allowedCharSet[buf[i] % allowedCharSet.Length]);
+                    }
+                }
+                return result.ToString();
+            }
+        }
+
+        Qiyas.WebAdmin.Common.Reports.PrintItemPack report = new Qiyas.WebAdmin.Common.Reports.PrintItemPack();
+
+        public ActionResult PrintPacksTitleDocumentViewerPartial()
+        {
+            return PartialView("_PrintPacksTitleDocumentViewerPartial", report);
+        }
+
+        public ActionResult PrintPacksTitleDocumentViewerPartialExport()
+        {
+            return DocumentViewerExtension.ExportTo(report, Request);
         }
     }
 }

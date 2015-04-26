@@ -48,6 +48,9 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
                 packItem.ModelandNumber = item.ModelandNumber;
                 packItem.OperationStatusID = item.OperationStatusID;
                 packItem.PackCode = item.PackCode;
+                packItem.PackageTypeName = item.PackageTypeName;
+                packItem.StartBookSerial = item.StartBookSerial;
+                packItem.LastBookSerial = item.LastBookSerial;
                 packItem.PackSerial = item.PackSerial;
                 packItem.ParentID = item.ParentID;
                 packItem.Speciality = item.Speciality;

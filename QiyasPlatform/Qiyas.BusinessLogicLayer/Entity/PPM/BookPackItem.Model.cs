@@ -87,6 +87,21 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             set { this.entity.PackSerial = value; }
             get { return this.entity.PackSerial; }
         }
+
+        
+        [Display(Name = "StartBookSerial")]
+        public int? StartBookSerial
+        {
+            set { this.entity.StartBookSerial = value; }
+            get { return this.entity.StartBookSerial; }
+        }
+
+        [Display(Name = "LastBookSerial")]
+        public int? LastBookSerial
+        {
+            set { this.entity.LastBookSerial = value; }
+            get { return this.entity.LastBookSerial; }
+        }
     
         #endregion    
     

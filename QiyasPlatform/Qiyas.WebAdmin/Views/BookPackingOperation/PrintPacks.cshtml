@@ -1,0 +1,23 @@
+﻿@model Qiyas.BusinessLogicLayer.Entity.PPM.BookPrintingOperation
+
+@{
+    ViewBag.Title = @Resources.MainResource.PrintPacksTitle;
+}
+
+<div class="page-title">
+    <h1>
+        @Resources.MainResource.PrintPacksTitle
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+                @Html.Action("PrintPacksTitleDocumentViewerPartial")
+            </div>
+        </div>
+    </div>
+</div>
+
+

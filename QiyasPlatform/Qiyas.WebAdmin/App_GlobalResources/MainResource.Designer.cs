@@ -691,6 +691,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to طباعة الباركود.
+        /// </summary>
+        internal static string PrintPacksTitle {
+            get {
+                return ResourceManager.GetString("PrintPacksTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to قياس.
         /// </summary>
         internal static string QiyasTitle {

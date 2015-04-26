@@ -26,6 +26,13 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             get { return _ModelandNumber; }
         }
 
+        private string _PackageTypeName;
+        public string PackageTypeName
+        {
+            set { _PackageTypeName = value; }
+            get { return _PackageTypeName; }
+        }
+
         private int _LastBookCount;
         public int LastBookCount
         {

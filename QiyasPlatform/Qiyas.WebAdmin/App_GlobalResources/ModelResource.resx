@@ -417,4 +417,10 @@
   <data name="ShippingBagItemID" xml:space="preserve">
     <value>ShippingBagItemID</value>
   </data>
+  <data name="LastBookSerial" xml:space="preserve">
+    <value>التسلسل الأخير</value>
+  </data>
+  <data name="StartBookSerial" xml:space="preserve">
+    <value>بداية التسلسل</value>
+  </data>
 </root>

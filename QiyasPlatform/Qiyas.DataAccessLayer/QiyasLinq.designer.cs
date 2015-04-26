@@ -11020,6 +11020,10 @@ namespace Qiyas.DataAccessLayer
 		
 		private System.Nullable<int> _ParentID;
 		
+		private System.Nullable<int> _StartBookSerial;
+		
+		private System.Nullable<int> _LastBookSerial;
+		
 		private EntitySet<BookPackItemModel> _BookPackItemModels;
 		
 		private EntitySet<BookPackItemOperation> _BookPackItemOperations;
@@ -11052,6 +11056,10 @@ namespace Qiyas.DataAccessLayer
     partial void OnOperationStatusIDChanged();
     partial void OnParentIDChanging(System.Nullable<int> value);
     partial void OnParentIDChanged();
+    partial void OnStartBookSerialChanging(System.Nullable<int> value);
+    partial void OnStartBookSerialChanged();
+    partial void OnLastBookSerialChanging(System.Nullable<int> value);
+    partial void OnLastBookSerialChanged();
     #endregion
 		
 		public BookPackItem()
@@ -11210,6 +11218,46 @@ namespace Qiyas.DataAccessLayer
 					this._ParentID = value;
 					this.SendPropertyChanged("ParentID");
 					this.OnParentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartBookSerial", DbType="Int")]
+		public System.Nullable<int> StartBookSerial
+		{
+			get
+			{
+				return this._StartBookSerial;
+			}
+			set
+			{
+				if ((this._StartBookSerial != value))
+				{
+					this.OnStartBookSerialChanging(value);
+					this.SendPropertyChanging();
+					this._StartBookSerial = value;
+					this.SendPropertyChanged("StartBookSerial");
+					this.OnStartBookSerialChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastBookSerial", DbType="Int")]
+		public System.Nullable<int> LastBookSerial
+		{
+			get
+			{
+				return this._LastBookSerial;
+			}
+			set
+			{
+				if ((this._LastBookSerial != value))
+				{
+					this.OnLastBookSerialChanging(value);
+					this.SendPropertyChanging();
+					this._LastBookSerial = value;
+					this.SendPropertyChanged("LastBookSerial");
+					this.OnLastBookSerialChanged();
 				}
 			}
 		}
@@ -11452,6 +11500,12 @@ namespace Qiyas.DataAccessLayer
 		
 		private System.Nullable<int> _BookPrintingOperationID;
 		
+		private string _PackageTypeName;
+		
+		private System.Nullable<int> _StartBookSerial;
+		
+		private System.Nullable<int> _LastBookSerial;
+		
 		public ViewBookPackItemPrint()
 		{
 		}
@@ -11612,6 +11666,54 @@ namespace Qiyas.DataAccessLayer
 				if ((this._BookPrintingOperationID != value))
 				{
 					this._BookPrintingOperationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackageTypeName", DbType="NVarChar(50)")]
+		public string PackageTypeName
+		{
+			get
+			{
+				return this._PackageTypeName;
+			}
+			set
+			{
+				if ((this._PackageTypeName != value))
+				{
+					this._PackageTypeName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartBookSerial", DbType="Int")]
+		public System.Nullable<int> StartBookSerial
+		{
+			get
+			{
+				return this._StartBookSerial;
+			}
+			set
+			{
+				if ((this._StartBookSerial != value))
+				{
+					this._StartBookSerial = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastBookSerial", DbType="Int")]
+		public System.Nullable<int> LastBookSerial
+		{
+			get
+			{
+				return this._LastBookSerial;
+			}
+			set
+			{
+				if ((this._LastBookSerial != value))
+				{
+					this._LastBookSerial = value;
 				}
 			}
 		}

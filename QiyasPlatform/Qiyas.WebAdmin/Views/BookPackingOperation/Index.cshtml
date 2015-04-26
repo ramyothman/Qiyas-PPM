@@ -63,8 +63,8 @@
                             <input type="submit" name="SavePack" id="SavePack" value="حفظ" class="btn btn-default btn-primary" />
                             <input type="submit" name="DeletePack" id="DeletePack" value="حذف" class="btn btn-default btn-primary" />
                             <input type="submit" name="NumberingPacks" id="NumberingPacks" value="ترقيم الحزم" class="btn btn-default btn-primary" />
-                            <input type="submit" name="Print" value="طباعة ملصقات" class="btn btn-default btn-primary" />
-                            <input type="submit" name="BackButton" value="عودة" class="btn btn-default " />
+                            <input type="submit" name="PrintPacks" id="PrintPacks" value="طباعة ملصقات" class="btn btn-default btn-primary" />
+                            <input type="button" name="BackButton" id="BackButton" value="عودة" class="btn btn-default " />
                         </div>
                     </div>
                 }
@@ -73,6 +73,7 @@
         </div>
     </div>
 </div>
+
 
 @section Scripts {
     <script type="text/javascript">
@@ -100,7 +101,7 @@
         
     });
 
-        $("#NumberingPacks").click(function () {
+    $("#NumberingPacks").click(function () {
             var r = confirm("هل تريد إتمام الترقيم");
             if (r == true) {
                 var form = $("form#packForm");
@@ -111,5 +112,23 @@
             }
         
     });
+
+        $("#PrintPacks").click(function (e) {
+            e.preventDefault();
+            window.location = "/BookPackingOperation/PrintPacks/" + @Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID;
+            return false;
+            @*var form = $("form#packForm");
+            form.attr("action", "@Url.Action("PrinPacks", "BookPackingOperation", Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID)");
+            form.submit();*@
+        });
+
+        $("#BackButton").click(function (e) {
+            e.preventDefault();
+            window.location = "/BookPrintingOperation";
+            return false;
+            @*var form = $("form#packForm");
+            form.attr("action", "@Url.Action("PrinPacks", "BookPackingOperation", Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID)");
+            form.submit();*@
+            });
     </script>
 }
