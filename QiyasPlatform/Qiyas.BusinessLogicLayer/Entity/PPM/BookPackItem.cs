@@ -11,6 +11,28 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
 {
     public partial class BookPackItem
     {
+
+        private string _Speciality;
+        public string Speciality
+        {
+            set { _Speciality = value; }
+            get{ return _Speciality;}
+        }
+
+        private string _ModelandNumber;
+        public string ModelandNumber
+        {
+            set { _ModelandNumber = value; }
+            get { return _ModelandNumber; }
+        }
+
+        private int _LastBookCount;
+        public int LastBookCount
+        {
+            set { _LastBookCount = value; }
+            get { return _LastBookCount; }
+        }
+
         private List<BusinessLogicLayer.Entity.PPM.BookPackItemModel> _ItemModels;
         public List<BusinessLogicLayer.Entity.PPM.BookPackItemModel> ItemModels
         {

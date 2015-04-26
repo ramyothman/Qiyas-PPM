@@ -244,6 +244,12 @@
     <Compile Include="Common\Reports\PackReport.Designer.cs">
       <DependentUpon>PackReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\Reports\PrintItemPack.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Common\Reports\PrintItemPack.Designer.cs">
+      <DependentUpon>PrintItemPack.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\Security\CustomRoleStore.cs" />
     <Compile Include="Common\Security\CustomUserStore.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -1287,6 +1293,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Common\Reports\PackReport.resx">
       <DependentUpon>PackReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\Reports\PrintItemPack.resx">
+      <DependentUpon>PrintItemPack.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>

@@ -469,6 +469,14 @@ namespace Qiyas.DataAccessLayer
 			}
 		}
 		
+		public System.Data.Linq.Table<ViewBookPackItemPrint> ViewBookPackItemPrints
+		{
+			get
+			{
+				return this.GetTable<ViewBookPackItemPrint>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.DeleteExamModelItemByExamID")]
 		public int DeleteExamModelItemByExamID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ExamID", DbType="Int")] System.Nullable<int> examID)
 		{
@@ -11417,6 +11425,195 @@ namespace Qiyas.DataAccessLayer
 		{
 			this.SendPropertyChanging();
 			entity.BookPackItem1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ViewBookPackItemPrint")]
+	public partial class ViewBookPackItemPrint
+	{
+		
+		private int _BookPackItemID;
+		
+		private System.Nullable<int> _BookPackingOperationID;
+		
+		private string _PackCode;
+		
+		private System.Nullable<int> _PackSerial;
+		
+		private System.Nullable<decimal> _Weight;
+		
+		private System.Nullable<int> _OperationStatusID;
+		
+		private System.Nullable<int> _ParentID;
+		
+		private string _Speciality;
+		
+		private string _ModelandNumber;
+		
+		private System.Nullable<int> _BookPrintingOperationID;
+		
+		public ViewBookPackItemPrint()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPackItemID", DbType="Int NOT NULL")]
+		public int BookPackItemID
+		{
+			get
+			{
+				return this._BookPackItemID;
+			}
+			set
+			{
+				if ((this._BookPackItemID != value))
+				{
+					this._BookPackItemID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPackingOperationID", DbType="Int")]
+		public System.Nullable<int> BookPackingOperationID
+		{
+			get
+			{
+				return this._BookPackingOperationID;
+			}
+			set
+			{
+				if ((this._BookPackingOperationID != value))
+				{
+					this._BookPackingOperationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackCode", DbType="NVarChar(20)")]
+		public string PackCode
+		{
+			get
+			{
+				return this._PackCode;
+			}
+			set
+			{
+				if ((this._PackCode != value))
+				{
+					this._PackCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackSerial", DbType="Int")]
+		public System.Nullable<int> PackSerial
+		{
+			get
+			{
+				return this._PackSerial;
+			}
+			set
+			{
+				if ((this._PackSerial != value))
+				{
+					this._PackSerial = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weight", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Weight
+		{
+			get
+			{
+				return this._Weight;
+			}
+			set
+			{
+				if ((this._Weight != value))
+				{
+					this._Weight = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OperationStatusID", DbType="Int")]
+		public System.Nullable<int> OperationStatusID
+		{
+			get
+			{
+				return this._OperationStatusID;
+			}
+			set
+			{
+				if ((this._OperationStatusID != value))
+				{
+					this._OperationStatusID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ParentID", DbType="Int")]
+		public System.Nullable<int> ParentID
+		{
+			get
+			{
+				return this._ParentID;
+			}
+			set
+			{
+				if ((this._ParentID != value))
+				{
+					this._ParentID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Speciality", DbType="NVarChar(50)")]
+		public string Speciality
+		{
+			get
+			{
+				return this._Speciality;
+			}
+			set
+			{
+				if ((this._Speciality != value))
+				{
+					this._Speciality = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModelandNumber", DbType="NVarChar(50)")]
+		public string ModelandNumber
+		{
+			get
+			{
+				return this._ModelandNumber;
+			}
+			set
+			{
+				if ((this._ModelandNumber != value))
+				{
+					this._ModelandNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPrintingOperationID", DbType="Int")]
+		public System.Nullable<int> BookPrintingOperationID
+		{
+			get
+			{
+				return this._BookPrintingOperationID;
+			}
+			set
+			{
+				if ((this._BookPrintingOperationID != value))
+				{
+					this._BookPrintingOperationID = value;
+				}
+			}
 		}
 	}
 	

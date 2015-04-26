@@ -76,22 +76,40 @@
 
 @section Scripts {
     <script type="text/javascript">
-    $("#SavePack").click(function () {
-        var form = $("form#packForm");
-        form.attr("action", "@Url.Action("SavePack", "BookPackingOperation")");
-        form.submit();
+        $("#SavePack").click(function () {
+            var r = confirm("هل تريد حفظ التحزيم");
+            if (r == true) {
+                var form = $("form#packForm");
+                form.attr("action", "@Url.Action("SavePack", "BookPackingOperation")");
+                form.submit();
+            } else {
+                
+            }
+        
     });
 
-    $("#DeletePack").click(function () {
-        var form = $("form#packForm");
-        form.attr("action", "@Url.Action("DeletePack", "BookPackingOperation")");
-        form.submit();
+        $("#DeletePack").click(function () {
+            var r = confirm("هل تريد حذف هذا التحزيم");
+            if (r == true) {
+                var form = $("form#packForm");
+                form.attr("action", "@Url.Action("DeletePack", "BookPackingOperation")");
+                form.submit();
+            } else {
+                
+            }
+        
     });
 
-    $("#NumberingPacks").click(function () {
-        var form = $("form#packForm");
-        form.attr("action", "@Url.Action("NumberingPack", "BookPackingOperation")");
-        form.submit();
+        $("#NumberingPacks").click(function () {
+            var r = confirm("هل تريد إتمام الترقيم");
+            if (r == true) {
+                var form = $("form#packForm");
+                form.attr("action", "@Url.Action("NumberingPack", "BookPackingOperation")");
+                form.submit();
+            } else {
+                
+            }
+        
     });
     </script>
 }

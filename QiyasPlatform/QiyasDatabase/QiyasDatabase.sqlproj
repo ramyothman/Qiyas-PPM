@@ -162,6 +162,10 @@
     <Build Include="dbo\Functions\GetLastPackSerialForExamID.sql" />
     <Build Include="dbo\Stored Procedures\GetPackedByPrintingID.sql" />
     <Build Include="dbo\Stored Procedures\DeleteBookPackingOperationByBookPrintingID.sql" />
+    <Build Include="dbo\Views\ViewBookPackItemPrint.sql" />
+    <Build Include="dbo\Views\ViewBookPackItem.sql" />
+    <Build Include="dbo\Functions\GetItemPackSpeciality.sql" />
+    <Build Include="dbo\Functions\GetItemPackExamandExamModel.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompleteSchema.sql" />

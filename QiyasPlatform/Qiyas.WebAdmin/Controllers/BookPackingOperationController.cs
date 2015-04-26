@@ -418,7 +418,7 @@ namespace Qiyas.WebAdmin.Controllers
 
             foreach (BusinessLogicLayer.Entity.PPM.BookPackingOperation pack in orderedPack)
             {
-                serial = 1;
+                //serial = 1;
                 var packType = (from x in packageTypes where x.PackagingTypeID == pack.PackagingTypeID select x).FirstOrDefault();
                 var exists = (from x in oldPacks where x.BookPackingOperationID == pack.BookPackingOperationID select x ).FirstOrDefault();
                 if(exists == null || !exists.HasObject)
@@ -428,21 +428,54 @@ namespace Qiyas.WebAdmin.Controllers
                         BusinessLogicLayer.Entity.PPM.BookPackItem item = new BusinessLogicLayer.Entity.PPM.BookPackItem();
                         item.BookPackingOperationID = pack.BookPackingOperationID;
                         item.OperationStatusID = 2;
-                        item.PackCode = PrintingOperationID + "-" + pack.BookPackingOperationID + "-" + pack.PackagingTypeID + "-" + serial;
+                        
                         item.PackSerial = serial;
-                        items.Add(item);
+                        
+                        string modelCode = "";
                         List<BusinessLogicLayer.Entity.PPM.BookPackItemModel> itemModels = new List<BusinessLogicLayer.Entity.PPM.BookPackItemModel>();
                         foreach (BusinessLogicLayer.Entity.PPM.ExamModelItem examModel in exam.ExamModels)
                         {
-                            BusinessLogicLayer.Entity.PPM.BookPackItemModel newModel = new BusinessLogicLayer.Entity.PPM.BookPackItemModel();
-                            newModel.BookPackItemID = item.BookPackItemID;
-                            newModel.ExamModelID = examModel.ExamModelID;
-                            itemModels.Add(newModel);
+                            if(packType.ExamModelCount > 1)
+                            {
+                                BusinessLogicLayer.Entity.PPM.BookPackItemModel newModel = new BusinessLogicLayer.Entity.PPM.BookPackItemModel();
+                                newModel.BookPackItemID = item.BookPackItemID;
+                                newModel.ExamModelID = examModel.ExamModelID;
+                                modelCode += examModel.ExamModelID + "-";
+                                itemModels.Add(newModel);
+                            }
+                            else
+                            {
+                                itemModels = new List<BusinessLogicLayer.Entity.PPM.BookPackItemModel>();
+                                BusinessLogicLayer.Entity.PPM.BookPackItem itemUnit = new BusinessLogicLayer.Entity.PPM.BookPackItem();
+                                itemUnit.BookPackingOperationID = pack.BookPackingOperationID;
+                                itemUnit.OperationStatusID = 2;
+
+                                itemUnit.PackSerial = serial;
+                                itemUnit.PackCode = PrintingOperationID + "-" + pack.BookPackingOperationID + "-" + pack.PackagingTypeID + "-" + examModel.ExamModelID + "-" + serial;
+                                BusinessLogicLayer.Entity.PPM.BookPackItemModel newModel = new BusinessLogicLayer.Entity.PPM.BookPackItemModel();
+                                newModel.BookPackItemID = item.BookPackItemID;
+                                newModel.ExamModelID = examModel.ExamModelID;
+                                modelCode += examModel.ExamModelID + "-";
+                                itemModels.Add(newModel);
+                                itemUnit.ItemModels = itemModels;
+                                items.Add(itemUnit);
+                                serial++;
+                            }
+                            
                         }
-                        item.ItemModels = itemModels;
+                        if (packType.ExamModelCount > 1)
+                        {
+                            if (!string.IsNullOrEmpty(modelCode))
+                                modelCode = modelCode.Remove(modelCode.Length - 1, 1);
+                            item.PackCode = PrintingOperationID + "-" + pack.BookPackingOperationID + "-" + pack.PackagingTypeID + "-" + modelCode + "-" + serial;
+                            item.ItemModels = itemModels;
+                            items.Add(item);
+                            serial++;
+                        }
+                        
 
                         ///TODO: Add Pack Items for Sub Packs
-                        serial++;
+                        
                     }
                     
                 }

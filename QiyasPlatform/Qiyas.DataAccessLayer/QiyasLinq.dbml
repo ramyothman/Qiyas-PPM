@@ -509,6 +509,20 @@
       <Association Name="BookPackItem_BookPackItem" Member="BookPackItem1" ThisKey="ParentID" OtherKey="BookPackItemID" Type="BookPackItem" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.ViewBookPackItemPrint" Member="ViewBookPackItemPrints">
+    <Type Name="ViewBookPackItemPrint">
+      <Column Name="BookPackItemID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BookPackingOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PackSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Weight" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="OperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Speciality" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ModelandNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="BookPrintingOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.DeleteExamModelItemByExamID" Method="DeleteExamModelItemByExamID">
     <Parameter Name="ExamID" Parameter="examID" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
