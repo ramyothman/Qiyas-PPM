@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE CheckPackWeightComplete 
+CREATE PROCEDURE [dbo].[CheckPackWeightComplete] 
 	-- Add the parameters for the stored procedure here
 	@PrintID int
 AS
@@ -14,7 +14,7 @@ BEGIN
 	Declare @Result int
 	Declare @PrintRequestStatus int
     -- Insert statements for procedure here
-	SELECT @Result = count([Weight]) from [PPM].[BookPackItem] where [BookPackingOperationID] 
+	SELECT @Result = count(BookPackItemID) from [PPM].[BookPackItem] where [BookPackingOperationID] 
 					in (select [BookPackingOperationID] from [PPM].[BookPackingOperation] where [BookPrintingOperationID] = @PrintID) and 
 					[Weight] is null
 	
@@ -27,7 +27,7 @@ BEGIN
 	end
 	else 
 	begin
-	SELECT @Result = count([Weight]) from [PPM].[BookPackItem] where [BookPackingOperationID] 
+	SELECT @Result = count(BookPackItemID) from [PPM].[BookPackItem] where [BookPackingOperationID] 
 					in (select [BookPackingOperationID] from [PPM].[BookPackingOperation] where [BookPrintingOperationID] = @PrintID) and 
 					[Weight] is not null
 		if(@Result > 0)

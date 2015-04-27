@@ -11,8 +11,12 @@
     [CreatedDate]             DATETIME      NULL,
     [ModifiedByID]            INT           NULL,
     [ModifiedDate]            DATETIME      NULL,
+    [TotalPacks]              AS            ([dbo].[GetTotalBookPrintPackages]([BookPrintingOperationID])),
+    [TotalExamModels]         AS            ([dbo].[GetExamModelCount]([ExamID])),
     CONSTRAINT [PK_BookPrintingOperation] PRIMARY KEY CLUSTERED ([BookPrintingOperationID] ASC),
     CONSTRAINT [FK_BookPrintingOperation_Exam] FOREIGN KEY ([ExamID]) REFERENCES [PPM].[Exam] ([ExamID]) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT [FK_BookPrintingOperation_OperationStatus] FOREIGN KEY ([OperationStatusID]) REFERENCES [PPM].[OperationStatus] ([OperationStatusID])
 );
+
+
 
