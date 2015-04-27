@@ -477,6 +477,14 @@ namespace Qiyas.DataAccessLayer
 			}
 		}
 		
+		public System.Data.Linq.Table<PackageWeightView> PackageWeightViews
+		{
+			get
+			{
+				return this.GetTable<PackageWeightView>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.DeleteExamModelItemByExamID")]
 		public int DeleteExamModelItemByExamID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ExamID", DbType="Int")] System.Nullable<int> examID)
 		{
@@ -532,6 +540,13 @@ namespace Qiyas.DataAccessLayer
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD);
 			return ((ISingleResult<GetPackedByPrintingIDResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.CheckPackWeightComplete")]
+		public int CheckPackWeightComplete([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrintID", DbType="Int")] System.Nullable<int> printID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), printID);
+			return ((int)(result.ReturnValue));
 		}
 	}
 	
@@ -11714,6 +11729,195 @@ namespace Qiyas.DataAccessLayer
 				if ((this._LastBookSerial != value))
 				{
 					this._LastBookSerial = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PackageWeightView")]
+	public partial class PackageWeightView
+	{
+		
+		private int _PackageWeightID;
+		
+		private string _Name;
+		
+		private System.Nullable<decimal> _Weight;
+		
+		private System.Nullable<int> _PackageCode;
+		
+		private System.Nullable<int> _CreatorID;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<int> _ModifiedByID;
+		
+		private System.Nullable<System.DateTime> _ModifiedDate;
+		
+		private string _PackCode;
+		
+		private System.Nullable<int> _PackSerial;
+		
+		public PackageWeightView()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackageWeightID", DbType="Int NOT NULL")]
+		public int PackageWeightID
+		{
+			get
+			{
+				return this._PackageWeightID;
+			}
+			set
+			{
+				if ((this._PackageWeightID != value))
+				{
+					this._PackageWeightID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weight", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Weight
+		{
+			get
+			{
+				return this._Weight;
+			}
+			set
+			{
+				if ((this._Weight != value))
+				{
+					this._Weight = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackageCode", DbType="Int")]
+		public System.Nullable<int> PackageCode
+		{
+			get
+			{
+				return this._PackageCode;
+			}
+			set
+			{
+				if ((this._PackageCode != value))
+				{
+					this._PackageCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatorID", DbType="Int")]
+		public System.Nullable<int> CreatorID
+		{
+			get
+			{
+				return this._CreatorID;
+			}
+			set
+			{
+				if ((this._CreatorID != value))
+				{
+					this._CreatorID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this._CreatedDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedByID", DbType="Int")]
+		public System.Nullable<int> ModifiedByID
+		{
+			get
+			{
+				return this._ModifiedByID;
+			}
+			set
+			{
+				if ((this._ModifiedByID != value))
+				{
+					this._ModifiedByID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this._ModifiedDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackCode", DbType="NVarChar(20)")]
+		public string PackCode
+		{
+			get
+			{
+				return this._PackCode;
+			}
+			set
+			{
+				if ((this._PackCode != value))
+				{
+					this._PackCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackSerial", DbType="Int")]
+		public System.Nullable<int> PackSerial
+		{
+			get
+			{
+				return this._PackSerial;
+			}
+			set
+			{
+				if ((this._PackSerial != value))
+				{
+					this._PackSerial = value;
 				}
 			}
 		}

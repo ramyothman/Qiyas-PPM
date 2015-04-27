@@ -12,9 +12,121 @@
     <div class="col-lg-12">
         <div class="widget-container fluid-height clearfix">
             <div class="widget-content padded clearfix">
-                @Html.Action("PackageWeightGridViewPartial")
+                
+                @using (Html.BeginForm("SaveWeight", "PackageWeight", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "packForm", @name = "packForm" }))
+                {
+                    @Html.AntiForgeryToken()
 
+                    <div id="errorMessage" class="alert alert-danger" style="display:none;">يوجد خطأ في الحفظ يرجى مراجعة البيانات</div>
+                    <div id="successMessage" class="alert alert-success" style="display:none;">تم الحفظ بنجاح</div>
+                    <div class="col-lg-4 pull-right">
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.PackageCode, new { @class = "col-md-5  pull-right control-label" })
+                            <div class="col-md-4  pull-right">
+                                @Html.TextBoxFor(m => m.PackageCode, new { @class = "form-control" })
+                            </div>
+                            <div class="error" style="color: forestgreen;display:none;" id="packageExists">حزمة صحيحة</div>
+                            <div class="error" style="color: darkred;display:none;" id="packageDoesntExist">لا يمكن تعديل هذه الحزمة</div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Weight, new { @class = "col-md-5  pull-right control-label" })
+                            <div class="col-md-4 pull-right">
+                                @Html.TextBoxFor(m => m.Weight, new { @class = "form-control", @type = "number" })
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-10 ">
+                                <input type="submit" name="SaveWeight" id="SaveWeight" value="حفظ" class="btn btn-default btn-primary pull-left" />
+                            </div>
+                        </div>
+                        <hr />
+                    </div>
+                    <br /><br />
+                    @Html.Action("PackageWeightGridViewPartial")
+
+
+
+                }
             </div>
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    
+    <script type="text/javascript">
+        $("#SaveWeight").click(function (e) {
+            e.preventDefault();
+            var urlLink = "@Url.Action("SaveWeight", "PackageWeight")";
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                data:  {
+                    item: $('#PackageCode').val(),
+                    weight: $('#Weight').val()
+                },
+                url: urlLink,
+                success: function (data) {
+                    if (data == "saved") {
+                        $('#errorMessage').hide();
+                        $('#successMessage').fadeIn('slow', function () {
+                            $(this).delay(3000).fadeOut('slow');
+                        });
+                        $('#PackageCode').val('');
+                        $('#Weight').val('');
+                        $('#packageDoesntExist').hide();
+                        $('#packageExists').hide();
+                        $("#PackageCode").focus();
+                        PackageWeightGridView.PerformCallback();
+                    }
+                    else {
+                        $('#successMessage').hide();
+                        $('#errorMessage').fadeIn('slow', function () {
+                            $(this).delay(5000).fadeOut('slow');
+                        });
+                    }
+
+                },
+                error: function (data) {
+                    $('#successMessage').hide();
+                    $('#errorMessage').fadeIn('slow', function () {
+                        $(this).delay(5000).fadeOut('slow');
+                    });
+                }
+            });
+            return false;
+        });
+        $("#PackageCode").change(function () {
+            var urlLink = "@Url.Action("CheckItem", "PackageWeight")";
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                data:  {
+                    item: $('#PackageCode').val()
+                },
+                url: urlLink,
+                success: function (data) {
+                    if (data == "exists") {
+                        $('#packageDoesntExist').hide();
+                        $('#packageExists').show();
+                    }
+                    else {
+                        $('#packageExists').hide();
+                        $('#packageDoesntExist').show();
+                    }
+
+                },
+                error: function (data) {
+                    $('#packageExists').hide();
+                    $('#packageDoesntExist').show();
+                }
+            });
+        });
+</script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -528,6 +528,20 @@
       <Column Name="LastBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.PackageWeightView" Member="PackageWeightViews">
+    <Type Name="PackageWeightView">
+      <Column Name="PackageWeightID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Weight" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="PackageCode" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PackCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PackSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.DeleteExamModelItemByExamID" Method="DeleteExamModelItemByExamID">
     <Parameter Name="ExamID" Parameter="examID" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
@@ -577,5 +591,9 @@
       <Column Name="PackageTotal" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PackingParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.CheckPackWeightComplete" Method="CheckPackWeightComplete">
+    <Parameter Name="PrintID" Parameter="printID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>

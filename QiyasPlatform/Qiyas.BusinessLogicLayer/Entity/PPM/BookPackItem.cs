@@ -12,6 +12,11 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
     public partial class BookPackItem
     {
 
+
+        public BookPackItem(string PackageCode)
+        {
+            this.entity = context.BookPackItems.Where(p => p.PackCode == PackageCode).FirstOrDefault();  
+        }
         private string _Speciality;
         public string Speciality
         {

@@ -25,7 +25,7 @@
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowDeleteButton = true;
-        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowEditButton = false;
 
         settings.SettingsSearchPanel.Visible = true;
         settings.SettingsSearchPanel.ShowClearButton = true;
@@ -41,7 +41,7 @@
         settings.Width = new System.Web.UI.WebControls.Unit("100%");
         settings.RightToLeft = DefaultBoolean.True;
         settings.SettingsPager.Visible = true;
-        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRow = false;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
         settings.Styles.AlternatingRow.BackColor = System.Drawing.Color.FromName("#f9f9f9");
 
@@ -69,18 +69,17 @@
 
                 settings.Columns.Add(column =>
                 {
-                    column.FieldName = "PackageCode";
+                    column.FieldName = "PackCode";
                     column.EditFormSettings.ColumnSpan = 2;
                     column.Caption = @Resources.ModelResource.PackageCode;
 
-                    column.ColumnType = MVCxGridViewColumnType.SpinEdit;
-                    var textProperties = column.PropertiesEdit as SpinEditProperties;
+                    column.ColumnType = MVCxGridViewColumnType.TextBox;
+                    var textProperties = column.PropertiesEdit as TextBoxProperties;
                     textProperties.ValidationSettings.RequiredField.IsRequired = true;
                     textProperties.ValidationSettings.RequiredField.ErrorText = "*";
                     textProperties.ValidationSettings.Display = Display.Dynamic;
                     textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
-                    textProperties.NumberType = SpinEditNumberType.Integer;
-
+                    
                 });
 
                 settings.Columns.Add(column =>

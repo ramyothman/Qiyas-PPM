@@ -166,6 +166,8 @@
     <Build Include="dbo\Views\ViewBookPackItem.sql" />
     <Build Include="dbo\Functions\GetItemPackSpeciality.sql" />
     <Build Include="dbo\Functions\GetItemPackExamandExamModel.sql" />
+    <Build Include="dbo\Views\PackageWeightView.sql" />
+    <Build Include="dbo\Stored Procedures\CheckPackWeightComplete.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompleteSchema.sql" />

@@ -50,6 +50,7 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             get{ return this.entity.Name; }
         }
 
+        [Required(ErrorMessage = "RequiredValidation")]
         [Display(Name = "Weight")]
         public decimal? Weight
         {            
@@ -57,6 +58,7 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             get { return this.entity.Weight; }
         }
 
+        [Required(ErrorMessage = "RequiredValidation")] 
         [Display(Name = "PackageCode")]
         public int? PackageCode
         {
