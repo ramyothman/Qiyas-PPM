@@ -176,25 +176,6 @@
       <Association Name="StudentGender_ExamPeriod" Member="StudentGender" ThisKey="StudentGenderID" OtherKey="StudentGenderID" Type="StudentGender" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="PPM.BookPrintingOperation" Member="BookPrintingOperations">
-    <Type Name="BookPrintingOperation">
-      <Column Name="BookPrintingOperationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ExamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PrintsForOneModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ExamsNeededForA3" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ExamsNeededForA4" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ExamsNeededForCD" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="OperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="BookPrintingOperation_BookPackingOperation" Member="BookPackingOperations" ThisKey="BookPrintingOperationID" OtherKey="BookPrintingOperationID" Type="BookPackingOperation" />
-      <Association Name="OperationStatus_BookPrintingOperation" Member="OperationStatus" ThisKey="OperationStatusID" OtherKey="OperationStatusID" Type="OperationStatus" IsForeignKey="true" />
-      <Association Name="Exam_BookPrintingOperation" Member="Exam" ThisKey="ExamID" OtherKey="ExamID" Type="Exam" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
   <Table Name="Person.CountryRegion" Member="CountryRegions">
     <Type Name="CountryRegion">
       <Column Name="CountryRegionCode" Type="System.String" DbType="Char(3) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -324,8 +305,8 @@
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Exam_BookPrintingOperation" Member="BookPrintingOperations" ThisKey="ExamID" OtherKey="ExamID" Type="BookPrintingOperation" />
       <Association Name="Exam_ExamModelItem" Member="ExamModelItems" ThisKey="ExamID" OtherKey="ExamID" Type="ExamModelItem" />
+      <Association Name="Exam_BookPrintingOperation" Member="BookPrintingOperations" ThisKey="ExamID" OtherKey="ExamID" Type="BookPrintingOperation" />
       <Association Name="ExamSpeciality_Exam" Member="ExamSpeciality" ThisKey="ExamSpecialityID" OtherKey="ExamSpecialityID" Type="ExamSpeciality" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="StudentGender_Exam" Member="StudentGender" ThisKey="StudentGenderID" OtherKey="StudentGenderID" Type="StudentGender" IsForeignKey="true" />
     </Type>
@@ -364,10 +345,10 @@
       <Association Name="BookPackingOperation_BookPackingOperation" Member="BookPackingOperations" ThisKey="BookPackingOperationID" OtherKey="PackingParentID" Type="BookPackingOperation" />
       <Association Name="BookPackingOperation_BookPackItem" Member="BookPackItems" ThisKey="BookPackingOperationID" OtherKey="BookPackingOperationID" Type="BookPackItem" />
       <Association Name="BookPackingOperation_BookPackingOperation" Member="BookPackingOperation1" ThisKey="PackingParentID" OtherKey="BookPackingOperationID" Type="BookPackingOperation" IsForeignKey="true" />
-      <Association Name="BookPrintingOperation_BookPackingOperation" Member="BookPrintingOperation" ThisKey="BookPrintingOperationID" OtherKey="BookPrintingOperationID" Type="BookPrintingOperation" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="PackagingType_BookPackingOperation" Member="PackagingType" ThisKey="PackagingTypeID" OtherKey="PackagingTypeID" Type="PackagingType" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="PackingCalculationType_BookPackingOperation" Member="PackingCalculationType" ThisKey="PackingCalculationTypeID" OtherKey="PackingCalculationTypeID" Type="PackingCalculationType" IsForeignKey="true" />
       <Association Name="PackingCalculationType1_BookPackingOperation" Member="PackingCalculationType1" ThisKey="PackingCalculationTypeID" OtherKey="PackingCalculationTypeID" Type="PackingCalculationType1" IsForeignKey="true" />
+      <Association Name="BookPrintingOperation_BookPackingOperation" Member="BookPrintingOperation" ThisKey="BookPrintingOperationID" OtherKey="BookPrintingOperationID" Type="BookPrintingOperation" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="PPM.BookPackItemModel" Member="BookPackItemModels">
@@ -540,6 +521,27 @@
       <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="PackCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="PackSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="PPM.BookPrintingOperation" Member="BookPrintingOperations">
+    <Type Name="BookPrintingOperation">
+      <Column Name="BookPrintingOperationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ExamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PrintsForOneModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForA3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForA4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForCD" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TotalPacks" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TotalExamModels" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="BookPrintingOperation_BookPackingOperation" Member="BookPackingOperations" ThisKey="BookPrintingOperationID" OtherKey="BookPrintingOperationID" Type="BookPackingOperation" />
+      <Association Name="Exam_BookPrintingOperation" Member="Exam" ThisKey="ExamID" OtherKey="ExamID" Type="Exam" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="OperationStatus_BookPrintingOperation" Member="OperationStatus" ThisKey="OperationStatusID" OtherKey="OperationStatusID" Type="OperationStatus" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.DeleteExamModelItemByExamID" Method="DeleteExamModelItemByExamID">

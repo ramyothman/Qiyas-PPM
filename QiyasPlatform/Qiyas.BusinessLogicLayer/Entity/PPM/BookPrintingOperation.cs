@@ -25,33 +25,25 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             }
         }
 
-        private int? _ModelCount;
+        
         [Display(Name = "ModelCount")]
-        public int ModelCount
+        public int? ModelCount
         {
-            set { _ModelCount = value; }
+            
             get
             {
-                if(!_ModelCount.HasValue)
-                {
-                    _ModelCount = 0;
-                }
-                return _ModelCount.Value;
+                return this.entity.TotalExamModels;
             }
         }
 
-        private int? _TotalPacks;
+        
         [Display(Name = "TotalPacks")]
-        public int TotalPacks
+        public int? TotalPacks
         {
-            set { _TotalPacks = value; }
+            
             get
             {
-                if (!_TotalPacks.HasValue)
-                {
-                    _TotalPacks = 0;
-                }
-                return _TotalPacks.Value;
+                return this.entity.TotalPacks;
             }
         }
 

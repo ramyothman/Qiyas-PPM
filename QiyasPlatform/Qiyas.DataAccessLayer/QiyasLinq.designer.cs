@@ -69,9 +69,6 @@ namespace Qiyas.DataAccessLayer
     partial void InsertExamPeriod(ExamPeriod instance);
     partial void UpdateExamPeriod(ExamPeriod instance);
     partial void DeleteExamPeriod(ExamPeriod instance);
-    partial void InsertBookPrintingOperation(BookPrintingOperation instance);
-    partial void UpdateBookPrintingOperation(BookPrintingOperation instance);
-    partial void DeleteBookPrintingOperation(BookPrintingOperation instance);
     partial void InsertCountryRegion(CountryRegion instance);
     partial void UpdateCountryRegion(CountryRegion instance);
     partial void DeleteCountryRegion(CountryRegion instance);
@@ -141,6 +138,9 @@ namespace Qiyas.DataAccessLayer
     partial void InsertBookPackItem(BookPackItem instance);
     partial void UpdateBookPackItem(BookPackItem instance);
     partial void DeleteBookPackItem(BookPackItem instance);
+    partial void InsertBookPrintingOperation(BookPrintingOperation instance);
+    partial void UpdateBookPrintingOperation(BookPrintingOperation instance);
+    partial void DeleteBookPrintingOperation(BookPrintingOperation instance);
     #endregion
 		
 		public QiyasLinqDataContext() : 
@@ -274,14 +274,6 @@ namespace Qiyas.DataAccessLayer
 			get
 			{
 				return this.GetTable<ExamPeriod>();
-			}
-		}
-		
-		public System.Data.Linq.Table<BookPrintingOperation> BookPrintingOperations
-		{
-			get
-			{
-				return this.GetTable<BookPrintingOperation>();
 			}
 		}
 		
@@ -482,6 +474,14 @@ namespace Qiyas.DataAccessLayer
 			get
 			{
 				return this.GetTable<PackageWeightView>();
+			}
+		}
+		
+		public System.Data.Linq.Table<BookPrintingOperation> BookPrintingOperations
+		{
+			get
+			{
+				return this.GetTable<BookPrintingOperation>();
 			}
 		}
 		
@@ -4241,442 +4241,6 @@ namespace Qiyas.DataAccessLayer
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="PPM.BookPrintingOperation")]
-	public partial class BookPrintingOperation : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _BookPrintingOperationID;
-		
-		private string _Name;
-		
-		private System.Nullable<int> _ExamID;
-		
-		private System.Nullable<int> _PrintsForOneModel;
-		
-		private System.Nullable<int> _ExamsNeededForA3;
-		
-		private System.Nullable<int> _ExamsNeededForA4;
-		
-		private System.Nullable<int> _ExamsNeededForCD;
-		
-		private System.Nullable<int> _OperationStatusID;
-		
-		private System.Nullable<int> _CreatorID;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-		private System.Nullable<int> _ModifiedByID;
-		
-		private System.Nullable<System.DateTime> _ModifiedDate;
-		
-		private EntitySet<BookPackingOperation> _BookPackingOperations;
-		
-		private EntityRef<OperationStatus> _OperationStatus;
-		
-		private EntityRef<Exam> _Exam;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnBookPrintingOperationIDChanging(int value);
-    partial void OnBookPrintingOperationIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnExamIDChanging(System.Nullable<int> value);
-    partial void OnExamIDChanged();
-    partial void OnPrintsForOneModelChanging(System.Nullable<int> value);
-    partial void OnPrintsForOneModelChanged();
-    partial void OnExamsNeededForA3Changing(System.Nullable<int> value);
-    partial void OnExamsNeededForA3Changed();
-    partial void OnExamsNeededForA4Changing(System.Nullable<int> value);
-    partial void OnExamsNeededForA4Changed();
-    partial void OnExamsNeededForCDChanging(System.Nullable<int> value);
-    partial void OnExamsNeededForCDChanged();
-    partial void OnOperationStatusIDChanging(System.Nullable<int> value);
-    partial void OnOperationStatusIDChanged();
-    partial void OnCreatorIDChanging(System.Nullable<int> value);
-    partial void OnCreatorIDChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
-    partial void OnModifiedByIDChanging(System.Nullable<int> value);
-    partial void OnModifiedByIDChanged();
-    partial void OnModifiedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnModifiedDateChanged();
-    #endregion
-		
-		public BookPrintingOperation()
-		{
-			this._BookPackingOperations = new EntitySet<BookPackingOperation>(new Action<BookPackingOperation>(this.attach_BookPackingOperations), new Action<BookPackingOperation>(this.detach_BookPackingOperations));
-			this._OperationStatus = default(EntityRef<OperationStatus>);
-			this._Exam = default(EntityRef<Exam>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPrintingOperationID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int BookPrintingOperationID
-		{
-			get
-			{
-				return this._BookPrintingOperationID;
-			}
-			set
-			{
-				if ((this._BookPrintingOperationID != value))
-				{
-					this.OnBookPrintingOperationIDChanging(value);
-					this.SendPropertyChanging();
-					this._BookPrintingOperationID = value;
-					this.SendPropertyChanged("BookPrintingOperationID");
-					this.OnBookPrintingOperationIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamID", DbType="Int")]
-		public System.Nullable<int> ExamID
-		{
-			get
-			{
-				return this._ExamID;
-			}
-			set
-			{
-				if ((this._ExamID != value))
-				{
-					if (this._Exam.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnExamIDChanging(value);
-					this.SendPropertyChanging();
-					this._ExamID = value;
-					this.SendPropertyChanged("ExamID");
-					this.OnExamIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrintsForOneModel", DbType="Int")]
-		public System.Nullable<int> PrintsForOneModel
-		{
-			get
-			{
-				return this._PrintsForOneModel;
-			}
-			set
-			{
-				if ((this._PrintsForOneModel != value))
-				{
-					this.OnPrintsForOneModelChanging(value);
-					this.SendPropertyChanging();
-					this._PrintsForOneModel = value;
-					this.SendPropertyChanged("PrintsForOneModel");
-					this.OnPrintsForOneModelChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamsNeededForA3", DbType="Int")]
-		public System.Nullable<int> ExamsNeededForA3
-		{
-			get
-			{
-				return this._ExamsNeededForA3;
-			}
-			set
-			{
-				if ((this._ExamsNeededForA3 != value))
-				{
-					this.OnExamsNeededForA3Changing(value);
-					this.SendPropertyChanging();
-					this._ExamsNeededForA3 = value;
-					this.SendPropertyChanged("ExamsNeededForA3");
-					this.OnExamsNeededForA3Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamsNeededForA4", DbType="Int")]
-		public System.Nullable<int> ExamsNeededForA4
-		{
-			get
-			{
-				return this._ExamsNeededForA4;
-			}
-			set
-			{
-				if ((this._ExamsNeededForA4 != value))
-				{
-					this.OnExamsNeededForA4Changing(value);
-					this.SendPropertyChanging();
-					this._ExamsNeededForA4 = value;
-					this.SendPropertyChanged("ExamsNeededForA4");
-					this.OnExamsNeededForA4Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamsNeededForCD", DbType="Int")]
-		public System.Nullable<int> ExamsNeededForCD
-		{
-			get
-			{
-				return this._ExamsNeededForCD;
-			}
-			set
-			{
-				if ((this._ExamsNeededForCD != value))
-				{
-					this.OnExamsNeededForCDChanging(value);
-					this.SendPropertyChanging();
-					this._ExamsNeededForCD = value;
-					this.SendPropertyChanged("ExamsNeededForCD");
-					this.OnExamsNeededForCDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OperationStatusID", DbType="Int")]
-		public System.Nullable<int> OperationStatusID
-		{
-			get
-			{
-				return this._OperationStatusID;
-			}
-			set
-			{
-				if ((this._OperationStatusID != value))
-				{
-					if (this._OperationStatus.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnOperationStatusIDChanging(value);
-					this.SendPropertyChanging();
-					this._OperationStatusID = value;
-					this.SendPropertyChanged("OperationStatusID");
-					this.OnOperationStatusIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatorID", DbType="Int")]
-		public System.Nullable<int> CreatorID
-		{
-			get
-			{
-				return this._CreatorID;
-			}
-			set
-			{
-				if ((this._CreatorID != value))
-				{
-					this.OnCreatorIDChanging(value);
-					this.SendPropertyChanging();
-					this._CreatorID = value;
-					this.SendPropertyChanged("CreatorID");
-					this.OnCreatorIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedByID", DbType="Int")]
-		public System.Nullable<int> ModifiedByID
-		{
-			get
-			{
-				return this._ModifiedByID;
-			}
-			set
-			{
-				if ((this._ModifiedByID != value))
-				{
-					this.OnModifiedByIDChanging(value);
-					this.SendPropertyChanging();
-					this._ModifiedByID = value;
-					this.SendPropertyChanged("ModifiedByID");
-					this.OnModifiedByIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ModifiedDate
-		{
-			get
-			{
-				return this._ModifiedDate;
-			}
-			set
-			{
-				if ((this._ModifiedDate != value))
-				{
-					this.OnModifiedDateChanging(value);
-					this.SendPropertyChanging();
-					this._ModifiedDate = value;
-					this.SendPropertyChanged("ModifiedDate");
-					this.OnModifiedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPrintingOperation_BookPackingOperation", Storage="_BookPackingOperations", ThisKey="BookPrintingOperationID", OtherKey="BookPrintingOperationID")]
-		public EntitySet<BookPackingOperation> BookPackingOperations
-		{
-			get
-			{
-				return this._BookPackingOperations;
-			}
-			set
-			{
-				this._BookPackingOperations.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OperationStatus_BookPrintingOperation", Storage="_OperationStatus", ThisKey="OperationStatusID", OtherKey="OperationStatusID", IsForeignKey=true)]
-		public OperationStatus OperationStatus
-		{
-			get
-			{
-				return this._OperationStatus.Entity;
-			}
-			set
-			{
-				OperationStatus previousValue = this._OperationStatus.Entity;
-				if (((previousValue != value) 
-							|| (this._OperationStatus.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._OperationStatus.Entity = null;
-						previousValue.BookPrintingOperations.Remove(this);
-					}
-					this._OperationStatus.Entity = value;
-					if ((value != null))
-					{
-						value.BookPrintingOperations.Add(this);
-						this._OperationStatusID = value.OperationStatusID;
-					}
-					else
-					{
-						this._OperationStatusID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("OperationStatus");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Exam_BookPrintingOperation", Storage="_Exam", ThisKey="ExamID", OtherKey="ExamID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Exam Exam
-		{
-			get
-			{
-				return this._Exam.Entity;
-			}
-			set
-			{
-				Exam previousValue = this._Exam.Entity;
-				if (((previousValue != value) 
-							|| (this._Exam.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Exam.Entity = null;
-						previousValue.BookPrintingOperations.Remove(this);
-					}
-					this._Exam.Entity = value;
-					if ((value != null))
-					{
-						value.BookPrintingOperations.Add(this);
-						this._ExamID = value.ExamID;
-					}
-					else
-					{
-						this._ExamID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Exam");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_BookPackingOperations(BookPackingOperation entity)
-		{
-			this.SendPropertyChanging();
-			entity.BookPrintingOperation = this;
-		}
-		
-		private void detach_BookPackingOperations(BookPackingOperation entity)
-		{
-			this.SendPropertyChanging();
-			entity.BookPrintingOperation = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Person.CountryRegion")]
 	public partial class CountryRegion : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -7051,9 +6615,9 @@ namespace Qiyas.DataAccessLayer
 		
 		private System.Nullable<System.DateTime> _ModifiedDate;
 		
-		private EntitySet<BookPrintingOperation> _BookPrintingOperations;
-		
 		private EntitySet<ExamModelItem> _ExamModelItems;
+		
+		private EntitySet<BookPrintingOperation> _BookPrintingOperations;
 		
 		private EntityRef<ExamSpeciality> _ExamSpeciality;
 		
@@ -7095,8 +6659,8 @@ namespace Qiyas.DataAccessLayer
 		
 		public Exam()
 		{
-			this._BookPrintingOperations = new EntitySet<BookPrintingOperation>(new Action<BookPrintingOperation>(this.attach_BookPrintingOperations), new Action<BookPrintingOperation>(this.detach_BookPrintingOperations));
 			this._ExamModelItems = new EntitySet<ExamModelItem>(new Action<ExamModelItem>(this.attach_ExamModelItems), new Action<ExamModelItem>(this.detach_ExamModelItems));
+			this._BookPrintingOperations = new EntitySet<BookPrintingOperation>(new Action<BookPrintingOperation>(this.attach_BookPrintingOperations), new Action<BookPrintingOperation>(this.detach_BookPrintingOperations));
 			this._ExamSpeciality = default(EntityRef<ExamSpeciality>);
 			this._StudentGender = default(EntityRef<StudentGender>);
 			OnCreated();
@@ -7390,19 +6954,6 @@ namespace Qiyas.DataAccessLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Exam_BookPrintingOperation", Storage="_BookPrintingOperations", ThisKey="ExamID", OtherKey="ExamID")]
-		public EntitySet<BookPrintingOperation> BookPrintingOperations
-		{
-			get
-			{
-				return this._BookPrintingOperations;
-			}
-			set
-			{
-				this._BookPrintingOperations.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Exam_ExamModelItem", Storage="_ExamModelItems", ThisKey="ExamID", OtherKey="ExamID")]
 		public EntitySet<ExamModelItem> ExamModelItems
 		{
@@ -7413,6 +6964,19 @@ namespace Qiyas.DataAccessLayer
 			set
 			{
 				this._ExamModelItems.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Exam_BookPrintingOperation", Storage="_BookPrintingOperations", ThisKey="ExamID", OtherKey="ExamID")]
+		public EntitySet<BookPrintingOperation> BookPrintingOperations
+		{
+			get
+			{
+				return this._BookPrintingOperations;
+			}
+			set
+			{
+				this._BookPrintingOperations.Assign(value);
 			}
 		}
 		
@@ -7504,18 +7068,6 @@ namespace Qiyas.DataAccessLayer
 			}
 		}
 		
-		private void attach_BookPrintingOperations(BookPrintingOperation entity)
-		{
-			this.SendPropertyChanging();
-			entity.Exam = this;
-		}
-		
-		private void detach_BookPrintingOperations(BookPrintingOperation entity)
-		{
-			this.SendPropertyChanging();
-			entity.Exam = null;
-		}
-		
 		private void attach_ExamModelItems(ExamModelItem entity)
 		{
 			this.SendPropertyChanging();
@@ -7523,6 +7075,18 @@ namespace Qiyas.DataAccessLayer
 		}
 		
 		private void detach_ExamModelItems(ExamModelItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.Exam = null;
+		}
+		
+		private void attach_BookPrintingOperations(BookPrintingOperation entity)
+		{
+			this.SendPropertyChanging();
+			entity.Exam = this;
+		}
+		
+		private void detach_BookPrintingOperations(BookPrintingOperation entity)
 		{
 			this.SendPropertyChanging();
 			entity.Exam = null;
@@ -7873,13 +7437,13 @@ namespace Qiyas.DataAccessLayer
 		
 		private EntityRef<BookPackingOperation> _BookPackingOperation1;
 		
-		private EntityRef<BookPrintingOperation> _BookPrintingOperation;
-		
 		private EntityRef<PackagingType> _PackagingType;
 		
 		private EntityRef<PackingCalculationType> _PackingCalculationType;
 		
 		private EntityRef<PackingCalculationType1> _PackingCalculationType1;
+		
+		private EntityRef<BookPrintingOperation> _BookPrintingOperation;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -7918,10 +7482,10 @@ namespace Qiyas.DataAccessLayer
 			this._BookPackingOperations = new EntitySet<BookPackingOperation>(new Action<BookPackingOperation>(this.attach_BookPackingOperations), new Action<BookPackingOperation>(this.detach_BookPackingOperations));
 			this._BookPackItems = new EntitySet<BookPackItem>(new Action<BookPackItem>(this.attach_BookPackItems), new Action<BookPackItem>(this.detach_BookPackItems));
 			this._BookPackingOperation1 = default(EntityRef<BookPackingOperation>);
-			this._BookPrintingOperation = default(EntityRef<BookPrintingOperation>);
 			this._PackagingType = default(EntityRef<PackagingType>);
 			this._PackingCalculationType = default(EntityRef<PackingCalculationType>);
 			this._PackingCalculationType1 = default(EntityRef<PackingCalculationType1>);
+			this._BookPrintingOperation = default(EntityRef<BookPrintingOperation>);
 			OnCreated();
 		}
 		
@@ -8261,40 +7825,6 @@ namespace Qiyas.DataAccessLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPrintingOperation_BookPackingOperation", Storage="_BookPrintingOperation", ThisKey="BookPrintingOperationID", OtherKey="BookPrintingOperationID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public BookPrintingOperation BookPrintingOperation
-		{
-			get
-			{
-				return this._BookPrintingOperation.Entity;
-			}
-			set
-			{
-				BookPrintingOperation previousValue = this._BookPrintingOperation.Entity;
-				if (((previousValue != value) 
-							|| (this._BookPrintingOperation.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._BookPrintingOperation.Entity = null;
-						previousValue.BookPackingOperations.Remove(this);
-					}
-					this._BookPrintingOperation.Entity = value;
-					if ((value != null))
-					{
-						value.BookPackingOperations.Add(this);
-						this._BookPrintingOperationID = value.BookPrintingOperationID;
-					}
-					else
-					{
-						this._BookPrintingOperationID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("BookPrintingOperation");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PackagingType_BookPackingOperation", Storage="_PackagingType", ThisKey="PackagingTypeID", OtherKey="PackagingTypeID", IsForeignKey=true, DeleteRule="CASCADE")]
 		public PackagingType PackagingType
 		{
@@ -8393,6 +7923,40 @@ namespace Qiyas.DataAccessLayer
 						this._PackingCalculationTypeID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("PackingCalculationType1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPrintingOperation_BookPackingOperation", Storage="_BookPrintingOperation", ThisKey="BookPrintingOperationID", OtherKey="BookPrintingOperationID", IsForeignKey=true, DeleteRule="CASCADE")]
+		public BookPrintingOperation BookPrintingOperation
+		{
+			get
+			{
+				return this._BookPrintingOperation.Entity;
+			}
+			set
+			{
+				BookPrintingOperation previousValue = this._BookPrintingOperation.Entity;
+				if (((previousValue != value) 
+							|| (this._BookPrintingOperation.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._BookPrintingOperation.Entity = null;
+						previousValue.BookPackingOperations.Remove(this);
+					}
+					this._BookPrintingOperation.Entity = value;
+					if ((value != null))
+					{
+						value.BookPackingOperations.Add(this);
+						this._BookPrintingOperationID = value.BookPrintingOperationID;
+					}
+					else
+					{
+						this._BookPrintingOperationID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("BookPrintingOperation");
 				}
 			}
 		}
@@ -11920,6 +11484,490 @@ namespace Qiyas.DataAccessLayer
 					this._PackSerial = value;
 				}
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="PPM.BookPrintingOperation")]
+	public partial class BookPrintingOperation : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _BookPrintingOperationID;
+		
+		private string _Name;
+		
+		private System.Nullable<int> _ExamID;
+		
+		private System.Nullable<int> _PrintsForOneModel;
+		
+		private System.Nullable<int> _ExamsNeededForA3;
+		
+		private System.Nullable<int> _ExamsNeededForA4;
+		
+		private System.Nullable<int> _ExamsNeededForCD;
+		
+		private System.Nullable<int> _OperationStatusID;
+		
+		private System.Nullable<int> _CreatorID;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<int> _ModifiedByID;
+		
+		private System.Nullable<System.DateTime> _ModifiedDate;
+		
+		private System.Nullable<int> _TotalPacks;
+		
+		private System.Nullable<int> _TotalExamModels;
+		
+		private EntitySet<BookPackingOperation> _BookPackingOperations;
+		
+		private EntityRef<Exam> _Exam;
+		
+		private EntityRef<OperationStatus> _OperationStatus;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnBookPrintingOperationIDChanging(int value);
+    partial void OnBookPrintingOperationIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnExamIDChanging(System.Nullable<int> value);
+    partial void OnExamIDChanged();
+    partial void OnPrintsForOneModelChanging(System.Nullable<int> value);
+    partial void OnPrintsForOneModelChanged();
+    partial void OnExamsNeededForA3Changing(System.Nullable<int> value);
+    partial void OnExamsNeededForA3Changed();
+    partial void OnExamsNeededForA4Changing(System.Nullable<int> value);
+    partial void OnExamsNeededForA4Changed();
+    partial void OnExamsNeededForCDChanging(System.Nullable<int> value);
+    partial void OnExamsNeededForCDChanged();
+    partial void OnOperationStatusIDChanging(System.Nullable<int> value);
+    partial void OnOperationStatusIDChanged();
+    partial void OnCreatorIDChanging(System.Nullable<int> value);
+    partial void OnCreatorIDChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    partial void OnModifiedByIDChanging(System.Nullable<int> value);
+    partial void OnModifiedByIDChanged();
+    partial void OnModifiedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnModifiedDateChanged();
+    partial void OnTotalPacksChanging(System.Nullable<int> value);
+    partial void OnTotalPacksChanged();
+    partial void OnTotalExamModelsChanging(System.Nullable<int> value);
+    partial void OnTotalExamModelsChanged();
+    #endregion
+		
+		public BookPrintingOperation()
+		{
+			this._BookPackingOperations = new EntitySet<BookPackingOperation>(new Action<BookPackingOperation>(this.attach_BookPackingOperations), new Action<BookPackingOperation>(this.detach_BookPackingOperations));
+			this._Exam = default(EntityRef<Exam>);
+			this._OperationStatus = default(EntityRef<OperationStatus>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPrintingOperationID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int BookPrintingOperationID
+		{
+			get
+			{
+				return this._BookPrintingOperationID;
+			}
+			set
+			{
+				if ((this._BookPrintingOperationID != value))
+				{
+					this.OnBookPrintingOperationIDChanging(value);
+					this.SendPropertyChanging();
+					this._BookPrintingOperationID = value;
+					this.SendPropertyChanged("BookPrintingOperationID");
+					this.OnBookPrintingOperationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamID", DbType="Int")]
+		public System.Nullable<int> ExamID
+		{
+			get
+			{
+				return this._ExamID;
+			}
+			set
+			{
+				if ((this._ExamID != value))
+				{
+					if (this._Exam.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnExamIDChanging(value);
+					this.SendPropertyChanging();
+					this._ExamID = value;
+					this.SendPropertyChanged("ExamID");
+					this.OnExamIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrintsForOneModel", DbType="Int")]
+		public System.Nullable<int> PrintsForOneModel
+		{
+			get
+			{
+				return this._PrintsForOneModel;
+			}
+			set
+			{
+				if ((this._PrintsForOneModel != value))
+				{
+					this.OnPrintsForOneModelChanging(value);
+					this.SendPropertyChanging();
+					this._PrintsForOneModel = value;
+					this.SendPropertyChanged("PrintsForOneModel");
+					this.OnPrintsForOneModelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamsNeededForA3", DbType="Int")]
+		public System.Nullable<int> ExamsNeededForA3
+		{
+			get
+			{
+				return this._ExamsNeededForA3;
+			}
+			set
+			{
+				if ((this._ExamsNeededForA3 != value))
+				{
+					this.OnExamsNeededForA3Changing(value);
+					this.SendPropertyChanging();
+					this._ExamsNeededForA3 = value;
+					this.SendPropertyChanged("ExamsNeededForA3");
+					this.OnExamsNeededForA3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamsNeededForA4", DbType="Int")]
+		public System.Nullable<int> ExamsNeededForA4
+		{
+			get
+			{
+				return this._ExamsNeededForA4;
+			}
+			set
+			{
+				if ((this._ExamsNeededForA4 != value))
+				{
+					this.OnExamsNeededForA4Changing(value);
+					this.SendPropertyChanging();
+					this._ExamsNeededForA4 = value;
+					this.SendPropertyChanged("ExamsNeededForA4");
+					this.OnExamsNeededForA4Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamsNeededForCD", DbType="Int")]
+		public System.Nullable<int> ExamsNeededForCD
+		{
+			get
+			{
+				return this._ExamsNeededForCD;
+			}
+			set
+			{
+				if ((this._ExamsNeededForCD != value))
+				{
+					this.OnExamsNeededForCDChanging(value);
+					this.SendPropertyChanging();
+					this._ExamsNeededForCD = value;
+					this.SendPropertyChanged("ExamsNeededForCD");
+					this.OnExamsNeededForCDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OperationStatusID", DbType="Int")]
+		public System.Nullable<int> OperationStatusID
+		{
+			get
+			{
+				return this._OperationStatusID;
+			}
+			set
+			{
+				if ((this._OperationStatusID != value))
+				{
+					if (this._OperationStatus.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOperationStatusIDChanging(value);
+					this.SendPropertyChanging();
+					this._OperationStatusID = value;
+					this.SendPropertyChanged("OperationStatusID");
+					this.OnOperationStatusIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatorID", DbType="Int")]
+		public System.Nullable<int> CreatorID
+		{
+			get
+			{
+				return this._CreatorID;
+			}
+			set
+			{
+				if ((this._CreatorID != value))
+				{
+					this.OnCreatorIDChanging(value);
+					this.SendPropertyChanging();
+					this._CreatorID = value;
+					this.SendPropertyChanged("CreatorID");
+					this.OnCreatorIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedByID", DbType="Int")]
+		public System.Nullable<int> ModifiedByID
+		{
+			get
+			{
+				return this._ModifiedByID;
+			}
+			set
+			{
+				if ((this._ModifiedByID != value))
+				{
+					this.OnModifiedByIDChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedByID = value;
+					this.SendPropertyChanged("ModifiedByID");
+					this.OnModifiedByIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this.OnModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedDate = value;
+					this.SendPropertyChanged("ModifiedDate");
+					this.OnModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPacks", AutoSync=AutoSync.Always, DbType="Int", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> TotalPacks
+		{
+			get
+			{
+				return this._TotalPacks;
+			}
+			set
+			{
+				if ((this._TotalPacks != value))
+				{
+					this.OnTotalPacksChanging(value);
+					this.SendPropertyChanging();
+					this._TotalPacks = value;
+					this.SendPropertyChanged("TotalPacks");
+					this.OnTotalPacksChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalExamModels", AutoSync=AutoSync.Always, DbType="Int", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> TotalExamModels
+		{
+			get
+			{
+				return this._TotalExamModels;
+			}
+			set
+			{
+				if ((this._TotalExamModels != value))
+				{
+					this.OnTotalExamModelsChanging(value);
+					this.SendPropertyChanging();
+					this._TotalExamModels = value;
+					this.SendPropertyChanged("TotalExamModels");
+					this.OnTotalExamModelsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPrintingOperation_BookPackingOperation", Storage="_BookPackingOperations", ThisKey="BookPrintingOperationID", OtherKey="BookPrintingOperationID")]
+		public EntitySet<BookPackingOperation> BookPackingOperations
+		{
+			get
+			{
+				return this._BookPackingOperations;
+			}
+			set
+			{
+				this._BookPackingOperations.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Exam_BookPrintingOperation", Storage="_Exam", ThisKey="ExamID", OtherKey="ExamID", IsForeignKey=true, DeleteRule="CASCADE")]
+		public Exam Exam
+		{
+			get
+			{
+				return this._Exam.Entity;
+			}
+			set
+			{
+				Exam previousValue = this._Exam.Entity;
+				if (((previousValue != value) 
+							|| (this._Exam.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Exam.Entity = null;
+						previousValue.BookPrintingOperations.Remove(this);
+					}
+					this._Exam.Entity = value;
+					if ((value != null))
+					{
+						value.BookPrintingOperations.Add(this);
+						this._ExamID = value.ExamID;
+					}
+					else
+					{
+						this._ExamID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Exam");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OperationStatus_BookPrintingOperation", Storage="_OperationStatus", ThisKey="OperationStatusID", OtherKey="OperationStatusID", IsForeignKey=true)]
+		public OperationStatus OperationStatus
+		{
+			get
+			{
+				return this._OperationStatus.Entity;
+			}
+			set
+			{
+				OperationStatus previousValue = this._OperationStatus.Entity;
+				if (((previousValue != value) 
+							|| (this._OperationStatus.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._OperationStatus.Entity = null;
+						previousValue.BookPrintingOperations.Remove(this);
+					}
+					this._OperationStatus.Entity = value;
+					if ((value != null))
+					{
+						value.BookPrintingOperations.Add(this);
+						this._OperationStatusID = value.OperationStatusID;
+					}
+					else
+					{
+						this._OperationStatusID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("OperationStatus");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_BookPackingOperations(BookPackingOperation entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPrintingOperation = this;
+		}
+		
+		private void detach_BookPackingOperations(BookPackingOperation entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPrintingOperation = null;
 		}
 	}
 	

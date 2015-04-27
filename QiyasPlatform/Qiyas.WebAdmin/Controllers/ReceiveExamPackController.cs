@@ -18,7 +18,7 @@ namespace Qiyas.WebAdmin.Controllers
         [ValidateInput(false)]
         public ActionResult PrintGridViewPartial()
         {
-            var model = new object[0];
+            var model = new BusinessLogicLayer.Components.PPM.BookPrintingOperationLogic().GetAllReadyToReceive();
             return PartialView("_PrintGridViewPartial", model);
         }
 
