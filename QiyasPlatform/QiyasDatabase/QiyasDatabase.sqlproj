@@ -74,6 +74,7 @@
     <Folder Include="Security\" />
     <Folder Include="dbo\Functions\" />
     <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="InitialDataInsertion" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="HumanResources\Tables\DepartmentLanguages.sql" />
@@ -171,5 +172,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CompleteSchema.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="InitialDataInsertion\OperationStatusData.sql" />
   </ItemGroup>
 </Project>

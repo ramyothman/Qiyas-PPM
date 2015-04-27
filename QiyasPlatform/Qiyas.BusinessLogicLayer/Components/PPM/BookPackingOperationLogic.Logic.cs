@@ -17,7 +17,7 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
         [DataObjectMethod(DataObjectMethodType.Select)]
         public List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation> GetAll()
         {
-            return db.BookPackingOperations.Select(c => new Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation(c) { context = db }).ToList();
+            return db.BookPackingOperations.Where( x => x.PackingParentID == null).Select(c => new Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation(c) { context = db }).ToList();
         }
         #endregion
     }
