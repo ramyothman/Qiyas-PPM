@@ -22,7 +22,19 @@ BEGIN
 	if(@Result is null OR @Result = 0)
 	begin
 		select @PrintRequestStatus = [OperationStatusID] from [PPM].[BookPrintingOperation] where [BookPrintingOperationID] = @PrintID
-		if(@PrintRequestStatus <= 2)
-			Update [PPM].[BookPrintingOperation] set [OperationStatusID] = 3 where [BookPrintingOperationID] = @PrintID
+		if(@PrintRequestStatus <= 3)
+			Update [PPM].[BookPrintingOperation] set [OperationStatusID] = 4 where [BookPrintingOperationID] = @PrintID
+	end
+	else 
+	begin
+	SELECT @Result = count([Weight]) from [PPM].[BookPackItem] where [BookPackingOperationID] 
+					in (select [BookPackingOperationID] from [PPM].[BookPackingOperation] where [BookPrintingOperationID] = @PrintID) and 
+					[Weight] is not null
+		if(@Result > 0)
+		begin
+			select @PrintRequestStatus = [OperationStatusID] from [PPM].[BookPrintingOperation] where [BookPrintingOperationID] = @PrintID
+			if(@PrintRequestStatus <= 2)
+				Update [PPM].[BookPrintingOperation] set [OperationStatusID] = 3 where [BookPrintingOperationID] = @PrintID
+		end
 	end
 END
