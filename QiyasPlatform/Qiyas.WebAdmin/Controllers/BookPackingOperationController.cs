@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 namespace Qiyas.WebAdmin.Controllers
 {
+    [Authorize]
     public class BookPackingOperationController : Controller
     {
         public int PrintingOperationID

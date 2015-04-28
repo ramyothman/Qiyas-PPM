@@ -12,6 +12,7 @@ namespace Qiyas.WebAdmin.Controllers
         Printing = 1,
         Packing = 2
     }
+    [Authorize]
     public class BookPrintingOperationController : Controller
     {
         // GET: BookPrintingOperation

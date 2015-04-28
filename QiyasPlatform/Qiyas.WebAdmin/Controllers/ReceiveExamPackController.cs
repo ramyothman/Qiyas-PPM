@@ -7,6 +7,7 @@ using DevExpress.Web.Mvc;
 
 namespace Qiyas.WebAdmin.Controllers
 {
+    [Authorize]
     public class ReceiveExamPackController : Controller
     {
         public int PrintingOperationID
