@@ -9,10 +9,45 @@ namespace Qiyas.WebAdmin.Controllers
 {
     public class ReceiveExamPackController : Controller
     {
+        public int PrintingOperationID
+        {
+            set
+            {
+                var key = "34FAA431-CF79-4869-9488-93F6AAE81226";
+                var Session = HttpContext.Session;
+                Session[key] = value;
+            }
+            get
+            {
+                var key = "34FAA431-CF79-4869-9488-93F6AAE81226";
+                var Session = HttpContext.Session;
+                if (Session[key] == null)
+                    Session[key] = 0;
+                return (int)Session[key];
+            }
+        }
+        public static int MainID;
         // GET: ReceiveExamPack
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Receive(int ID = 0)
+        {
+            string url = string.Format("{0}", Url.Action("Index", "ReceiveExamPack"));
+            var model = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(ID);
+            if (model == null || !model.HasObject)
+            {
+                return RedirectToAction("Index", "ReceiveExamPack");
+            }
+            MainID = ID;
+            ViewBag.HasError = false;
+            ViewBag.NotifyMessage = "";
+            ViewBag.PrintingID = ID;
+            ViewBag.IsReceived = model.OperationStatusID != 4;
+            PrintingOperationID = ID;
+            return View(model);
         }
 
         [ValidateInput(false)]
@@ -81,12 +116,34 @@ namespace Qiyas.WebAdmin.Controllers
 
         public ActionResult ReceivePack(int ID)
         {
-            string url = string.Format("{0}/Index/{1}", Url.Action("View", "ReceiveExamPack"), ID);
+            string url = string.Format("{0}/{1}", Url.Action("Receive", "ReceiveExamPack"), ID);
             var model = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(ID);
             if (model == null)
                 return View();
             else
                 return Redirect(url);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult ReceivePackGridViewPartial()
+        {
+            var model = new BusinessLogicLayer.Components.PPM.BookPackingOperationLogic().GetByBookPrintingID(PrintingOperationID);
+            return PartialView("_ReceivePackGridViewPartial", model);
+        }
+
+        
+        [HttpPost]
+        public ActionResult ReceiveOrder(FormCollection form)
+        {
+            
+            var model = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(PrintingOperationID);
+            model.OperationStatusID = 5;
+            model.Save();
+            model.UpdateItemPackStatus(7);
+            ViewBag.HasError = false;
+            ViewBag.NotifyMessage = Resources.MainResource.ReceivedSuccessfully;
+            ViewBag.IsReceived = model.OperationStatusID != 4;
+            return View("Receive", model);
         }
     }
 }

@@ -709,11 +709,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تم الاستلام بنجاح.
+        /// </summary>
+        internal static string ReceivedSuccessfully {
+            get {
+                return ResourceManager.GetString("ReceivedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to استلام الحزم بمستودع التخزين.
         /// </summary>
         internal static string ReceiveExamPackTitle {
             get {
                 return ResourceManager.GetString("ReceiveExamPackTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to استلام طلبات الطباعة.
+        /// </summary>
+        internal static string ReceivePrinterOrderTitle {
+            get {
+                return ResourceManager.GetString("ReceivePrinterOrderTitle", resourceCulture);
             }
         }
         

@@ -430,4 +430,10 @@
   <data name="PrintPacksTitle" xml:space="preserve">
     <value>طباعة الباركود</value>
   </data>
+  <data name="ReceivePrinterOrderTitle" xml:space="preserve">
+    <value>استلام طلبات الطباعة</value>
+  </data>
+  <data name="ReceivedSuccessfully" xml:space="preserve">
+    <value>تم الاستلام بنجاح</value>
+  </data>
 </root>

@@ -11,6 +11,27 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
 {
     public partial class BookPrintingOperation
     {
+        [Display(Name = "ExamModelNames")]
+        public string ExamModels
+        {
+            get
+            {
+                var models = this.entity.Exam.ExamModelItems;
+                int count = models.Count;
+                int counter = 1;
+                string result = "";
+                foreach(var modelItem in models)
+                {
+
+                    result += modelItem.ExamModel.Name;
+                    if(counter < count)
+                        result += " - ";
+                    counter++;
+                }
+
+                return result;
+            }
+        }
         [Display(Name = "ExamCode")]
         public string ExamCode
         {
@@ -60,6 +81,11 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
                 }
                 return _PackNumber;
             }
+        }
+
+        public void UpdateItemPackStatus(int StatusID)
+        {
+            context.UpdateItemPacksBulk(BookPrintingOperationID, StatusID);
         }
 
 

@@ -598,4 +598,9 @@
     <Parameter Name="PrintID" Parameter="printID" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.UpdateItemPacksBulk" Method="UpdateItemPacksBulk">
+    <Parameter Name="PrintID" Parameter="printID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StatusID" Parameter="statusID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>

@@ -423,4 +423,7 @@
   <data name="StartBookSerial" xml:space="preserve">
     <value>بداية التسلسل</value>
   </data>
+  <data name="ExamModelNames" xml:space="preserve">
+    <value>نماذج الاختبار</value>
+  </data>
 </root>

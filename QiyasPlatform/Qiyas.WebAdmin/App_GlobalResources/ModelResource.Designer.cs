@@ -394,6 +394,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to نماذج الاختبار.
+        /// </summary>
+        internal static string ExamModelNames {
+            get {
+                return ResourceManager.GetString("ExamModelNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to نماذج الإختبار.
         /// </summary>
         internal static string ExamModels {
