@@ -4,13 +4,12 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "grid";
-        settings.CallbackRouteValues = new { Controller = "BookRePack", Action = "RepackGridViewPartial" };
+        settings.CallbackRouteValues = new { Controller = "BookRePack", Action = "PackingGridViewPartial" };
 
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "BookRePack", Action = "RepackGridViewPartialAddNew" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "BookRePack", Action = "RepackGridViewPartialUpdate" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "BookRePack", Action = "RepackGridViewPartialDelete" };
-        
-        settings.KeyFieldName = "BookPackingOperationID";
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "BookRePack", Action = "PackingGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "BookRePack", Action = "PackingGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "BookRePack", Action = "PackingGridViewPartialDelete" };
+        settings.KeyFieldName = "BookPackItemOperationID";
 
 
         settings.SettingsBehavior.ConfirmDelete = true;
@@ -70,7 +69,7 @@
             column.ColumnType = MVCxGridViewColumnType.ComboBox;
 
             var comboProperties = column.PropertiesEdit as ComboBoxProperties;
-            comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.PackagingTypeLogic().GetAll());
+            comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.PackagingTypeLogic().GetAllForPrint(Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID));
             comboProperties.TextField = "Name";
             comboProperties.ValueField = "PackagingTypeID";
 
@@ -112,7 +111,7 @@
             column.Caption = @Resources.ModelResource.AllocatedFrom;
             column.ColumnType = MVCxGridViewColumnType.ComboBox;
             var comboProperties = column.PropertiesEdit as ComboBoxProperties;
-            comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.BookPackingOperationLogic().GetPackagingTypeByBookPrintingID(Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID));
+            comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.BookPackItemOperationLogic().GetPackagingTypeByBookPackID(Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID));
             comboProperties.TextField = "PackagingTypeName";
             comboProperties.ValueField = "BookPackingOperationID";
 

@@ -16,6 +16,8 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
         {
             get
             {
+                if (this.entity.ExamID == 0)
+                    return "";
                 var models = this.entity.Exam.ExamModelItems;
                 int count = models.Count;
                 int counter = 1;
@@ -39,6 +41,8 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             get 
             {
                 if (!this.HasObject)
+                    return "";
+                if (this.entity.ExamID == 0)
                     return "";
                 if (this.entity.Exam == null)
                     return "";

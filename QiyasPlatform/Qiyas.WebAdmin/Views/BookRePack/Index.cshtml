@@ -23,7 +23,10 @@
             <div class="col-md-4  pull-right">
                 @Html.TextBoxFor(m => m.PackNumber, new { @class = "form-control" })
             </div>
+            <div class="error" style="color: forestgreen;display:none;" id="packageExists">حزمة صحيحة</div>
+            <div class="error" style="color: darkred;display:none;" id="packageDoesntExist">لا يمكن تعديل هذه الحزمة</div>
         </div>
+        
         <br /><br />
 
         </div>
@@ -43,3 +46,55 @@
 
 
 
+@section Scripts {
+    <script type="text/javascript">
+        $("#SavePack").click(function () {
+            var r = confirm("هل تريد إعادة التحزيم");
+            if (r == true) {
+                var form = $("form#packForm");
+                form.attr("action", "@Url.Action("NumberingPack", "BookRePack")");
+                form.submit();
+            } else {
+
+            }
+
+    });
+
+        $("#PackNumber").change(function () {
+            var urlLink = "@Url.Action("CheckItem", "BookRePack")";
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                data:  {
+                    item: $('#PackNumber').val()
+                },
+                url: urlLink,
+                success: function (data) {
+                    if (data == "exists") {
+                        grid.PerformCallback();
+                        $('#packageDoesntExist').hide();
+                        $('#packageExists').show();
+                    }
+                    else {
+                        $('#packageExists').hide();
+                        $('#packageDoesntExist').show();
+                    }
+
+                },
+                error: function (data) {
+                    $('#packageExists').hide();
+                    $('#packageDoesntExist').show();
+                }
+            });
+        });
+        $("#BackButton").click(function (e) {
+            e.preventDefault();
+            window.location = "/BookPrintingOperation";
+            return false;
+            @*var form = $("form#packForm");
+            form.attr("action", "@Url.Action("PrinPacks", "BookPackingOperation", Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID)");
+            form.submit();*@
+        });
+    </script>
+}

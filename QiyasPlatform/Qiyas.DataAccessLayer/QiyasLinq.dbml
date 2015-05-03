@@ -287,6 +287,7 @@
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="BookPackItem_PackageWeight" Member="BookPackItem" ThisKey="PackageCode" OtherKey="BookPackItemID" Type="BookPackItem" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="PPM.Exam" Member="Exams">
@@ -472,26 +473,6 @@
       <Association Name="BookPackItem_ShippingBagItem" Member="BookPackItem" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="BookPackItem" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="PPM.BookPackItem" Member="BookPackItems">
-    <Type Name="BookPackItem">
-      <Column Name="BookPackItemID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="BookPackingOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PackCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="PackSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Weight" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="OperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="StartBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LastBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="BookPackItem_BookPackItemModel" Member="BookPackItemModels" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="BookPackItemModel" />
-      <Association Name="BookPackItem_BookPackItemOperation" Member="BookPackItemOperations" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="BookPackItemOperation" />
-      <Association Name="BookPackItem_ContainerRequestPack" Member="ContainerRequestPacks" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="ContainerRequestPack" />
-      <Association Name="BookPackItem_ShippingBagItem" Member="ShippingBagItems" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="ShippingBagItem" />
-      <Association Name="BookPackItem_BookPackItem" Member="BookPackItems" ThisKey="BookPackItemID" OtherKey="ParentID" Type="BookPackItem" />
-      <Association Name="BookPackingOperation_BookPackItem" Member="BookPackingOperation" ThisKey="BookPackingOperationID" OtherKey="BookPackingOperationID" Type="BookPackingOperation" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="BookPackItem_BookPackItem" Member="BookPackItem1" ThisKey="ParentID" OtherKey="BookPackItemID" Type="BookPackItem" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.ViewBookPackItemPrint" Member="ViewBookPackItemPrints">
     <Type Name="ViewBookPackItemPrint">
       <Column Name="BookPackItemID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -542,6 +523,28 @@
       <Association Name="BookPrintingOperation_BookPackingOperation" Member="BookPackingOperations" ThisKey="BookPrintingOperationID" OtherKey="BookPrintingOperationID" Type="BookPackingOperation" />
       <Association Name="Exam_BookPrintingOperation" Member="Exam" ThisKey="ExamID" OtherKey="ExamID" Type="Exam" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="OperationStatus_BookPrintingOperation" Member="OperationStatus" ThisKey="OperationStatusID" OtherKey="OperationStatusID" Type="OperationStatus" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="PPM.BookPackItem" Member="BookPackItems">
+    <Type Name="BookPackItem">
+      <Column Name="BookPackItemID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BookPackingOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PackSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Weight" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="OperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BookPackItemOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="BookPackItem_PackageWeight" Member="PackageWeights" ThisKey="BookPackItemID" OtherKey="PackageCode" Type="PackageWeight" />
+      <Association Name="BookPackItem_BookPackItemModel" Member="BookPackItemModels" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="BookPackItemModel" />
+      <Association Name="BookPackItem_BookPackItemOperation" Member="BookPackItemOperations" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="BookPackItemOperation" />
+      <Association Name="BookPackItem_ContainerRequestPack" Member="ContainerRequestPacks" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="ContainerRequestPack" />
+      <Association Name="BookPackItem_ShippingBagItem" Member="ShippingBagItems" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="ShippingBagItem" />
+      <Association Name="BookPackItem_BookPackItem" Member="BookPackItems" ThisKey="BookPackItemID" OtherKey="ParentID" Type="BookPackItem" />
+      <Association Name="BookPackingOperation_BookPackItem" Member="BookPackingOperation" ThisKey="BookPackingOperationID" OtherKey="BookPackingOperationID" Type="BookPackingOperation" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="BookPackItem_BookPackItem" Member="BookPackItem1" ThisKey="ParentID" OtherKey="BookPackItemID" Type="BookPackItem" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.DeleteExamModelItemByExamID" Method="DeleteExamModelItemByExamID">
@@ -601,6 +604,40 @@
   <Function Name="dbo.UpdateItemPacksBulk" Method="UpdateItemPacksBulk">
     <Parameter Name="PrintID" Parameter="printID" Type="System.Int32" DbType="Int" />
     <Parameter Name="StatusID" Parameter="statusID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetItemPackedByPackID" Method="GetItemPackedByPackID">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetItemPackedByPackIDResult">
+      <Column Name="BookPackItemOperationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BookPackItemID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackagingTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackingCalculationTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AllocatedFrom" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PackingValue" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageTotal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackingParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetTotalPrintingPackageByItemPackID" Method="GetTotalPrintingPackageByItemPackID" IsComposable="true">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetTotalPrintingPackageA3ByItemPackID" Method="GetTotalPrintingPackageA3ByItemPackID" IsComposable="true">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetTotalPrintingPackageByPackID" Method="GetTotalPrintingPackageByPackID" IsComposable="true">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetTotalPrintingPackageItemsA3ByPackID" Method="GetTotalPrintingPackageItemsA3ByPackID" IsComposable="true">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
 </Database>

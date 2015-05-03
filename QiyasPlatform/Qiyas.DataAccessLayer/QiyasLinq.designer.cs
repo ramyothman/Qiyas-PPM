@@ -135,12 +135,12 @@ namespace Qiyas.DataAccessLayer
     partial void InsertShippingBagItem(ShippingBagItem instance);
     partial void UpdateShippingBagItem(ShippingBagItem instance);
     partial void DeleteShippingBagItem(ShippingBagItem instance);
-    partial void InsertBookPackItem(BookPackItem instance);
-    partial void UpdateBookPackItem(BookPackItem instance);
-    partial void DeleteBookPackItem(BookPackItem instance);
     partial void InsertBookPrintingOperation(BookPrintingOperation instance);
     partial void UpdateBookPrintingOperation(BookPrintingOperation instance);
     partial void DeleteBookPrintingOperation(BookPrintingOperation instance);
+    partial void InsertBookPackItem(BookPackItem instance);
+    partial void UpdateBookPackItem(BookPackItem instance);
+    partial void DeleteBookPackItem(BookPackItem instance);
     #endregion
 		
 		public QiyasLinqDataContext() : 
@@ -453,14 +453,6 @@ namespace Qiyas.DataAccessLayer
 			}
 		}
 		
-		public System.Data.Linq.Table<BookPackItem> BookPackItems
-		{
-			get
-			{
-				return this.GetTable<BookPackItem>();
-			}
-		}
-		
 		public System.Data.Linq.Table<ViewBookPackItemPrint> ViewBookPackItemPrints
 		{
 			get
@@ -482,6 +474,14 @@ namespace Qiyas.DataAccessLayer
 			get
 			{
 				return this.GetTable<BookPrintingOperation>();
+			}
+		}
+		
+		public System.Data.Linq.Table<BookPackItem> BookPackItems
+		{
+			get
+			{
+				return this.GetTable<BookPackItem>();
 			}
 		}
 		
@@ -554,6 +554,37 @@ namespace Qiyas.DataAccessLayer
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), printID, statusID);
 			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetItemPackedByPackID")]
+		public ISingleResult<GetItemPackedByPackIDResult> GetItemPackedByPackID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD);
+			return ((ISingleResult<GetItemPackedByPackIDResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetTotalPrintingPackageByItemPackID", IsComposable=true)]
+		public System.Nullable<int> GetTotalPrintingPackageByItemPackID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetTotalPrintingPackageA3ByItemPackID", IsComposable=true)]
+		public System.Nullable<int> GetTotalPrintingPackageA3ByItemPackID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetTotalPrintingPackageByPackID", IsComposable=true)]
+		public System.Nullable<int> GetTotalPrintingPackageByPackID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetTotalPrintingPackageItemsA3ByPackID", IsComposable=true)]
+		public System.Nullable<int> GetTotalPrintingPackageItemsA3ByPackID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD).ReturnValue));
 		}
 	}
 	
@@ -6380,6 +6411,8 @@ namespace Qiyas.DataAccessLayer
 		
 		private System.Nullable<System.DateTime> _ModifiedDate;
 		
+		private EntityRef<BookPackItem> _BookPackItem;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -6404,6 +6437,7 @@ namespace Qiyas.DataAccessLayer
 		
 		public PackageWeight()
 		{
+			this._BookPackItem = default(EntityRef<BookPackItem>);
 			OnCreated();
 		}
 		
@@ -6478,6 +6512,10 @@ namespace Qiyas.DataAccessLayer
 			{
 				if ((this._PackageCode != value))
 				{
+					if (this._BookPackItem.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnPackageCodeChanging(value);
 					this.SendPropertyChanging();
 					this._PackageCode = value;
@@ -6563,6 +6601,40 @@ namespace Qiyas.DataAccessLayer
 					this._ModifiedDate = value;
 					this.SendPropertyChanged("ModifiedDate");
 					this.OnModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackItem_PackageWeight", Storage="_BookPackItem", ThisKey="PackageCode", OtherKey="BookPackItemID", IsForeignKey=true, DeleteRule="CASCADE")]
+		public BookPackItem BookPackItem
+		{
+			get
+			{
+				return this._BookPackItem.Entity;
+			}
+			set
+			{
+				BookPackItem previousValue = this._BookPackItem.Entity;
+				if (((previousValue != value) 
+							|| (this._BookPackItem.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._BookPackItem.Entity = null;
+						previousValue.PackageWeights.Remove(this);
+					}
+					this._BookPackItem.Entity = value;
+					if ((value != null))
+					{
+						value.PackageWeights.Add(this);
+						this._PackageCode = value.BookPackItemID;
+					}
+					else
+					{
+						this._PackageCode = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("BookPackItem");
 				}
 			}
 		}
@@ -10586,482 +10658,6 @@ namespace Qiyas.DataAccessLayer
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="PPM.BookPackItem")]
-	public partial class BookPackItem : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _BookPackItemID;
-		
-		private System.Nullable<int> _BookPackingOperationID;
-		
-		private string _PackCode;
-		
-		private System.Nullable<int> _PackSerial;
-		
-		private System.Nullable<decimal> _Weight;
-		
-		private System.Nullable<int> _OperationStatusID;
-		
-		private System.Nullable<int> _ParentID;
-		
-		private System.Nullable<int> _StartBookSerial;
-		
-		private System.Nullable<int> _LastBookSerial;
-		
-		private EntitySet<BookPackItemModel> _BookPackItemModels;
-		
-		private EntitySet<BookPackItemOperation> _BookPackItemOperations;
-		
-		private EntitySet<ContainerRequestPack> _ContainerRequestPacks;
-		
-		private EntitySet<ShippingBagItem> _ShippingBagItems;
-		
-		private EntitySet<BookPackItem> _BookPackItems;
-		
-		private EntityRef<BookPackingOperation> _BookPackingOperation;
-		
-		private EntityRef<BookPackItem> _BookPackItem1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnBookPackItemIDChanging(int value);
-    partial void OnBookPackItemIDChanged();
-    partial void OnBookPackingOperationIDChanging(System.Nullable<int> value);
-    partial void OnBookPackingOperationIDChanged();
-    partial void OnPackCodeChanging(string value);
-    partial void OnPackCodeChanged();
-    partial void OnPackSerialChanging(System.Nullable<int> value);
-    partial void OnPackSerialChanged();
-    partial void OnWeightChanging(System.Nullable<decimal> value);
-    partial void OnWeightChanged();
-    partial void OnOperationStatusIDChanging(System.Nullable<int> value);
-    partial void OnOperationStatusIDChanged();
-    partial void OnParentIDChanging(System.Nullable<int> value);
-    partial void OnParentIDChanged();
-    partial void OnStartBookSerialChanging(System.Nullable<int> value);
-    partial void OnStartBookSerialChanged();
-    partial void OnLastBookSerialChanging(System.Nullable<int> value);
-    partial void OnLastBookSerialChanged();
-    #endregion
-		
-		public BookPackItem()
-		{
-			this._BookPackItemModels = new EntitySet<BookPackItemModel>(new Action<BookPackItemModel>(this.attach_BookPackItemModels), new Action<BookPackItemModel>(this.detach_BookPackItemModels));
-			this._BookPackItemOperations = new EntitySet<BookPackItemOperation>(new Action<BookPackItemOperation>(this.attach_BookPackItemOperations), new Action<BookPackItemOperation>(this.detach_BookPackItemOperations));
-			this._ContainerRequestPacks = new EntitySet<ContainerRequestPack>(new Action<ContainerRequestPack>(this.attach_ContainerRequestPacks), new Action<ContainerRequestPack>(this.detach_ContainerRequestPacks));
-			this._ShippingBagItems = new EntitySet<ShippingBagItem>(new Action<ShippingBagItem>(this.attach_ShippingBagItems), new Action<ShippingBagItem>(this.detach_ShippingBagItems));
-			this._BookPackItems = new EntitySet<BookPackItem>(new Action<BookPackItem>(this.attach_BookPackItems), new Action<BookPackItem>(this.detach_BookPackItems));
-			this._BookPackingOperation = default(EntityRef<BookPackingOperation>);
-			this._BookPackItem1 = default(EntityRef<BookPackItem>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPackItemID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int BookPackItemID
-		{
-			get
-			{
-				return this._BookPackItemID;
-			}
-			set
-			{
-				if ((this._BookPackItemID != value))
-				{
-					this.OnBookPackItemIDChanging(value);
-					this.SendPropertyChanging();
-					this._BookPackItemID = value;
-					this.SendPropertyChanged("BookPackItemID");
-					this.OnBookPackItemIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPackingOperationID", DbType="Int")]
-		public System.Nullable<int> BookPackingOperationID
-		{
-			get
-			{
-				return this._BookPackingOperationID;
-			}
-			set
-			{
-				if ((this._BookPackingOperationID != value))
-				{
-					if (this._BookPackingOperation.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnBookPackingOperationIDChanging(value);
-					this.SendPropertyChanging();
-					this._BookPackingOperationID = value;
-					this.SendPropertyChanged("BookPackingOperationID");
-					this.OnBookPackingOperationIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackCode", DbType="NVarChar(20)")]
-		public string PackCode
-		{
-			get
-			{
-				return this._PackCode;
-			}
-			set
-			{
-				if ((this._PackCode != value))
-				{
-					this.OnPackCodeChanging(value);
-					this.SendPropertyChanging();
-					this._PackCode = value;
-					this.SendPropertyChanged("PackCode");
-					this.OnPackCodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackSerial", DbType="Int")]
-		public System.Nullable<int> PackSerial
-		{
-			get
-			{
-				return this._PackSerial;
-			}
-			set
-			{
-				if ((this._PackSerial != value))
-				{
-					this.OnPackSerialChanging(value);
-					this.SendPropertyChanging();
-					this._PackSerial = value;
-					this.SendPropertyChanged("PackSerial");
-					this.OnPackSerialChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weight", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> Weight
-		{
-			get
-			{
-				return this._Weight;
-			}
-			set
-			{
-				if ((this._Weight != value))
-				{
-					this.OnWeightChanging(value);
-					this.SendPropertyChanging();
-					this._Weight = value;
-					this.SendPropertyChanged("Weight");
-					this.OnWeightChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OperationStatusID", DbType="Int")]
-		public System.Nullable<int> OperationStatusID
-		{
-			get
-			{
-				return this._OperationStatusID;
-			}
-			set
-			{
-				if ((this._OperationStatusID != value))
-				{
-					this.OnOperationStatusIDChanging(value);
-					this.SendPropertyChanging();
-					this._OperationStatusID = value;
-					this.SendPropertyChanged("OperationStatusID");
-					this.OnOperationStatusIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ParentID", DbType="Int")]
-		public System.Nullable<int> ParentID
-		{
-			get
-			{
-				return this._ParentID;
-			}
-			set
-			{
-				if ((this._ParentID != value))
-				{
-					if (this._BookPackItem1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnParentIDChanging(value);
-					this.SendPropertyChanging();
-					this._ParentID = value;
-					this.SendPropertyChanged("ParentID");
-					this.OnParentIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartBookSerial", DbType="Int")]
-		public System.Nullable<int> StartBookSerial
-		{
-			get
-			{
-				return this._StartBookSerial;
-			}
-			set
-			{
-				if ((this._StartBookSerial != value))
-				{
-					this.OnStartBookSerialChanging(value);
-					this.SendPropertyChanging();
-					this._StartBookSerial = value;
-					this.SendPropertyChanged("StartBookSerial");
-					this.OnStartBookSerialChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastBookSerial", DbType="Int")]
-		public System.Nullable<int> LastBookSerial
-		{
-			get
-			{
-				return this._LastBookSerial;
-			}
-			set
-			{
-				if ((this._LastBookSerial != value))
-				{
-					this.OnLastBookSerialChanging(value);
-					this.SendPropertyChanging();
-					this._LastBookSerial = value;
-					this.SendPropertyChanged("LastBookSerial");
-					this.OnLastBookSerialChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackItem_BookPackItemModel", Storage="_BookPackItemModels", ThisKey="BookPackItemID", OtherKey="BookPackItemID")]
-		public EntitySet<BookPackItemModel> BookPackItemModels
-		{
-			get
-			{
-				return this._BookPackItemModels;
-			}
-			set
-			{
-				this._BookPackItemModels.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackItem_BookPackItemOperation", Storage="_BookPackItemOperations", ThisKey="BookPackItemID", OtherKey="BookPackItemID")]
-		public EntitySet<BookPackItemOperation> BookPackItemOperations
-		{
-			get
-			{
-				return this._BookPackItemOperations;
-			}
-			set
-			{
-				this._BookPackItemOperations.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackItem_ContainerRequestPack", Storage="_ContainerRequestPacks", ThisKey="BookPackItemID", OtherKey="BookPackItemID")]
-		public EntitySet<ContainerRequestPack> ContainerRequestPacks
-		{
-			get
-			{
-				return this._ContainerRequestPacks;
-			}
-			set
-			{
-				this._ContainerRequestPacks.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackItem_ShippingBagItem", Storage="_ShippingBagItems", ThisKey="BookPackItemID", OtherKey="BookPackItemID")]
-		public EntitySet<ShippingBagItem> ShippingBagItems
-		{
-			get
-			{
-				return this._ShippingBagItems;
-			}
-			set
-			{
-				this._ShippingBagItems.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackItem_BookPackItem", Storage="_BookPackItems", ThisKey="BookPackItemID", OtherKey="ParentID")]
-		public EntitySet<BookPackItem> BookPackItems
-		{
-			get
-			{
-				return this._BookPackItems;
-			}
-			set
-			{
-				this._BookPackItems.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackingOperation_BookPackItem", Storage="_BookPackingOperation", ThisKey="BookPackingOperationID", OtherKey="BookPackingOperationID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public BookPackingOperation BookPackingOperation
-		{
-			get
-			{
-				return this._BookPackingOperation.Entity;
-			}
-			set
-			{
-				BookPackingOperation previousValue = this._BookPackingOperation.Entity;
-				if (((previousValue != value) 
-							|| (this._BookPackingOperation.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._BookPackingOperation.Entity = null;
-						previousValue.BookPackItems.Remove(this);
-					}
-					this._BookPackingOperation.Entity = value;
-					if ((value != null))
-					{
-						value.BookPackItems.Add(this);
-						this._BookPackingOperationID = value.BookPackingOperationID;
-					}
-					else
-					{
-						this._BookPackingOperationID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("BookPackingOperation");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackItem_BookPackItem", Storage="_BookPackItem1", ThisKey="ParentID", OtherKey="BookPackItemID", IsForeignKey=true)]
-		public BookPackItem BookPackItem1
-		{
-			get
-			{
-				return this._BookPackItem1.Entity;
-			}
-			set
-			{
-				BookPackItem previousValue = this._BookPackItem1.Entity;
-				if (((previousValue != value) 
-							|| (this._BookPackItem1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._BookPackItem1.Entity = null;
-						previousValue.BookPackItems.Remove(this);
-					}
-					this._BookPackItem1.Entity = value;
-					if ((value != null))
-					{
-						value.BookPackItems.Add(this);
-						this._ParentID = value.BookPackItemID;
-					}
-					else
-					{
-						this._ParentID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("BookPackItem1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_BookPackItemModels(BookPackItemModel entity)
-		{
-			this.SendPropertyChanging();
-			entity.BookPackItem = this;
-		}
-		
-		private void detach_BookPackItemModels(BookPackItemModel entity)
-		{
-			this.SendPropertyChanging();
-			entity.BookPackItem = null;
-		}
-		
-		private void attach_BookPackItemOperations(BookPackItemOperation entity)
-		{
-			this.SendPropertyChanging();
-			entity.BookPackItem = this;
-		}
-		
-		private void detach_BookPackItemOperations(BookPackItemOperation entity)
-		{
-			this.SendPropertyChanging();
-			entity.BookPackItem = null;
-		}
-		
-		private void attach_ContainerRequestPacks(ContainerRequestPack entity)
-		{
-			this.SendPropertyChanging();
-			entity.BookPackItem = this;
-		}
-		
-		private void detach_ContainerRequestPacks(ContainerRequestPack entity)
-		{
-			this.SendPropertyChanging();
-			entity.BookPackItem = null;
-		}
-		
-		private void attach_ShippingBagItems(ShippingBagItem entity)
-		{
-			this.SendPropertyChanging();
-			entity.BookPackItem = this;
-		}
-		
-		private void detach_ShippingBagItems(ShippingBagItem entity)
-		{
-			this.SendPropertyChanging();
-			entity.BookPackItem = null;
-		}
-		
-		private void attach_BookPackItems(BookPackItem entity)
-		{
-			this.SendPropertyChanging();
-			entity.BookPackItem1 = this;
-		}
-		
-		private void detach_BookPackItems(BookPackItem entity)
-		{
-			this.SendPropertyChanging();
-			entity.BookPackItem1 = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ViewBookPackItemPrint")]
 	public partial class ViewBookPackItemPrint
 	{
@@ -11978,6 +11574,534 @@ namespace Qiyas.DataAccessLayer
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="PPM.BookPackItem")]
+	public partial class BookPackItem : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _BookPackItemID;
+		
+		private System.Nullable<int> _BookPackingOperationID;
+		
+		private string _PackCode;
+		
+		private System.Nullable<int> _PackSerial;
+		
+		private System.Nullable<decimal> _Weight;
+		
+		private System.Nullable<int> _OperationStatusID;
+		
+		private System.Nullable<int> _ParentID;
+		
+		private System.Nullable<int> _StartBookSerial;
+		
+		private System.Nullable<int> _LastBookSerial;
+		
+		private System.Nullable<int> _BookPackItemOperationID;
+		
+		private EntitySet<PackageWeight> _PackageWeights;
+		
+		private EntitySet<BookPackItemModel> _BookPackItemModels;
+		
+		private EntitySet<BookPackItemOperation> _BookPackItemOperations;
+		
+		private EntitySet<ContainerRequestPack> _ContainerRequestPacks;
+		
+		private EntitySet<ShippingBagItem> _ShippingBagItems;
+		
+		private EntitySet<BookPackItem> _BookPackItems;
+		
+		private EntityRef<BookPackingOperation> _BookPackingOperation;
+		
+		private EntityRef<BookPackItem> _BookPackItem1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnBookPackItemIDChanging(int value);
+    partial void OnBookPackItemIDChanged();
+    partial void OnBookPackingOperationIDChanging(System.Nullable<int> value);
+    partial void OnBookPackingOperationIDChanged();
+    partial void OnPackCodeChanging(string value);
+    partial void OnPackCodeChanged();
+    partial void OnPackSerialChanging(System.Nullable<int> value);
+    partial void OnPackSerialChanged();
+    partial void OnWeightChanging(System.Nullable<decimal> value);
+    partial void OnWeightChanged();
+    partial void OnOperationStatusIDChanging(System.Nullable<int> value);
+    partial void OnOperationStatusIDChanged();
+    partial void OnParentIDChanging(System.Nullable<int> value);
+    partial void OnParentIDChanged();
+    partial void OnStartBookSerialChanging(System.Nullable<int> value);
+    partial void OnStartBookSerialChanged();
+    partial void OnLastBookSerialChanging(System.Nullable<int> value);
+    partial void OnLastBookSerialChanged();
+    partial void OnBookPackItemOperationIDChanging(System.Nullable<int> value);
+    partial void OnBookPackItemOperationIDChanged();
+    #endregion
+		
+		public BookPackItem()
+		{
+			this._PackageWeights = new EntitySet<PackageWeight>(new Action<PackageWeight>(this.attach_PackageWeights), new Action<PackageWeight>(this.detach_PackageWeights));
+			this._BookPackItemModels = new EntitySet<BookPackItemModel>(new Action<BookPackItemModel>(this.attach_BookPackItemModels), new Action<BookPackItemModel>(this.detach_BookPackItemModels));
+			this._BookPackItemOperations = new EntitySet<BookPackItemOperation>(new Action<BookPackItemOperation>(this.attach_BookPackItemOperations), new Action<BookPackItemOperation>(this.detach_BookPackItemOperations));
+			this._ContainerRequestPacks = new EntitySet<ContainerRequestPack>(new Action<ContainerRequestPack>(this.attach_ContainerRequestPacks), new Action<ContainerRequestPack>(this.detach_ContainerRequestPacks));
+			this._ShippingBagItems = new EntitySet<ShippingBagItem>(new Action<ShippingBagItem>(this.attach_ShippingBagItems), new Action<ShippingBagItem>(this.detach_ShippingBagItems));
+			this._BookPackItems = new EntitySet<BookPackItem>(new Action<BookPackItem>(this.attach_BookPackItems), new Action<BookPackItem>(this.detach_BookPackItems));
+			this._BookPackingOperation = default(EntityRef<BookPackingOperation>);
+			this._BookPackItem1 = default(EntityRef<BookPackItem>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPackItemID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int BookPackItemID
+		{
+			get
+			{
+				return this._BookPackItemID;
+			}
+			set
+			{
+				if ((this._BookPackItemID != value))
+				{
+					this.OnBookPackItemIDChanging(value);
+					this.SendPropertyChanging();
+					this._BookPackItemID = value;
+					this.SendPropertyChanged("BookPackItemID");
+					this.OnBookPackItemIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPackingOperationID", DbType="Int")]
+		public System.Nullable<int> BookPackingOperationID
+		{
+			get
+			{
+				return this._BookPackingOperationID;
+			}
+			set
+			{
+				if ((this._BookPackingOperationID != value))
+				{
+					if (this._BookPackingOperation.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnBookPackingOperationIDChanging(value);
+					this.SendPropertyChanging();
+					this._BookPackingOperationID = value;
+					this.SendPropertyChanged("BookPackingOperationID");
+					this.OnBookPackingOperationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackCode", DbType="NVarChar(20)")]
+		public string PackCode
+		{
+			get
+			{
+				return this._PackCode;
+			}
+			set
+			{
+				if ((this._PackCode != value))
+				{
+					this.OnPackCodeChanging(value);
+					this.SendPropertyChanging();
+					this._PackCode = value;
+					this.SendPropertyChanged("PackCode");
+					this.OnPackCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackSerial", DbType="Int")]
+		public System.Nullable<int> PackSerial
+		{
+			get
+			{
+				return this._PackSerial;
+			}
+			set
+			{
+				if ((this._PackSerial != value))
+				{
+					this.OnPackSerialChanging(value);
+					this.SendPropertyChanging();
+					this._PackSerial = value;
+					this.SendPropertyChanged("PackSerial");
+					this.OnPackSerialChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weight", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Weight
+		{
+			get
+			{
+				return this._Weight;
+			}
+			set
+			{
+				if ((this._Weight != value))
+				{
+					this.OnWeightChanging(value);
+					this.SendPropertyChanging();
+					this._Weight = value;
+					this.SendPropertyChanged("Weight");
+					this.OnWeightChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OperationStatusID", DbType="Int")]
+		public System.Nullable<int> OperationStatusID
+		{
+			get
+			{
+				return this._OperationStatusID;
+			}
+			set
+			{
+				if ((this._OperationStatusID != value))
+				{
+					this.OnOperationStatusIDChanging(value);
+					this.SendPropertyChanging();
+					this._OperationStatusID = value;
+					this.SendPropertyChanged("OperationStatusID");
+					this.OnOperationStatusIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ParentID", DbType="Int")]
+		public System.Nullable<int> ParentID
+		{
+			get
+			{
+				return this._ParentID;
+			}
+			set
+			{
+				if ((this._ParentID != value))
+				{
+					if (this._BookPackItem1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnParentIDChanging(value);
+					this.SendPropertyChanging();
+					this._ParentID = value;
+					this.SendPropertyChanged("ParentID");
+					this.OnParentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartBookSerial", DbType="Int")]
+		public System.Nullable<int> StartBookSerial
+		{
+			get
+			{
+				return this._StartBookSerial;
+			}
+			set
+			{
+				if ((this._StartBookSerial != value))
+				{
+					this.OnStartBookSerialChanging(value);
+					this.SendPropertyChanging();
+					this._StartBookSerial = value;
+					this.SendPropertyChanged("StartBookSerial");
+					this.OnStartBookSerialChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastBookSerial", DbType="Int")]
+		public System.Nullable<int> LastBookSerial
+		{
+			get
+			{
+				return this._LastBookSerial;
+			}
+			set
+			{
+				if ((this._LastBookSerial != value))
+				{
+					this.OnLastBookSerialChanging(value);
+					this.SendPropertyChanging();
+					this._LastBookSerial = value;
+					this.SendPropertyChanged("LastBookSerial");
+					this.OnLastBookSerialChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPackItemOperationID", DbType="Int")]
+		public System.Nullable<int> BookPackItemOperationID
+		{
+			get
+			{
+				return this._BookPackItemOperationID;
+			}
+			set
+			{
+				if ((this._BookPackItemOperationID != value))
+				{
+					this.OnBookPackItemOperationIDChanging(value);
+					this.SendPropertyChanging();
+					this._BookPackItemOperationID = value;
+					this.SendPropertyChanged("BookPackItemOperationID");
+					this.OnBookPackItemOperationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackItem_PackageWeight", Storage="_PackageWeights", ThisKey="BookPackItemID", OtherKey="PackageCode")]
+		public EntitySet<PackageWeight> PackageWeights
+		{
+			get
+			{
+				return this._PackageWeights;
+			}
+			set
+			{
+				this._PackageWeights.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackItem_BookPackItemModel", Storage="_BookPackItemModels", ThisKey="BookPackItemID", OtherKey="BookPackItemID")]
+		public EntitySet<BookPackItemModel> BookPackItemModels
+		{
+			get
+			{
+				return this._BookPackItemModels;
+			}
+			set
+			{
+				this._BookPackItemModels.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackItem_BookPackItemOperation", Storage="_BookPackItemOperations", ThisKey="BookPackItemID", OtherKey="BookPackItemID")]
+		public EntitySet<BookPackItemOperation> BookPackItemOperations
+		{
+			get
+			{
+				return this._BookPackItemOperations;
+			}
+			set
+			{
+				this._BookPackItemOperations.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackItem_ContainerRequestPack", Storage="_ContainerRequestPacks", ThisKey="BookPackItemID", OtherKey="BookPackItemID")]
+		public EntitySet<ContainerRequestPack> ContainerRequestPacks
+		{
+			get
+			{
+				return this._ContainerRequestPacks;
+			}
+			set
+			{
+				this._ContainerRequestPacks.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackItem_ShippingBagItem", Storage="_ShippingBagItems", ThisKey="BookPackItemID", OtherKey="BookPackItemID")]
+		public EntitySet<ShippingBagItem> ShippingBagItems
+		{
+			get
+			{
+				return this._ShippingBagItems;
+			}
+			set
+			{
+				this._ShippingBagItems.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackItem_BookPackItem", Storage="_BookPackItems", ThisKey="BookPackItemID", OtherKey="ParentID")]
+		public EntitySet<BookPackItem> BookPackItems
+		{
+			get
+			{
+				return this._BookPackItems;
+			}
+			set
+			{
+				this._BookPackItems.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackingOperation_BookPackItem", Storage="_BookPackingOperation", ThisKey="BookPackingOperationID", OtherKey="BookPackingOperationID", IsForeignKey=true, DeleteRule="CASCADE")]
+		public BookPackingOperation BookPackingOperation
+		{
+			get
+			{
+				return this._BookPackingOperation.Entity;
+			}
+			set
+			{
+				BookPackingOperation previousValue = this._BookPackingOperation.Entity;
+				if (((previousValue != value) 
+							|| (this._BookPackingOperation.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._BookPackingOperation.Entity = null;
+						previousValue.BookPackItems.Remove(this);
+					}
+					this._BookPackingOperation.Entity = value;
+					if ((value != null))
+					{
+						value.BookPackItems.Add(this);
+						this._BookPackingOperationID = value.BookPackingOperationID;
+					}
+					else
+					{
+						this._BookPackingOperationID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("BookPackingOperation");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackItem_BookPackItem", Storage="_BookPackItem1", ThisKey="ParentID", OtherKey="BookPackItemID", IsForeignKey=true)]
+		public BookPackItem BookPackItem1
+		{
+			get
+			{
+				return this._BookPackItem1.Entity;
+			}
+			set
+			{
+				BookPackItem previousValue = this._BookPackItem1.Entity;
+				if (((previousValue != value) 
+							|| (this._BookPackItem1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._BookPackItem1.Entity = null;
+						previousValue.BookPackItems.Remove(this);
+					}
+					this._BookPackItem1.Entity = value;
+					if ((value != null))
+					{
+						value.BookPackItems.Add(this);
+						this._ParentID = value.BookPackItemID;
+					}
+					else
+					{
+						this._ParentID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("BookPackItem1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_PackageWeights(PackageWeight entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPackItem = this;
+		}
+		
+		private void detach_PackageWeights(PackageWeight entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPackItem = null;
+		}
+		
+		private void attach_BookPackItemModels(BookPackItemModel entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPackItem = this;
+		}
+		
+		private void detach_BookPackItemModels(BookPackItemModel entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPackItem = null;
+		}
+		
+		private void attach_BookPackItemOperations(BookPackItemOperation entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPackItem = this;
+		}
+		
+		private void detach_BookPackItemOperations(BookPackItemOperation entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPackItem = null;
+		}
+		
+		private void attach_ContainerRequestPacks(ContainerRequestPack entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPackItem = this;
+		}
+		
+		private void detach_ContainerRequestPacks(ContainerRequestPack entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPackItem = null;
+		}
+		
+		private void attach_ShippingBagItems(ShippingBagItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPackItem = this;
+		}
+		
+		private void detach_ShippingBagItems(ShippingBagItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPackItem = null;
+		}
+		
+		private void attach_BookPackItems(BookPackItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPackItem1 = this;
+		}
+		
+		private void detach_BookPackItems(BookPackItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.BookPackItem1 = null;
+		}
+	}
+	
 	public partial class GetPackedByPrintingIDResult
 	{
 		
@@ -12119,6 +12243,248 @@ namespace Qiyas.DataAccessLayer
 				if ((this._BookPrintingOperationID != value))
 				{
 					this._BookPrintingOperationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackagingTypeID", DbType="Int")]
+		public System.Nullable<int> PackagingTypeID
+		{
+			get
+			{
+				return this._PackagingTypeID;
+			}
+			set
+			{
+				if ((this._PackagingTypeID != value))
+				{
+					this._PackagingTypeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingCalculationTypeID", DbType="Int")]
+		public System.Nullable<int> PackingCalculationTypeID
+		{
+			get
+			{
+				return this._PackingCalculationTypeID;
+			}
+			set
+			{
+				if ((this._PackingCalculationTypeID != value))
+				{
+					this._PackingCalculationTypeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AllocatedFrom", DbType="NVarChar(50)")]
+		public string AllocatedFrom
+		{
+			get
+			{
+				return this._AllocatedFrom;
+			}
+			set
+			{
+				if ((this._AllocatedFrom != value))
+				{
+					this._AllocatedFrom = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingValue", DbType="Int")]
+		public System.Nullable<int> PackingValue
+		{
+			get
+			{
+				return this._PackingValue;
+			}
+			set
+			{
+				if ((this._PackingValue != value))
+				{
+					this._PackingValue = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackageTotal", DbType="Int")]
+		public System.Nullable<int> PackageTotal
+		{
+			get
+			{
+				return this._PackageTotal;
+			}
+			set
+			{
+				if ((this._PackageTotal != value))
+				{
+					this._PackageTotal = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingParentID", DbType="Int")]
+		public System.Nullable<int> PackingParentID
+		{
+			get
+			{
+				return this._PackingParentID;
+			}
+			set
+			{
+				if ((this._PackingParentID != value))
+				{
+					this._PackingParentID = value;
+				}
+			}
+		}
+	}
+	
+	public partial class GetItemPackedByPackIDResult
+	{
+		
+		private int _BookPackItemOperationID;
+		
+		private string _Name;
+		
+		private System.Nullable<int> _CreatorID;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<int> _ModifiedByID;
+		
+		private System.Nullable<System.DateTime> _ModifiedDate;
+		
+		private System.Nullable<int> _BookPackItemID;
+		
+		private System.Nullable<int> _PackagingTypeID;
+		
+		private System.Nullable<int> _PackingCalculationTypeID;
+		
+		private string _AllocatedFrom;
+		
+		private System.Nullable<int> _PackingValue;
+		
+		private System.Nullable<int> _PackageTotal;
+		
+		private System.Nullable<int> _PackingParentID;
+		
+		public GetItemPackedByPackIDResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPackItemOperationID", DbType="Int NOT NULL")]
+		public int BookPackItemOperationID
+		{
+			get
+			{
+				return this._BookPackItemOperationID;
+			}
+			set
+			{
+				if ((this._BookPackItemOperationID != value))
+				{
+					this._BookPackItemOperationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatorID", DbType="Int")]
+		public System.Nullable<int> CreatorID
+		{
+			get
+			{
+				return this._CreatorID;
+			}
+			set
+			{
+				if ((this._CreatorID != value))
+				{
+					this._CreatorID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this._CreatedDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedByID", DbType="Int")]
+		public System.Nullable<int> ModifiedByID
+		{
+			get
+			{
+				return this._ModifiedByID;
+			}
+			set
+			{
+				if ((this._ModifiedByID != value))
+				{
+					this._ModifiedByID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this._ModifiedDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPackItemID", DbType="Int")]
+		public System.Nullable<int> BookPackItemID
+		{
+			get
+			{
+				return this._BookPackItemID;
+			}
+			set
+			{
+				if ((this._BookPackItemID != value))
+				{
+					this._BookPackItemID = value;
 				}
 			}
 		}

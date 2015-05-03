@@ -102,6 +102,13 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             set { this.entity.LastBookSerial = value; }
             get { return this.entity.LastBookSerial; }
         }
+
+
+        public int? BookPackItemOperationID
+        {
+            set { this.entity.BookPackItemOperationID = value; }
+            get { return this.entity.BookPackItemOperationID; }
+        }
     
         #endregion    
     

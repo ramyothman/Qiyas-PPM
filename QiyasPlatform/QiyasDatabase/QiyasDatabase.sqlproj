@@ -171,6 +171,11 @@
     <Build Include="dbo\Stored Procedures\CheckPackWeightComplete.sql" />
     <Build Include="dbo\Functions\GetTotalBookPrintPackages.sql" />
     <Build Include="dbo\Stored Procedures\UpdateItemPacksBulk.sql" />
+    <Build Include="dbo\Functions\GetTotalPrintingPackageItemsA3ByPackID.sql" />
+    <Build Include="dbo\Functions\GetTotalPrintingPackageByPackID.sql" />
+    <Build Include="dbo\Functions\GetTotalPrintingPackageByItemPackID.sql" />
+    <Build Include="dbo\Functions\GetTotalPrintingPackageA3ByItemPackID.sql" />
+    <Build Include="dbo\Stored Procedures\GetItemPackedByPackID.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompleteSchema.sql" />

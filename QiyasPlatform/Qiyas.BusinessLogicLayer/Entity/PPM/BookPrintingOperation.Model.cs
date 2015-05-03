@@ -55,7 +55,12 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
         public int? ExamID
         {            
             set{ this.entity.ExamID = value; }
-            get{ return this.entity.ExamID; }
+            get
+            {
+                if (this.entity == null)
+                    return 0;
+                return this.entity.ExamID; 
+            }
         }
     
         [Display(Name = "PrintsForOneModel")]

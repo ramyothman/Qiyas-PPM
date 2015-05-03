@@ -11,7 +11,9 @@ namespace Qiyas.WebAdmin.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            
+            
+            return RedirectToAction("Index", "Exam");
         }
 
         public ActionResult About()
