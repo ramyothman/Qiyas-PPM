@@ -142,11 +142,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BookRepackPackageID.
+        /// </summary>
+        internal static string BookRepackPackageID {
+            get {
+                return ResourceManager.GetString("BookRepackPackageID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BookRepackPackageItemID.
+        /// </summary>
+        internal static string BookRepackPackageItemID {
+            get {
+                return ResourceManager.GetString("BookRepackPackageItemID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to عدد الكتب للنموذج الواحد.
         /// </summary>
         internal static string BooksPerPackage {
             get {
                 return ResourceManager.GetString("BooksPerPackage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عدد الكتب.
+        /// </summary>
+        internal static string BooksTotal {
+            get {
+                return ResourceManager.GetString("BooksTotal", resourceCulture);
             }
         }
         
@@ -750,6 +777,15 @@ namespace Resources {
         internal static string PackNumber {
             get {
                 return ResourceManager.GetString("PackNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to رقم التسلسل.
+        /// </summary>
+        internal static string PackSerial {
+            get {
+                return ResourceManager.GetString("PackSerial", resourceCulture);
             }
         }
         

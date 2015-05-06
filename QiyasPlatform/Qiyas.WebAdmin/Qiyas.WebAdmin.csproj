@@ -1270,6 +1270,7 @@
     <Content Include="Views\BookPackingOperation\_PrintPacksTitleDocumentViewerPartial.cshtml" />
     <Content Include="Views\ReceiveExamPack\Receive.cshtml" />
     <Content Include="Views\ReceiveExamPack\_ReceivePackGridViewPartial.cshtml" />
+    <Content Include="Views\BookRePack\_RepackPackageGridViewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

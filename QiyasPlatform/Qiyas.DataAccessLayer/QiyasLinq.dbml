@@ -543,8 +543,84 @@
       <Association Name="BookPackItem_ContainerRequestPack" Member="ContainerRequestPacks" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="ContainerRequestPack" />
       <Association Name="BookPackItem_ShippingBagItem" Member="ShippingBagItems" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="ShippingBagItem" />
       <Association Name="BookPackItem_BookPackItem" Member="BookPackItems" ThisKey="BookPackItemID" OtherKey="ParentID" Type="BookPackItem" />
+      <Association Name="BookPackItem_BookRepackPackageItem" Member="BookRepackPackageItems" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="BookRepackPackageItem" />
       <Association Name="BookPackingOperation_BookPackItem" Member="BookPackingOperation" ThisKey="BookPackingOperationID" OtherKey="BookPackingOperationID" Type="BookPackingOperation" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="BookPackItem_BookPackItem" Member="BookPackItem1" ThisKey="ParentID" OtherKey="BookPackItemID" Type="BookPackItem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ViewBookPackItemComplete" Member="ViewBookPackItemCompletes">
+    <Type Name="ViewBookPackItemComplete">
+      <Column Name="BookPackItemID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BookPackingOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PackSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Weight" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="OperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BookPackItemOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamModelName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PackagingTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackingCalculationTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AllocatedFrom" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PackingValue" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageTotal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackingParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BookPrintingOperationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PrintsForOneModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForA3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForA4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForCD" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageOperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalExamModels" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalPacks" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamCode" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="ExamSpecialityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StudentGenderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumberofPages" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumberofSections" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TimeForSection" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="BooksCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ViewRepackPackageItems" Member="ViewRepackPackageItems">
+    <Type Name="ViewRepackPackageItem">
+      <Column Name="BookRepackPackageItemID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BookRepackPackageID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BookPackItemID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PackSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Weight" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="OperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamModelName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="BooksCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamCode" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="PPM.BookRepackPackageItem" Member="BookRepackPackageItems">
+    <Type Name="BookRepackPackageItem">
+      <Column Name="BookRepackPackageItemID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BookRepackPackageID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BookPackItemID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="BookPackItem_BookRepackPackageItem" Member="BookPackItem" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="BookPackItem" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="BookRepackPackage_BookRepackPackageItem" Member="BookRepackPackage" ThisKey="BookRepackPackageID" OtherKey="BookRepackPackageID" Type="BookRepackPackage" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="PPM.BookRepackPackage" Member="BookRepackPackages">
+    <Type Name="BookRepackPackage">
+      <Column Name="BookRepackPackageID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="BookRepackPackage_BookRepackPackageItem" Member="BookRepackPackageItems" ThisKey="BookRepackPackageID" OtherKey="BookRepackPackageID" Type="BookRepackPackageItem" />
     </Type>
   </Table>
   <Function Name="dbo.DeleteExamModelItemByExamID" Method="DeleteExamModelItemByExamID">
@@ -639,5 +715,17 @@
   <Function Name="dbo.GetTotalPrintingPackageItemsA3ByPackID" Method="GetTotalPrintingPackageItemsA3ByPackID" IsComposable="true">
     <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetBookCountForBookPackItem" Method="GetBookCountForBookPackItem" IsComposable="true">
+    <Parameter Name="BookPackItemID" Parameter="bookPackItemID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetExamModelName" Method="GetExamModelName" IsComposable="true">
+    <Parameter Name="ExamID" Parameter="examID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.GetExamModelNameFromPackItem" Method="GetExamModelNameFromPackItem" IsComposable="true">
+    <Parameter Name="BookPackItemID" Parameter="bookPackItemID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
   </Function>
 </Database>

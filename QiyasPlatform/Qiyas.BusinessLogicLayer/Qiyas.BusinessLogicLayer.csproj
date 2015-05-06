@@ -120,6 +120,14 @@
     <Compile Include="Components\PPM\BookPrintingOperationLogic.Logic.cs">
       <DependentUpon>BookPrintingOperationLogic.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\PPM\BookRepackPackageItemLogic.cs" />
+    <Compile Include="Components\PPM\BookRepackPackageItemLogic.Logic.cs">
+      <DependentUpon>BookRepackPackageItemLogic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PPM\BookRepackPackageLogic.cs" />
+    <Compile Include="Components\PPM\BookRepackPackageLogic.Logic.cs">
+      <DependentUpon>BookRepackPackageLogic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\PPM\ContainerRequestLogic.cs" />
     <Compile Include="Components\PPM\ContainerRequestLogic.Logic.cs">
       <DependentUpon>ContainerRequestLogic.cs</DependentUpon>
@@ -231,6 +239,14 @@
     <Compile Include="Entity\PPM\BookPrintingOperation.cs" />
     <Compile Include="Entity\PPM\BookPrintingOperation.Model.cs">
       <DependentUpon>BookPrintingOperation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\BookRepackPackage.cs" />
+    <Compile Include="Entity\PPM\BookRepackPackage.Model.cs">
+      <DependentUpon>BookRepackPackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\BookRepackPackageItem.cs" />
+    <Compile Include="Entity\PPM\BookRepackPackageItem.Model.cs">
+      <DependentUpon>BookRepackPackageItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity\PPM\ContainerRequest.cs" />
     <Compile Include="Entity\PPM\ContainerRequest.Model.cs">

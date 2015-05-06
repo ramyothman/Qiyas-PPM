@@ -176,6 +176,13 @@
     <Build Include="dbo\Functions\GetTotalPrintingPackageByItemPackID.sql" />
     <Build Include="dbo\Functions\GetTotalPrintingPackageA3ByItemPackID.sql" />
     <Build Include="dbo\Stored Procedures\GetItemPackedByPackID.sql" />
+    <Build Include="PPM\Tables\BookRepackPackageItem.sql" />
+    <Build Include="PPM\Tables\BookRepackPackage.sql" />
+    <Build Include="dbo\Views\ViewRepackPackageItems.sql" />
+    <Build Include="dbo\Views\ViewBookPackItemComplete.sql" />
+    <Build Include="dbo\Functions\GetExamModelNameFromPackItem.sql" />
+    <Build Include="dbo\Functions\GetExamModelName.sql" />
+    <Build Include="dbo\Functions\GetBookCountForBookPackItem.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompleteSchema.sql" />

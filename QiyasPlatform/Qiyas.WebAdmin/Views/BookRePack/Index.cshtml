@@ -26,10 +26,14 @@
             <div class="error" style="color: forestgreen;display:none;" id="packageExists">حزمة صحيحة</div>
             <div class="error" style="color: darkred;display:none;" id="packageDoesntExist">لا يمكن تعديل هذه الحزمة</div>
         </div>
-        
         <br /><br />
+        
 
         </div>
+                    
+                    @Html.Action("RepackPackageGridViewPartial")
+
+                    <br /><br />
         @Html.Action("RepackGridViewPartial")
         <br /><br />
         <div class="form-group">
@@ -72,7 +76,7 @@
                 url: urlLink,
                 success: function (data) {
                     if (data == "exists") {
-                        grid.PerformCallback();
+                        RepackPackageGridView.PerformCallback();
                         $('#packageDoesntExist').hide();
                         $('#packageExists').show();
                     }

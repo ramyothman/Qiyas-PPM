@@ -436,4 +436,13 @@
   <data name="ReceivedSuccessfully" xml:space="preserve">
     <value>تم الاستلام بنجاح</value>
   </data>
+  <data name="AllowDivisionForPackageValue" xml:space="preserve">
+    <value>يجب ادخال رقم يسمح بالقسمة علي عدد الكتب في في نوع التحزيم</value>
+  </data>
+  <data name="EnterNumberLessThanBooksCount" xml:space="preserve">
+    <value>يجب ادخال قيمة اقل من او تساوي كمية الطباعة للنموذج الواحد</value>
+  </data>
+  <data name="EnterNumberLessThanBooksCountA3" xml:space="preserve">
+    <value>يجب ادخال قيمة اقل من او تساوي كمية الطباعة لنموذج A3</value>
+  </data>
 </root>

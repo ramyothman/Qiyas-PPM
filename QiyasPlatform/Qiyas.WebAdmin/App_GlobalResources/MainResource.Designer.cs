@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to يجب ادخال رقم يسمح بالقسمة علي عدد الكتب في في نوع التحزيم.
+        /// </summary>
+        internal static string AllowDivisionForPackageValue {
+            get {
+                return ResourceManager.GetString("AllowDivisionForPackageValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to إضافة / تعديل طلب تحزيم.
         /// </summary>
         internal static string BookPackingTitle {
@@ -228,6 +237,24 @@ namespace Resources {
         internal static string EnterEmail {
             get {
                 return ResourceManager.GetString("EnterEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to يجب ادخال قيمة اقل من او تساوي كمية الطباعة للنموذج الواحد.
+        /// </summary>
+        internal static string EnterNumberLessThanBooksCount {
+            get {
+                return ResourceManager.GetString("EnterNumberLessThanBooksCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to يجب ادخال قيمة اقل من او تساوي كمية الطباعة لنموذج A3.
+        /// </summary>
+        internal static string EnterNumberLessThanBooksCountA3 {
+            get {
+                return ResourceManager.GetString("EnterNumberLessThanBooksCountA3", resourceCulture);
             }
         }
         

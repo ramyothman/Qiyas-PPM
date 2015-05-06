@@ -29,6 +29,44 @@ namespace Qiyas.WebAdmin.Controllers
             }
         }
 
+
+        public List<BusinessLogicLayer.Entity.PPM.BookRepackPackageItem> BookRepackPackageItemList
+        {
+            set
+            {
+                var key = "34FAA431-CF79-4869-1234-93F6BBE81263";
+                var Session = HttpContext.Session;
+                Session[key] = value;
+            }
+            get
+            {
+                var key = "34FAA431-CF79-4869-1234-93F6BBE81263";
+                var Session = HttpContext.Session;
+                if (Session[key] == null)
+                    Session[key] = new List< BusinessLogicLayer.Entity.PPM.BookRepackPackageItem>();
+                return  Session[key] as List< BusinessLogicLayer.Entity.PPM.BookRepackPackageItem>;
+            }
+        }
+
+        public List<BusinessLogicLayer.Entity.PPM.BookPackItemOperation> BookPackItemOperationList
+        {
+            set
+            {
+                var key = "34FAA431-CF79-4869-1235-93F6BBE81263";
+                var Session = HttpContext.Session;
+                Session[key] = value;
+            }
+            get
+            {
+                var key = "34FAA431-CF79-4869-1235-93F6BBE81263";
+                var Session = HttpContext.Session;
+                if (Session[key] == null)
+                    Session[key] = new List<BusinessLogicLayer.Entity.PPM.BookPackItemOperation>();
+                return Session[key] as List<BusinessLogicLayer.Entity.PPM.BookPackItemOperation>;
+            }
+        }
+
+
         public int PackID
         {
             set
@@ -51,6 +89,8 @@ namespace Qiyas.WebAdmin.Controllers
         public ActionResult Index()
         {
             BusinessLogicLayer.Entity.PPM.BookPrintingOperation printing = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation();
+            BookPackItemOperationList = new List<BusinessLogicLayer.Entity.PPM.BookPackItemOperation>();
+            BookRepackPackageItemList = new List<BusinessLogicLayer.Entity.PPM.BookRepackPackageItem>();
             return View(printing);
         }
 
@@ -540,6 +580,13 @@ namespace Qiyas.WebAdmin.Controllers
         public ActionResult CheckItem(string item)
         {
             var itemPack = new BusinessLogicLayer.Entity.PPM.BookPackItem(item);
+            if(itemPack == null || !itemPack.HasObject)
+            {
+                PackID = 0;
+                PrintingOperationID = 0;
+                return Json("notexists");
+            }
+
             if(itemPack.ParentID != null)
             {
                 PackID = 0;
@@ -549,6 +596,7 @@ namespace Qiyas.WebAdmin.Controllers
             PackID = itemPack.BookPackItemID;
             BusinessLogicLayer.Entity.PPM.BookPackingOperation operation = new BusinessLogicLayer.Entity.PPM.BookPackingOperation(itemPack.BookPackingOperationID.Value);
             PrintingOperationID = operation.BookPrintingOperationID.Value;
+            BookRepackPackageItemList.Add(repackItemLogic.GetBookRepackItem(item));
             if (itemPack.HasObject)
             {
                 return Json("exists");
@@ -564,6 +612,75 @@ namespace Qiyas.WebAdmin.Controllers
             //ViewBag.HasError = false;
             //ViewBag.NotifyMessage = Resources.MainResource.SaveSuccess;
 
+        }
+
+        BusinessLogicLayer.Components.PPM.BookRepackPackageItemLogic repackItemLogic = new BusinessLogicLayer.Components.PPM.BookRepackPackageItemLogic();
+        BusinessLogicLayer.Components.PPM.BookRepackPackageLogic repackLogic = new BusinessLogicLayer.Components.PPM.BookRepackPackageLogic();
+
+        [ValidateInput(false)]
+        public ActionResult RepackPackageGridViewPartial()
+        {
+            var model = BookRepackPackageItemList;
+            return PartialView("_RepackPackageGridViewPartial", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult RepackPackageGridViewPartialAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] Qiyas.BusinessLogicLayer.Entity.PPM.BookRepackPackageItem item)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            var model = BookRepackPackageItemList;
+            return PartialView("_RepackPackageGridViewPartial", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult RepackPackageGridViewPartialUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] Qiyas.BusinessLogicLayer.Entity.PPM.BookRepackPackageItem item)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Insert here a code to update the item in your model
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            var model = BookRepackPackageItemList;
+            return PartialView("_RepackPackageGridViewPartial", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult RepackPackageGridViewPartialDelete(System.Int32? BookPackItemID)
+        {
+            
+            if (BookPackItemID != null)
+            {
+                try
+                {
+                    repackItemLogic.RemoveFromList(BookRepackPackageItemList, BookPackItemID.Value);
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            var model = BookRepackPackageItemList;
+            return PartialView("_RepackPackageGridViewPartial", model);
         }
     }
 }

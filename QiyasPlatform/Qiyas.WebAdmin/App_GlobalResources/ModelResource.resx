@@ -426,4 +426,16 @@
   <data name="ExamModelNames" xml:space="preserve">
     <value>نماذج الاختبار</value>
   </data>
+  <data name="BookRepackPackageID" xml:space="preserve">
+    <value>BookRepackPackageID</value>
+  </data>
+  <data name="BookRepackPackageItemID" xml:space="preserve">
+    <value>BookRepackPackageItemID</value>
+  </data>
+  <data name="BooksTotal" xml:space="preserve">
+    <value>عدد الكتب</value>
+  </data>
+  <data name="PackSerial" xml:space="preserve">
+    <value>رقم التسلسل</value>
+  </data>
 </root>
