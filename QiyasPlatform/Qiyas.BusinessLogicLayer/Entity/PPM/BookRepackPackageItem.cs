@@ -32,6 +32,13 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             get { return _TotalPacks; }
         }
 
+        private int? _BooksCount;
+        public int? BooksCount
+        {
+            set { _BooksCount = value; }
+            get { return _BooksCount; }
+        }
+
         private int? _PackSerial;
         public int? PackSerial
         {

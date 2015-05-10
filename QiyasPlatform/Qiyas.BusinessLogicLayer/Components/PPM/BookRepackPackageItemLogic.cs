@@ -12,7 +12,7 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
     {
         public List<Qiyas.BusinessLogicLayer.Entity.PPM.BookRepackPackageItem> GetAllByBookRepackPackageID(int ID)
         {
-            return db.ViewRepackPackageItems.Where(c=> c.BookRepackPackageID == ID).Select(c => new Qiyas.BusinessLogicLayer.Entity.PPM.BookRepackPackageItem() { context = db, BookPackItemID = c.BookPackItemID, BookRepackPackageID = c.BookRepackPackageID, BookRepackPackageItemID = c.BookRepackPackageItemID, ExamCode = c.ExamCode, ExamModelName = c.ExamModelName, PackCode = c.PackCode, PackSerial = c.PackSerial.Value, TotalPacks = c.BooksCount.Value }).ToList();
+            return db.ViewRepackPackageItems.Where(c=> c.BookRepackPackageID == ID).Select(c => new Qiyas.BusinessLogicLayer.Entity.PPM.BookRepackPackageItem() { context = db, BookPackItemID = c.BookPackItemID, BookRepackPackageID = c.BookRepackPackageID, BookRepackPackageItemID = c.BookRepackPackageItemID, ExamCode = c.ExamCode, ExamModelName = c.ExamModelName, PackCode = c.PackCode, PackSerial = c.PackSerial.Value, BooksCount = c.BooksCount.Value }).ToList();
         }
 
         public Qiyas.BusinessLogicLayer.Entity.PPM.BookRepackPackageItem GetBookRepackItem(string packCode)
@@ -25,6 +25,7 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
             item.PackCode = pack.PackCode;
             item.PackSerial = pack.PackSerial;
             item.TotalPacks = pack.TotalPacks;
+            item.BooksCount = pack.BooksCount;
 
             return item;
         }

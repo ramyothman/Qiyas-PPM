@@ -14,7 +14,7 @@
         <elementListCompartment Id="3ebf3f8f-56df-47d8-9392-7492fda0a873" absoluteBounds="3.39, 2.835, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.625 : 3.06814697265625); (2.79166666666667 : 3.06814697265625 : JumpStart); (2.95833333333333 : 3.06814697265625 : JumpEnd); (3.00666666666667 : 3.06814697265625 : JumpStart); (3.17333333333333 : 3.06814697265625 : JumpEnd); (3.375 : 3.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.625 : 3.06814697265625); (2.79166666666667 : 3.06814697265625 : JumpStart); (2.95833333333333 : 3.06814697265625 : JumpEnd); (3.00666666666667 : 3.06814697265625 : JumpStart); (3.17333333333333 : 3.06814697265625 : JumpEnd); (3.375 : 3.06814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/QiyasLinqDataContext/BusinessEntity/BusinessEntity_Person" />
       <nodes>
         <classShapeMoniker Id="663c7909-940d-416d-82e8-6c3114e45b55" />
@@ -232,7 +232,7 @@
         <classShapeMoniker Id="c912f72c-af3b-4382-aa0e-2607aef75740" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6 : 11.8469962565104); (6.16666666666667 : 11.8469962565104 : JumpStart); (6.33333333333333 : 11.8469962565104 : JumpEnd); (6.625 : 11.8469962565104); (6.625 : 12.625); (7.375 : 12.625); (7.375 : 15.375); (7.218752 : 15.375); (7.218752 : 15.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(6 : 11.8469962565104); (6.625 : 11.8469962565104); (6.625 : 12.625); (7.375 : 12.625); (7.375 : 15.375); (7.218752 : 15.375); (7.218752 : 15.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/QiyasLinqDataContext/StudentGender/StudentGender_Exam" />
       <nodes>
         <classShapeMoniker Id="6f1568a7-a166-4fb3-be2c-1397005df2ab" />
@@ -271,7 +271,7 @@
         <elementListCompartment Id="b138a346-4e1b-4455-944a-9359043be575" absoluteBounds="8.265, 17.085, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(8.95923076923077 : 19.9343082682292); (8.95923076923077 : 20.1843082682292); (9.17358974358975 : 20.1843082682292 : JumpStart); (9.34025641025641 : 20.1843082682292 : JumpEnd); (9.55461538461539 : 20.1843082682292); (9.55461538461539 : 19.9343082682292)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(8.95923076923077 : 19.9343082682292); (8.95923076923077 : 20.1843082682292); (9.55461538461539 : 20.1843082682292); (9.55461538461539 : 19.9343082682292)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/QiyasLinqDataContext/BookPackingOperation/BookPackingOperation_BookPackingOperation" />
       <nodes>
         <classShapeMoniker Id="0c85ee04-e7ea-41df-bcd0-81883808e8e7" />
@@ -298,7 +298,7 @@
         <elementListCompartment Id="b6e10189-7bbb-42db-abf2-f9c6cf5943a0" absoluteBounds="4.14, 26.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(10.40625 : 15.2804996744792); (10.40625 : 26.3181469726563); (9.34025641025641 : 26.3181469726563 : JumpStart); (9.17358974358975 : 26.3181469726563 : JumpEnd); (8.74304487179487 : 26.3181469726563 : JumpStart); (8.57637820512821 : 26.3181469726563 : JumpEnd); (6.125 : 26.3181469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(10.40625 : 15.2804996744792); (10.40625 : 26.3181469726563); (6.125 : 26.3181469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/QiyasLinqDataContext/ExamModel/ExamModel_BookPackItemModel" />
       <nodes>
         <classShapeMoniker Id="9b9168fc-9eab-4fc1-a794-ff1fa6784dd1" />
@@ -343,7 +343,7 @@
         <classShapeMoniker Id="8b670b0c-49ad-4aa4-87a8-47da928f23c0" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(10.625 : 12.2324039713542); (10.625 : 29.4815991210938); (9.34025641025641 : 29.4815991210938 : JumpStart); (9.17358974358975 : 29.4815991210938 : JumpEnd); (8.74304487179487 : 29.4815991210938 : JumpStart); (8.57637820512821 : 29.4815991210938 : JumpEnd); (5.08333333333333 : 29.4815991210938 : JumpStart); (4.91666666666667 : 29.4815991210938 : JumpEnd); (3.83469456164863 : 29.4815991210938 : JumpStart); (3.66802789498197 : 29.4815991210938 : JumpEnd); (3.55208333333333 : 29.4815991210938 : JumpStart); (3.38541666666667 : 29.4815991210938 : JumpEnd); (2.75 : 29.4815991210938)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(10.625 : 12.2324039713542); (10.625 : 29.4815991210938); (5.08333333333333 : 29.4815991210938 : JumpStart); (4.91666666666667 : 29.4815991210938 : JumpEnd); (3.83469456164863 : 29.4815991210938 : JumpStart); (3.66802789498197 : 29.4815991210938 : JumpEnd); (3.55208333333333 : 29.4815991210938 : JumpStart); (3.38541666666667 : 29.4815991210938 : JumpEnd); (2.75 : 29.4815991210938)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/QiyasLinqDataContext/ExamCenter/ExamCenter_ExamCenterRequiredExam" />
       <nodes>
         <classShapeMoniker Id="ff9b3102-89ad-4a20-b949-2ba42213ef90" />
@@ -376,7 +376,7 @@
         <elementListCompartment Id="b8e2d4fb-dd08-4e49-a089-95de517f2b45" absoluteBounds="3.64, 36.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.625 : 36.8469962565104); (8.57637820512821 : 36.8469962565104 : JumpStart); (8.74304487179487 : 36.8469962565104 : JumpEnd); (9.25692307692308 : 36.8469962565104); (9.25692307692308 : 19.9343082682292)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.625 : 36.8469962565104); (9.25692307692308 : 36.8469962565104); (9.25692307692308 : 19.9343082682292)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/QiyasLinqDataContext/PackingCalculationType1/PackingCalculationType1_BookPackingOperation" />
       <nodes>
         <classShapeMoniker Id="993ec813-dfb7-4dfb-b5ab-a742748a8bcf" />
@@ -402,7 +402,7 @@
         <elementListCompartment Id="2f36a747-ba90-427e-baf4-a02aae6b7a96" absoluteBounds="1.0150000000000001, 37.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.281252 : 30.2901025390625); (2.281252 : 34.125); (1.83333333333333 : 34.125 : JumpStart); (1.66666666666667 : 34.125 : JumpEnd); (0.5 : 34.125); (0.5 : 38.5777498372396); (1 : 38.5777498372396)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.281252 : 30.2901025390625); (2.281252 : 34.125); (0.5 : 34.125); (0.5 : 38.5777498372396); (1 : 38.5777498372396)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/QiyasLinqDataContext/ExamCenterRequiredExam/ExamCenterRequiredExam_ShippingBag" />
       <nodes>
         <classShapeMoniker Id="c14766d4-8321-41fb-9ef8-53d9fe0c09dc" />
@@ -481,7 +481,7 @@
         <classShapeMoniker Id="15d2314f-914f-4bdf-9c96-49f02f44b2d0" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4.125 : 23.8662019856771); (2.75 : 23.8662019856771)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(4.125 : 23.8662019856771); (3.55208333333333 : 23.8662019856771 : JumpStart); (3.38541666666667 : 23.8662019856771 : JumpEnd); (2.75 : 23.8662019856771)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/QiyasLinqDataContext/BookPackItem/BookPackItem_BookPackItemOperation" />
       <nodes>
         <classShapeMoniker Id="52b2ce7d-0685-4a1d-a14b-f8433615605a" />
@@ -502,7 +502,7 @@
         <classShapeMoniker Id="a5d95c4d-e4b6-48a1-b5fc-fdeac420c0fc" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(9.9335601923077 : 19.9343082682292); (9.9335601923077 : 23.1518484928385); (9.34025641025641 : 23.1518484928385 : JumpStart); (9.17358974358975 : 23.1518484928385 : JumpEnd); (8.14583333333333 : 23.1518484928385 : JumpStart); (7.97916666666667 : 23.1518484928385 : JumpEnd); (6.125 : 23.1518484928385)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(9.9335601923077 : 19.9343082682292); (9.9335601923077 : 23.1518484928385); (8.14583333333333 : 23.1518484928385 : JumpStart); (7.97916666666667 : 23.1518484928385 : JumpEnd); (6.125 : 23.1518484928385)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/QiyasLinqDataContext/BookPackingOperation/BookPackingOperation_BookPackItem" />
       <nodes>
         <classShapeMoniker Id="0c85ee04-e7ea-41df-bcd0-81883808e8e7" />
@@ -534,7 +534,7 @@
         <elementListCompartment Id="2ab4897d-66bf-42df-85bd-14cbdf9586fa" absoluteBounds="7.5150000000000006, 40.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6.125 : 24.5805554785156); (8.65971153846154 : 24.5805554785156); (8.65971153846154 : 40.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(6.125 : 24.5805554785156); (8.65971153846154 : 24.5805554785156); (8.65971153846154 : 40.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/QiyasLinqDataContext/BookPackItem/BookPackItem_BookRepackPackageItem" />
       <nodes>
         <classShapeMoniker Id="52b2ce7d-0685-4a1d-a14b-f8433615605a" />
@@ -547,7 +547,7 @@
         <elementListCompartment Id="c814865b-5ee0-488e-83e0-ea0d415a8c56" absoluteBounds="4.765, 40.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6.75 : 41.0056469726563); (7.5 : 41.0056469726563)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(6.75 : 41.0056469726563); (7.5 : 41.0056469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/QiyasLinqDataContext/BookRepackPackage/BookRepackPackage_BookRepackPackageItem" />
       <nodes>
         <classShapeMoniker Id="9d95926e-8d85-47b1-bae3-f4d6ad537577" />
