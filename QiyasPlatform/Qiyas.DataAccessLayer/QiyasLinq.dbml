@@ -630,6 +630,23 @@
       <Association Name="BookPackingOperation_BookPackItem" Member="BookPackingOperation" ThisKey="BookPackingOperationID" OtherKey="BookPackingOperationID" Type="BookPackingOperation" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
+  <Table Name="dbo.ViewBookPackItemPrintSub" Member="ViewBookPackItemPrintSubs">
+    <Type Name="ViewBookPackItemPrintSub">
+      <Column Name="BookPackItemID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BookPackItemOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PackSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Weight" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="OperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Speciality" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ModelandNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Expr1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageTypeName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="StartBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.DeleteExamModelItemByExamID" Method="DeleteExamModelItemByExamID">
     <Parameter Name="ExamID" Parameter="examID" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />

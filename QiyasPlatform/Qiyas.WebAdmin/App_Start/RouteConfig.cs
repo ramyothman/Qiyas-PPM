@@ -18,6 +18,12 @@ namespace Qiyas.WebAdmin
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "PrintPacks",
+                url: "{controller}/{action}/{ID}/{PrintingID}",
+                defaults: new { controller = "BookPackItemRePack", action = "PrintPacks", ID = 0, PrintingID = 0 }
+            );
         }
     }
 }

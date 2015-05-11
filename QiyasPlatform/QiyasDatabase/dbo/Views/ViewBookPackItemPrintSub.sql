@@ -1,18 +1,13 @@
-﻿CREATE VIEW dbo.ViewBookPackItemPrint
+﻿CREATE VIEW dbo.ViewBookPackItemPrintSub
 AS
-SELECT PPM.BookPackItem.BookPackItemID, PPM.BookPackItem.BookPackingOperationID, PPM.BookPackItem.PackCode, PPM.BookPackItem.PackSerial, PPM.BookPackItem.Weight, PPM.BookPackItem.OperationStatusID, 
+SELECT PPM.BookPackItem.BookPackItemID, PPM.BookPackItem.BookPackItemOperationID, PPM.BookPackItem.PackCode, PPM.BookPackItem.PackSerial, PPM.BookPackItem.Weight, PPM.BookPackItem.OperationStatusID, 
                   PPM.BookPackItem.ParentID, dbo.GetItemPackSpeciality(PPM.BookPackItem.BookPackItemID) AS Speciality, dbo.GetItemPackExamandExamModel(PPM.BookPackItem.BookPackItemID) AS ModelandNumber, 
-                  PPM.BookPackingOperation.BookPrintingOperationID, CASE WHEN ParentID IS NULL THEN PPM.PackagingType.Name ELSE pt1.Name END AS PackageTypeName, PPM.BookPackItem.StartBookSerial, 
-                  PPM.BookPackItem.LastBookSerial
+                  PPM.BookPackItemOperation.BookPackItemID AS Expr1, PPM.PackagingType.Name AS PackageTypeName, PPM.BookPackItem.StartBookSerial, PPM.BookPackItem.LastBookSerial
 FROM     PPM.BookPackItem INNER JOIN
-                  PPM.BookPackingOperation ON PPM.BookPackItem.BookPackingOperationID = PPM.BookPackingOperation.BookPackingOperationID INNER JOIN
-                  PPM.PackagingType ON PPM.BookPackingOperation.PackagingTypeID = PPM.PackagingType.PackagingTypeID LEFT OUTER JOIN
-                  PPM.BookPackItemOperation AS pio ON pio.BookPackItemOperationID = PPM.BookPackItem.BookPackItemOperationID LEFT OUTER JOIN
-                  PPM.PackagingType AS pt1 ON pt1.PackagingTypeID = pio.PackagingTypeID
+                  PPM.BookPackItemOperation ON PPM.BookPackItem.BookPackItemOperationID = PPM.BookPackItemOperation.BookPackItemOperationID INNER JOIN
+                  PPM.PackagingType ON PPM.BookPackItemOperation.PackagingTypeID = PPM.PackagingType.PackagingTypeID
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookPackItemPrint';
-
-
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookPackItemPrintSub';
 
 
 GO
@@ -21,7 +16,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[41] 4[20] 2[10] 3) )"
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -92,47 +87,27 @@ Begin DesignProperties =
                Top = 7
                Left = 48
                Bottom = 170
-               Right = 310
-            End
-            DisplayFlags = 280
-            TopColumn = 5
-         End
-         Begin Table = "BookPackingOperation (PPM)"
-            Begin Extent = 
-               Top = 7
-               Left = 358
-               Bottom = 293
-               Right = 625
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "PackagingType (PPM)"
-            Begin Extent = 
-               Top = 7
-               Left = 673
-               Bottom = 170
-               Right = 886
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "pio"
-            Begin Extent = 
-               Top = 175
-               Left = 48
-               Bottom = 338
                Right = 319
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "pt1"
+         Begin Table = "BookPackItemOperation (PPM)"
             Begin Extent = 
-               Top = 175
-               Left = 673
-               Bottom = 338
-               Right = 886
+               Top = 7
+               Left = 367
+               Bottom = 297
+               Right = 638
+            End
+            DisplayFlags = 280
+            TopColumn = 4
+         End
+         Begin Table = "PackagingType (PPM)"
+            Begin Extent = 
+               Top = 7
+               Left = 686
+               Bottom = 170
+               Right = 899
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -144,47 +119,24 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 13
-         Width = 284
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-     ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookPackItemPrint';
-
-
-
-
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' End
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
          Column = 1440
          Alias = 900
-         Table = 1176
+         Table = 1170
          Output = 720
          Append = 1400
          NewValue = 1170
-         SortType = 1356
-         SortOrder = 1416
+         SortType = 1350
+         SortOrder = 1410
          GroupBy = 1350
-         Filter = 1356
+         Filter = 1350
          Or = 1350
          Or = 1350
          Or = 1350
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookPackItemPrint';
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookPackItemPrintSub';
 

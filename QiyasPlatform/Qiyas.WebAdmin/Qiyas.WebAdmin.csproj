@@ -1275,6 +1275,8 @@
     <Content Include="Views\BookPackItemRePack\Index.cshtml" />
     <Content Include="Views\BookPackItemRePack\_RepackPackageGridViewPartial.cshtml" />
     <Content Include="Views\BookPackItemRePack\_BookPackItemOperationGridViewPartial.cshtml" />
+    <Content Include="Views\BookPackItemRePack\_PrintPacksTitleDocumentViewerPartial.cshtml" />
+    <Content Include="Views\BookPackItemRePack\PrintPacks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1316,7 +1318,7 @@
     <EmbeddedResource Include="Common\Reports\TestReport.resx">
       <DependentUpon>TestReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licensesa.licx" />
+    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

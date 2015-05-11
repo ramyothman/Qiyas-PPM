@@ -59,6 +59,31 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
             }
             return packItems;
         }
+
+        public object GetAllByParentID(int ID)
+        {
+            List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackItem> packItems = new List<Entity.PPM.BookPackItem>();
+            var items = (from x in db.ViewBookPackItemPrintSubs where x.ParentID == ID select x);
+            foreach (var item in items)
+            {
+                Qiyas.BusinessLogicLayer.Entity.PPM.BookPackItem packItem = new Entity.PPM.BookPackItem();
+                //packItem.BookPackingOperationID = item.BookPackingOperationID;
+                packItem.BookPackItemID = item.BookPackItemID;
+                packItem.isNew = false;
+                packItem.ModelandNumber = item.ModelandNumber;
+                packItem.OperationStatusID = item.OperationStatusID;
+                packItem.PackCode = item.PackCode;
+                packItem.PackageTypeName = item.PackageTypeName;
+                packItem.StartBookSerial = item.StartBookSerial;
+                packItem.LastBookSerial = item.LastBookSerial;
+                packItem.PackSerial = item.PackSerial;
+                packItem.ParentID = item.ParentID;
+                packItem.Speciality = item.Speciality;
+                packItem.Weight = item.Weight;
+                packItems.Add(packItem);
+            }
+            return packItems;
+        }
     }
 }
       
