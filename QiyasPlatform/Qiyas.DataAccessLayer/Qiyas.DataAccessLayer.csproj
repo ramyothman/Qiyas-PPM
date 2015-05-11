@@ -46,7 +46,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="QiyasLinq.designer.cs">
+    <Compile Include="QiyasLinq1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>QiyasLinq.dbml</DependentUpon>
@@ -60,8 +60,8 @@
     </None>
     <None Include="QiyasLinq.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>QiyasLinq.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>QiyasLinq1.designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

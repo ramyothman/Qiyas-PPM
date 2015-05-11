@@ -3,11 +3,11 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "grid";
+        settings.Name = "gridRepack";
         settings.CallbackRouteValues = new { Controller = "BookRePack", Action = "PackingGridViewPartial" };
 
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "BookRePack", Action = "PackingGridViewPartialAddNew" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "BookRePack", Action = "PackingGridViewPartialUpdate" };
+        //settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "BookRePack", Action = "PackingGridViewPartialUpdate" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "BookRePack", Action = "PackingGridViewPartialDelete" };
         settings.KeyFieldName = "BookPackItemOperationID";
 

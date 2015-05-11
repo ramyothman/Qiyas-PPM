@@ -52,6 +52,62 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             set { _PackCode = value; }
             get { return _PackCode; }
         }
+
+        private int? _ExamID = 0;
+        public int? ExamID
+        {
+            set
+            {
+                _ExamID = value;
+            }
+            get
+            {
+                return _ExamID;
+            }
+        }
+
+        private int? _PrintsForOneModel;
+        public int? PrintsForOneModel 
+        {
+            set { _PrintsForOneModel = value; }
+            get { return _PrintsForOneModel; }
+        }
+
+        private int? _ExamsNeededForA3;
+        public int? ExamsNeededForA3
+        {
+            set { _ExamsNeededForA3 = value; }
+            get { return _ExamsNeededForA3; }
+        }
+
+        private int? _TotalExamModels;
+        public int? TotalExamModels
+        {
+            set { _TotalExamModels = value; }
+            get { return _TotalExamModels; }
+        }
+
+        private int? _PackageTypeTotal;
+        public int? PackageTypeTotal
+        {
+            set { _PackageTypeTotal = value; }
+            get { return _PackageTypeTotal; }
+        }
+
+        private int? _PackageTypeBooksPerPackage;
+        public int? PackageTypeBooksPerPackage
+        {
+            set { _PackageTypeBooksPerPackage = value; }
+            get { return _PackageTypeBooksPerPackage; }
+        }
+
+        private int? _PackageTypeExamModelCount;
+        public int? PackageTypeExamModelCount
+        {
+            set { _PackageTypeExamModelCount = value; }
+            get { return _PackageTypeExamModelCount; }
+        }
+            
     }
 }
       

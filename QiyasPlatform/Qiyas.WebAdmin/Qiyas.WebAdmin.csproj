@@ -261,6 +261,7 @@
     <Compile Include="Common\Security\CustomUserStore.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookPackingOperationController.cs" />
+    <Compile Include="Controllers\BookPackItemRePackController.cs" />
     <Compile Include="Controllers\BookPrintingOperationController.cs" />
     <Compile Include="Controllers\BookRePackController.cs" />
     <Compile Include="Controllers\CityController.cs" />
@@ -1271,6 +1272,9 @@
     <Content Include="Views\ReceiveExamPack\Receive.cshtml" />
     <Content Include="Views\ReceiveExamPack\_ReceivePackGridViewPartial.cshtml" />
     <Content Include="Views\BookRePack\_RepackPackageGridViewPartial.cshtml" />
+    <Content Include="Views\BookPackItemRePack\Index.cshtml" />
+    <Content Include="Views\BookPackItemRePack\_RepackPackageGridViewPartial.cshtml" />
+    <Content Include="Views\BookPackItemRePack\_BookPackItemOperationGridViewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

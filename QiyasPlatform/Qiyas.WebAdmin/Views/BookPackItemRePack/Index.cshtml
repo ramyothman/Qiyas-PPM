@@ -9,41 +9,49 @@
         @Resources.MainResource.BookRepack
     </h1>
 </div>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="widget-container fluid-height clearfix">
             <div class="widget-content padded clearfix">
-                @using (Html.BeginForm("Repack", "BookRePack", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                @using (Html.BeginForm("NumberingPack", "BookPackItemRePack", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id="packForm" }))
                 {
                     @Html.AntiForgeryToken()
-    <div class="col-lg-4 pull-right">
-        @Html.ValidationSummary("", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(m => m.PackNumber, new { @class = "col-md-5  pull-right control-label" })
-            <div class="col-md-4  pull-right">
-                @Html.TextBoxFor(m => m.PackNumber, new { @class = "form-control" })
-            </div>
-            <div class="error" style="color: forestgreen;display:none;" id="packageExists">حزمة صحيحة</div>
-            <div class="error" style="color: darkred;display:none;" id="packageDoesntExist">لا يمكن تعديل هذه الحزمة</div>
-        </div>
-        <br /><br />
-        
+                    if (ViewBag.HasError)
+                    {
+                        <div class="alert alert-danger">@ViewBag.NotifyMessage</div>
+                    }
+                    else if (!string.IsNullOrEmpty(ViewBag.NotifyMessage))
+                    {
+                        <div class="alert alert-success">@ViewBag.NotifyMessage</div>
+                    }
+                    <div class="col-lg-4 pull-right">
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.PackNumber, new { @class = "col-md-5  pull-right control-label" })
+                            <div class="col-md-4  pull-right">
+                                @Html.TextBoxFor(m => m.PackNumber, new { @class = "form-control" })
+                            </div>
+                            <div class="error" style="color: forestgreen;display:none;" id="packageExists">حزمة صحيحة</div>
+                            <div class="error" style="color: darkred;display:none;" id="packageDoesntExist">لا يمكن تعديل هذه الحزمة</div>
+                        </div>
+                        <br /><br />
+                    </div>
 
-        </div>
-                    
                     @Html.Action("RepackPackageGridViewPartial")
+                    <br /><br />
+                    
+                    @Html.Action("BookPackItemOperationGridViewPartial")
 
                     <br /><br />
-        @Html.Action("RepackGridViewPartial")
-        <br /><br />
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" name="Save" value="إعادة تحزيم" class="btn btn-default btn-primary" />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" name="SavePack" id="SavePack" value="إعادة تحزيم" class="btn btn-default btn-primary" />
 
+                        </div>
+                    </div>
+                }
             </div>
-        </div>
-        }
-    </div>
         </div>
     </div>
 </div>
@@ -56,7 +64,7 @@
             var r = confirm("هل تريد إعادة التحزيم");
             if (r == true) {
                 var form = $("form#packForm");
-                form.attr("action", "@Url.Action("NumberingPack", "BookRePack")");
+                form.attr("action", "@Url.Action("NumberingPack", "BookPackItemRePack")");
                 form.submit();
             } else {
 
@@ -65,7 +73,7 @@
     });
 
         $("#PackNumber").change(function () {
-            var urlLink = "@Url.Action("CheckItem", "BookRePack")";
+            var urlLink = "@Url.Action("CheckItem", "BookPackItemRePack")";
 
             $.ajax({
                 type: "POST",

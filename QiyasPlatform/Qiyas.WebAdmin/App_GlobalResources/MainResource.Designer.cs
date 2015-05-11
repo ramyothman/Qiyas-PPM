@@ -628,6 +628,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to لا يوجد حزمه مختارة للاضافة.
+        /// </summary>
+        internal static string NoRepackItemsSelected {
+            get {
+                return ResourceManager.GetString("NoRepackItemsSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to هذا المستخدم ليس موجود بالنظام.
         /// </summary>
         internal static string NoUserError {

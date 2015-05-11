@@ -406,7 +406,7 @@ namespace Qiyas.WebAdmin.Controllers
             return total;
         }
 
-        public static int MainID;
+        public static int MainID, ExamCount;
 
         public static int GetID(dynamic bag)
         {

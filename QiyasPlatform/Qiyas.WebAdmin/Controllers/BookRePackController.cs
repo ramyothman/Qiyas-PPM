@@ -170,23 +170,23 @@ namespace Qiyas.WebAdmin.Controllers
         [ValidateInput(false)]
         public ActionResult PackingGridViewPartial()
         {
-            
-            var model = new BusinessLogicLayer.Components.PPM.BookPackItemOperationLogic().GetByBookPackID(PackID);
+
+            var model = BookPackItemOperationList;//new BusinessLogicLayer.Components.PPM.BookPackItemOperationLogic().GetByBookPackID(PackID);
             return PartialView("_RepackGridViewPartial", model);
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult PackingGridViewPartialAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation item)
+        public ActionResult PackingGridViewPartialAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] Qiyas.BusinessLogicLayer.Entity.PPM.BookPackItemOperation item)
         {
 
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
             {
                 try
                 {
                     bool isValid = true;
-                    if (PackID == 0)
+                    if (BookRepackPackageItemList.Count == 0)
                     {
-                        ViewData["EditError"] = "لا يوجد حزمه مختارة للاضافة";
+                        ViewData["EditError"] = Resources.MainResource.NoRepackItemsSelected;
                         isValid = false;
                         var modelError = new BusinessLogicLayer.Components.PPM.BookPackItemOperationLogic().GetByBookPackID(PackID);
                         return PartialView("_RepackGridViewPartial", modelError);
@@ -206,22 +206,19 @@ namespace Qiyas.WebAdmin.Controllers
                     BusinessLogicLayer.Entity.PPM.BookPackingOperation package = new BusinessLogicLayer.Entity.PPM.BookPackingOperation(packItem.BookPackingOperationID.Value);
                     BusinessLogicLayer.Entity.PPM.BookPrintingOperation printingOperation = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(PrintingOperationID);
                     BusinessLogicLayer.Entity.PPM.PackagingType ptype = new BusinessLogicLayer.Entity.PPM.PackagingType(item.PackagingTypeID.Value);
-                    //if(item.PackingCalculationTypeID == 1)
-                    //{
-                    //    totalPackage /= ptype.BooksPerPackage.Value;
-                    //}
+                    
                     if (printingOperation != null)
                     {
                         BusinessLogicLayer.Components.PPM.BookPackItemOperationLogic logic = new BusinessLogicLayer.Components.PPM.BookPackItemOperationLogic();
 
-                        int totalItems = package.PackageTotal.Value * ptype.BooksPerPackage.Value;
-                        int currentTotal = ptype.BooksPerPackage == 3 && ptype.ExamModelCount == 1 ? logic.GetTotalItemsA3(PackID) : logic.GetTotalItems(PackID);
+                        int totalItems = GetTotalBooksForModel(true);
+                        int currentTotal = ptype.BooksPerPackage == 3 && ptype.ExamModelCount == 1 ? GetTotalItemsA3() : GetTotalItems();
                         int totalPrint = (totalPackage * ptype.BooksPerPackage.Value + currentTotal);
                         int count = new BusinessLogicLayer.Components.PPM.ExamLogic().GetExamModelCount(printingOperation.ExamID.Value);
-                        //if (count > 1)
-                        //{
-                        //    totalItems = totalItems * count;
-                        //}
+                        if (count > 1)
+                        {
+                            totalItems = totalItems * count;
+                        }
                         if (totalItems < totalPrint)
                         {
                             isValid = false;
@@ -231,6 +228,7 @@ namespace Qiyas.WebAdmin.Controllers
                     if (isValid)
                     {
                         BusinessLogicLayer.Entity.PPM.BookPackItemOperation entity = new BusinessLogicLayer.Entity.PPM.BookPackItemOperation();
+                        entity.BookPackItemOperationID = BookPackItemOperationList.Count + 1;
                         entity.AllocatedFrom = item.AllocatedFrom;
                         entity.BookPackItemID = packItem.BookPackItemID;
                         entity.PackingParentID = package.BookPackingOperationID;
@@ -242,7 +240,7 @@ namespace Qiyas.WebAdmin.Controllers
                         entity.PackagingTypeID = item.PackagingTypeID;
                         entity.PackingCalculationTypeID = item.PackingCalculationTypeID;
                         entity.PackingValue = item.PackingValue;
-                        entity.Save();
+                        BookPackItemOperationList.Add(entity);
                     }
 
 
@@ -252,13 +250,57 @@ namespace Qiyas.WebAdmin.Controllers
                     ViewData["EditError"] = e.Message;
                 }
             }
-            else
-                ViewData["EditError"] = "Please, correct all errors.";
-            var model = new BusinessLogicLayer.Components.PPM.BookPackItemOperationLogic().GetByBookPackID(PackID);
+            //else
+            //    ViewData["EditError"] = "Please, correct all errors.";
+            var model = BookPackItemOperationList;//new BusinessLogicLayer.Components.PPM.BookPackItemOperationLogic().GetByBookPackID(PackID);
             return PartialView("_RepackGridViewPartial", model);
         }
 
+        private int GetTotalBooksForModel(bool isA3)
+        {
+            List<int> ExamIDs = new List<int>();
+            int result = 0;
+            foreach(var item in BookRepackPackageItemList)
+            {
+                if(!ExamIDs.Contains(item.ExamID.Value))
+                {
+                    //if(isA3)
+                    //    result += item.ExamsNeededForA3.Value;
+                    //else
+                    //    result += item.PrintsForOneModel.Value;
+                    result += item.BooksCount.Value;
+                    ExamIDs.Add(item.ExamID.Value);
+                }
+            }
+            return result;
+        }
 
+        private int GetTotalItemsA3()
+        {
+            int result = 0;
+            List<BusinessLogicLayer.Entity.PPM.PackagingType> types = new BusinessLogicLayer.Components.PPM.PackagingTypeLogic().GetAll();
+            foreach(var item in BookPackItemOperationList)
+            {
+                var type = types.Where(c => c.BooksPerPackage == 3 && c.ExamModelCount == 1).FirstOrDefault();
+                if(item.PackagingTypeID == type.PackagingTypeID)
+                    result += item.PackageTotal.Value;
+            }
+            return result;
+        }
+
+        private int GetTotalItems()
+        {
+            int result = 0;
+            List<BusinessLogicLayer.Entity.PPM.PackagingType> types = new BusinessLogicLayer.Components.PPM.PackagingTypeLogic().GetAll();
+            foreach (var item in BookPackItemOperationList)
+            {
+                var type = types.Where(c => c.BooksPerPackage == 3 && c.ExamModelCount == 1).FirstOrDefault();
+                if (item.PackagingTypeID != type.PackagingTypeID)
+                    result += item.PackageTotal.Value;
+            }
+            return result;
+        }
+        
 
         [HttpPost, ValidateInput(false)]
         public ActionResult PackingGridViewPartialDelete(System.Int32 BookPackItemOperationID)
@@ -268,15 +310,17 @@ namespace Qiyas.WebAdmin.Controllers
             {
                 try
                 {
-                    BusinessLogicLayer.Entity.PPM.BookPackItemOperation entity = new BusinessLogicLayer.Entity.PPM.BookPackItemOperation(BookPackItemOperationID);
-                    entity.Delete();
+                    var item = BookPackItemOperationList.Where(c => c.BookPackItemOperationID == BookPackItemOperationID).FirstOrDefault();
+                    BookPackItemOperationList.Remove(item);
+                    //BusinessLogicLayer.Entity.PPM.BookPackItemOperation entity = new BusinessLogicLayer.Entity.PPM.BookPackItemOperation(BookPackItemOperationID);
+                    //entity.Delete();
                 }
                 catch (Exception e)
                 {
                     ViewData["EditError"] = e.Message;
                 }
             }
-            var model = new BusinessLogicLayer.Components.PPM.BookPackItemOperationLogic().GetByBookPackID(PackID);
+            var model = BookPackItemOperationList;// new BusinessLogicLayer.Components.PPM.BookPackItemOperationLogic().GetByBookPackID(PackID);
             return PartialView("_RepackGridViewPartial", model);
         }
         #endregion
@@ -472,7 +516,7 @@ namespace Qiyas.WebAdmin.Controllers
 
 
         #region Helpers
-        private int TotalPackages(BusinessLogicLayer.Entity.PPM.BookPackingOperation item)
+        private int TotalPackages(BusinessLogicLayer.Entity.PPM.BookPackItemOperation item)
         {
             int total = 0;
 
@@ -484,18 +528,10 @@ namespace Qiyas.WebAdmin.Controllers
             BusinessLogicLayer.Entity.PPM.BookPrintingOperation printingOperation = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(PrintingOperationID);
             if (printingOperation == null)
                 return 0;
-            BusinessLogicLayer.Entity.PPM.BookPackItem itemPack = new BusinessLogicLayer.Entity.PPM.BookPackItem(PackID);
-            BusinessLogicLayer.Entity.PPM.BookPackingOperation packingOperation = new BusinessLogicLayer.Entity.PPM.BookPackingOperation(itemPack.BookPackingOperationID.Value);
+
+            bool isA3 = ptype.BooksPerPackage == 3 && ptype.ExamModelCount == 1 ;
+            int totalItems = GetTotalBooksForModel(isA3);
             int countExams = new BusinessLogicLayer.Components.PPM.ExamLogic().GetExamModelCount(printingOperation.ExamID.Value);
-            int totalItems = 0;
-            if(ptype.ExamModelCount == 1)
-            {
-                totalItems = (packingOperation.PackageTotal.Value / countExams) * ptype.BooksPerPackage.Value;
-            }
-            else
-            {
-                totalItems = packingOperation.PackageTotal.Value * ptype.BooksPerPackage.Value;
-            }
             if (item.PackingCalculationTypeID == 1)
             {
 
@@ -509,7 +545,7 @@ namespace Qiyas.WebAdmin.Controllers
             }
             else if (item.PackingCalculationTypeID == 2)
             {
-                BusinessLogicLayer.Entity.PPM.BookPackingOperation operation = new BusinessLogicLayer.Entity.PPM.BookPackingOperation(item.PackingParentID.Value);
+                BusinessLogicLayer.Entity.PPM.BookPackItemOperation operation = new BusinessLogicLayer.Entity.PPM.BookPackItemOperation(item.PackingParentID.Value);
                 if (operation == null)
                     return 0;
                 totalItems = operation.PackageTotal.Value;
@@ -525,7 +561,7 @@ namespace Qiyas.WebAdmin.Controllers
                 }
                 else if (operation.PackingCalculationTypeID == 2)
                 {
-                    BusinessLogicLayer.Entity.PPM.BookPackingOperation operation2 = new BusinessLogicLayer.Entity.PPM.BookPackingOperation(operation.PackingParentID.Value);
+                    BusinessLogicLayer.Entity.PPM.BookPackItemOperation operation2 = new BusinessLogicLayer.Entity.PPM.BookPackItemOperation(operation.PackingParentID.Value);
                     if (operation2 == null)
                         return 0;
                     totalItems = operation2.PackageTotal.Value;
@@ -541,21 +577,35 @@ namespace Qiyas.WebAdmin.Controllers
                 }
                 else if (operation.PackingCalculationTypeID == 3)
                 {
-                    total = item.PackingValue.Value / (ptype.BooksPerPackage.Value * ptype.ExamModelCount.Value);
+
                     if (ptype.ExamModelCount == 1)
+                    {
+                        total = item.PackingValue.Value / (ptype.BooksPerPackage.Value * ptype.ExamModelCount.Value);
                         total = total * countExams;
+                    }
                     else
-                        total = total * ptype.ExamModelCount.Value;
+                    {
+                        total = item.PackingValue.Value / (ptype.BooksPerPackage.Value);
+                        //total = total * ptype.ExamModelCount.Value;
+                    }
+
                 }
 
             }
             else if (item.PackingCalculationTypeID == 3)
             {
-                total = item.PackingValue.Value / (ptype.BooksPerPackage.Value * ptype.ExamModelCount.Value);
+
                 if (ptype.ExamModelCount == 1)
+                {
+                    total = item.PackingValue.Value / (ptype.BooksPerPackage.Value * ptype.ExamModelCount.Value);
                     total = total * countExams;
+                }
                 else
-                    total = total * ptype.ExamModelCount.Value;
+                {
+                    total = item.PackingValue.Value / (ptype.BooksPerPackage.Value);
+                    //total = total * ptype.ExamModelCount.Value;
+                }
+
             }
             return total;
         }

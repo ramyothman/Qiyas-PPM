@@ -10,9 +10,10 @@
     [LastBookSerial]          INT             NULL,
     [BookPackItemOperationID] INT             NULL,
     CONSTRAINT [PK_BookPackItem] PRIMARY KEY CLUSTERED ([BookPackItemID] ASC),
-    CONSTRAINT [FK_BookPackItem_BookPackingOperation] FOREIGN KEY ([BookPackingOperationID]) REFERENCES [PPM].[BookPackingOperation] ([BookPackingOperationID]) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT [FK_BookPackItem_BookPackItem] FOREIGN KEY ([ParentID]) REFERENCES [PPM].[BookPackItem] ([BookPackItemID])
+    CONSTRAINT [FK_BookPackItem_BookPackingOperation] FOREIGN KEY ([BookPackingOperationID]) REFERENCES [PPM].[BookPackingOperation] ([BookPackingOperationID]) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
 
 
 

@@ -445,4 +445,7 @@
   <data name="EnterNumberLessThanBooksCountA3" xml:space="preserve">
     <value>يجب ادخال قيمة اقل من او تساوي كمية الطباعة لنموذج A3</value>
   </data>
+  <data name="NoRepackItemsSelected" xml:space="preserve">
+    <value>لا يوجد حزمه مختارة للاضافة</value>
+  </data>
 </root>
