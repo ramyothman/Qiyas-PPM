@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to استعراض.
+        /// </summary>
+        internal static string btnBrowse {
+            get {
+                return ResourceManager.GetString("btnBrowse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to الغاء.
         /// </summary>
         internal static string Cancel {
@@ -309,6 +318,42 @@ namespace Resources {
         internal static string ExamCenterHasAssociatedData {
             get {
                 return ResourceManager.GetString("ExamCenterHasAssociatedData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حفظ احتياجات مركز.
+        /// </summary>
+        internal static string ExamCenterItemNeedsEditFormTitle {
+            get {
+                return ResourceManager.GetString("ExamCenterItemNeedsEditFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to إضافة تعديل احتياجات لمركز اختبار.
+        /// </summary>
+        internal static string ExamCenterItemNeedsTitle {
+            get {
+                return ResourceManager.GetString("ExamCenterItemNeedsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حفظ احتياجات مركز.
+        /// </summary>
+        internal static string ExamCenterNeedsEditFormTitle {
+            get {
+                return ResourceManager.GetString("ExamCenterNeedsEditFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ادارة احتياجات المراكز.
+        /// </summary>
+        internal static string ExamCenterNeedsTitle {
+            get {
+                return ResourceManager.GetString("ExamCenterNeedsTitle", resourceCulture);
             }
         }
         

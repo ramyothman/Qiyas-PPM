@@ -448,4 +448,19 @@
   <data name="NoRepackItemsSelected" xml:space="preserve">
     <value>لا يوجد حزمه مختارة للاضافة</value>
   </data>
+  <data name="btnBrowse" xml:space="preserve">
+    <value>استعراض</value>
+  </data>
+  <data name="ExamCenterNeedsEditFormTitle" xml:space="preserve">
+    <value>حفظ احتياجات مركز</value>
+  </data>
+  <data name="ExamCenterNeedsTitle" xml:space="preserve">
+    <value>ادارة احتياجات المراكز</value>
+  </data>
+  <data name="ExamCenterItemNeedsEditFormTitle" xml:space="preserve">
+    <value>حفظ احتياجات مركز</value>
+  </data>
+  <data name="ExamCenterItemNeedsTitle" xml:space="preserve">
+    <value>إضافة تعديل احتياجات لمركز اختبار</value>
+  </data>
 </root>

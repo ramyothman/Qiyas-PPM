@@ -266,6 +266,7 @@
     <Compile Include="Controllers\BookRePackController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ExamCenterController.cs" />
+    <Compile Include="Controllers\ExamCenterNeedsController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\ExamModelController.cs" />
     <Compile Include="Controllers\ExamPeriodController.cs" />
@@ -1277,6 +1278,9 @@
     <Content Include="Views\BookPackItemRePack\_BookPackItemOperationGridViewPartial.cshtml" />
     <Content Include="Views\BookPackItemRePack\_PrintPacksTitleDocumentViewerPartial.cshtml" />
     <Content Include="Views\BookPackItemRePack\PrintPacks.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\Index.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\_ExamCenterNeedsGridViewPartial.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\BrowseItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

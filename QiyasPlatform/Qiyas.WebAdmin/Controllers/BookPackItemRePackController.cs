@@ -786,14 +786,15 @@ namespace Qiyas.WebAdmin.Controllers
 
         public ActionResult PrintPacksTitleDocumentViewerPartial()
         {
-            report = new Common.Reports.PrintItemPack();
-            report.DataSource = new Qiyas.BusinessLogicLayer.Components.PPM.BookPackItemLogic().GetAllByParentID(RepackID);
+            //report = new Common.Reports.PrintItemPack();
+            //report.LoadData(RepackID);
+            //report.DataSource = new Qiyas.BusinessLogicLayer.Components.PPM.BookPackItemLogic().GetAllByParentID(RepackID);
             return PartialView("_PrintPacksTitleDocumentViewerPartial", report);
         }
 
         public ActionResult PrintPacksTitleDocumentViewerPartialExport()
         {
-            report = new Common.Reports.PrintItemPack();
+            //report = new Common.Reports.PrintItemPack();
             report.DataSource = new Qiyas.BusinessLogicLayer.Components.PPM.BookPackItemLogic().GetAllByParentID(RepackID);
             return DocumentViewerExtension.ExportTo(report, Request);
         }

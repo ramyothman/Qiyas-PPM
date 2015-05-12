@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = Resources.MainResource.ExamCenterNeedsTitle;
+}
+
+
+<div class="page-title">
+    <h1>
+        @Resources.MainResource.ExamCenterNeedsTitle
+    </h1>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+                
+                @Html.Action("ExamCenterNeedsGridViewPartial")
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function CustomButtonClick(s, e, url) {
+            var key = s.GetRowKey(e.visibleIndex);
+
+            if (e.buttonID === "btnViewNeededItems") {
+                var destUrl = url + "/" + key;
+                window.location.href = destUrl;
+            }
+        }
+    </script>
+}
