@@ -184,6 +184,8 @@
     <Build Include="dbo\Functions\GetExamModelName.sql" />
     <Build Include="dbo\Functions\GetBookCountForBookPackItem.sql" />
     <Build Include="dbo\Views\ViewBookPackItemPrintSub.sql" />
+    <Build Include="dbo\Functions\GetPackedBookItemLastSerial.sql" />
+    <Build Include="dbo\Functions\GetPackageBooksCountByBookPackItemId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompleteSchema.sql" />
