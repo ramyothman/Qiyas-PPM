@@ -87,7 +87,7 @@
                     column.VisibleIndex = 2;
                     column.Name = "ExamCenterID";
                     column.Caption = @Resources.ModelResource.ExamCenterName;
-                    column.Width = new System.Web.UI.WebControls.Unit("20%");
+                    
                     column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Right;
                     column.ColumnType = MVCxGridViewColumnType.ComboBox;
                     var comboProperties = column.PropertiesEdit as ComboBoxProperties;
@@ -112,16 +112,19 @@
                     column.Width = new System.Web.UI.WebControls.Unit("20%");
                     column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Right;
                     column.ColumnType = MVCxGridViewColumnType.ComboBox;
+                    column.ReadOnly = true;
+                    column.EditFormSettings.Visible = DefaultBoolean.False;
                     var comboProperties = column.PropertiesEdit as ComboBoxProperties;
                     comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.RequestPreparationStatuLogic().GetAll());
                     comboProperties.TextField = "Name";
                     comboProperties.ValueField = "RequestPreparationStatusID";
-
+                    
                     comboProperties.ValueType = typeof(int);
                     comboProperties.ValidationSettings.RequiredField.IsRequired = true;
                     comboProperties.ValidationSettings.RequiredField.ErrorText = "*";
                     comboProperties.ValidationSettings.Display = Display.Dynamic;
                     comboProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                    
                 });
 				
 			});

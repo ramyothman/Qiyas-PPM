@@ -109,6 +109,14 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             set { this.entity.BookPackItemOperationID = value; }
             get { return this.entity.BookPackItemOperationID; }
         }
+
+        public int? ParentBookPackItemID
+        {
+            set { this.entity.ParentBookPackItemID = value; }
+            get { return this.entity.ParentBookPackItemID; }
+        }
+
+        
     
         #endregion    
     

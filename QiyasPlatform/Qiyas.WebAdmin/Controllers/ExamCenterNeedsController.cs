@@ -18,19 +18,30 @@ namespace Qiyas.WebAdmin.Controllers
         [ValidateInput(false)]
         public ActionResult ExamCenterNeedsGridViewPartial()
         {
-            var model = new object[0];
+            var model = new BusinessLogicLayer.Components.PPM.ExamCenterRequiredExamLogic().GetAll();
             return PartialView("_ExamCenterNeedsGridViewPartial", model);
         }
 
         [HttpPost, ValidateInput(false)]
         public ActionResult ExamCenterNeedsGridViewPartialAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] Qiyas.BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam item)
         {
-            var model = new object[0];
+            item.RequestPreparationStatusID = 1;
+            foreach (ModelState modelState in ViewData.ModelState.Values)
+            {
+                modelState.Errors.Clear();
+
+            }
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // Insert here a code to insert the new item in your model
+                    Qiyas.BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam saveItem = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam();
+                    saveItem.CreatedDate = DateTime.Now;
+                    saveItem.ExamCenterID = item.ExamCenterID;
+                    saveItem.ExamPeriodID = item.ExamPeriodID;
+                    saveItem.ModifiedDate = DateTime.Now;
+                    saveItem.RequestPreparationStatusID = 1;
+                    saveItem.Save();
                 }
                 catch (Exception e)
                 {
@@ -39,17 +50,22 @@ namespace Qiyas.WebAdmin.Controllers
             }
             else
                 ViewData["EditError"] = "Please, correct all errors.";
+            var model = new BusinessLogicLayer.Components.PPM.ExamCenterRequiredExamLogic().GetAll();
             return PartialView("_ExamCenterNeedsGridViewPartial", model);
         }
         [HttpPost, ValidateInput(false)]
         public ActionResult ExamCenterNeedsGridViewPartialUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] Qiyas.BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam item)
         {
-            var model = new object[0];
+         
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // Insert here a code to update the item in your model
+                    Qiyas.BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam saveItem = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(item.ExamCenterRequiredExamsID);
+                    saveItem.ExamCenterID = item.ExamCenterID;
+                    saveItem.ExamPeriodID = item.ExamPeriodID;
+                    saveItem.ModifiedDate = DateTime.Now;
+                    saveItem.Save();
                 }
                 catch (Exception e)
                 {
@@ -58,23 +74,26 @@ namespace Qiyas.WebAdmin.Controllers
             }
             else
                 ViewData["EditError"] = "Please, correct all errors.";
+            var model = new BusinessLogicLayer.Components.PPM.ExamCenterRequiredExamLogic().GetAll();
             return PartialView("_ExamCenterNeedsGridViewPartial", model);
         }
         [HttpPost, ValidateInput(false)]
         public ActionResult ExamCenterNeedsGridViewPartialDelete(System.Int32 ExamCenterRequiredExamsID)
         {
-            var model = new object[0];
+            
             if (ExamCenterRequiredExamsID >= 0)
             {
                 try
                 {
-                    // Insert here a code to delete the item from your model
+                    Qiyas.BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam saveItem = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(ExamCenterRequiredExamsID);
+                    saveItem.Delete();
                 }
                 catch (Exception e)
                 {
                     ViewData["EditError"] = e.Message;
                 }
             }
+            var model = new BusinessLogicLayer.Components.PPM.ExamCenterRequiredExamLogic().GetAll();
             return PartialView("_ExamCenterNeedsGridViewPartial", model);
         }
     }

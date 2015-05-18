@@ -467,8 +467,8 @@ namespace Qiyas.WebAdmin.Controllers
 
                     string modelCode = "";
                     List<BusinessLogicLayer.Entity.PPM.BookPackItemModel> itemModels = new List<BusinessLogicLayer.Entity.PPM.BookPackItemModel>();
-                    bookStart = bookLast + 1;
-                    bookLast += bookStart + (i + 1) * packType.BooksPerPackage.Value;
+                    bookStart = i == 0 ? bookLast : bookLast + 1;
+                    bookLast = bookStart + (packType.BooksPerPackage.Value - 1);
                     foreach (BusinessLogicLayer.Entity.PPM.ExamModelItem examModel in exam.ExamModels)
                     {
                         if (packType.ExamModelCount > 1)

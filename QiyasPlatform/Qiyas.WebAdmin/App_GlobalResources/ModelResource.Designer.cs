@@ -844,7 +844,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
+        ///   Looks up a localized string similar to حالة الطلب.
         /// </summary>
         internal static string RequestPreparationStatusName {
             get {

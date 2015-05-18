@@ -406,7 +406,7 @@
     <value>ExamRequirementItemID</value>
   </data>
   <data name="RequestPreparationStatusName" xml:space="preserve">
-    <value>Name</value>
+    <value>حالة الطلب</value>
   </data>
   <data name="ShippingBagID" xml:space="preserve">
     <value>ShippingBagID</value>

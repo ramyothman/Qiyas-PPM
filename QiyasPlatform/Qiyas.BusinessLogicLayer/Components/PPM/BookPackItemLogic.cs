@@ -84,6 +84,18 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
             }
             return packItems;
         }
+
+        public int GetLastBookSerialForRePackedItem(int BookPackItemID)
+        {
+            int? result = db.GetPackedBookItemLastSerial(BookPackItemID);
+            return result.HasValue ? result.Value : 0;
+        }
+
+        public int GetPackageBooksCount(int BookPackItemID)
+        {
+            int? result = db.GetPackageBooksCountByBookPackItemId(BookPackItemID);
+            return result.HasValue ? result.Value : 0;
+        }
     }
 }
       
