@@ -22,12 +22,39 @@
         settings.SettingsCommandButton.UpdateButton.Text = @Resources.MainResource.Save;
         settings.SettingsCommandButton.UpdateButton.ButtonType = GridViewCommandButtonType.Button;
         settings.SettingsCommandButton.CancelButton.ButtonType = GridViewCommandButtonType.Button;
-        settings.CommandColumn.Width = new System.Web.UI.WebControls.Unit("60px");
+        settings.CommandColumn.Width = new System.Web.UI.WebControls.Unit("260px");
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowDeleteButton = true;
-        settings.CommandColumn.ShowEditButton = true;
-        settings.CommandColumn.CustomButtons.Add(new GridViewCommandColumnCustomButton() { ID = "btnViewNeededItems", Text = Resources.MainResource.btnBrowse });
+        settings.CommandColumn.ShowEditButton = false;
+        
+        //settings.CommandColumn.CustomButtons.Add(new GridViewCommandColumnCustomButton() { ID = "btnViewNeededItems", Text = Resources.MainResource.btnBrowse });
+        GridViewCommandColumnCustomButton customButtonView = new GridViewCommandColumnCustomButton() { ID = "btnViewNeededItems", Text = " " };
+        customButtonView.Styles.Style.CssClass = "fa fa-eye";
+        customButtonView.Image.AlternateText = Resources.MainResource.btnBrowse;
+        //customButton.Image.Url = "~/images/print.png";
+        settings.CommandColumn.CustomButtons.Add(customButtonView);
+        
+        //settings.CommandColumn.CustomButtons.Add(new GridViewCommandColumnCustomButton() { ID = "btnViewPrintItems", Text = Resources.MainResource.btnPrint });
+        GridViewCommandColumnCustomButton customButton = new GridViewCommandColumnCustomButton() { ID = "btnViewPrintItems", Text = " " };
+        customButton.Styles.Style.CssClass  = "fa fa-print";
+        customButton.Image.AlternateText = Resources.MainResource.btnPrint;
+        //customButton.Image.Url = "~/images/print.png";
+        settings.CommandColumn.CustomButtons.Add(customButton);
+        //settings.CommandColumn.CustomButtons.Add(new GridViewCommandColumnCustomButton() { ID = "", Text = Resources.MainResource.btnPrepareForWithdraw });
+        GridViewCommandColumnCustomButton customButtonPrepareWithdrawy = new GridViewCommandColumnCustomButton() { ID = "btnPrepareForWithdraw", Text = " " };
+        customButtonPrepareWithdrawy.Styles.Style.CssClass = "fa fa-code-fork";
+        customButtonPrepareWithdrawy.Image.AlternateText = Resources.MainResource.btnPrepareForWithdraw;
+        //customButton.Image.Url = "~/images/print.png";
+        settings.CommandColumn.CustomButtons.Add(customButtonPrepareWithdrawy);
+        
+        //settings.CommandColumn.CustomButtons.Add(new GridViewCommandColumnCustomButton() { ID = "btnViewContainerItems", Text = Resources.MainResource.btnContainerPreparation });
+        GridViewCommandColumnCustomButton customButtonContainer = new GridViewCommandColumnCustomButton() { ID = "btnViewContainerItems", Text = " " };
+        customButtonContainer.Styles.Style.CssClass = "fa fa-tags";
+        customButtonContainer.Image.AlternateText = Resources.MainResource.btnContainerPreparation;
+        //customButton.Image.Url = "~/images/print.png";
+        settings.CommandColumn.CustomButtons.Add(customButtonContainer);
+        
         settings.ClientSideEvents.CustomButtonClick =
         string.Format("function(s, e) {{ CustomButtonClick(s, e, '{0}'); }}", Url.Action("BrowseItems", "ExamCenterNeeds"));
         

@@ -26,6 +26,11 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             this.entity = context.ExamCenterRequiredExams.Where(p => p.ExamCenterRequiredExamsID == ExamCenterRequiredExamsID).FirstOrDefault();  
         }
 
+        public ExamCenterRequiredExam(int PeriodID, int CenterID)
+        {
+            this.entity = context.ExamCenterRequiredExams.Where(p => p.ExamPeriodID == PeriodID && p.ExamCenterID == CenterID).FirstOrDefault();
+        }
+
         internal ExamCenterRequiredExam(Qiyas.DataAccessLayer.ExamCenterRequiredExam entity)
         {
             this.entity = entity;

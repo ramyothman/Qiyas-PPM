@@ -24,6 +24,11 @@ namespace Qiyas.WebAdmin
                 url: "{controller}/{action}/{ID}/{PrintingID}",
                 defaults: new { controller = "BookPackItemRePack", action = "PrintPacks", ID = 0, PrintingID = 0 }
             );
+
+            routes.MapRoute(
+                name: "WithdrawReport",
+                url: "{controller}/{action}/{ID}/{ReportType}",
+                defaults: new { controller = "ExamCenterNeeds", action = "WithdrawReport", ID = 0, ReportType = "request" });
         }
     }
 }

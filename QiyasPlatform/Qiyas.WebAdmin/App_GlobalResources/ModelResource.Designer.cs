@@ -736,6 +736,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PackCount.
+        /// </summary>
+        internal static string PackCount {
+            get {
+                return ResourceManager.GetString("PackCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to مسلسل طريقة الحساب.
         /// </summary>
         internal static string PackingCalculationTypeID {
@@ -835,6 +844,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RequestOrder.
+        /// </summary>
+        internal static string RequestOrder {
+            get {
+                return ResourceManager.GetString("RequestOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RequestPreparationStatusID.
         /// </summary>
         internal static string RequestPreparationStatusID {
@@ -853,6 +871,42 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RequestWithdrawDetailID.
+        /// </summary>
+        internal static string RequestWithdrawDetailID {
+            get {
+                return ResourceManager.GetString("RequestWithdrawDetailID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RequestWithdrawDetailItemID.
+        /// </summary>
+        internal static string RequestWithdrawDetailItemID {
+            get {
+                return ResourceManager.GetString("RequestWithdrawDetailItemID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RequestWithdrawDetailItemModelID.
+        /// </summary>
+        internal static string RequestWithdrawDetailItemModelID {
+            get {
+                return ResourceManager.GetString("RequestWithdrawDetailItemModelID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RequestWithdrawID.
+        /// </summary>
+        internal static string RequestWithdrawID {
+            get {
+                return ResourceManager.GetString("RequestWithdrawID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to يرجي إدخال {0}.
         /// </summary>
         internal static string RequiredValidation {
@@ -867,6 +921,42 @@ namespace Resources {
         internal static string RowGuid {
             get {
                 return ResourceManager.GetString("RowGuid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ShippedExamsNeededForA3.
+        /// </summary>
+        internal static string ShippedExamsNeededForA3 {
+            get {
+                return ResourceManager.GetString("ShippedExamsNeededForA3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ShippedExamsNeededForA4.
+        /// </summary>
+        internal static string ShippedExamsNeededForA4 {
+            get {
+                return ResourceManager.GetString("ShippedExamsNeededForA4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ShippedExamsNeededForCD.
+        /// </summary>
+        internal static string ShippedExamsNeededForCD {
+            get {
+                return ResourceManager.GetString("ShippedExamsNeededForCD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ShippedPrintsForOneModel.
+        /// </summary>
+        internal static string ShippedPrintsForOneModel {
+            get {
+                return ResourceManager.GetString("ShippedPrintsForOneModel", resourceCulture);
             }
         }
         

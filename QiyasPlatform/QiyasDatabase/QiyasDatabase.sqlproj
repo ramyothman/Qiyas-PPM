@@ -186,6 +186,20 @@
     <Build Include="dbo\Views\ViewBookPackItemPrintSub.sql" />
     <Build Include="dbo\Functions\GetPackedBookItemLastSerial.sql" />
     <Build Include="dbo\Functions\GetPackageBooksCountByBookPackItemId.sql" />
+    <Build Include="PPM\Tables\RequestWithdrawDetailItemModel.sql" />
+    <Build Include="PPM\Tables\RequestWithdrawDetailItem.sql" />
+    <Build Include="PPM\Tables\RequestWithdrawDetail.sql" />
+    <Build Include="PPM\Tables\RequestWithdraw.sql" />
+    <Build Include="PPM\Tables\BookPackItemWithdraw.sql" />
+    <Build Include="dbo\Views\ViewWithdrawalReport.sql" />
+    <Build Include="dbo\Views\ViewReservedPacks.sql" />
+    <Build Include="dbo\Views\ViewRequestWithdrawDetailSubTotal.sql" />
+    <Build Include="dbo\Views\ViewCurrentPackStockExistence.sql" />
+    <Build Include="dbo\Views\ViewContainerRequest.sql" />
+    <Build Include="dbo\Views\ViewBookPackItemOperation.sql" />
+    <Build Include="dbo\Views\RemainingExamRequirementItemForWithdraw.sql" />
+    <Build Include="dbo\Functions\GetWithdrawRequestSerial.sql" />
+    <Build Include="dbo\Functions\GetExamModelNameForRequestWithdrawItems.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompleteSchema.sql" />

@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [PPM].[ExamCenterRequiredExams] (
-    [ExamCenterRequiredExamsID]  INT            NOT NULL,
+    [ExamCenterRequiredExamsID]  INT            IDENTITY (1, 1) NOT NULL,
     [ExamPeriodID]               INT            NULL,
     [ExamCenterID]               INT            NULL,
     [RequestPreparationStatusID] INT            NULL,
@@ -13,4 +13,6 @@
     CONSTRAINT [FK_ExamCenterRequiredExams_ExamPeriod] FOREIGN KEY ([ExamPeriodID]) REFERENCES [PPM].[ExamPeriod] ([ExamPeriodID]) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT [FK_ExamCenterRequiredExams_RequestPreparationStatus] FOREIGN KEY ([RequestPreparationStatusID]) REFERENCES [PPM].[RequestPreparationStatus] ([RequestPreparationStatusID])
 );
+
+
 

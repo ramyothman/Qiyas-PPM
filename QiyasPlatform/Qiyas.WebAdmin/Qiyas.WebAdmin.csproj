@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Qiyas.WebAdmin</RootNamespace>
     <AssemblyName>Qiyas.WebAdmin</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>44300</IISExpressSSLPort>
@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode />
     <NuGetPackageImportStamp>206f2b77</NuGetPackageImportStamp>
     <ApplicationInsightsResourceId>/subscriptions/a754fd35-6610-43a1-b943-a8936cbad564/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/Qiyas.WebAdmin</ApplicationInsightsResourceId>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -78,6 +79,12 @@
     <Reference Include="DevExpress.XtraReports.v14.2, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraReports.v14.2.Web, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraScheduler.v14.2.Core, Version=14.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="Excel">
+      <HintPath>..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ApplicationInsights">
       <HintPath>..\packages\Microsoft.ApplicationInsights.0.13.2-build00132\lib\net40\Microsoft.ApplicationInsights.dll</HintPath>
     </Reference>
@@ -114,18 +121,16 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -167,6 +172,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -257,6 +263,12 @@
     <Compile Include="Common\Reports\TestReport.Designer.cs">
       <DependentUpon>TestReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\Reports\WithdrawReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Common\Reports\WithdrawReport.Designer.cs">
+      <DependentUpon>WithdrawReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\Security\CustomRoleStore.cs" />
     <Compile Include="Common\Security\CustomUserStore.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -308,6 +320,7 @@
     <Content Include="App_Assets\css\daterange-picker.css" />
     <Content Include="App_Assets\css\dropzone.css" />
     <Content Include="App_Assets\css\font-awesome.min.css" />
+    <Content Include="App_Assets\css\fonts.css" />
     <Content Include="App_Assets\css\fullcalendar.css" />
     <Content Include="App_Assets\css\isotope.css" />
     <Content Include="App_Assets\css\jquery.fancybox.css" />
@@ -485,6 +498,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\print.png" />
     <Content Include="Scripts\address.js" />
     <Content Include="Scripts\application.js" />
     <Content Include="Scripts\bootstrap-colorpicker.js" />
@@ -516,6 +530,15 @@
     <Content Include="Scripts\calendar\jquery.calendars.ummalqura.min.js.map">
       <DependentUpon>jquery.calendars.ummalqura.min.js</DependentUpon>
     </Content>
+    <Content Include="App_Assets\fonts\1YwB1sO8YE1Lyjf12WNiUA.woff2" />
+    <Content Include="App_Assets\fonts\dPJ5r9gl3kK6ijoeP1IRsvY6323mHUZFJMgTvxaG2iE.woff2" />
+    <Content Include="App_Assets\fonts\eFRpvGLEW31oiexbYNx7Y_esZW2xOQ-xsNqO47m55DA.woff2" />
+    <Content Include="App_Assets\fonts\EsvMC5un3kjyUhB9ZEPPwg.woff2" />
+    <Content Include="App_Assets\fonts\GtRkRNTnri0g82CjKnEB0Q.woff2" />
+    <Content Include="App_Assets\fonts\H2DMvhDLycM56KNuAtbJYA.woff2" />
+    <Content Include="App_Assets\fonts\ObQr5XYcoH0WBoUxiaYK3_Y6323mHUZFJMgTvxaG2iE.woff2" />
+    <Content Include="App_Assets\fonts\UyBMtLsHKBKXelqf4x7VRQ.woff2" />
+    <None Include="Properties\PublishProfiles\FileSystem.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\calendar\jquery.calendars-af.js" />
     <Content Include="Scripts\calendar\jquery.calendars-am.js" />
@@ -1281,10 +1304,20 @@
     <Content Include="Views\ExamCenterNeeds\Index.cshtml" />
     <Content Include="Views\ExamCenterNeeds\_ExamCenterNeedsGridViewPartial.cshtml" />
     <Content Include="Views\ExamCenterNeeds\BrowseItems.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\_ExamRequirementItemGridViewPartial.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\SendItemsRequest.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\_WithdrawGridViewPartial.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\SendItemsRequestPrint.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\WithdrawReport.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\_WithdrawReportDocumentViewerPartial.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\ContainerRequest.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\_ContainerRequestGridViewPartial.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\_ViewWithdrawalReportGridViewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
+    <Folder Include="ContentData\Excel\" />
     <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
@@ -1322,7 +1355,12 @@
     <EmbeddedResource Include="Common\Reports\TestReport.resx">
       <DependentUpon>TestReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Common\Reports\WithdrawReport.resx">
+      <DependentUpon>WithdrawReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

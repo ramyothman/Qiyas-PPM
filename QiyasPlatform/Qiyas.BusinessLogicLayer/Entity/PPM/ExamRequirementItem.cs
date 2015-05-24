@@ -11,7 +11,10 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
 {
     public partial class ExamRequirementItem
     {
-        
+        public ExamRequirementItem(int ID, int ExamID)
+        {
+            this.entity = context.ExamRequirementItems.Where(p => p.ExamCenterRequiredExamsID == ID && p.ExamID == ExamID).FirstOrDefault();
+        }
     }
 }
       

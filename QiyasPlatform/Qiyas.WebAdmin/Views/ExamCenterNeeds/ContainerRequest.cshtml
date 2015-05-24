@@ -1,0 +1,138 @@
+﻿@model Qiyas.BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam
+@{
+
+    ViewBag.Title = @Resources.MainResource.ContainerRequestTitle;
+}
+
+<div class="page-title">
+    <h1>
+        @Resources.MainResource.ContainerRequestTitle
+    </h1>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+
+                @using (Html.BeginForm("SaveContainerRequest", "ExamCenterNeeds", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "packForm", @name = "packForm", @enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    if (ViewBag.HasError)
+                    {
+                        <div class="alert alert-danger">@ViewBag.NotifyMessage</div>
+                    }
+                    else if (!string.IsNullOrEmpty(ViewBag.NotifyMessage))
+                    {
+                        <div class="alert alert-success">@ViewBag.NotifyMessage</div>
+                    }
+                    <div class="col-lg-4 pull-right">
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ExamPeriodName, new { @class = "col-md-5  pull-right control-label" })
+                            <div class="col-md-7  pull-right">
+                                @Html.TextBoxFor(m => m.ExamPeriodName, new { @class = "form-control col-md-6" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ExamCenterName, new { @class = "col-md-5  pull-right control-label" })
+                            <div class="col-md-7 pull-right">
+                                @Html.TextBoxFor(m => m.ExamCenterName, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        @Html.Action("ViewWithdrawalReportGridViewPartial")
+
+
+
+
+                        <hr />
+                        <br /><br />
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.PackageCode, new { @class = "col-md-5  pull-right control-label" })
+                            <div class="col-md-4  pull-right">
+                                @Html.TextBoxFor(m => m.PackageCode, new { @class = "form-control" })
+                            </div>
+                            <div class="error" style="color: forestgreen;display:none;" id="packageExists">حزمة صحيحة</div>
+                            <div class="error" style="color: darkred;display:none;" id="packageDoesntExist">لا يمكن تعديل هذه الحزمة</div>
+                        </div>
+                    </div>
+                    
+                    <br /><br />
+                    @Html.Action("ContainerRequestGridViewPartial")
+
+
+
+                    <br /><br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" name="SaveContainer" id="SaveContainer" value="حفظ" class="btn btn-default btn-primary" />
+
+                            <input type="button" name="BackButton" id="BackButton" value="عودة" class="btn btn-default " />
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $("#SaveContainer").click(function () {
+        var r = confirm("هل تريد حفظ حاوية المركز");
+        if (r == true) {
+            var form = $("form#packForm");
+            form.attr("action", "@Url.Action("SaveContainerRequest", "ExamCenterNeeds")");
+                form.submit();
+            } else {
+
+            }
+
+        });
+
+        $("#PackageCode").change(function () {
+            var urlLink = "@Url.Action("CheckItem", "ExamCenterNeeds")";
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                data:  {
+                    item: $('#PackageCode').val()
+                },
+                url: urlLink,
+                success: function (data) {
+                    if (data == "exists") {
+                        ContainerRequestGridView.PerformCallback();
+                        $('#packageDoesntExist').hide();
+                        $('#packageExists').show();
+                    }
+                    else {
+                        $('#packageExists').hide();
+                        $('#packageDoesntExist').show();
+                    }
+
+                },
+                error: function (data) {
+                    $('#packageExists').hide();
+                    $('#packageDoesntExist').show();
+                }
+            });
+        });
+
+        $("#BackButton").click(function (e) {
+            e.preventDefault();
+            window.location = "/ExamCenterNeeds";
+            return false;
+            @*var form = $("form#packForm");
+            form.attr("action", "@Url.Action("PrinPacks", "BookPackingOperation", Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID)");
+            form.submit();*@
+    });
+
+
+
+
+    </script>
+}

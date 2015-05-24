@@ -192,6 +192,22 @@
     <Compile Include="Components\PPM\RequestPreparationStatusLogic.Logic.cs">
       <DependentUpon>RequestPreparationStatusLogic.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\PPM\RequestWithdrawDetailItemLogic.cs" />
+    <Compile Include="Components\PPM\RequestWithdrawDetailItemLogic.Logic.cs">
+      <DependentUpon>RequestWithdrawDetailItemLogic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PPM\RequestWithdrawDetailItemModelLogic.cs" />
+    <Compile Include="Components\PPM\RequestWithdrawDetailItemModelLogic.Logic.cs">
+      <DependentUpon>RequestWithdrawDetailItemModelLogic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PPM\RequestWithdrawDetailLogic.cs" />
+    <Compile Include="Components\PPM\RequestWithdrawDetailLogic.Logic.cs">
+      <DependentUpon>RequestWithdrawDetailLogic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PPM\RequestWithdrawLogic.cs" />
+    <Compile Include="Components\PPM\RequestWithdrawLogic.Logic.cs">
+      <DependentUpon>RequestWithdrawLogic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\PPM\ShippingBagItemLogic.cs" />
     <Compile Include="Components\PPM\ShippingBagItemLogic.Logic.cs">
       <DependentUpon>ShippingBagItemLogic.cs</DependentUpon>
@@ -311,6 +327,22 @@
     <Compile Include="Entity\PPM\RequestPreparationStatus.cs" />
     <Compile Include="Entity\PPM\RequestPreparationStatus.Model.cs">
       <DependentUpon>RequestPreparationStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\RequestWithdraw.cs" />
+    <Compile Include="Entity\PPM\RequestWithdraw.Model.cs">
+      <DependentUpon>RequestWithdraw.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\RequestWithdrawDetail.cs" />
+    <Compile Include="Entity\PPM\RequestWithdrawDetail.Model.cs">
+      <DependentUpon>RequestWithdrawDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\RequestWithdrawDetailItem.cs" />
+    <Compile Include="Entity\PPM\RequestWithdrawDetailItem.Model.cs">
+      <DependentUpon>RequestWithdrawDetailItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PPM\RequestWithdrawDetailItemModel.cs" />
+    <Compile Include="Entity\PPM\RequestWithdrawDetailItemModel.Model.cs">
+      <DependentUpon>RequestWithdrawDetailItemModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity\PPM\ShippingBag.cs" />
     <Compile Include="Entity\PPM\ShippingBag.Model.cs">

@@ -85,7 +85,14 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             set{ this.entity.ExamsNeededForCD = value; }
             get{ return this.entity.ExamsNeededForCD; }
         }
-    
+
+        [Required(ErrorMessage = "RequiredValidation")]
+        [Display(Name = "RequestPreparationStatusID")]
+        public int? RequestPreparationStatusID
+        {
+            set { this.entity.RequestPreparationStatusID = value; }
+            get { return this.entity.RequestPreparationStatusID; }
+        }
         #endregion    
     
         #region Methods

@@ -26,6 +26,11 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             this.entity = context.ViewExamCenters.Where(p => p.ExaminationCenterID == ExaminationCenterID).FirstOrDefault();  
         }
 
+        public ExamCenter(string Code)
+        {
+            this.entity = context.ViewExamCenters.Where(p => p.CenterCode == Code).FirstOrDefault();
+        }
+
         internal ExamCenter(Qiyas.DataAccessLayer.ViewExamCenter entity)
         {
             this.entity = entity;

@@ -463,4 +463,25 @@
   <data name="ExamCenterItemNeedsTitle" xml:space="preserve">
     <value>إضافة تعديل احتياجات لمركز اختبار</value>
   </data>
+  <data name="ExamCenterNeedsDetailEditFormTitle" xml:space="preserve">
+    <value>حفظ احتياج لمركز اختبار</value>
+  </data>
+  <data name="ExamCenterNeedsDetailTitle" xml:space="preserve">
+    <value>اضافة / تعديل احتياجات لمركز اختبار</value>
+  </data>
+  <data name="btnPrepareForWithdraw" xml:space="preserve">
+    <value>إضافة طلب تجهيز</value>
+  </data>
+  <data name="btnPrint" xml:space="preserve">
+    <value>طباعة</value>
+  </data>
+  <data name="btnContainerPreparation" xml:space="preserve">
+    <value>تجهيز حاوية مركز</value>
+  </data>
+  <data name="ContainerRequestEditFormTitle" xml:space="preserve">
+    <value>طلب حاوية مركز</value>
+  </data>
+  <data name="ContainerRequestTitle" xml:space="preserve">
+    <value>تجهيز حاويات المركز</value>
+  </data>
 </root>

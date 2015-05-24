@@ -124,6 +124,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تجهيز حاوية مركز.
+        /// </summary>
+        internal static string btnContainerPreparation {
+            get {
+                return ResourceManager.GetString("btnContainerPreparation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to إضافة طلب تجهيز.
+        /// </summary>
+        internal static string btnPrepareForWithdraw {
+            get {
+                return ResourceManager.GetString("btnPrepareForWithdraw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to طباعة.
+        /// </summary>
+        internal static string btnPrint {
+            get {
+                return ResourceManager.GetString("btnPrint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to الغاء.
         /// </summary>
         internal static string Cancel {
@@ -183,6 +210,24 @@ namespace Resources {
         internal static string Clear {
             get {
                 return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to طلب حاوية مركز.
+        /// </summary>
+        internal static string ContainerRequestEditFormTitle {
+            get {
+                return ResourceManager.GetString("ContainerRequestEditFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تجهيز حاويات المركز.
+        /// </summary>
+        internal static string ContainerRequestTitle {
+            get {
+                return ResourceManager.GetString("ContainerRequestTitle", resourceCulture);
             }
         }
         
@@ -336,6 +381,24 @@ namespace Resources {
         internal static string ExamCenterItemNeedsTitle {
             get {
                 return ResourceManager.GetString("ExamCenterItemNeedsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حفظ احتياج لمركز اختبار.
+        /// </summary>
+        internal static string ExamCenterNeedsDetailEditFormTitle {
+            get {
+                return ResourceManager.GetString("ExamCenterNeedsDetailEditFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اضافة / تعديل احتياجات لمركز اختبار.
+        /// </summary>
+        internal static string ExamCenterNeedsDetailTitle {
+            get {
+                return ResourceManager.GetString("ExamCenterNeedsDetailTitle", resourceCulture);
             }
         }
         

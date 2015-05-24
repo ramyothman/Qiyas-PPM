@@ -25,6 +25,11 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
         {
             this.entity = context.ContainerRequests.Where(p => p.ContainerRequestID == ContainerRequestID).FirstOrDefault();  
         }
+
+        public ContainerRequest(int ExamCenterRequiredExamsID, bool isRequestID)
+        {
+            this.entity = context.ContainerRequests.Where(p => p.ExamCenterRequiredExamsID == ExamCenterRequiredExamsID).FirstOrDefault();
+        }
     
         internal ContainerRequest(Qiyas.DataAccessLayer.ContainerRequest entity)
         {

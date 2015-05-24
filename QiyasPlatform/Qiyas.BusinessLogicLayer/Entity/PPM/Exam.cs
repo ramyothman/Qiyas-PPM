@@ -11,6 +11,11 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
 {
     public partial class Exam
     {
+        public Exam(string ExamCode)
+        {
+            this.entity = context.Exams.Where(p => p.ExamCode == ExamCode).FirstOrDefault();
+        }
+
         private int? _ExamTypeID;
         [Required(ErrorMessage = "RequiredValidation")]
         [Display(Name = "ExamTypeID")]

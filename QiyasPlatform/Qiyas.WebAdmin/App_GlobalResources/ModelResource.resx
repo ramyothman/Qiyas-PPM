@@ -438,4 +438,34 @@
   <data name="PackSerial" xml:space="preserve">
     <value>رقم التسلسل</value>
   </data>
+  <data name="RequestWithdrawID">
+    <value>RequestWithdrawID</value>
+  </data>
+  <data name="RequestOrder">
+    <value>RequestOrder</value>
+  </data>
+  <data name="RequestWithdrawDetailID">
+    <value>RequestWithdrawDetailID</value>
+  </data>
+  <data name="ShippedPrintsForOneModel">
+    <value>ShippedPrintsForOneModel</value>
+  </data>
+  <data name="ShippedExamsNeededForA3">
+    <value>ShippedExamsNeededForA3</value>
+  </data>
+  <data name="ShippedExamsNeededForA4">
+    <value>ShippedExamsNeededForA4</value>
+  </data>
+  <data name="ShippedExamsNeededForCD">
+    <value>ShippedExamsNeededForCD</value>
+  </data>
+  <data name="RequestWithdrawDetailItemID">
+    <value>RequestWithdrawDetailItemID</value>
+  </data>
+  <data name="PackCount">
+    <value>PackCount</value>
+  </data>
+  <data name="RequestWithdrawDetailItemModelID">
+    <value>RequestWithdrawDetailItemModelID</value>
+  </data>
 </root>

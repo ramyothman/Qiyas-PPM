@@ -1,0 +1,8 @@
+@Html.DevExpress().DocumentViewer(settings => {
+    settings.Name = "WithdrawReportDocumentViewer";
+    settings.CallbackRouteValues = new { Controller = "ExamCenterNeeds", Action = "WithdrawReportDocumentViewerPartial" };
+    settings.ExportRouteValues = new { Controller = "ExamCenterNeeds", Action = "WithdrawReportDocumentViewerPartialExport" };
+	settings.Report = (XtraReport)Model;
+    
+	settings.ToolbarMode = DocumentViewerToolbarMode.StandardToolbar;
+}).GetHtml()

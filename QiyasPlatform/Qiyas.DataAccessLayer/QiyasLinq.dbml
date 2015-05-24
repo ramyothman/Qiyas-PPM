@@ -121,6 +121,7 @@
       <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="PackagingType_BookPackingOperation" Member="BookPackingOperations" ThisKey="PackagingTypeID" OtherKey="PackagingTypeID" Type="BookPackingOperation" />
+      <Association Name="PackagingType_RequestWithdrawDetailItem" Member="RequestWithdrawDetailItems" ThisKey="PackagingTypeID" OtherKey="PackagingTypeID" Type="RequestWithdrawDetailItem" />
     </Type>
   </Table>
   <Table Name="PPM.OperationStatus" Member="OperationStatus">
@@ -253,6 +254,7 @@
       <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="ExamModel_ExamModelItem" Member="ExamModelItems" ThisKey="ExamModelID" OtherKey="ExamModelID" Type="ExamModelItem" />
       <Association Name="ExamModel_BookPackItemModel" Member="BookPackItemModels" ThisKey="ExamModelID" OtherKey="ExamModelID" Type="BookPackItemModel" />
+      <Association Name="ExamModel_RequestWithdrawDetailItemModel" Member="RequestWithdrawDetailItemModels" ThisKey="ExamModelID" OtherKey="ExamModelID" Type="RequestWithdrawDetailItemModel" />
     </Type>
   </Table>
   <Table Name="dbo.ExamView" Member="ExamViews">
@@ -402,37 +404,6 @@
       <Association Name="BookPackItem_ContainerRequestPack" Member="BookPackItem" ThisKey="BookPackItemID" OtherKey="BookPackItemID" Type="BookPackItem" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="PPM.ExamCenterRequiredExams" Member="ExamCenterRequiredExams">
-    <Type Name="ExamCenterRequiredExam">
-      <Column Name="ExamCenterRequiredExamsID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ExamPeriodID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ExamCenterID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="RequestPreparationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="FileNeedsPath" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="ExamCenterRequiredExam_ContainerRequest" Member="ContainerRequests" ThisKey="ExamCenterRequiredExamsID" OtherKey="ExamCenterRequiredExamsID" Type="ContainerRequest" />
-      <Association Name="ExamCenterRequiredExam_ExamRequirementItem" Member="ExamRequirementItems" ThisKey="ExamCenterRequiredExamsID" OtherKey="ExamCenterRequiredExamsID" Type="ExamRequirementItem" />
-      <Association Name="ExamCenterRequiredExam_ShippingBag" Member="ShippingBags" ThisKey="ExamCenterRequiredExamsID" OtherKey="ExamCenterRequiredExamsID" Type="ShippingBag" />
-      <Association Name="ExamCenter_ExamCenterRequiredExam" Member="ExamCenter" ThisKey="ExamCenterID" OtherKey="ExaminationCenterID" Type="ExamCenter" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="ExamPeriod_ExamCenterRequiredExam" Member="ExamPeriod" ThisKey="ExamPeriodID" OtherKey="ExamPeriodID" Type="ExamPeriod" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="RequestPreparationStatus_ExamCenterRequiredExam" Member="RequestPreparationStatus" ThisKey="RequestPreparationStatusID" OtherKey="RequestPreparationStatusID" Type="RequestPreparationStatus" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="PPM.ExamRequirementItem" Member="ExamRequirementItems">
-    <Type Name="ExamRequirementItem">
-      <Column Name="ExamRequirementItemID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ExamCenterRequiredExamsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ExamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PrintsForOneModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ExamsNeededForA3" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ExamsNeededForA4" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ExamsNeededForCD" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="ExamCenterRequiredExam_ExamRequirementItem" Member="ExamCenterRequiredExam" ThisKey="ExamCenterRequiredExamsID" OtherKey="ExamCenterRequiredExamsID" Type="ExamCenterRequiredExam" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
   <Table Name="PPM.PackingCalculationType" Member="PackingCalculationType1s">
     <Type Name="PackingCalculationType1">
       <Column Name="PackingCalculationTypeID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -445,6 +416,7 @@
       <Column Name="RequestPreparationStatusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="RequestPreparationStatus_ExamCenterRequiredExam" Member="ExamCenterRequiredExams" ThisKey="RequestPreparationStatusID" OtherKey="RequestPreparationStatusID" Type="ExamCenterRequiredExam" />
+      <Association Name="RequestPreparationStatus_RequestWithdrawDetail" Member="RequestWithdrawDetails" ThisKey="RequestPreparationStatusID" OtherKey="RequestPreparationStatusID" Type="RequestWithdrawDetail" />
     </Type>
   </Table>
   <Table Name="PPM.ShippingBag" Member="ShippingBags">
@@ -648,6 +620,190 @@
       <Association Name="BookPackingOperation_BookPackItem" Member="BookPackingOperation" ThisKey="BookPackingOperationID" OtherKey="BookPackingOperationID" Type="BookPackingOperation" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
+  <Table Name="PPM.ExamCenterRequiredExams" Member="ExamCenterRequiredExams">
+    <Type Name="ExamCenterRequiredExam">
+      <Column Name="ExamCenterRequiredExamsID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ExamPeriodID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamCenterID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RequestPreparationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FileNeedsPath" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ExamCenterRequiredExam_ContainerRequest" Member="ContainerRequests" ThisKey="ExamCenterRequiredExamsID" OtherKey="ExamCenterRequiredExamsID" Type="ContainerRequest" />
+      <Association Name="ExamCenterRequiredExam_ShippingBag" Member="ShippingBags" ThisKey="ExamCenterRequiredExamsID" OtherKey="ExamCenterRequiredExamsID" Type="ShippingBag" />
+      <Association Name="ExamCenterRequiredExam_ExamRequirementItem" Member="ExamRequirementItems" ThisKey="ExamCenterRequiredExamsID" OtherKey="ExamCenterRequiredExamsID" Type="ExamRequirementItem" />
+      <Association Name="ExamCenterRequiredExam_RequestWithdraw" Member="RequestWithdraws" ThisKey="ExamCenterRequiredExamsID" OtherKey="ExamCenterRequiredExamsID" Type="RequestWithdraw" />
+      <Association Name="ExamCenter_ExamCenterRequiredExam" Member="ExamCenter" ThisKey="ExamCenterID" OtherKey="ExaminationCenterID" Type="ExamCenter" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="ExamPeriod_ExamCenterRequiredExam" Member="ExamPeriod" ThisKey="ExamPeriodID" OtherKey="ExamPeriodID" Type="ExamPeriod" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="RequestPreparationStatus_ExamCenterRequiredExam" Member="RequestPreparationStatus" ThisKey="RequestPreparationStatusID" OtherKey="RequestPreparationStatusID" Type="RequestPreparationStatus" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="PPM.ExamRequirementItem" Member="ExamRequirementItems">
+    <Type Name="ExamRequirementItem">
+      <Column Name="ExamRequirementItemID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ExamCenterRequiredExamsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PrintsForOneModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForA3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForA4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForCD" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RequestPreparationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ExamRequirementItem_RequestWithdrawDetail" Member="RequestWithdrawDetails" ThisKey="ExamRequirementItemID" OtherKey="ExamRequirementItemID" Type="RequestWithdrawDetail" />
+      <Association Name="ExamCenterRequiredExam_ExamRequirementItem" Member="ExamCenterRequiredExam" ThisKey="ExamCenterRequiredExamsID" OtherKey="ExamCenterRequiredExamsID" Type="ExamCenterRequiredExam" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="PPM.RequestWithdraw" Member="RequestWithdraws">
+    <Type Name="RequestWithdraw">
+      <Column Name="RequestWithdrawID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ExamCenterRequiredExamsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RequestOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="RequestWithdraw_RequestWithdrawDetail" Member="RequestWithdrawDetails" ThisKey="RequestWithdrawID" OtherKey="RequestWithdrawID" Type="RequestWithdrawDetail" />
+      <Association Name="ExamCenterRequiredExam_RequestWithdraw" Member="ExamCenterRequiredExam" ThisKey="ExamCenterRequiredExamsID" OtherKey="ExamCenterRequiredExamsID" Type="ExamCenterRequiredExam" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="PPM.RequestWithdrawDetail" Member="RequestWithdrawDetails">
+    <Type Name="RequestWithdrawDetail">
+      <Column Name="RequestWithdrawDetailID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RequestWithdrawID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamRequirementItemID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PrintsForOneModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForA3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForA4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForCD" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShippedPrintsForOneModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShippedExamsNeededForA3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShippedExamsNeededForA4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShippedExamsNeededForCD" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RequestPreparationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="RequestWithdrawDetail_RequestWithdrawDetailItem" Member="RequestWithdrawDetailItems" ThisKey="RequestWithdrawDetailID" OtherKey="RequestWithdrawDetailID" Type="RequestWithdrawDetailItem" />
+      <Association Name="ExamRequirementItem_RequestWithdrawDetail" Member="ExamRequirementItem" ThisKey="ExamRequirementItemID" OtherKey="ExamRequirementItemID" Type="ExamRequirementItem" IsForeignKey="true" />
+      <Association Name="RequestPreparationStatus_RequestWithdrawDetail" Member="RequestPreparationStatus" ThisKey="RequestPreparationStatusID" OtherKey="RequestPreparationStatusID" Type="RequestPreparationStatus" IsForeignKey="true" />
+      <Association Name="RequestWithdraw_RequestWithdrawDetail" Member="RequestWithdraw" ThisKey="RequestWithdrawID" OtherKey="RequestWithdrawID" Type="RequestWithdraw" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RemainingExamRequirementItemForWithdraw" Member="RemainingExamRequirementItemForWithdraws">
+    <Type Name="RemainingExamRequirementItemForWithdraw">
+      <Column Name="ExamRequirementItemID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExamCenterRequiredExamsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PrintsForOneModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForA3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForA4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForCD" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RequestPreparationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ViewCurrentPackStockExistence" Member="ViewCurrentPackStockExistences">
+    <Type Name="ViewCurrentPackStockExistence">
+      <Column Name="PackCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackagingTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExamModelCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BooksPerPackage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ViewReservedPacks" Member="ViewReservedPacks">
+    <Type Name="ViewReservedPack">
+      <Column Name="PackCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackagingTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamModelCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BooksPerPackage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="PPM.RequestWithdrawDetailItem" Member="RequestWithdrawDetailItems">
+    <Type Name="RequestWithdrawDetailItem">
+      <Column Name="RequestWithdrawDetailItemID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RequestWithdrawDetailID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackagingTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="RequestWithdrawDetailItem_RequestWithdrawDetailItemModel" Member="RequestWithdrawDetailItemModels" ThisKey="RequestWithdrawDetailItemID" OtherKey="RequestWithdrawDetailItemID" Type="RequestWithdrawDetailItemModel" />
+      <Association Name="PackagingType_RequestWithdrawDetailItem" Member="PackagingType" ThisKey="PackagingTypeID" OtherKey="PackagingTypeID" Type="PackagingType" IsForeignKey="true" />
+      <Association Name="RequestWithdrawDetail_RequestWithdrawDetailItem" Member="RequestWithdrawDetail" ThisKey="RequestWithdrawDetailID" OtherKey="RequestWithdrawDetailID" Type="RequestWithdrawDetail" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="PPM.RequestWithdrawDetailItemModel" Member="RequestWithdrawDetailItemModels">
+    <Type Name="RequestWithdrawDetailItemModel">
+      <Column Name="RequestWithdrawDetailItemModelID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RequestWithdrawDetailItemID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamModelID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ExamModel_RequestWithdrawDetailItemModel" Member="ExamModel" ThisKey="ExamModelID" OtherKey="ExamModelID" Type="ExamModel" IsForeignKey="true" />
+      <Association Name="RequestWithdrawDetailItem_RequestWithdrawDetailItemModel" Member="RequestWithdrawDetailItem" ThisKey="RequestWithdrawDetailItemID" OtherKey="RequestWithdrawDetailItemID" Type="RequestWithdrawDetailItem" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ViewWithdrawalReport" Member="ViewWithdrawalReports">
+    <Type Name="ViewWithdrawalReport">
+      <Column Name="RequestWithdrawDetailID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RequestWithdrawID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamRequirementItemID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PrintsForOneModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackagingTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ExamModel" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ExamCenterRequiredExamsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamPeriodID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamCenterID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RequestPreparationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PeriodName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CenterName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ExamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamCode" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ViewContainerRequest" Member="ViewContainerRequests">
+    <Type Name="ViewContainerRequest">
+      <Column Name="ContainerRequestPackID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ContainerRequestID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BookPackItemID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BookPackingOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Weight" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="PackSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BookPackItemOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamModelName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PackagingTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackingCalculationTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AllocatedFrom" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PackingValue" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageTotal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackingParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BookPrintingOperationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PrintsForOneModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForA3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForA4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamsNeededForCD" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageOperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalExamModels" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalPacks" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamCode" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="ExamSpecialityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StudentGenderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumberofPages" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumberofSections" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TimeForSection" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="BooksCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageTypeExamModelCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageTypeBooksPerPackage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageTypeTotal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamCenterRequiredExamsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.DeleteExamModelItemByExamID" Method="DeleteExamModelItemByExamID">
     <Parameter Name="ExamID" Parameter="examID" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
@@ -759,6 +915,10 @@
   </Function>
   <Function Name="dbo.GetPackageBooksCountByBookPackItemId" Method="GetPackageBooksCountByBookPackItemId" IsComposable="true">
     <Parameter Name="BookPackItemID" Parameter="bookPackItemID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetWithdrawRequestSerial" Method="GetWithdrawRequestSerial" IsComposable="true">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
 </Database>
