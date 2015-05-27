@@ -65,7 +65,7 @@
                     column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Right;
                     column.ColumnType = MVCxGridViewColumnType.ComboBox;
                     var comboProperties = column.PropertiesEdit as ComboBoxProperties;
-                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.ExamLogic().GetAll());
+                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.ExamLogic().GetAllActive());
                     comboProperties.TextField = "ExamCode";
                     comboProperties.ValueField = "ExamID";
                     comboProperties.ValueType = typeof(int);

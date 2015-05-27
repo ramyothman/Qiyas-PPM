@@ -34,17 +34,25 @@ namespace Qiyas.WebAdmin.Controllers
                 {
                     if (!ExamPeriodExists(item.Name, item.ExamPeriodID))
                     {
-                        BusinessLogicLayer.Entity.PPM.ExamPeriod period = new BusinessLogicLayer.Entity.PPM.ExamPeriod();
-                        period.Name = item.Name;
-                        period.ExamTypeID = item.ExamTypeID;
-                        period.StudentGenderID = item.StudentGenderID;
-                        period.IsActive = item.IsActive;
-                        period.ExamYear = item.ExamYear;
-                        period.StartDate = item.StartDate;
-                        period.EndDate = item.EndDate;
-                        period.ModifiedDate = DateTime.Now;
-                        period.CreatedDate = DateTime.Now;
-                        period.Save();
+                        if(item.EndDate > item.StartDate)
+                        {
+                            ViewData["EditError"] = "تاريخ البداية يجب ان يكون اقل من تاريخ النهاية";
+                        }
+                        else
+                        {
+                            BusinessLogicLayer.Entity.PPM.ExamPeriod period = new BusinessLogicLayer.Entity.PPM.ExamPeriod();
+                            period.Name = item.Name;
+                            period.ExamTypeID = item.ExamTypeID;
+                            period.StudentGenderID = item.StudentGenderID;
+                            period.IsActive = item.IsActive;
+                            period.ExamYear = item.ExamYear;
+                            period.StartDate = item.StartDate;
+                            period.EndDate = item.EndDate;
+                            period.ModifiedDate = DateTime.Now;
+                            period.CreatedDate = DateTime.Now;
+                            period.Save();
+                        }
+                        
                     }
                     else
                     {
@@ -74,17 +82,25 @@ namespace Qiyas.WebAdmin.Controllers
                 {
                     if (!ExamPeriodExists(item.Name, item.ExamPeriodID))
                     {
-                        BusinessLogicLayer.Entity.PPM.ExamPeriod period = new BusinessLogicLayer.Entity.PPM.ExamPeriod(item.ExamPeriodID);
-                        period.Name = item.Name;
-                        period.ExamTypeID = item.ExamTypeID;
-                        period.IsActive = item.IsActive;
-                        period.StudentGenderID = item.StudentGenderID;
-                        period.ExamYear = item.ExamYear;
-                        period.StartDate = item.StartDate;
-                        period.EndDate = item.EndDate;
-                        period.ModifiedDate = DateTime.Now;
-                        period.CreatedDate = DateTime.Now;
-                        period.Save();
+                        if (item.EndDate > item.StartDate)
+                        {
+                            ViewData["EditError"] = "تاريخ البداية يجب ان يكون اقل من تاريخ النهاية";
+                        }
+                        else
+                        {
+                            BusinessLogicLayer.Entity.PPM.ExamPeriod period = new BusinessLogicLayer.Entity.PPM.ExamPeriod(item.ExamPeriodID);
+                            period.Name = item.Name;
+                            period.ExamTypeID = item.ExamTypeID;
+                            period.IsActive = item.IsActive;
+                            period.StudentGenderID = item.StudentGenderID;
+                            period.ExamYear = item.ExamYear;
+                            period.StartDate = item.StartDate;
+                            period.EndDate = item.EndDate;
+                            period.ModifiedDate = DateTime.Now;
+                            period.CreatedDate = DateTime.Now;
+                            period.Save();
+                        }
+                        
                     }
                     else
                     {

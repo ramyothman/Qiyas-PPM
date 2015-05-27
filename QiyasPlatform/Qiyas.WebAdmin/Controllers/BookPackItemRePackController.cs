@@ -142,7 +142,7 @@ namespace Qiyas.WebAdmin.Controllers
             if (countExams > ExamCount)
                 ExamCount = countExams;
             var addedItem = repackItemLogic.GetBookRepackItem(item);
-            var exItem = BookRepackPackageItemList.Where(c => c.ExamID != addedItem.ExamID).FirstOrDefault();
+            var exItem = BookRepackPackageItemList.Where(c => c.ExamID == addedItem.ExamID).FirstOrDefault();
             if(exItem != null)
             {
                 return Json("notexists");

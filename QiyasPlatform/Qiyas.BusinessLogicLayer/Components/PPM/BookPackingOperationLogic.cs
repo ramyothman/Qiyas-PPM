@@ -69,6 +69,19 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
             return operations;
         }
 
+        public bool ContainPackType(int ID, int PackagingTypeID)
+        {
+            List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation> operations = db.BookPackingOperations.Where(c => c.BookPrintingOperationID == ID && c.PackagingTypeID == PackagingTypeID).Select(c => new Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation(c) { context = db }).ToList();
+            return operations.Count > 0;
+            
+        }
+
+        public bool ContainPackTypeExclExisting(int ID, int PackagingTypeID, int oldPackagingOperationID)
+        {
+            List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation> operations = db.BookPackingOperations.Where(c => c.BookPrintingOperationID == ID && c.PackagingTypeID == PackagingTypeID && c.BookPackingOperationID != oldPackagingOperationID).Select(c => new Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation(c) { context = db }).ToList();
+            return operations.Count > 0;
+        }
+
         public int GetTotal(int ID)
         {
             var result = db.GetTotalPrintingPackageByPrintingID(ID);

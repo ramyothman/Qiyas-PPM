@@ -356,6 +356,7 @@ namespace Qiyas.WebAdmin.Controllers
                     List<BusinessLogicLayer.Entity.PPM.BookPackItemModel> itemModels = new List<BusinessLogicLayer.Entity.PPM.BookPackItemModel>();
                     bookStart = bookLast + 1;
                     bookLast += bookStart + (i + 1) * packType.BooksPerPackage.Value;
+                    bool addModelsToCount = true;
                     foreach (BusinessLogicLayer.Entity.PPM.ExamModelItem examModel in exam.ExamModels)
                     {
                         if (packType.ExamModelCount > 1)
@@ -391,6 +392,11 @@ namespace Qiyas.WebAdmin.Controllers
                             itemModels.Add(newModel);
                             itemUnit.ItemModels = itemModels;
                             items.Add(itemUnit);
+                            if (addModelsToCount)
+                            {
+                                i += exam.ExamModels.Count - 1;
+                                addModelsToCount = false;
+                            }
                             //serial++;
                         }
 

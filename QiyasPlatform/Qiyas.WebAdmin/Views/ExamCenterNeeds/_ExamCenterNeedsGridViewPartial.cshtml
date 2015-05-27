@@ -35,6 +35,12 @@
         //customButton.Image.Url = "~/images/print.png";
         settings.CommandColumn.CustomButtons.Add(customButtonView);
         
+        GridViewCommandColumnCustomButton customButtonPrepareWithdrawy = new GridViewCommandColumnCustomButton() { ID = "btnPrepareForWithdraw", Text = " " };
+        customButtonPrepareWithdrawy.Styles.Style.CssClass = "fa fa-code-fork";
+        customButtonPrepareWithdrawy.Image.AlternateText = Resources.MainResource.btnPrepareForWithdraw;
+        //customButton.Image.Url = "~/images/print.png";
+        settings.CommandColumn.CustomButtons.Add(customButtonPrepareWithdrawy);
+        
         //settings.CommandColumn.CustomButtons.Add(new GridViewCommandColumnCustomButton() { ID = "btnViewPrintItems", Text = Resources.MainResource.btnPrint });
         GridViewCommandColumnCustomButton customButton = new GridViewCommandColumnCustomButton() { ID = "btnViewPrintItems", Text = " " };
         customButton.Styles.Style.CssClass  = "fa fa-print";
@@ -42,11 +48,7 @@
         //customButton.Image.Url = "~/images/print.png";
         settings.CommandColumn.CustomButtons.Add(customButton);
         //settings.CommandColumn.CustomButtons.Add(new GridViewCommandColumnCustomButton() { ID = "", Text = Resources.MainResource.btnPrepareForWithdraw });
-        GridViewCommandColumnCustomButton customButtonPrepareWithdrawy = new GridViewCommandColumnCustomButton() { ID = "btnPrepareForWithdraw", Text = " " };
-        customButtonPrepareWithdrawy.Styles.Style.CssClass = "fa fa-code-fork";
-        customButtonPrepareWithdrawy.Image.AlternateText = Resources.MainResource.btnPrepareForWithdraw;
-        //customButton.Image.Url = "~/images/print.png";
-        settings.CommandColumn.CustomButtons.Add(customButtonPrepareWithdrawy);
+        
         
         //settings.CommandColumn.CustomButtons.Add(new GridViewCommandColumnCustomButton() { ID = "btnViewContainerItems", Text = Resources.MainResource.btnContainerPreparation });
         GridViewCommandColumnCustomButton customButtonContainer = new GridViewCommandColumnCustomButton() { ID = "btnViewContainerItems", Text = " " };
@@ -107,6 +109,18 @@
                     comboProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
                 });
 				
+                //settings.Columns.Add(column =>
+                //{
+                //    column.FieldName = "ExamCenterCode";
+                //    column.EditFormSettings.ColumnSpan = 2;
+                //    column.VisibleIndex = 2;
+                //    column.Name = "ExamCenterCode";
+                //    column.Caption = @Resources.ModelResource.ExamCode;
+                //    column.EditFormSettings.Visible = DefaultBoolean.False;
+                //    column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Right;
+                //    column.ColumnType = MVCxGridViewColumnType.TextBox;
+                    
+                //});
                 settings.Columns.Add(column =>
                 {
                     column.FieldName = "ExamCenterID";

@@ -808,7 +808,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to صفحة {0} من {1} عدد الصفحات {2}.
+        ///   Looks up a localized string similar to صفحة {0} من {1} عدد السجلات {2}.
         /// </summary>
         internal static string PageSummaryText {
             get {

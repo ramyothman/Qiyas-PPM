@@ -100,7 +100,15 @@ namespace Qiyas.WebAdmin.Controllers
                     if (!logic.HasDependencies(BookPrintingOperationID))
                     {
                         BusinessLogicLayer.Entity.PPM.BookPrintingOperation type = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(BookPrintingOperationID);
-                        type.Delete();
+                        if(type.OperationStatusID == 1)
+                        {
+                            type.Delete();
+                        }
+                        else
+                        {
+                            ViewData["EditError"] = "لا يمكن حذف هذا الطلب يجب ان يكون نوع الطلب طباعة";
+                        }
+                        
                     }
                 }
                 catch (Exception e)

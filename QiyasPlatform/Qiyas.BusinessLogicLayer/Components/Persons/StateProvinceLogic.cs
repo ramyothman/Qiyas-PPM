@@ -15,7 +15,7 @@ namespace Qiyas.BusinessLogicLayer.Components.Persons
         [DataObjectMethod(DataObjectMethodType.Select)]
         public bool HasCities(int StateRegionID)
         {
-            return db.Cities.Select(c => c.StateRegionID == StateRegionID).Count() > 0;
+            return (from c in db.Cities where c.StateRegionID == StateRegionID select c).Count() > 0;
         }
 
         public BusinessLogicLayer.Entity.Persons.StateProvince GetByName(string state)

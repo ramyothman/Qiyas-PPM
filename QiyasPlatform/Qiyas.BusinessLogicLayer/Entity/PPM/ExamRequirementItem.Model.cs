@@ -69,7 +69,12 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
         public int? ExamsNeededForA3
         {            
             set{ this.entity.ExamsNeededForA3 = value; }
-            get{ return this.entity.ExamsNeededForA3; }
+            get
+            {
+                if (!this.entity.ExamsNeededForA3.HasValue)
+                    this.entity.ExamsNeededForA3 = 0;
+                return this.entity.ExamsNeededForA3; 
+            }
         }
     
         [Display(Name = "ExamsNeededForA4")]
@@ -83,7 +88,12 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
         public int? ExamsNeededForCD
         {            
             set{ this.entity.ExamsNeededForCD = value; }
-            get{ return this.entity.ExamsNeededForCD; }
+            get
+            {
+                if (!this.entity.ExamsNeededForCD.HasValue)
+                    this.entity.ExamsNeededForCD = 0;
+                return this.entity.ExamsNeededForCD; 
+            }
         }
 
         [Required(ErrorMessage = "RequiredValidation")]

@@ -43,6 +43,7 @@ namespace Qiyas.WebAdmin.Controllers
             ViewBag.HasError = false;
             ViewBag.NotifyMessage = "";
             ViewBag.PrintingID = ID;
+            ViewBag.IsSaved = model.OperationStatusID > 1;
             PrintingOperationID = ID;
             return View(model);
 
@@ -61,6 +62,7 @@ namespace Qiyas.WebAdmin.Controllers
             ViewBag.NotifyMessage = "";
             ViewBag.PrintingID = ID;
             PrintingOperationID = ID;
+            ViewBag.IsSaved = model.OperationStatusID > 1;
             return View(model);
         }
 
@@ -125,7 +127,11 @@ namespace Qiyas.WebAdmin.Controllers
                     if (printingOperation != null)
                     {
                         BusinessLogicLayer.Components.PPM.BookPackingOperationLogic logic = new BusinessLogicLayer.Components.PPM.BookPackingOperationLogic();
-                        
+                        if(logic.ContainPackType(MainID, ptype.PackagingTypeID))
+                        {
+                            ViewData["EditError"] = "لا يمكن اضافة نوع التحزيم اكثر من مرة";
+                            isValid = false;
+                        }
                         int totalItems = ptype.BooksPerPackage == 3 && ptype.ExamModelCount == 1 ? printingOperation.ExamsNeededForA3.Value : printingOperation.PrintsForOneModel.Value;
                         int currentTotal = ptype.BooksPerPackage == 3 && ptype.ExamModelCount == 1 ? logic.GetTotalItemsA3(printingOperation.BookPrintingOperationID) : logic.GetTotalItems(printingOperation.BookPrintingOperationID);
                         int totalPrint = (totalPackage * ptype.BooksPerPackage.Value + currentTotal);
@@ -246,6 +252,11 @@ namespace Qiyas.WebAdmin.Controllers
                     if (printingOperation != null)
                     {
                         BusinessLogicLayer.Components.PPM.BookPackingOperationLogic logic = new BusinessLogicLayer.Components.PPM.BookPackingOperationLogic();
+                        if (logic.ContainPackTypeExclExisting(MainID, item.PackagingTypeID.Value, item.BookPackingOperationID))
+                        {
+                            ViewData["EditError"] = "لا يمكن اضافة نوع التحزيم اكثر من مرة";
+                            isValid = false;
+                        }
                         BusinessLogicLayer.Entity.PPM.PackagingType ptype = new BusinessLogicLayer.Entity.PPM.PackagingType(item.PackagingTypeID.Value);
                         int totalItems = ptype.BooksPerPackage == 3 && ptype.ExamModelCount == 1 ? printingOperation.ExamsNeededForA3.Value : printingOperation.PrintsForOneModel.Value;
                         int currentTotal = ptype.BooksPerPackage == 3 && ptype.ExamModelCount == 1 ? logic.GetTotalA3(printingOperation.BookPrintingOperationID) : logic.GetTotal(printingOperation.BookPrintingOperationID);
@@ -259,6 +270,11 @@ namespace Qiyas.WebAdmin.Controllers
                         {
                             isValid = false;
                             ViewData["EditError"] = Resources.MainResource.TotalPackGreaterThanOverallTotal;
+                        }
+                        if(totalPackage == 0)
+                        {
+                            isValid = false;
+                            ViewData["EditError"] = "العدد المسموح يجب ان يكون اكبر من صفر";
                         }
                     }
                     if (isValid)
@@ -294,6 +310,7 @@ namespace Qiyas.WebAdmin.Controllers
                 try
                 {
                     BusinessLogicLayer.Entity.PPM.BookPackingOperation entity = new BusinessLogicLayer.Entity.PPM.BookPackingOperation(Convert.ToInt32(BookPackingOperationID));
+                    
                     entity.Delete();
                 }
                 catch (Exception e)
@@ -429,6 +446,7 @@ namespace Qiyas.WebAdmin.Controllers
             model.OperationStatusID = 2;
             model.Save();
             ViewBag.HasError = false;
+            ViewBag.IsSaved = model.OperationStatusID > 1;
             ViewBag.NotifyMessage = Resources.MainResource.SaveSuccess;
             return View("Index", model);
         }
@@ -444,6 +462,7 @@ namespace Qiyas.WebAdmin.Controllers
                 return RedirectToAction("Index", "BookPrintingOperation");
             }
             ViewBag.HasError = true;
+            ViewBag.IsSaved = model.OperationStatusID > 1;
             ViewBag.NotifyMessage = Resources.MainResource.ErrorDeletingPack;
             return View("Index", model);
         }
@@ -467,12 +486,14 @@ namespace Qiyas.WebAdmin.Controllers
 
                     string modelCode = "";
                     List<BusinessLogicLayer.Entity.PPM.BookPackItemModel> itemModels = new List<BusinessLogicLayer.Entity.PPM.BookPackItemModel>();
-                    bookStart = i == 0 ? bookLast : bookLast + 1;
+                    bool addModelsToCount = true;
+                    bookStart = bookLast + 1;
                     bookLast = bookStart + (packType.BooksPerPackage.Value - 1);
                     foreach (BusinessLogicLayer.Entity.PPM.ExamModelItem examModel in exam.ExamModels)
                     {
                         if (packType.ExamModelCount > 1)
                         {
+                            
                             BusinessLogicLayer.Entity.PPM.BookPackItemModel newModel = new BusinessLogicLayer.Entity.PPM.BookPackItemModel();
                             newModel.BookPackItemID = item.BookPackItemID;
                             newModel.ExamModelID = examModel.ExamModelID;
@@ -483,6 +504,7 @@ namespace Qiyas.WebAdmin.Controllers
                         }
                         else
                         {
+                            
                             itemModels = new List<BusinessLogicLayer.Entity.PPM.BookPackItemModel>();
                             BusinessLogicLayer.Entity.PPM.BookPackItem itemUnit = new BusinessLogicLayer.Entity.PPM.BookPackItem();
                             itemUnit.BookPackingOperationID = pack.BookPackingOperationID;
@@ -500,6 +522,11 @@ namespace Qiyas.WebAdmin.Controllers
                             itemModels.Add(newModel);
                             itemUnit.ItemModels = itemModels;
                             items.Add(itemUnit);
+                            if(addModelsToCount)
+                            {
+                                i += exam.ExamModels.Count - 1;
+                                addModelsToCount = false;
+                            }
                             //serial++;
                         }
 
@@ -528,6 +555,8 @@ namespace Qiyas.WebAdmin.Controllers
 
             BusinessLogicLayer.Components.PPM.BookPackingOperationLogic logic = new BusinessLogicLayer.Components.PPM.BookPackingOperationLogic();
             var model = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(PrintingOperationID);
+            model.OperationStatusID = 2;
+            model.Save();
             List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> packing = logic.GetPackagingTypeByBookPrintingID(PrintingOperationID);
             List<BusinessLogicLayer.Entity.PPM.PackagingType> packageTypes = new BusinessLogicLayer.Components.PPM.PackagingTypeLogic().GetAll();
             var orderedPackageTypes = (from x in packageTypes orderby x.Total descending select x);
@@ -539,6 +568,8 @@ namespace Qiyas.WebAdmin.Controllers
 
             int count = exam.ExamModels.Count;
             int serial = logic.GetLastPackSerial(exam.ExamID) + 1;
+            
+            
 
             List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> orderedPackSingle = new List<BusinessLogicLayer.Entity.PPM.BookPackingOperation>();
             List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> orderedPackMultiple = new List<BusinessLogicLayer.Entity.PPM.BookPackingOperation>();
@@ -584,8 +615,12 @@ namespace Qiyas.WebAdmin.Controllers
             Qiyas.BusinessLogicLayer.Components.PPM.BookPackItemLogic itemLogic = new BusinessLogicLayer.Components.PPM.BookPackItemLogic();
             itemLogic.SaveItems(items);
             ViewBag.HasError = false;
+            ViewBag.IsSaved = model.OperationStatusID > 1;
             ViewBag.NotifyMessage = Resources.MainResource.NumberingPackSuccess;
-            return View("Index", model);
+            System.Web.Routing.RouteValueDictionary dict = new System.Web.Routing.RouteValueDictionary();
+            dict.Add("ID", MainID);
+            return RedirectToAction("PrintPacks", dict);
+            //return View("Index", model);
         }
 
         string RandomString(int length, string allowedChars = "0123456789")

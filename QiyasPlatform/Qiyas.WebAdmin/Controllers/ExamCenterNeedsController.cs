@@ -157,13 +157,22 @@ namespace Qiyas.WebAdmin.Controllers
             {
                 try
                 {
-                    Qiyas.BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam saveItem = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam();
-                    saveItem.CreatedDate = DateTime.Now;
-                    saveItem.ExamCenterID = item.ExamCenterID;
-                    saveItem.ExamPeriodID = item.ExamPeriodID;
-                    saveItem.ModifiedDate = DateTime.Now;
-                    saveItem.RequestPreparationStatusID = 1;
-                    saveItem.Save();
+                    BusinessLogicLayer.Components.PPM.ExamCenterRequiredExamLogic logic = new BusinessLogicLayer.Components.PPM.ExamCenterRequiredExamLogic();
+                    if(!logic.RecordExists(item.ExamPeriodID.Value, item.ExamCenterID.Value, 1))
+                    {
+                        Qiyas.BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam saveItem = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam();
+                        saveItem.CreatedDate = DateTime.Now;
+                        saveItem.ExamCenterID = item.ExamCenterID;
+                        saveItem.ExamPeriodID = item.ExamPeriodID;
+                        saveItem.ModifiedDate = DateTime.Now;
+                        saveItem.RequestPreparationStatusID = 1;
+                        saveItem.Save();
+                    }
+                    else
+                    {
+                        ViewData["EditError"] = "هذا السجل يوجد بالفعل";
+                    }
+                    
                 }
                 catch (Exception e)
                 {

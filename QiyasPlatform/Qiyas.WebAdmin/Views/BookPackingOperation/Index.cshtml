@@ -17,6 +17,7 @@
                 @using (Html.BeginForm("SavePackage", "BookPackingOperation", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "packForm", @name = "packForm" }))
                 {
                     @Html.AntiForgeryToken()
+
                     if (ViewBag.HasError)
                     {
                         <div class="alert alert-danger">@ViewBag.NotifyMessage</div>
@@ -55,20 +56,28 @@
                     </div>
                     <br /><br />
                     @Html.Action("PackingGridViewPartial")
-
-
                     <br /><br />
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" name="SavePack" id="SavePack" value="حفظ" class="btn btn-default btn-primary" />
-                            <input type="submit" name="DeletePack" id="DeletePack" value="حذف" class="btn btn-default btn-primary" />
-                            <input type="submit" name="NumberingPacks" id="NumberingPacks" value="ترقيم الحزم" class="btn btn-default btn-primary" />
+                            @if (ViewBag.IsSaved)
+                            {
                             <input type="submit" name="PrintPacks" id="PrintPacks" value="طباعة ملصقات" class="btn btn-default btn-primary" />
+                            }
+                            else
+                            {
+                            <input type="submit" name="NumberingPacks" id="NumberingPacks" value="ترقيم الحزم" class="btn btn-default btn-primary" />
+                            }
+
+                            @*<input type="submit" name="SavePack" id="SavePack" value="حفظ" class="btn btn-default btn-primary" />*@
+
+
+
+                            <input type="submit" name="DeletePack" id="DeletePack" value="حذف" class="btn btn-default btn-primary" />
                             <input type="button" name="BackButton" id="BackButton" value="عودة" class="btn btn-default " />
                         </div>
                     </div>
                 }
-                
+
             </div>
         </div>
     </div>
@@ -77,38 +86,40 @@
 
 @section Scripts {
     <script type="text/javascript">
-        $("#SavePack").click(function () {
+        $("#SavePack").click(function (e) {
             var r = confirm("هل تريد حفظ التحزيم");
             if (r == true) {
                 var form = $("form#packForm");
                 form.attr("action", "@Url.Action("SavePack", "BookPackingOperation")");
                 form.submit();
             } else {
-                
+                e.preventDefault();
+                //e.cancel = true;
+                return;
             }
         
     });
 
-        $("#DeletePack").click(function () {
+        $("#DeletePack").click(function (e) {
             var r = confirm("هل تريد حذف هذا التحزيم");
             if (r == true) {
                 var form = $("form#packForm");
                 form.attr("action", "@Url.Action("DeletePack", "BookPackingOperation")");
                 form.submit();
             } else {
-                
+                e.preventDefault();
             }
         
     });
 
-    $("#NumberingPacks").click(function () {
+    $("#NumberingPacks").click(function (e) {
             var r = confirm("هل تريد إتمام الترقيم");
             if (r == true) {
                 var form = $("form#packForm");
                 form.attr("action", "@Url.Action("NumberingPack", "BookPackingOperation")");
                 form.submit();
             } else {
-                
+                e.preventDefault();
             }
         
     });

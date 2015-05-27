@@ -298,7 +298,7 @@
     <value>إدارة وزن الحزم</value>
   </data>
   <data name="PageSummaryText" xml:space="preserve">
-    <value>صفحة {0} من {1} عدد الصفحات {2}</value>
+    <value>صفحة {0} من {1} عدد السجلات {2}</value>
   </data>
   <data name="PasswordCheckError" xml:space="preserve">
     <value>كلمة المرور يجب ان تحتوي علي الاقل على رقم واحد و علي حرف صغير من (a-z) و علي حرف كبير من (A-Z)</value>
