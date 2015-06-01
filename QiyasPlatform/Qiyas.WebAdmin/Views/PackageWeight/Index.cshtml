@@ -38,7 +38,7 @@
                         
                         <div class="form-group">
                             <div class="col-md-offset-3 col-md-10 ">
-                                <input type="submit" name="SaveWeight" id="SaveWeight" value="حفظ" class="btn btn-default btn-primary pull-left" />
+                                <input type="button" name="SaveWeight" id="SaveWeight" value="حفظ" class="btn btn-default btn-primary pull-left" />
                             </div>
                         </div>
                         <hr />
@@ -58,6 +58,7 @@
 @section Scripts {
     
     <script type="text/javascript">
+        
         $("#SaveWeight").click(function (e) {
             e.preventDefault();
             var urlLink = "@Url.Action("SaveWeight", "PackageWeight")";
@@ -126,6 +127,17 @@
                     $('#packageDoesntExist').show();
                 }
             });
+        });
+
+        $(document).ready(function () {
+            
+            
+            $("form").bind("keypress", function (e) {
+                if (e.keyCode == 13) {
+                    return false;
+                }
+            });
+            $('#PackageCode').focus();
         });
 </script>
     @Scripts.Render("~/bundles/jqueryval")

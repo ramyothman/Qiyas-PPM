@@ -126,6 +126,20 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             set{ this.entity.PackageTotal = value; }
             get{ return this.entity.PackageTotal; }
         }
+
+        [Display(Name = "PackageTotalPerModel")]
+        public int? PackageTotalPerModel
+        {
+            set { this.entity.PackageTotalPerModel = value; }
+            get { return this.entity.PackageTotalPerModel; }
+        }
+
+        [Display(Name = "NumberofBooksPerModel")]
+        public int? NumberofBooksPerModel
+        {
+            set { this.entity.NumberofBooksPerModel = value; }
+            get { return this.entity.NumberofBooksPerModel; }
+        }
     
         #endregion    
     

@@ -46,7 +46,7 @@
                     <br /><br />
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" name="SavePack" id="SavePack" value="إعادة تحزيم" class="btn btn-default btn-primary" />
+                            <input type="button" name="SavePack" id="SavePack" value="إعادة تحزيم" class="btn btn-default btn-primary" />
 
                         </div>
                     </div>
@@ -61,18 +61,22 @@
 @section Scripts {
     <script type="text/javascript">
         $("#SavePack").click(function () {
-            var r = confirm("هل تريد إعادة التحزيم");
-            if (r == true) {
-                var form = $("form#packForm");
-                form.attr("action", "@Url.Action("NumberingPack", "BookPackItemRePack")");
+            if (isChecking) {
+                isChecking = false;
+                return;
+            }
+        var r = confirm("هل تريد إعادة التحزيم");
+        if (r == true) {
+            var form = $("form#packForm");
+            form.attr("action", "@Url.Action("NumberingPack", "BookPackItemRePack")");
                 form.submit();
             } else {
-
+                e.preventDefault();
+                return false;
             }
 
     });
-
-        $("#PackNumber").change(function () {
+        function PackItem() {
             var urlLink = "@Url.Action("CheckItem", "BookPackItemRePack")";
 
             $.ajax({
@@ -102,6 +106,9 @@
                     $('#packageDoesntExist').show();
                 }
             });
+        }
+        $("#PackNumber").change(function () {
+            PackItem();
         });
         $("#BackButton").click(function (e) {
             e.preventDefault();
@@ -110,6 +117,21 @@
             @*var form = $("form#packForm");
             form.attr("action", "@Url.Action("PrinPacks", "BookPackingOperation", Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID)");
             form.submit();*@
+    });
+        var isChecking = false;
+
+        
+        $(document).ready(function () {
+            
+
+            
+            $('#PackNumber').focus();
         });
+    $("form").bind("keypress", function (e) {
+        
+        if (e.keyCode == 13) {
+            return false;
+        }
+    });
     </script>
 }

@@ -133,24 +133,43 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             center.StudentGenderID = this.StudentGenderID;
             return center;
         }
+
+        private Qiyas.DataAccessLayer.ExamCenter GetCenter(int centerId, DataAccessLayer.QiyasLinqDataContext db)
+        {
+            Qiyas.DataAccessLayer.ExamCenter center = new DataAccessLayer.ExamCenter();
+            if (centerId != 0)
+                center = db.ExamCenters.Where(c => c.ExaminationCenterID == centerId).FirstOrDefault();
+            center.CenterCode = this.entity.CenterCode;
+            center.CityID = this.entity.CityID;
+            center.CreatedDate = this.entity.CreatedDate;
+            center.CreatorID = this.entity.CreatorID;
+            center.IsActive = this.entity.IsActive;
+            center.ExaminationCenterID = this.entity.ExaminationCenterID;
+            center.ModifiedByID = this.entity.ModifiedByID;
+            center.ModifiedDate = this.entity.ModifiedDate;
+            center.Name = this.Name;
+            center.StudentGenderID = this.StudentGenderID;
+            return center;
+        }
         internal override bool? Save(Qiyas.DataAccessLayer.QiyasLinqDataContext context, bool commit)
         {
+            DataAccessLayer.QiyasLinqDataContext db = new DataAccessLayer.QiyasLinqDataContext();
             Qiyas.DataAccessLayer.ExamCenter center = null;
             if (isNew)
             {
 
-                center = GetCenter(0);
+                center = GetCenter(0,db);
                 context.ExamCenters.InsertOnSubmit(center);
             }
             else
             {
-                center = GetCenter(ExaminationCenterID);
+                center = GetCenter(ExaminationCenterID,db);
             }
             if (commit)
       
               try
               {
-                context.SubmitChanges();
+                db.SubmitChanges();
                 isNew = false;
                 return true;
               }

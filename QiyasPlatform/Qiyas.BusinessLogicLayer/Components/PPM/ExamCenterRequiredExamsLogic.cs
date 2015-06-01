@@ -14,7 +14,8 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
     {
         public bool RecordExists(int PeriodID, int CenterID, int StatusID)
         {
-            return db.ExamCenterRequiredExams.Where(c => c.ExamPeriodID == PeriodID && c.ExamCenterID == CenterID && c.RequestPreparationStatusID == StatusID).FirstOrDefault() == null;
+            var item = db.ExamCenterRequiredExams.Where(c => c.ExamPeriodID == PeriodID && c.ExamCenterID == CenterID && c.RequestPreparationStatusID == StatusID).FirstOrDefault();
+            return item != null;
         }
     }
 }

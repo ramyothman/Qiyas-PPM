@@ -82,7 +82,8 @@
                 form.attr("action", "@Url.Action("WithdrawRequest", "ExamCenterNeeds")");
                 form.submit();
             } else {
-
+                e.preventDefault();
+                return false;
             }
 
         });

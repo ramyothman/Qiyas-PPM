@@ -12,12 +12,16 @@
     [PackingValue]             INT           NULL,
     [PackageTotal]             INT           NULL,
     [PackingParentID]          INT           NULL,
+    [NumberofBooksPerModel]    INT           NULL,
+    [PackageTotalPerModel]     INT           NULL,
     CONSTRAINT [PK_BookPackingOperation] PRIMARY KEY CLUSTERED ([BookPackingOperationID] ASC),
     CONSTRAINT [FK_BookPackingOperation_BookPackingOperation] FOREIGN KEY ([PackingParentID]) REFERENCES [PPM].[BookPackingOperation] ([BookPackingOperationID]),
     CONSTRAINT [FK_BookPackingOperation_BookPrintingOperation] FOREIGN KEY ([BookPrintingOperationID]) REFERENCES [PPM].[BookPrintingOperation] ([BookPrintingOperationID]) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT [FK_BookPackingOperation_PackagingType] FOREIGN KEY ([PackagingTypeID]) REFERENCES [PPM].[PackagingType] ([PackagingTypeID]) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT [FK_BookPackingOperation_PackingCalculationType] FOREIGN KEY ([PackingCalculationTypeID]) REFERENCES [PPM].[PackingCalculationType] ([PackingCalculationTypeID])
 );
+
+
 
 
 

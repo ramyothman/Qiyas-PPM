@@ -38,7 +38,7 @@
         <br /><br />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" name="Save" value="إعادة تحزيم" class="btn btn-default btn-primary" />
+                <input type="button" name="Save" value="إعادة تحزيم" class="btn btn-default btn-primary" />
 
             </div>
         </div>
@@ -59,7 +59,8 @@
                 form.attr("action", "@Url.Action("NumberingPack", "BookRePack")");
                 form.submit();
             } else {
-
+                e.preventDefault();
+                return false;
             }
 
     });

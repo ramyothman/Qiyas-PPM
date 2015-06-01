@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Qiyas" Class="QiyasLinqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=RBM-MLAP;Initial Catalog=Qiyas;User ID=sa" SettingsObjectName="Qiyas.DataAccessLayer.Properties.Settings" SettingsPropertyName="QiyasConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=RBM-MLAP;Initial Catalog=Qiyas;User ID=sa" SettingsObjectName="Qiyas.DataAccessLayer.Properties.Settings" SettingsPropertyName="QiyasConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="Person.BusinessEntity" Member="BusinessEntities">
     <Type Name="BusinessEntity">
       <Column Name="BusinessEntityId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -120,8 +120,8 @@
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="PackagingType_BookPackingOperation" Member="BookPackingOperations" ThisKey="PackagingTypeID" OtherKey="PackagingTypeID" Type="BookPackingOperation" />
       <Association Name="PackagingType_RequestWithdrawDetailItem" Member="RequestWithdrawDetailItems" ThisKey="PackagingTypeID" OtherKey="PackagingTypeID" Type="RequestWithdrawDetailItem" />
+      <Association Name="PackagingType_BookPackingOperation" Member="BookPackingOperations" ThisKey="PackagingTypeID" OtherKey="PackagingTypeID" Type="BookPackingOperation" />
     </Type>
   </Table>
   <Table Name="PPM.OperationStatus" Member="OperationStatus">
@@ -328,30 +328,6 @@
       <Column Name="PackingCalculationTypeID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="PackingCalculationType_BookPackingOperation" Member="BookPackingOperations" ThisKey="PackingCalculationTypeID" OtherKey="PackingCalculationTypeID" Type="BookPackingOperation" />
-    </Type>
-  </Table>
-  <Table Name="PPM.BookPackingOperation" Member="BookPackingOperations">
-    <Type Name="BookPackingOperation">
-      <Column Name="BookPackingOperationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="BookPrintingOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PackagingTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PackingCalculationTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="AllocatedFrom" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="PackingValue" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PackageTotal" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PackingParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="BookPackingOperation_BookPackingOperation" Member="BookPackingOperations" ThisKey="BookPackingOperationID" OtherKey="PackingParentID" Type="BookPackingOperation" />
-      <Association Name="BookPackingOperation_BookPackItem" Member="BookPackItems" ThisKey="BookPackingOperationID" OtherKey="BookPackingOperationID" Type="BookPackItem" />
-      <Association Name="BookPackingOperation_BookPackingOperation" Member="BookPackingOperation1" ThisKey="PackingParentID" OtherKey="BookPackingOperationID" Type="BookPackingOperation" IsForeignKey="true" />
-      <Association Name="PackagingType_BookPackingOperation" Member="PackagingType" ThisKey="PackagingTypeID" OtherKey="PackagingTypeID" Type="PackagingType" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="PackingCalculationType_BookPackingOperation" Member="PackingCalculationType" ThisKey="PackingCalculationTypeID" OtherKey="PackingCalculationTypeID" Type="PackingCalculationType" IsForeignKey="true" />
-      <Association Name="PackingCalculationType1_BookPackingOperation" Member="PackingCalculationType1" ThisKey="PackingCalculationTypeID" OtherKey="PackingCalculationTypeID" Type="PackingCalculationType1" IsForeignKey="true" />
-      <Association Name="BookPrintingOperation_BookPackingOperation" Member="BookPrintingOperation" ThisKey="BookPrintingOperationID" OtherKey="BookPrintingOperationID" Type="BookPrintingOperation" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="PPM.BookPackItemModel" Member="BookPackItemModels">
@@ -802,6 +778,32 @@
       <Column Name="PackageTypeBooksPerPackage" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PackageTypeTotal" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ExamCenterRequiredExamsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="PPM.BookPackingOperation" Member="BookPackingOperations">
+    <Type Name="BookPackingOperation">
+      <Column Name="BookPackingOperationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedByID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BookPrintingOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackagingTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackingCalculationTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AllocatedFrom" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PackingValue" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageTotal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackingParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumberofBooksPerModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageTotalPerModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="BookPackingOperation_BookPackItem" Member="BookPackItems" ThisKey="BookPackingOperationID" OtherKey="BookPackingOperationID" Type="BookPackItem" />
+      <Association Name="BookPackingOperation_BookPackingOperation" Member="BookPackingOperations" ThisKey="BookPackingOperationID" OtherKey="PackingParentID" Type="BookPackingOperation" />
+      <Association Name="BookPackingOperation_BookPackingOperation" Member="BookPackingOperation1" ThisKey="PackingParentID" OtherKey="BookPackingOperationID" Type="BookPackingOperation" IsForeignKey="true" />
+      <Association Name="BookPrintingOperation_BookPackingOperation" Member="BookPrintingOperation" ThisKey="BookPrintingOperationID" OtherKey="BookPrintingOperationID" Type="BookPrintingOperation" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="PackagingType_BookPackingOperation" Member="PackagingType" ThisKey="PackagingTypeID" OtherKey="PackagingTypeID" Type="PackagingType" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="PackingCalculationType_BookPackingOperation" Member="PackingCalculationType" ThisKey="PackingCalculationTypeID" OtherKey="PackingCalculationTypeID" Type="PackingCalculationType" IsForeignKey="true" />
+      <Association Name="PackingCalculationType1_BookPackingOperation" Member="PackingCalculationType1" ThisKey="PackingCalculationTypeID" OtherKey="PackingCalculationTypeID" Type="PackingCalculationType1" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.DeleteExamModelItemByExamID" Method="DeleteExamModelItemByExamID">

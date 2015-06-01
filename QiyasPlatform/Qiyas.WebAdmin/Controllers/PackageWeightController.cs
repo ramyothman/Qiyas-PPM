@@ -113,8 +113,8 @@ namespace Qiyas.WebAdmin.Controllers
         {
 
             var itemPack = new BusinessLogicLayer.Entity.PPM.BookPackItem(item);
-            if (itemPack.OperationStatusID > 3)
-                return Json("notsaved");
+            //if (itemPack.OperationStatusID > 3)
+            //    return Json("notsaved");
             if (itemPack.HasObject)
             {
                 BusinessLogicLayer.Components.PPM.PackageWeightLogic logic = new BusinessLogicLayer.Components.PPM.PackageWeightLogic();

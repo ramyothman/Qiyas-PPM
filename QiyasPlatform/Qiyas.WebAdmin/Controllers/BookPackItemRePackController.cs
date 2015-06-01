@@ -143,7 +143,7 @@ namespace Qiyas.WebAdmin.Controllers
                 ExamCount = countExams;
             var addedItem = repackItemLogic.GetBookRepackItem(item);
             var exItem = BookRepackPackageItemList.Where(c => c.ExamID == addedItem.ExamID).FirstOrDefault();
-            if(exItem != null)
+            if (BookRepackPackageItemList.Count > 0 && exItem == null)
             {
                 return Json("notexists");
             }
@@ -169,6 +169,10 @@ namespace Qiyas.WebAdmin.Controllers
         public ActionResult NumberingPack(FormCollection form)
         {
             bool isValid = CheckPackValid();
+            if(PrintingOperationID == null || PrintingOperationID == 0)
+            {
+                return Index();
+            }
             var model = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(PrintingOperationID);
             if (isValid)
             {

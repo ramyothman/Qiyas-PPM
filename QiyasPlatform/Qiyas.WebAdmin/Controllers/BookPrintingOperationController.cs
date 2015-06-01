@@ -37,17 +37,25 @@ namespace Qiyas.WebAdmin.Controllers
             {
                 try
                 {
-                    BusinessLogicLayer.Entity.PPM.BookPrintingOperation printing = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation();
-                    printing.ExamsNeededForA3 = item.ExamsNeededForA3;
-                    printing.ExamsNeededForA4 = item.ExamsNeededForA4;
-                    printing.ExamsNeededForCD = item.ExamsNeededForCD;
-                    printing.ExamID = item.ExamID;
-                    printing.Name = item.Name;
-                    printing.OperationStatusID = (int)OperationStatus.Printing;
-                    printing.PrintsForOneModel = item.PrintsForOneModel;
-                    printing.ModifiedDate = DateTime.Now;
-                    printing.CreatedDate = DateTime.Now;
-                    printing.Save();
+                    if((item.ExamsNeededForA3.Value % 3) != 0)
+                    {
+                        ViewData["EditError"] = "يجب ان يكون الايه 3 من مضاعفات الثلاثة";
+                    }
+                    else
+                    {
+                        BusinessLogicLayer.Entity.PPM.BookPrintingOperation printing = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation();
+                        printing.ExamsNeededForA3 = item.ExamsNeededForA3;
+                        printing.ExamsNeededForA4 = item.ExamsNeededForA4;
+                        printing.ExamsNeededForCD = item.ExamsNeededForCD;
+                        printing.ExamID = item.ExamID;
+                        printing.Name = item.Name;
+                        printing.OperationStatusID = (int)OperationStatus.Printing;
+                        printing.PrintsForOneModel = item.PrintsForOneModel;
+                        printing.ModifiedDate = DateTime.Now;
+                        printing.CreatedDate = DateTime.Now;
+                        printing.Save();
+                    }
+                    
                 }
                 catch (Exception e)
                 {

@@ -637,6 +637,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to كمية الكتب للنموذج.
+        /// </summary>
+        internal static string NumberofBooksPerModel {
+            get {
+                return ResourceManager.GetString("NumberofBooksPerModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to عدد الصفحات.
         /// </summary>
         internal static string NumberofPages {
@@ -687,6 +696,15 @@ namespace Resources {
         internal static string PackageTotal {
             get {
                 return ResourceManager.GetString("PackageTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عدد الحزم للنموذج.
+        /// </summary>
+        internal static string PackageTotalPerModel {
+            get {
+                return ResourceManager.GetString("PackageTotalPerModel", resourceCulture);
             }
         }
         

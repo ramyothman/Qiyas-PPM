@@ -57,6 +57,35 @@
                     <br /><br />
                     @Html.Action("PackingGridViewPartial")
                     <br /><br />
+                    <div class="pull-left">
+                        <table>
+                            <tr>
+                                <td style="margin-left:10px;margin-bottom:10px;">
+                                    اجمالي عدد الحزم
+                                </td>
+                                <td style="margin-left:10px;margin-bottom:10px;">
+                                    <input id="bpoTotalPackage" type="text" readonly="readonly" value="0" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   اجمالي عدد الحزم للنموذج
+                                </td>
+                                <td>
+                                    <input id="bpoTotalPackagePerModel" type="text" readonly="readonly" value="0" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    اجمالي كمية الكتب للنموذج
+                                </td>
+                                <td>
+                                    <input id="bpoTotalPackageBooksPerModel" type="text" readonly="readonly" value="0" />
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             @if (ViewBag.IsSaved)
@@ -86,6 +115,36 @@
 
 @section Scripts {
     <script type="text/javascript">
+        
+        function GetPackingTotals(urlLink) {
+            
+            
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                data:  {
+                    item: 0
+                },
+                url: urlLink,
+                success: function (data) {
+                    
+                    $('#bpoTotalPackage').val(data.Total);
+                    $('#bpoTotalPackagePerModel').val(data.TotalPerModel);
+                    $('#bpoTotalPackageBooksPerModel').val(data.TotalBooksPerModel);
+                    
+                    //totalObject.Total = totalCount;
+                    //totalObject.TotalA3 = totalA3;
+                    //totalObject.TotalBooksPerModel = totalBooksPerModel;
+                    //totalObject.TotalPerModel = totalPerModel;
+                },
+                error: function (data) {
+                    alert("e" + data);
+                    //$('#packageExists').hide();
+                    //$('#packageDoesntExist').show();
+                }
+            });
+
+        }
         $("#SavePack").click(function (e) {
             var r = confirm("هل تريد حفظ التحزيم");
             if (r == true) {
@@ -94,8 +153,9 @@
                 form.submit();
             } else {
                 e.preventDefault();
+                return false;
                 //e.cancel = true;
-                return;
+                
             }
         
     });
@@ -108,6 +168,7 @@
                 form.submit();
             } else {
                 e.preventDefault();
+                return false;
             }
         
     });
@@ -120,6 +181,7 @@
                 form.submit();
             } else {
                 e.preventDefault();
+                return false;
             }
         
     });
