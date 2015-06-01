@@ -115,10 +115,15 @@
 
 @section Scripts {
     <script type="text/javascript">
-        
+
+        $(document).ready(function () {
+            var url = "@Url.Action("GetPackingTotals", "BookPackingOperation")";
+            GetPackingTotals(url);
+        });
+
         function GetPackingTotals(urlLink) {
-            
-            
+
+
             $.ajax({
                 type: "POST",
                 dataType: "json",
@@ -127,11 +132,11 @@
                 },
                 url: urlLink,
                 success: function (data) {
-                    
+
                     $('#bpoTotalPackage').val(data.Total);
                     $('#bpoTotalPackagePerModel').val(data.TotalPerModel);
                     $('#bpoTotalPackageBooksPerModel').val(data.TotalBooksPerModel);
-                    
+
                     //totalObject.Total = totalCount;
                     //totalObject.TotalA3 = totalA3;
                     //totalObject.TotalBooksPerModel = totalBooksPerModel;
@@ -155,10 +160,10 @@
                 e.preventDefault();
                 return false;
                 //e.cancel = true;
-                
+
             }
-        
-    });
+
+        });
 
         $("#DeletePack").click(function (e) {
             var r = confirm("هل تريد حذف هذا التحزيم");
@@ -170,10 +175,10 @@
                 e.preventDefault();
                 return false;
             }
-        
-    });
 
-    $("#NumberingPacks").click(function (e) {
+        });
+
+        $("#NumberingPacks").click(function (e) {
             var r = confirm("هل تريد إتمام الترقيم");
             if (r == true) {
                 var form = $("form#packForm");
@@ -183,8 +188,8 @@
                 e.preventDefault();
                 return false;
             }
-        
-    });
+
+        });
 
         $("#PrintPacks").click(function (e) {
             e.preventDefault();
