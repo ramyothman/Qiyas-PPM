@@ -11,7 +11,10 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
 {
     public partial class ShippingBag
     {
-        
+        public ShippingBag(int ID, int ShippingBagSerial)
+        {
+            this.entity = context.ShippingBags.Where(p => p.ShippingBagSerial == ShippingBagSerial && p.ExamCenterRequiredExamsID == ID).FirstOrDefault();
+        }
     }
 }
       

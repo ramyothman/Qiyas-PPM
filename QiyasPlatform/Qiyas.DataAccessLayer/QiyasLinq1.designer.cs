@@ -120,9 +120,6 @@ namespace Qiyas.DataAccessLayer
     partial void InsertRequestPreparationStatus(RequestPreparationStatus instance);
     partial void UpdateRequestPreparationStatus(RequestPreparationStatus instance);
     partial void DeleteRequestPreparationStatus(RequestPreparationStatus instance);
-    partial void InsertShippingBag(ShippingBag instance);
-    partial void UpdateShippingBag(ShippingBag instance);
-    partial void DeleteShippingBag(ShippingBag instance);
     partial void InsertShippingBagItem(ShippingBagItem instance);
     partial void UpdateShippingBagItem(ShippingBagItem instance);
     partial void DeleteShippingBagItem(ShippingBagItem instance);
@@ -159,6 +156,9 @@ namespace Qiyas.DataAccessLayer
     partial void InsertBookPackingOperation(BookPackingOperation instance);
     partial void UpdateBookPackingOperation(BookPackingOperation instance);
     partial void DeleteBookPackingOperation(BookPackingOperation instance);
+    partial void InsertShippingBag(ShippingBag instance);
+    partial void UpdateShippingBag(ShippingBag instance);
+    partial void DeleteShippingBag(ShippingBag instance);
     #endregion
 		
 		public QiyasLinqDataContext() :
@@ -431,14 +431,6 @@ namespace Qiyas.DataAccessLayer
 			}
 		}
 		
-		public System.Data.Linq.Table<ShippingBag> ShippingBags
-		{
-			get
-			{
-				return this.GetTable<ShippingBag>();
-			}
-		}
-		
 		public System.Data.Linq.Table<ShippingBagItem> ShippingBagItems
 		{
 			get
@@ -612,6 +604,22 @@ namespace Qiyas.DataAccessLayer
 			get
 			{
 				return this.GetTable<BookPackingOperation>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ShippingBag> ShippingBags
+		{
+			get
+			{
+				return this.GetTable<ShippingBag>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ViewShippingBagItem> ViewShippingBagItems
+		{
+			get
+			{
+				return this.GetTable<ViewShippingBagItem>();
 			}
 		}
 		
@@ -9030,281 +9038,6 @@ namespace Qiyas.DataAccessLayer
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="PPM.ShippingBag")]
-	public partial class ShippingBag : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ShippingBagID;
-		
-		private System.Nullable<int> _ExamCenterRequiredExamsID;
-		
-		private string _ShippingBagCode;
-		
-		private System.Nullable<int> _CreatedBy;
-		
-		private System.Nullable<int> _ModifiedBy;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-		private System.Nullable<System.DateTime> _ModifiedDate;
-		
-		private EntitySet<ShippingBagItem> _ShippingBagItems;
-		
-		private EntityRef<ExamCenterRequiredExam> _ExamCenterRequiredExam;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnShippingBagIDChanging(int value);
-    partial void OnShippingBagIDChanged();
-    partial void OnExamCenterRequiredExamsIDChanging(System.Nullable<int> value);
-    partial void OnExamCenterRequiredExamsIDChanged();
-    partial void OnShippingBagCodeChanging(string value);
-    partial void OnShippingBagCodeChanged();
-    partial void OnCreatedByChanging(System.Nullable<int> value);
-    partial void OnCreatedByChanged();
-    partial void OnModifiedByChanging(System.Nullable<int> value);
-    partial void OnModifiedByChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
-    partial void OnModifiedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnModifiedDateChanged();
-    #endregion
-		
-		public ShippingBag()
-		{
-			this._ShippingBagItems = new EntitySet<ShippingBagItem>(new Action<ShippingBagItem>(this.attach_ShippingBagItems), new Action<ShippingBagItem>(this.detach_ShippingBagItems));
-			this._ExamCenterRequiredExam = default(EntityRef<ExamCenterRequiredExam>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShippingBagID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ShippingBagID
-		{
-			get
-			{
-				return this._ShippingBagID;
-			}
-			set
-			{
-				if ((this._ShippingBagID != value))
-				{
-					this.OnShippingBagIDChanging(value);
-					this.SendPropertyChanging();
-					this._ShippingBagID = value;
-					this.SendPropertyChanged("ShippingBagID");
-					this.OnShippingBagIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamCenterRequiredExamsID", DbType="Int")]
-		public System.Nullable<int> ExamCenterRequiredExamsID
-		{
-			get
-			{
-				return this._ExamCenterRequiredExamsID;
-			}
-			set
-			{
-				if ((this._ExamCenterRequiredExamsID != value))
-				{
-					if (this._ExamCenterRequiredExam.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnExamCenterRequiredExamsIDChanging(value);
-					this.SendPropertyChanging();
-					this._ExamCenterRequiredExamsID = value;
-					this.SendPropertyChanged("ExamCenterRequiredExamsID");
-					this.OnExamCenterRequiredExamsIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShippingBagCode", DbType="NVarChar(20)")]
-		public string ShippingBagCode
-		{
-			get
-			{
-				return this._ShippingBagCode;
-			}
-			set
-			{
-				if ((this._ShippingBagCode != value))
-				{
-					this.OnShippingBagCodeChanging(value);
-					this.SendPropertyChanging();
-					this._ShippingBagCode = value;
-					this.SendPropertyChanged("ShippingBagCode");
-					this.OnShippingBagCodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="Int")]
-		public System.Nullable<int> CreatedBy
-		{
-			get
-			{
-				return this._CreatedBy;
-			}
-			set
-			{
-				if ((this._CreatedBy != value))
-				{
-					this.OnCreatedByChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedBy = value;
-					this.SendPropertyChanged("CreatedBy");
-					this.OnCreatedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedBy", DbType="Int")]
-		public System.Nullable<int> ModifiedBy
-		{
-			get
-			{
-				return this._ModifiedBy;
-			}
-			set
-			{
-				if ((this._ModifiedBy != value))
-				{
-					this.OnModifiedByChanging(value);
-					this.SendPropertyChanging();
-					this._ModifiedBy = value;
-					this.SendPropertyChanged("ModifiedBy");
-					this.OnModifiedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ModifiedDate
-		{
-			get
-			{
-				return this._ModifiedDate;
-			}
-			set
-			{
-				if ((this._ModifiedDate != value))
-				{
-					this.OnModifiedDateChanging(value);
-					this.SendPropertyChanging();
-					this._ModifiedDate = value;
-					this.SendPropertyChanged("ModifiedDate");
-					this.OnModifiedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ShippingBag_ShippingBagItem", Storage="_ShippingBagItems", ThisKey="ShippingBagID", OtherKey="ShippingBagID")]
-		public EntitySet<ShippingBagItem> ShippingBagItems
-		{
-			get
-			{
-				return this._ShippingBagItems;
-			}
-			set
-			{
-				this._ShippingBagItems.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ExamCenterRequiredExam_ShippingBag", Storage="_ExamCenterRequiredExam", ThisKey="ExamCenterRequiredExamsID", OtherKey="ExamCenterRequiredExamsID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public ExamCenterRequiredExam ExamCenterRequiredExam
-		{
-			get
-			{
-				return this._ExamCenterRequiredExam.Entity;
-			}
-			set
-			{
-				ExamCenterRequiredExam previousValue = this._ExamCenterRequiredExam.Entity;
-				if (((previousValue != value) 
-							|| (this._ExamCenterRequiredExam.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ExamCenterRequiredExam.Entity = null;
-						previousValue.ShippingBags.Remove(this);
-					}
-					this._ExamCenterRequiredExam.Entity = value;
-					if ((value != null))
-					{
-						value.ShippingBags.Add(this);
-						this._ExamCenterRequiredExamsID = value.ExamCenterRequiredExamsID;
-					}
-					else
-					{
-						this._ExamCenterRequiredExamsID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("ExamCenterRequiredExam");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ShippingBagItems(ShippingBagItem entity)
-		{
-			this.SendPropertyChanging();
-			entity.ShippingBag = this;
-		}
-		
-		private void detach_ShippingBagItems(ShippingBagItem entity)
-		{
-			this.SendPropertyChanging();
-			entity.ShippingBag = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="PPM.ShippingBagItem")]
 	public partial class ShippingBagItem : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -9325,9 +9058,9 @@ namespace Qiyas.DataAccessLayer
 		
 		private System.Nullable<int> _ModifiedBy;
 		
-		private EntityRef<ShippingBag> _ShippingBag;
-		
 		private EntityRef<BookPackItem> _BookPackItem;
+		
+		private EntityRef<ShippingBag> _ShippingBag;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -9351,8 +9084,8 @@ namespace Qiyas.DataAccessLayer
 		
 		public ShippingBagItem()
 		{
-			this._ShippingBag = default(EntityRef<ShippingBag>);
 			this._BookPackItem = default(EntityRef<BookPackItem>);
+			this._ShippingBag = default(EntityRef<ShippingBag>);
 			OnCreated();
 		}
 		
@@ -9504,40 +9237,6 @@ namespace Qiyas.DataAccessLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ShippingBag_ShippingBagItem", Storage="_ShippingBag", ThisKey="ShippingBagID", OtherKey="ShippingBagID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public ShippingBag ShippingBag
-		{
-			get
-			{
-				return this._ShippingBag.Entity;
-			}
-			set
-			{
-				ShippingBag previousValue = this._ShippingBag.Entity;
-				if (((previousValue != value) 
-							|| (this._ShippingBag.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ShippingBag.Entity = null;
-						previousValue.ShippingBagItems.Remove(this);
-					}
-					this._ShippingBag.Entity = value;
-					if ((value != null))
-					{
-						value.ShippingBagItems.Add(this);
-						this._ShippingBagID = value.ShippingBagID;
-					}
-					else
-					{
-						this._ShippingBagID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("ShippingBag");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BookPackItem_ShippingBagItem", Storage="_BookPackItem", ThisKey="BookPackItemID", OtherKey="BookPackItemID", IsForeignKey=true)]
 		public BookPackItem BookPackItem
 		{
@@ -9568,6 +9267,40 @@ namespace Qiyas.DataAccessLayer
 						this._BookPackItemID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("BookPackItem");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ShippingBag_ShippingBagItem", Storage="_ShippingBag", ThisKey="ShippingBagID", OtherKey="ShippingBagID", IsForeignKey=true, DeleteRule="CASCADE")]
+		public ShippingBag ShippingBag
+		{
+			get
+			{
+				return this._ShippingBag.Entity;
+			}
+			set
+			{
+				ShippingBag previousValue = this._ShippingBag.Entity;
+				if (((previousValue != value) 
+							|| (this._ShippingBag.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ShippingBag.Entity = null;
+						previousValue.ShippingBagItems.Remove(this);
+					}
+					this._ShippingBag.Entity = value;
+					if ((value != null))
+					{
+						value.ShippingBagItems.Add(this);
+						this._ShippingBagID = value.ShippingBagID;
+					}
+					else
+					{
+						this._ShippingBagID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("ShippingBag");
 				}
 			}
 		}
@@ -12711,11 +12444,11 @@ namespace Qiyas.DataAccessLayer
 		
 		private EntitySet<ContainerRequest> _ContainerRequests;
 		
-		private EntitySet<ShippingBag> _ShippingBags;
-		
 		private EntitySet<ExamRequirementItem> _ExamRequirementItems;
 		
 		private EntitySet<RequestWithdraw> _RequestWithdraws;
+		
+		private EntitySet<ShippingBag> _ShippingBags;
 		
 		private EntityRef<ExamCenter> _ExamCenter;
 		
@@ -12750,9 +12483,9 @@ namespace Qiyas.DataAccessLayer
 		public ExamCenterRequiredExam()
 		{
 			this._ContainerRequests = new EntitySet<ContainerRequest>(new Action<ContainerRequest>(this.attach_ContainerRequests), new Action<ContainerRequest>(this.detach_ContainerRequests));
-			this._ShippingBags = new EntitySet<ShippingBag>(new Action<ShippingBag>(this.attach_ShippingBags), new Action<ShippingBag>(this.detach_ShippingBags));
 			this._ExamRequirementItems = new EntitySet<ExamRequirementItem>(new Action<ExamRequirementItem>(this.attach_ExamRequirementItems), new Action<ExamRequirementItem>(this.detach_ExamRequirementItems));
 			this._RequestWithdraws = new EntitySet<RequestWithdraw>(new Action<RequestWithdraw>(this.attach_RequestWithdraws), new Action<RequestWithdraw>(this.detach_RequestWithdraws));
+			this._ShippingBags = new EntitySet<ShippingBag>(new Action<ShippingBag>(this.attach_ShippingBags), new Action<ShippingBag>(this.detach_ShippingBags));
 			this._ExamCenter = default(EntityRef<ExamCenter>);
 			this._ExamPeriod = default(EntityRef<ExamPeriod>);
 			this._RequestPreparationStatus = default(EntityRef<RequestPreparationStatus>);
@@ -12964,19 +12697,6 @@ namespace Qiyas.DataAccessLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ExamCenterRequiredExam_ShippingBag", Storage="_ShippingBags", ThisKey="ExamCenterRequiredExamsID", OtherKey="ExamCenterRequiredExamsID")]
-		public EntitySet<ShippingBag> ShippingBags
-		{
-			get
-			{
-				return this._ShippingBags;
-			}
-			set
-			{
-				this._ShippingBags.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ExamCenterRequiredExam_ExamRequirementItem", Storage="_ExamRequirementItems", ThisKey="ExamCenterRequiredExamsID", OtherKey="ExamCenterRequiredExamsID")]
 		public EntitySet<ExamRequirementItem> ExamRequirementItems
 		{
@@ -13000,6 +12720,19 @@ namespace Qiyas.DataAccessLayer
 			set
 			{
 				this._RequestWithdraws.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ExamCenterRequiredExam_ShippingBag", Storage="_ShippingBags", ThisKey="ExamCenterRequiredExamsID", OtherKey="ExamCenterRequiredExamsID")]
+		public EntitySet<ShippingBag> ShippingBags
+		{
+			get
+			{
+				return this._ShippingBags;
+			}
+			set
+			{
+				this._ShippingBags.Assign(value);
 			}
 		}
 		
@@ -13137,18 +12870,6 @@ namespace Qiyas.DataAccessLayer
 			entity.ExamCenterRequiredExam = null;
 		}
 		
-		private void attach_ShippingBags(ShippingBag entity)
-		{
-			this.SendPropertyChanging();
-			entity.ExamCenterRequiredExam = this;
-		}
-		
-		private void detach_ShippingBags(ShippingBag entity)
-		{
-			this.SendPropertyChanging();
-			entity.ExamCenterRequiredExam = null;
-		}
-		
 		private void attach_ExamRequirementItems(ExamRequirementItem entity)
 		{
 			this.SendPropertyChanging();
@@ -13168,6 +12889,18 @@ namespace Qiyas.DataAccessLayer
 		}
 		
 		private void detach_RequestWithdraws(RequestWithdraw entity)
+		{
+			this.SendPropertyChanging();
+			entity.ExamCenterRequiredExam = null;
+		}
+		
+		private void attach_ShippingBags(ShippingBag entity)
+		{
+			this.SendPropertyChanging();
+			entity.ExamCenterRequiredExam = this;
+		}
+		
+		private void detach_ShippingBags(ShippingBag entity)
 		{
 			this.SendPropertyChanging();
 			entity.ExamCenterRequiredExam = null;
@@ -16744,6 +16477,668 @@ namespace Qiyas.DataAccessLayer
 		{
 			this.SendPropertyChanging();
 			entity.BookPackingOperation1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="PPM.ShippingBag")]
+	public partial class ShippingBag : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ShippingBagID;
+		
+		private System.Nullable<int> _ExamCenterRequiredExamsID;
+		
+		private string _ShippingBagCode;
+		
+		private System.Nullable<int> _ShippingBagSerial;
+		
+		private System.Nullable<int> _BookCount;
+		
+		private System.Nullable<int> _PackCount;
+		
+		private System.Nullable<int> _CreatedBy;
+		
+		private System.Nullable<int> _ModifiedBy;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<System.DateTime> _ModifiedDate;
+		
+		private EntitySet<ShippingBagItem> _ShippingBagItems;
+		
+		private EntityRef<ExamCenterRequiredExam> _ExamCenterRequiredExam;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnShippingBagIDChanging(int value);
+    partial void OnShippingBagIDChanged();
+    partial void OnExamCenterRequiredExamsIDChanging(System.Nullable<int> value);
+    partial void OnExamCenterRequiredExamsIDChanged();
+    partial void OnShippingBagCodeChanging(string value);
+    partial void OnShippingBagCodeChanged();
+    partial void OnShippingBagSerialChanging(System.Nullable<int> value);
+    partial void OnShippingBagSerialChanged();
+    partial void OnBookCountChanging(System.Nullable<int> value);
+    partial void OnBookCountChanged();
+    partial void OnPackCountChanging(System.Nullable<int> value);
+    partial void OnPackCountChanged();
+    partial void OnCreatedByChanging(System.Nullable<int> value);
+    partial void OnCreatedByChanged();
+    partial void OnModifiedByChanging(System.Nullable<int> value);
+    partial void OnModifiedByChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    partial void OnModifiedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnModifiedDateChanged();
+    #endregion
+		
+		public ShippingBag()
+		{
+			this._ShippingBagItems = new EntitySet<ShippingBagItem>(new Action<ShippingBagItem>(this.attach_ShippingBagItems), new Action<ShippingBagItem>(this.detach_ShippingBagItems));
+			this._ExamCenterRequiredExam = default(EntityRef<ExamCenterRequiredExam>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShippingBagID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ShippingBagID
+		{
+			get
+			{
+				return this._ShippingBagID;
+			}
+			set
+			{
+				if ((this._ShippingBagID != value))
+				{
+					this.OnShippingBagIDChanging(value);
+					this.SendPropertyChanging();
+					this._ShippingBagID = value;
+					this.SendPropertyChanged("ShippingBagID");
+					this.OnShippingBagIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamCenterRequiredExamsID", DbType="Int")]
+		public System.Nullable<int> ExamCenterRequiredExamsID
+		{
+			get
+			{
+				return this._ExamCenterRequiredExamsID;
+			}
+			set
+			{
+				if ((this._ExamCenterRequiredExamsID != value))
+				{
+					if (this._ExamCenterRequiredExam.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnExamCenterRequiredExamsIDChanging(value);
+					this.SendPropertyChanging();
+					this._ExamCenterRequiredExamsID = value;
+					this.SendPropertyChanged("ExamCenterRequiredExamsID");
+					this.OnExamCenterRequiredExamsIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShippingBagCode", DbType="NVarChar(20)")]
+		public string ShippingBagCode
+		{
+			get
+			{
+				return this._ShippingBagCode;
+			}
+			set
+			{
+				if ((this._ShippingBagCode != value))
+				{
+					this.OnShippingBagCodeChanging(value);
+					this.SendPropertyChanging();
+					this._ShippingBagCode = value;
+					this.SendPropertyChanged("ShippingBagCode");
+					this.OnShippingBagCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShippingBagSerial", DbType="Int")]
+		public System.Nullable<int> ShippingBagSerial
+		{
+			get
+			{
+				return this._ShippingBagSerial;
+			}
+			set
+			{
+				if ((this._ShippingBagSerial != value))
+				{
+					this.OnShippingBagSerialChanging(value);
+					this.SendPropertyChanging();
+					this._ShippingBagSerial = value;
+					this.SendPropertyChanged("ShippingBagSerial");
+					this.OnShippingBagSerialChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookCount", DbType="Int")]
+		public System.Nullable<int> BookCount
+		{
+			get
+			{
+				return this._BookCount;
+			}
+			set
+			{
+				if ((this._BookCount != value))
+				{
+					this.OnBookCountChanging(value);
+					this.SendPropertyChanging();
+					this._BookCount = value;
+					this.SendPropertyChanged("BookCount");
+					this.OnBookCountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackCount", DbType="Int")]
+		public System.Nullable<int> PackCount
+		{
+			get
+			{
+				return this._PackCount;
+			}
+			set
+			{
+				if ((this._PackCount != value))
+				{
+					this.OnPackCountChanging(value);
+					this.SendPropertyChanging();
+					this._PackCount = value;
+					this.SendPropertyChanged("PackCount");
+					this.OnPackCountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="Int")]
+		public System.Nullable<int> CreatedBy
+		{
+			get
+			{
+				return this._CreatedBy;
+			}
+			set
+			{
+				if ((this._CreatedBy != value))
+				{
+					this.OnCreatedByChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedBy = value;
+					this.SendPropertyChanged("CreatedBy");
+					this.OnCreatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedBy", DbType="Int")]
+		public System.Nullable<int> ModifiedBy
+		{
+			get
+			{
+				return this._ModifiedBy;
+			}
+			set
+			{
+				if ((this._ModifiedBy != value))
+				{
+					this.OnModifiedByChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedBy = value;
+					this.SendPropertyChanged("ModifiedBy");
+					this.OnModifiedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this.OnModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedDate = value;
+					this.SendPropertyChanged("ModifiedDate");
+					this.OnModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ShippingBag_ShippingBagItem", Storage="_ShippingBagItems", ThisKey="ShippingBagID", OtherKey="ShippingBagID")]
+		public EntitySet<ShippingBagItem> ShippingBagItems
+		{
+			get
+			{
+				return this._ShippingBagItems;
+			}
+			set
+			{
+				this._ShippingBagItems.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ExamCenterRequiredExam_ShippingBag", Storage="_ExamCenterRequiredExam", ThisKey="ExamCenterRequiredExamsID", OtherKey="ExamCenterRequiredExamsID", IsForeignKey=true, DeleteRule="CASCADE")]
+		public ExamCenterRequiredExam ExamCenterRequiredExam
+		{
+			get
+			{
+				return this._ExamCenterRequiredExam.Entity;
+			}
+			set
+			{
+				ExamCenterRequiredExam previousValue = this._ExamCenterRequiredExam.Entity;
+				if (((previousValue != value) 
+							|| (this._ExamCenterRequiredExam.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ExamCenterRequiredExam.Entity = null;
+						previousValue.ShippingBags.Remove(this);
+					}
+					this._ExamCenterRequiredExam.Entity = value;
+					if ((value != null))
+					{
+						value.ShippingBags.Add(this);
+						this._ExamCenterRequiredExamsID = value.ExamCenterRequiredExamsID;
+					}
+					else
+					{
+						this._ExamCenterRequiredExamsID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("ExamCenterRequiredExam");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ShippingBagItems(ShippingBagItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.ShippingBag = this;
+		}
+		
+		private void detach_ShippingBagItems(ShippingBagItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.ShippingBag = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ViewShippingBagItems")]
+	public partial class ViewShippingBagItem
+	{
+		
+		private int _ShippingBagItemID;
+		
+		private System.Nullable<int> _ShippingBagID;
+		
+		private System.Nullable<int> _BookPackItemID;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<System.DateTime> _ModifiedDate;
+		
+		private System.Nullable<int> _CreatedBy;
+		
+		private System.Nullable<int> _ModifiedBy;
+		
+		private string _PackCode;
+		
+		private System.Nullable<int> _PackSerial;
+		
+		private string _ExamModelName;
+		
+		private System.Nullable<int> _PackageTotal;
+		
+		private System.Nullable<int> _PrintsForOneModel;
+		
+		private System.Nullable<int> _TotalExamModels;
+		
+		private System.Nullable<int> _TotalPacks;
+		
+		private string _ExamCode;
+		
+		private System.Nullable<int> _BooksCount;
+		
+		private System.Nullable<int> _ExamCenterRequiredExamsID;
+		
+		public ViewShippingBagItem()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShippingBagItemID", DbType="Int NOT NULL")]
+		public int ShippingBagItemID
+		{
+			get
+			{
+				return this._ShippingBagItemID;
+			}
+			set
+			{
+				if ((this._ShippingBagItemID != value))
+				{
+					this._ShippingBagItemID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShippingBagID", DbType="Int")]
+		public System.Nullable<int> ShippingBagID
+		{
+			get
+			{
+				return this._ShippingBagID;
+			}
+			set
+			{
+				if ((this._ShippingBagID != value))
+				{
+					this._ShippingBagID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPackItemID", DbType="Int")]
+		public System.Nullable<int> BookPackItemID
+		{
+			get
+			{
+				return this._BookPackItemID;
+			}
+			set
+			{
+				if ((this._BookPackItemID != value))
+				{
+					this._BookPackItemID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this._CreatedDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this._ModifiedDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="Int")]
+		public System.Nullable<int> CreatedBy
+		{
+			get
+			{
+				return this._CreatedBy;
+			}
+			set
+			{
+				if ((this._CreatedBy != value))
+				{
+					this._CreatedBy = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedBy", DbType="Int")]
+		public System.Nullable<int> ModifiedBy
+		{
+			get
+			{
+				return this._ModifiedBy;
+			}
+			set
+			{
+				if ((this._ModifiedBy != value))
+				{
+					this._ModifiedBy = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackCode", DbType="NVarChar(20)")]
+		public string PackCode
+		{
+			get
+			{
+				return this._PackCode;
+			}
+			set
+			{
+				if ((this._PackCode != value))
+				{
+					this._PackCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackSerial", DbType="Int")]
+		public System.Nullable<int> PackSerial
+		{
+			get
+			{
+				return this._PackSerial;
+			}
+			set
+			{
+				if ((this._PackSerial != value))
+				{
+					this._PackSerial = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamModelName", DbType="NVarChar(50)")]
+		public string ExamModelName
+		{
+			get
+			{
+				return this._ExamModelName;
+			}
+			set
+			{
+				if ((this._ExamModelName != value))
+				{
+					this._ExamModelName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackageTotal", DbType="Int")]
+		public System.Nullable<int> PackageTotal
+		{
+			get
+			{
+				return this._PackageTotal;
+			}
+			set
+			{
+				if ((this._PackageTotal != value))
+				{
+					this._PackageTotal = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrintsForOneModel", DbType="Int")]
+		public System.Nullable<int> PrintsForOneModel
+		{
+			get
+			{
+				return this._PrintsForOneModel;
+			}
+			set
+			{
+				if ((this._PrintsForOneModel != value))
+				{
+					this._PrintsForOneModel = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalExamModels", DbType="Int")]
+		public System.Nullable<int> TotalExamModels
+		{
+			get
+			{
+				return this._TotalExamModels;
+			}
+			set
+			{
+				if ((this._TotalExamModels != value))
+				{
+					this._TotalExamModels = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPacks", DbType="Int")]
+		public System.Nullable<int> TotalPacks
+		{
+			get
+			{
+				return this._TotalPacks;
+			}
+			set
+			{
+				if ((this._TotalPacks != value))
+				{
+					this._TotalPacks = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamCode", DbType="NVarChar(12)")]
+		public string ExamCode
+		{
+			get
+			{
+				return this._ExamCode;
+			}
+			set
+			{
+				if ((this._ExamCode != value))
+				{
+					this._ExamCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BooksCount", DbType="Int")]
+		public System.Nullable<int> BooksCount
+		{
+			get
+			{
+				return this._BooksCount;
+			}
+			set
+			{
+				if ((this._BooksCount != value))
+				{
+					this._BooksCount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamCenterRequiredExamsID", DbType="Int")]
+		public System.Nullable<int> ExamCenterRequiredExamsID
+		{
+			get
+			{
+				return this._ExamCenterRequiredExamsID;
+			}
+			set
+			{
+				if ((this._ExamCenterRequiredExamsID != value))
+				{
+					this._ExamCenterRequiredExamsID = value;
+				}
+			}
 		}
 	}
 	

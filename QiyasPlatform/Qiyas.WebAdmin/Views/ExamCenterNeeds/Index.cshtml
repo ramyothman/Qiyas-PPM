@@ -65,30 +65,36 @@
 
 @section Scripts {
     <script type="text/javascript">
-        function CustomButtonClick(s, e, url) {
-            var key = s.GetRowKey(e.visibleIndex);
+    function CustomButtonClick(s, e, url) {
+        var key = s.GetRowKey(e.visibleIndex);
 
-            if (e.buttonID === "btnViewNeededItems") {
-                url = "@Url.Action("BrowseItems", "ExamCenterNeeds")";
-                var destUrl = url + "/" + key;
-                window.location.href = destUrl;
-            }
-            if (e.buttonID === "btnPrepareForWithdraw") {
-                url = "@Url.Action("SendItemsRequest", "ExamCenterNeeds")";
-                var destUrl = url + "/" + key;
-                window.location.href = destUrl;
-            }
-            if (e.buttonID === "btnViewPrintItems") {
-                url = "@Url.Action("WithdrawReport", "ExamCenterNeeds")";
-                var destUrl = url + "/" + key + "/request";
-                window.location.href = destUrl;
-            }
-            if (e.buttonID === "btnViewContainerItems") {
-                url = "@Url.Action("ContainerRequest", "ExamCenterNeeds")";
+        if (e.buttonID === "btnViewNeededItems") {
+            url = "@Url.Action("BrowseItems", "ExamCenterNeeds")";
+            var destUrl = url + "/" + key;
+            window.location.href = destUrl;
+        }
+        if (e.buttonID === "btnPrepareForWithdraw") {
+            url = "@Url.Action("SendItemsRequest", "ExamCenterNeeds")";
+            var destUrl = url + "/" + key;
+            window.location.href = destUrl;
+        }
+        if (e.buttonID === "btnViewPrintItems") {
+            url = "@Url.Action("WithdrawReport", "ExamCenterNeeds")";
+            var destUrl = url + "/" + key + "/request";
+            window.location.href = destUrl;
+        }
+        if (e.buttonID === "btnViewContainerItems") {
+            url = "@Url.Action("ContainerRequest", "ExamCenterNeeds")";
                 var destUrl = url + "/" + key;
                 window.location.href = destUrl;
             }
 
+        if (e.buttonID === "btnViewShippingBags") {
+                url = "@Url.Action("ShippingBags", "ExamCenterNeeds")";
+                var destUrl = url + "/" + key;
+                window.location.href = destUrl;
+            }
+            
         }
     </script>
 }

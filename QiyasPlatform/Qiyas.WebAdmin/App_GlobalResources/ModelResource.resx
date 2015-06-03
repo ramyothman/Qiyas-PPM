@@ -463,7 +463,7 @@
     <value>RequestWithdrawDetailItemID</value>
   </data>
   <data name="PackCount" xml:space="preserve">
-    <value>PackCount</value>
+    <value>عدد الحزم</value>
   </data>
   <data name="RequestWithdrawDetailItemModelID" xml:space="preserve">
     <value>RequestWithdrawDetailItemModelID</value>
@@ -473,5 +473,11 @@
   </data>
   <data name="PackageTotalPerModel" xml:space="preserve">
     <value>عدد الحزم للنموذج</value>
+  </data>
+  <data name="BookCount" xml:space="preserve">
+    <value>عدد الكتب</value>
+  </data>
+  <data name="ShippingBagSerial" xml:space="preserve">
+    <value>رقم الحقيبة</value>
   </data>
 </root>

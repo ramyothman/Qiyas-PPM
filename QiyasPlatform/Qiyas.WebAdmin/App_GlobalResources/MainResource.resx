@@ -484,4 +484,13 @@
   <data name="ContainerRequestTitle" xml:space="preserve">
     <value>تجهيز حاويات المركز</value>
   </data>
+  <data name="ShippingBagEditFormTitle" xml:space="preserve">
+    <value>حفظ حقيبة مركز</value>
+  </data>
+  <data name="ShippingBagPrepareTitle" xml:space="preserve">
+    <value>تجهيز حقائب مركز</value>
+  </data>
+  <data name="ShippingBagTitle" xml:space="preserve">
+    <value>حقائب مركز</value>
+  </data>
 </root>

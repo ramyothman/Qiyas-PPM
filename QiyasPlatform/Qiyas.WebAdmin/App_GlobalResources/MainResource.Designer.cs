@@ -1051,6 +1051,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to حفظ حقيبة مركز.
+        /// </summary>
+        internal static string ShippingBagEditFormTitle {
+            get {
+                return ResourceManager.GetString("ShippingBagEditFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تجهيز حقائب مركز.
+        /// </summary>
+        internal static string ShippingBagPrepareTitle {
+            get {
+                return ResourceManager.GetString("ShippingBagPrepareTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حقائب مركز.
+        /// </summary>
+        internal static string ShippingBagTitle {
+            get {
+                return ResourceManager.GetString("ShippingBagTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to حفظ منطقة إدارية.
         /// </summary>
         internal static string StateProvinceEditFormTitle {

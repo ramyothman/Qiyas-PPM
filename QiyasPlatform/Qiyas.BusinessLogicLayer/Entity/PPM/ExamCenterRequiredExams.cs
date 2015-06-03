@@ -60,6 +60,15 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             set { _PackageCode = value; }
             get { return _PackageCode; }
         }
+
+
+        private string _ShippingBagCode;
+        [Display(Name = "ShippingBagCode")]
+        public string ShippingBagCode
+        {
+            set { _ShippingBagCode = value; }
+            get { return _ShippingBagCode; }
+        }
     }
 }
       

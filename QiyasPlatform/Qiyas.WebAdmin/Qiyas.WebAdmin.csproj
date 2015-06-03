@@ -1314,6 +1314,10 @@
     <Content Include="Views\ExamCenterNeeds\ContainerRequest.cshtml" />
     <Content Include="Views\ExamCenterNeeds\_ContainerRequestGridViewPartial.cshtml" />
     <Content Include="Views\ExamCenterNeeds\_ViewWithdrawalReportGridViewPartial.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\ShippingBags.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\_ShippingBagsGridViewPartial.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\ShippingBagItems.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\_ShippingBagItemsGridViewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

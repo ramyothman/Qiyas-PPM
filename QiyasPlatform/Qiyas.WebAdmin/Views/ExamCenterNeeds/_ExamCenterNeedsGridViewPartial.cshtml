@@ -59,6 +59,17 @@
         
         settings.ClientSideEvents.CustomButtonClick =
         string.Format("function(s, e) {{ CustomButtonClick(s, e, '{0}'); }}", Url.Action("BrowseItems", "ExamCenterNeeds"));
+
+
+        GridViewCommandColumnCustomButton customButtonShipping = new GridViewCommandColumnCustomButton() { ID = "btnViewShippingBags", Text = " " };
+        customButtonShipping.Styles.Style.CssClass = "fa fa-tasks";
+        customButtonShipping.Image.AlternateText = Resources.MainResource.ShippingBagTitle;
+        //customButton.Image.Url = "~/images/print.png";
+        settings.CommandColumn.CustomButtons.Add(customButtonShipping);
+
+        settings.ClientSideEvents.CustomButtonClick =
+        string.Format("function(s, e) {{ CustomButtonClick(s, e, '{0}'); }}", Url.Action("BrowseItems", "ExamCenterNeeds"));
+        
         
         
         settings.SettingsSearchPanel.Visible = true;
@@ -132,7 +143,7 @@
                     column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Right;
                     column.ColumnType = MVCxGridViewColumnType.ComboBox;
                     var comboProperties = column.PropertiesEdit as ComboBoxProperties;
-                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.ExamCenterLogic().GetAllActive());
+                    comboProperties.DataSource = (new Qiyas.BusinessLogicLayer.Components.PPM.ExamCenterLogic().GetAll());
                     comboProperties.TextField = "Name";
                     comboProperties.ValueField = "ExaminationCenterID";
 
@@ -141,6 +152,12 @@
                     comboProperties.ValidationSettings.RequiredField.ErrorText = "*";
                     comboProperties.ValidationSettings.Display = Display.Dynamic;
                     comboProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+
+                    //column.SetEditItemTemplateContent(c =>
+                    //{
+
+                    //    Html.RenderPartial("~/Views/ExamSpeciality/ComboBoxExamSpecialityPartial.cshtml", (new Qiyas.BusinessLogicLayer.Components.PPM.ExamCenterLogic().GetAllActive()));
+                    //});
                 });
 				
                 settings.Columns.Add(column =>

@@ -11,7 +11,58 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
 {
     public partial class ShippingBagItem
     {
-        
+        private string _PackageCode;
+        [Display(Name = "PackageCode")]
+        public string PackageCode
+        {
+            set { _PackageCode = value; }
+            get { return _PackageCode; }
+        }
+
+        private string _ExamCenterCode;
+        [Display(Name = "CenterCode")]
+        public string ExamCenterCode
+        {
+            set { _ExamCenterCode = value; }
+            get
+            {
+                return _ExamCenterCode;
+            }
+        }
+
+        private string _ExamModelName;
+        [Display(Name = "ExamModelName")]
+        public string ExamModelName
+        {
+            set { _ExamModelName = value; }
+            get { return _ExamModelName; }
+        }
+
+        private int? _TotalPacks;
+        [Display(Name = "TotalPacks")]
+        public int? TotalPacks
+        {
+            set { _TotalPacks = value; }
+            get { return _TotalPacks; }
+        }
+
+        private int? _BooksCount;
+        [Display(Name = "BookCount")]
+        public int? BooksCount
+        {
+            set { _BooksCount = value; }
+            get { return _BooksCount; }
+        }
+
+        private int? _PackSerial;
+        [Display(Name = "PackSerial")]
+        public int? PackSerial
+        {
+            set { _PackSerial = value; }
+            get { return _PackSerial; }
+        }
+
+
     }
 }
       

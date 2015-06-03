@@ -43,7 +43,7 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             get{ return this.entity.ShippingBagID; }
         }
     
-        [Required(ErrorMessage="RequiredValidation")] 
+        
         [Display(Name = "ExamCenterRequiredExamsID")]
         public int? ExamCenterRequiredExamsID
         {            
@@ -56,6 +56,28 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
         {            
             set{ this.entity.ShippingBagCode = value; }
             get{ return this.entity.ShippingBagCode; }
+        }
+
+
+        [Display(Name = "ShippingBagSerial")]
+        public int? ShippingBagSerial
+        {
+            set { this.entity.ShippingBagSerial = value; }
+            get { return this.entity.ShippingBagSerial; }
+        }
+
+        [Display(Name = "BookCount")]
+        public int? BookCount
+        {
+            set { this.entity.BookCount = value; }
+            get { return this.entity.BookCount; }
+        }
+
+        [Display(Name = "PackCount")]
+        public int? PackCount
+        {
+            set { this.entity.PackCount = value; }
+            get { return this.entity.PackCount; }
         }
     
         [Display(Name = "CreatedBy")]

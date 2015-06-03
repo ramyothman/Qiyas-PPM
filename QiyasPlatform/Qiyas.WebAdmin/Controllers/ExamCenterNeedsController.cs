@@ -7,6 +7,7 @@ using DevExpress.Web.Mvc;
 using System.IO;
 using Excel;
 using System.Data;
+using System.Text;
 
 namespace Qiyas.WebAdmin.Controllers
 {
@@ -776,5 +777,276 @@ namespace Qiyas.WebAdmin.Controllers
             //BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam item = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(MainID);
             return RedirectToAction("Index");
         }
-    }
+
+
+        #region Shipping Bags
+        BusinessLogicLayer.Components.PPM.ShippingBagLogic ShippingBagLogic = new BusinessLogicLayer.Components.PPM.ShippingBagLogic();
+        public ActionResult ShippingBags(int ID = 0)
+        {
+            if (ID == 0)
+                return RedirectToAction("Index");
+
+            BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam item = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(ID);
+            if (!item.HasObject)
+                return RedirectToAction("Index");
+            ViewBag.HasError = false;
+            ViewBag.NotifyMessage = "";
+            MainID = ID;
+            return View(item);
+        }
+
+        public ActionResult ShippingBagItems(int ID = 0)
+        {
+            if (ID == 0)
+                return RedirectToAction("Index");
+            BusinessLogicLayer.Entity.PPM.ShippingBag bag = new BusinessLogicLayer.Entity.PPM.ShippingBag(ID);
+            if (!bag.HasObject)
+                return RedirectToAction("Index");
+            BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam item = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(bag.ExamCenterRequiredExamsID.Value);
+            if (!item.HasObject)
+                return RedirectToAction("Index");
+            ViewBag.HasError = false;
+            ViewBag.NotifyMessage = "";
+            MainID = bag.ExamCenterRequiredExamsID.Value;
+            return View(item);
+        }
+        //
+
+        string RandomString(int length, string allowedChars = "0123456789")
+        {
+            if (length < 0) throw new ArgumentOutOfRangeException("length", "length cannot be less than zero.");
+            if (string.IsNullOrEmpty(allowedChars)) throw new ArgumentException("allowedChars may not be empty.");
+
+            const int byteSize = 0x100;
+            var allowedCharSet = new HashSet<char>(allowedChars).ToArray();
+            if (byteSize < allowedCharSet.Length) throw new ArgumentException(String.Format("allowedChars may contain no more than {0} characters.", byteSize));
+
+            // Guid.NewGuid and System.Random are not particularly random. By using a
+            // cryptographically-secure random number generator, the caller is always
+            // protected, regardless of use.
+            using (var rng = new System.Security.Cryptography.RNGCryptoServiceProvider())
+            {
+                var result = new StringBuilder();
+                var buf = new byte[128];
+                while (result.Length < length)
+                {
+                    rng.GetBytes(buf);
+                    for (var i = 0; i < buf.Length && result.Length < length; ++i)
+                    {
+                        // Divide the byte into allowedCharSet-sized groups. If the
+                        // random value falls into the last group and the last group is
+                        // too small to choose from the entire allowedCharSet, ignore
+                        // the value in order to avoid biasing the result.
+                        var outOfRangeStart = byteSize - (byteSize % allowedCharSet.Length);
+                        if (outOfRangeStart <= buf[i]) continue;
+                        result.Append(allowedCharSet[buf[i] % allowedCharSet.Length]);
+                    }
+                }
+                return result.ToString();
+            }
+        }
+
+        [ValidateInput(false)]
+        public ActionResult ShippingBagsGridViewPartial()
+        {
+            var model = ShippingBagLogic.GetAllByExamCenterRequiredExamsID(MainID);
+            return PartialView("_ShippingBagsGridViewPartial", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult ShippingBagsGridViewPartialAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] Qiyas.BusinessLogicLayer.Entity.PPM.ShippingBag item)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    BusinessLogicLayer.Entity.PPM.ShippingBag bag = new BusinessLogicLayer.Entity.PPM.ShippingBag();
+                    bag.BookCount = 0;
+                    bag.CreatedDate = DateTime.Now;
+                    bag.ModifiedDate = DateTime.Now;
+                    bag.PackCount = 0;
+                    bag.ShippingBagCode = RandomString(12);
+                    bag.ExamCenterRequiredExamsID = MainID;
+                    bag.ShippingBagSerial = item.ShippingBagSerial;
+                    bag.Save();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "من فضلك صحح الاخطاء";
+            var model = ShippingBagLogic.GetAllByExamCenterRequiredExamsID(MainID);
+            return PartialView("_ShippingBagsGridViewPartial", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult ShippingBagsGridViewPartialUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] Qiyas.BusinessLogicLayer.Entity.PPM.ShippingBag item)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    BusinessLogicLayer.Entity.PPM.ShippingBag bag = new BusinessLogicLayer.Entity.PPM.ShippingBag(item.ShippingBagID);
+                    bag.ModifiedDate = DateTime.Now;
+                    bag.ShippingBagSerial = item.ShippingBagSerial;
+                    bag.Save();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "من فضلك صحح الاخطاء";
+            var model = ShippingBagLogic.GetAllByExamCenterRequiredExamsID(MainID);
+            return PartialView("_ShippingBagsGridViewPartial", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult ShippingBagsGridViewPartialDelete(System.Int32 ShippingBagID)
+        {
+            
+            if (ShippingBagID >= 0)
+            {
+                try
+                {
+                    BusinessLogicLayer.Entity.PPM.ShippingBag bag = new BusinessLogicLayer.Entity.PPM.ShippingBag(ShippingBagID);
+                    if(bag != null)
+                        bag.Delete();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            var model = ShippingBagLogic.GetAllByExamCenterRequiredExamsID(MainID);
+            return PartialView("_ShippingBagsGridViewPartial", model);
+        }
+        #endregion
+
+        [ValidateInput(false)]
+        public ActionResult ShippingBagItemsGridViewPartial(string ID = "")
+        {
+            if(string.IsNullOrEmpty(ID))
+            {
+                var model = new BusinessLogicLayer.Components.PPM.ShippingBagItemLogic().GetAll(MainID);
+                return PartialView("_ShippingBagItemsGridViewPartial", model);
+            }
+            else
+            {
+
+                var itemPack = new BusinessLogicLayer.Entity.PPM.ShippingBag(MainID, Convert.ToInt32(ID));
+                var model = new BusinessLogicLayer.Components.PPM.ShippingBagItemLogic().GetAll(MainID, itemPack.ShippingBagID);
+                return PartialView("_ShippingBagItemsGridViewPartial", model);
+            }
+            
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult ShippingBagItemsGridViewPartialAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] Qiyas.BusinessLogicLayer.Entity.PPM.ShippingBagItem item)
+        {
+            var model = new object[0];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Insert here a code to insert the new item in your model
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_ShippingBagItemsGridViewPartial", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult ShippingBagItemsGridViewPartialUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] Qiyas.BusinessLogicLayer.Entity.PPM.ShippingBagItem item)
+        {
+            var model = new object[0];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Insert here a code to update the item in your model
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_ShippingBagItemsGridViewPartial", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult ShippingBagItemsGridViewPartialDelete(System.Int32 ShippingBagItemID)
+        {
+            
+            if (ShippingBagItemID >= 0)
+            {
+                try
+                {
+                    BusinessLogicLayer.Entity.PPM.ShippingBagItem item = new BusinessLogicLayer.Entity.PPM.ShippingBagItem(ShippingBagItemID);
+                    item.Delete();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            var model = new BusinessLogicLayer.Components.PPM.ShippingBagItemLogic().GetAll(MainID);
+            return PartialView("_ShippingBagItemsGridViewPartial", model);
+        }
+
+        [HttpPost]
+        public ActionResult ShippingBagAdd(int item)
+        {
+            var itemPack = new BusinessLogicLayer.Entity.PPM.ShippingBag(MainID, item);
+
+            if (itemPack.HasObject)
+            {
+                return Json("exists");
+            }
+            else
+            {
+                return Json("notexists");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ShippingPackAdd(string item, int bag)
+        {
+            var itemPack = new BusinessLogicLayer.Entity.PPM.BookPackItem(item);
+            var bagItem = new BusinessLogicLayer.Entity.PPM.ShippingBag(MainID, bag);
+            if (itemPack.HasObject && bagItem.HasObject)
+            {
+                bagItem.PackCount += 1;
+                bagItem.BookCount += (itemPack.LastBookSerial - itemPack.StartBookSerial) + 1;
+                bagItem.Save();
+
+                BusinessLogicLayer.Entity.PPM.ShippingBagItem pack = new BusinessLogicLayer.Entity.PPM.ShippingBagItem();
+                pack.BookPackItemID = itemPack.BookPackItemID;
+                pack.ShippingBagID = bag;
+                pack.CreatedDate = DateTime.Now;
+                pack.ModifiedDate = DateTime.Now;
+                pack.Save();
+                return Json("exists");
+            }
+            else
+            {
+                return Json("notexists");
+            }
+
+            //var model = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(PrintingOperationID);
+            //model.OperationStatusID = 2;
+            //model.Save();
+            //ViewBag.HasError = false;
+            //ViewBag.NotifyMessage = Resources.MainResource.SaveSuccess;
+
+        }
+    }       
 }

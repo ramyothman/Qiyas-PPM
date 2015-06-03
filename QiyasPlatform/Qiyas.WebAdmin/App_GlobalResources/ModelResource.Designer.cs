@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to عدد الكتب.
+        /// </summary>
+        internal static string BookCount {
+            get {
+                return ResourceManager.GetString("BookCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to مسلسل عمليات تحزيم الكتب.
         /// </summary>
         internal static string BookPackingOperationID {
@@ -754,7 +763,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PackCount.
+        ///   Looks up a localized string similar to عدد الحزم.
         /// </summary>
         internal static string PackCount {
             get {
@@ -1002,6 +1011,15 @@ namespace Resources {
         internal static string ShippingBagItemID {
             get {
                 return ResourceManager.GetString("ShippingBagItemID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to رقم الحقيبة.
+        /// </summary>
+        internal static string ShippingBagSerial {
+            get {
+                return ResourceManager.GetString("ShippingBagSerial", resourceCulture);
             }
         }
         

@@ -1,0 +1,88 @@
+﻿@model Qiyas.BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam
+@{
+
+    ViewBag.Title = @Resources.MainResource.ShippingBagTitle;
+}
+
+<div class="page-title">
+    <h1>
+        @Resources.MainResource.ShippingBagTitle
+    </h1>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+
+                @using (Html.BeginForm("SaveContainerRequest", "ExamCenterNeeds", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "packForm", @name = "packForm", @enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="col-lg-4 pull-right">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ExamPeriodName, new { @class = "col-md-5  pull-right control-label" })
+                            <div class="col-md-7  pull-right">
+                                @Html.TextBoxFor(m => m.ExamPeriodName, new { @class = "form-control col-md-6" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ExamCenterName, new { @class = "col-md-5  pull-right control-label" })
+                            <div class="col-md-7 pull-right">
+                                @Html.TextBoxFor(m => m.ExamCenterName, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        @Html.Action("ShippingBagsGridViewPartial")
+
+                        <br /><br />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="button" name="PrintReport" id="PrintReport" value="طباعة تقرير" class="btn btn-default btn-primary" />
+
+                                <input type="button" name="BackButton" id="BackButton" value="عودة" class="btn btn-default " />
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+
+    @section Scripts {
+        <script type="text/javascript">
+    $("#PrintReport").click(function () {
+        var form = $("form#packForm");
+        form.attr("action", "@Url.Action("PrintShippingBags", "ExamCenterNeeds")");
+        form.submit();
+    });
+
+
+
+    $("#BackButton").click(function (e) {
+        e.preventDefault();
+        window.location = "/ExamCenterNeeds";
+        return false;
+                @*var form = $("form#packForm");
+            form.attr("action", "@Url.Action("PrinPacks", "BookPackingOperation", Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID)");
+            form.submit();*@
+            });
+
+
+            function CustomButtonClick(s, e, url) {
+                var key = s.GetRowKey(e.visibleIndex);
+
+                
+
+                if (e.buttonID === "btnViewShippingBags") {
+                    url = "@Url.Action("ShippingBagItems", "ExamCenterNeeds")";
+                    var destUrl = url + "/" + key;
+                    window.location.href = destUrl;
+                }
+
+            }
+
+        </script>
+    }
