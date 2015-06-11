@@ -4,6 +4,6 @@
     settings.ExportRouteValues = new { Controller = "BookPackingOperation", Action = "PrintPacksTitleDocumentViewerPartialExport" };
 	settings.Report = (XtraReport)Model;
     settings.Width = 680;
-    settings.Report.DataSource = new Qiyas.BusinessLogicLayer.Components.PPM.BookPackItemLogic().GetAllByPrintingID(Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID);
+    settings.Report.DataSource = new Qiyas.BusinessLogicLayer.Components.PPM.BookPackItemLogic().GetAllByPrintingIDForPrinting(Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID);
 	settings.ToolbarMode = DocumentViewerToolbarMode.StandardToolbar;
 }).GetHtml()

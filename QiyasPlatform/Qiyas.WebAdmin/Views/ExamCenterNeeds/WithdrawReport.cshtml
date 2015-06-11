@@ -17,11 +17,27 @@
                 @Html.Action("WithdrawReportDocumentViewerPartial")
 
 
-
+                <br />
+                <br />
+                <form>
+                    <input type="button" name="BackButton" id="BackButton" value="عودة" class="btn btn-default " />
+                </form>
 
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+    $("#BackButton").click(function (e) {
+        e.preventDefault();
+        var url = "@Url.Action("Index", "ExamCenterNeeds")";
+        window.location = url ;
+        return false;
+
+    });
+    </script>
+}
 
 

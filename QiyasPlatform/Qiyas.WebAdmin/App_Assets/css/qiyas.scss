@@ -24,6 +24,24 @@
     color: #007aff;
     font-size: 14px;
     padding: 8px !important;
+    &:first-child{
+        color:#fff;
+        font-weight: bold;
+        background-color: #007aff;
+    }
+}
+
+td.dxgvHeader_MetropolisBlue{
+
+    &:first-child{
+        color:#fff;
+        background-color: #007aff;
+        font-weight: bold;
+        a{
+            color:#FFF;
+            font-weight: bold;
+        }
+    }
 }
 
 .dxgvHeader_MetropolisBlue a.dxgvCommandColumnItem_MetropolisBlue{
@@ -111,3 +129,4 @@ a.dxbButton_MetropolisBlue{
 .dxeRadioButtonList_MetropolisBlue, .dxeCheckBoxList_MetropolisBlue{
     border: none !important;
 }
+

@@ -3,7 +3,8 @@ AS
 SELECT PPM.BookPackItem.BookPackItemID, PPM.BookPackItem.BookPackingOperationID, PPM.BookPackItem.PackCode, PPM.BookPackItem.PackSerial, PPM.BookPackItem.Weight, PPM.BookPackItem.OperationStatusID, 
                   PPM.BookPackItem.ParentID, dbo.GetItemPackSpeciality(PPM.BookPackItem.BookPackItemID) AS Speciality, dbo.GetItemPackExamandExamModel(PPM.BookPackItem.BookPackItemID) AS ModelandNumber, 
                   PPM.BookPackingOperation.BookPrintingOperationID, CASE WHEN ParentID IS NULL THEN PPM.PackagingType.Name ELSE pt1.Name END AS PackageTypeName, PPM.BookPackItem.StartBookSerial, 
-                  PPM.BookPackItem.LastBookSerial
+                  PPM.BookPackItem.LastBookSerial, PPM.BookPackingOperation.PackagingTypeID, pio.PackagingTypeID AS ChildPackagingTypeID, PPM.PackagingType.ExamModelCount, PPM.PackagingType.BooksPerPackage, 
+                  pt1.ExamModelCount AS ChildExamModelCount, pt1.BooksPerPackage AS ChildBooksPerPackage
 FROM     PPM.BookPackItem INNER JOIN
                   PPM.BookPackingOperation ON PPM.BookPackItem.BookPackingOperationID = PPM.BookPackingOperation.BookPackingOperationID INNER JOIN
                   PPM.PackagingType ON PPM.BookPackingOperation.PackagingTypeID = PPM.PackagingType.PackagingTypeID LEFT OUTER JOIN
@@ -83,7 +84,7 @@ Begin DesignProperties =
    End
    Begin DiagramPane = 
       Begin Origin = 
-         Top = 0
+         Top = -240
          Left = 0
       End
       Begin Tables = 
@@ -95,7 +96,7 @@ Begin DesignProperties =
                Right = 310
             End
             DisplayFlags = 280
-            TopColumn = 5
+            TopColumn = 0
          End
          Begin Table = "BookPackingOperation (PPM)"
             Begin Extent = 
@@ -105,7 +106,7 @@ Begin DesignProperties =
                Right = 625
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 6
          End
          Begin Table = "PackagingType (PPM)"
             Begin Extent = 
@@ -119,13 +120,13 @@ Begin DesignProperties =
          End
          Begin Table = "pio"
             Begin Extent = 
-               Top = 175
-               Left = 48
-               Bottom = 338
-               Right = 319
+               Top = 192
+               Left = 63
+               Bottom = 413
+               Right = 334
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 5
          End
          Begin Table = "pt1"
             Begin Extent = 
@@ -144,7 +145,7 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 13
+      Begin ColumnWidths = 16
          Width = 284
          Width = 1200
          Width = 1200
@@ -158,7 +159,9 @@ Begin DesignProperties =
          Width = 1200
          Width = 1200
          Width = 1200
-     ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookPackItemPrint';
+  ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookPackItemPrint';
+
+
 
 
 
@@ -166,7 +169,10 @@ Begin DesignProperties =
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' End
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'       Width = 1200
+         Width = 1200
+         Width = 1200
+      End
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
@@ -187,4 +193,6 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookPackItemPrint';
+
+
 

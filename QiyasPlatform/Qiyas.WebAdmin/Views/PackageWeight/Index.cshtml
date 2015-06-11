@@ -56,13 +56,13 @@
 
 
 @section Scripts {
-    
+    @*@Scripts.Render("~/bundles/jqueryval")*@
     <script type="text/javascript">
         
         $("#SaveWeight").click(function (e) {
             e.preventDefault();
             var urlLink = "@Url.Action("SaveWeight", "PackageWeight")";
-
+            
             $.ajax({
                 type: "POST",
                 dataType: "json",
@@ -128,17 +128,12 @@
                 }
             });
         });
-
-        $(document).ready(function () {
-            
-            
-            $("form").bind("keypress", function (e) {
-                if (e.keyCode == 13) {
-                    return false;
-                }
-            });
-            $('#PackageCode').focus();
+        $('#PackageCode').focus();
+        $("form").bind("keypress", function (e) {
+            if (e.keyCode == 13) {
+                $('#Weight').focus();
+            }
         });
 </script>
-    @Scripts.Render("~/bundles/jqueryval")
+    
 }

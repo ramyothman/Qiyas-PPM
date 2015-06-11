@@ -115,6 +115,12 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
         {
             return db.GetLastPackSerialForExamID(ExamID).Value;
         }
+
+        public bool HaveA3Packs(int ID)
+        {
+            bool? value = db.HaveA3Packs(ID);
+            return value.HasValue? value.Value: false;
+        }
     }
 }
       

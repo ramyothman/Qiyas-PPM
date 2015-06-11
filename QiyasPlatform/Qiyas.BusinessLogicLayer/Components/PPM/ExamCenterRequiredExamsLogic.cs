@@ -17,6 +17,8 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
             var item = db.ExamCenterRequiredExams.Where(c => c.ExamPeriodID == PeriodID && c.ExamCenterID == CenterID && c.RequestPreparationStatusID == StatusID).FirstOrDefault();
             return item != null;
         }
+
+
     }
 }
       

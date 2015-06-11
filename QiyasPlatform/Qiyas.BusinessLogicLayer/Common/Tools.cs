@@ -92,6 +92,19 @@ namespace Qiyas.BusinessLogicLayer
 
         }
 
+        public static string GregToHijriYear(DateTime dtTime)
+        {
+            if (dtTime == DateTime.MinValue)
+                return "";
+            UmAlQuraCalendar calHijri = new UmAlQuraCalendar();
+            string weekday = Convert.ToString(calHijri.GetDayOfWeek(dtTime));
+            int CurrDayOfMonth = calHijri.GetDayOfMonth(dtTime);
+            int CurrMonth = calHijri.GetMonth(dtTime);
+            int Curryear = calHijri.GetYear(dtTime);
+            return Curryear.ToString();
+
+        }
+
         public static string GregToHijriCompleteWithDay(DateTime dtTime)
         {
             if (dtTime == DateTime.MinValue)

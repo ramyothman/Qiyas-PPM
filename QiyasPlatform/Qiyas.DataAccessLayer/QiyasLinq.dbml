@@ -408,23 +408,6 @@
       <Association Name="ShippingBag_ShippingBagItem" Member="ShippingBag" ThisKey="ShippingBagID" OtherKey="ShippingBagID" Type="ShippingBag" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
-  <Table Name="dbo.ViewBookPackItemPrint" Member="ViewBookPackItemPrints">
-    <Type Name="ViewBookPackItemPrint">
-      <Column Name="BookPackItemID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="BookPackingOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PackCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="PackSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Weight" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="OperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Speciality" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ModelandNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="BookPrintingOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PackageTypeName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="StartBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LastBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.PackageWeightView" Member="PackageWeightViews">
     <Type Name="PackageWeightView">
       <Column Name="PackageWeightID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -830,6 +813,45 @@
       <Column Name="ExamCenterRequiredExamsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.ViewBookPackItemPrint" Member="ViewBookPackItemPrints">
+    <Type Name="ViewBookPackItemPrint">
+      <Column Name="BookPackItemID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BookPackingOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PackSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Weight" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="OperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Speciality" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ModelandNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="BookPrintingOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageTypeName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="StartBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackagingTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChildPackagingTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamModelCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BooksPerPackage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChildExamModelCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChildBooksPerPackage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ViewExamCenterRequiredExams" Member="ViewExamCenterRequiredExams">
+    <Type Name="ViewExamCenterRequiredExam">
+      <Column Name="ExamCenterRequiredExamsID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExamPeriodID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamCenterID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RequestPreparationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FileNeedsPath" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamPeriodName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ExamCenterCode" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="ExamCenterName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.DeleteExamModelItemByExamID" Method="DeleteExamModelItemByExamID">
     <Parameter Name="ExamID" Parameter="examID" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
@@ -946,5 +968,9 @@
   <Function Name="dbo.GetWithdrawRequestSerial" Method="GetWithdrawRequestSerial" IsComposable="true">
     <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.HaveA3Packs" Method="HaveA3Packs" IsComposable="true">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Boolean" />
   </Function>
 </Database>

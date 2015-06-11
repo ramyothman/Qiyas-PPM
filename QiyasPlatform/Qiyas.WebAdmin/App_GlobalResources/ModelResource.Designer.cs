@@ -340,6 +340,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to رقم المركز.
+        /// </summary>
+        internal static string ExamCenterCode {
+            get {
+                return ResourceManager.GetString("ExamCenterCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ExamCenterID.
         /// </summary>
         internal static string ExamCenterID {

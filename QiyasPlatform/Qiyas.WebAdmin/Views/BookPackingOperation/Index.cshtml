@@ -115,12 +115,10 @@
 
 @section Scripts {
     <script type="text/javascript">
-
-        $(document).ready(function () {
-            var url = "@Url.Action("GetPackingTotals", "BookPackingOperation")";
-            GetPackingTotals(url);
-        });
-
+        var url = "@Url.Action("GetPackingTotals", "BookPackingOperation")";
+        GetPackingTotals(url);
+        
+        
         function GetPackingTotals(urlLink) {
 
 

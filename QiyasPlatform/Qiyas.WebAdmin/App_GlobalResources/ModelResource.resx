@@ -480,4 +480,7 @@
   <data name="ShippingBagSerial" xml:space="preserve">
     <value>رقم الحقيبة</value>
   </data>
+  <data name="ExamCenterCode" xml:space="preserve">
+    <value>رقم المركز</value>
+  </data>
 </root>

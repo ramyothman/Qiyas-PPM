@@ -11,7 +11,10 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
 {
     public partial class PackagingType
     {
-        
+        public PackagingType(int ExamModelCount, int BooksPerPackage)
+        {
+            this.entity = context.PackagingTypes.Where(p => p.ExamModelCount == ExamModelCount && p.BooksPerPackage == BooksPerPackage).FirstOrDefault();
+        }
     }
 }
       

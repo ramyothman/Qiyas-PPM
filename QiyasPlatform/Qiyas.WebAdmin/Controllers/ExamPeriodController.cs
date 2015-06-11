@@ -19,6 +19,7 @@ namespace Qiyas.WebAdmin.Controllers
         [ValidateInput(false)]
         public ActionResult ExamPeriodGridViewPartial()
         {
+            ViewBag.ExamYear = Convert.ToInt32(BusinessLogicLayer.Tools.GregToHijriYear(DateTime.Today));
             var model = new BusinessLogicLayer.Components.PPM.ExamPeriodLogic().GetAll();
             return PartialView("_ExamPeriodGridViewPartial", model);
         }
@@ -27,7 +28,7 @@ namespace Qiyas.WebAdmin.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult ExamPeriodGridViewPartialAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] Qiyas.BusinessLogicLayer.Entity.PPM.ExamPeriod item)
         {
-            
+            ViewBag.ExamYear = Convert.ToInt32(BusinessLogicLayer.Tools.GregToHijriYear(DateTime.Today));
             if (ModelState.IsValid)
             {
                 try
@@ -75,7 +76,7 @@ namespace Qiyas.WebAdmin.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult ExamPeriodGridViewPartialUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] Qiyas.BusinessLogicLayer.Entity.PPM.ExamPeriod item)
         {
-            
+            ViewBag.ExamYear = Convert.ToInt32(BusinessLogicLayer.Tools.GregToHijriYear(DateTime.Today));
             if (ModelState.IsValid)
             {
                 try
@@ -121,7 +122,7 @@ namespace Qiyas.WebAdmin.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult ExamPeriodGridViewPartialDelete(System.Int32 ExamPeriodID)
         {
-            
+            ViewBag.ExamYear = Convert.ToInt32(BusinessLogicLayer.Tools.GregToHijriYear(DateTime.Today));
             if (ExamPeriodID >= 0)
             {
                 try

@@ -159,7 +159,7 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             {
 
                 center = GetCenter(0,db);
-                context.ExamCenters.InsertOnSubmit(center);
+                db.ExamCenters.InsertOnSubmit(center);
             }
             else
             {

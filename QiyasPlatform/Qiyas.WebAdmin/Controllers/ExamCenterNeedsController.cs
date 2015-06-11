@@ -641,6 +641,17 @@ namespace Qiyas.WebAdmin.Controllers
         {
             if (ID == 0)
                 return RedirectToAction("Index");
+            BusinessLogicLayer.Components.PPM.RequestWithdrawDetailLogic RequestWithdrawDetailLogic = new BusinessLogicLayer.Components.PPM.RequestWithdrawDetailLogic();
+            if (ReportType == "withdraw")
+            {
+                if(!RequestWithdrawDetailLogic.HasDataByRequestWithdrawID(ID))
+                    return RedirectToAction("Index");
+            }
+            else
+            {
+                if (!RequestWithdrawDetailLogic.HasDataByExamCenterRequiredExamsID(ID))
+                    return RedirectToAction("Index");
+            }
             ViewBag.HasError = false;
             ViewBag.NotifyMessage = "";
             ReportID = ID;

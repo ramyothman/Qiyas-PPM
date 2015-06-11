@@ -62,7 +62,13 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
         public int? ExamYear
         {            
             set{ this.entity.ExamYear = value; }
-            get{ return this.entity.ExamYear; }
+            get
+            {
+                string hijri = Tools.GregToHijriYear(DateTime.Today);
+                if (!this.entity.ExamYear.HasValue)
+                    this.entity.ExamYear = Convert.ToInt32(hijri);
+                return this.entity.ExamYear; 
+            }
         }
     
         [Required(ErrorMessage="RequiredValidation")] 
@@ -70,7 +76,14 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
         public int? StudentGenderID
         {            
             set{ this.entity.StudentGenderID = value; }
-            get{ return this.entity.StudentGenderID; }
+            get
+            {
+                if(!this.entity.StudentGenderID.HasValue)
+                {
+                    this.entity.StudentGenderID = 3;
+                }
+                return this.entity.StudentGenderID; 
+            }
         }
     
         [Display(Name = "StartDate")]

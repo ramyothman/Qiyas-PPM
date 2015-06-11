@@ -1119,6 +1119,8 @@
     <Content Include="Scripts\isotope_extras.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.11.3.js" />
+    <Content Include="Scripts\jquery-1.11.3.min.js" />
     <Content Include="Scripts\jquery.plugin.min.js.map">
       <DependentUpon>jquery.plugin.min.js</DependentUpon>
     </Content>
@@ -1362,9 +1364,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Common\Reports\WithdrawReport.resx">
       <DependentUpon>WithdrawReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

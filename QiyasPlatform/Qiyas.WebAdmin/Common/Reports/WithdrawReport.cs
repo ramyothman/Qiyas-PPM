@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using DevExpress.XtraReports.UI;
+using System.Collections.Generic;
 
 namespace Qiyas.WebAdmin.Common.Reports
 {
@@ -21,6 +22,12 @@ namespace Qiyas.WebAdmin.Common.Reports
                     LoadDataByRequestID(ID);
                     break;
             }
+        }
+
+        public bool HasData()
+        {
+            var items = this.DataSource as List<BusinessLogicLayer.Entity.PPM.RequestWithdrawDetail>;
+            return items == null ? items.Count > 0 : false;
         }
         public void LoadDataByWithdrawID(int ID)
         {

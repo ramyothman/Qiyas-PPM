@@ -30,7 +30,7 @@
         settings.CommandColumn.Width = new System.Web.UI.WebControls.Unit("60px");
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = false;
-        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowDeleteButton = !@ViewBag.IsSaved; ;
         //settings.CommandColumn.ShowEditButton = true;
         settings.ClientSideEvents.EndCallback =
         string.Format("function(s, e) {{ GetPackingTotals('{0}'); }}", Url.Action("GetPackingTotals", "BookPackingOperation"));

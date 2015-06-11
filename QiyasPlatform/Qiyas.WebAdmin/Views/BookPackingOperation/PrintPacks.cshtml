@@ -15,9 +15,25 @@
         <div class="widget-container fluid-height clearfix">
             <div class="widget-content padded clearfix">
                 @Html.Action("PrintPacksTitleDocumentViewerPartial")
+                <br />
+                <br />
+                <form>
+                    <input type="button" name="BackButton" id="BackButton" value="عودة" class="btn btn-default " />
+                </form>
             </div>
         </div>
     </div>
 </div>
 
 
+@section Scripts {
+    <script type="text/javascript">
+    $("#BackButton").click(function (e) {
+        e.preventDefault();
+        var url = "@Url.Action("Index", "BookPackingOperation")" + "/Index/" + "@Model.BookPrintingOperationID";
+        window.location = url ;
+        return false;
+
+    });
+</script>
+}

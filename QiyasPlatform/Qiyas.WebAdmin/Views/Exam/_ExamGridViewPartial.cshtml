@@ -52,7 +52,25 @@
         settings.Settings.ShowFilterRow = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
         settings.Styles.AlternatingRow.BackColor = System.Drawing.Color.FromName("#f9f9f9");
-				
+
+                settings.Columns.Add(col =>
+                {
+                    col.VisibleIndex = 0;
+                    col.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
+                    col.FieldName = "RowNumber";
+                    col.Caption = "#";
+                    col.Width = new System.Web.UI.WebControls.Unit("50px");
+                    col.EditFormSettings.Visible = DefaultBoolean.False;
+
+                });
+                settings.CustomColumnDisplayText = (s, e) =>
+                {
+                    var gr = s as MVCxGridView;
+                    if (e.Column.FieldName != "RowNumber")
+                        return;
+                    e.Value = e.VisibleRowIndex + 1;
+                    e.DisplayText = (e.VisibleRowIndex + 1).ToString();
+                };
                 settings.Columns.Add(column =>
                 {
                     column.FieldName = "ExamCode";

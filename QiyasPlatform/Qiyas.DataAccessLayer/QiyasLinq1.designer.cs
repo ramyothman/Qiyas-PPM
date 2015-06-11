@@ -439,14 +439,6 @@ namespace Qiyas.DataAccessLayer
 			}
 		}
 		
-		public System.Data.Linq.Table<ViewBookPackItemPrint> ViewBookPackItemPrints
-		{
-			get
-			{
-				return this.GetTable<ViewBookPackItemPrint>();
-			}
-		}
-		
 		public System.Data.Linq.Table<PackageWeightView> PackageWeightViews
 		{
 			get
@@ -623,6 +615,22 @@ namespace Qiyas.DataAccessLayer
 			}
 		}
 		
+		public System.Data.Linq.Table<ViewBookPackItemPrint> ViewBookPackItemPrints
+		{
+			get
+			{
+				return this.GetTable<ViewBookPackItemPrint>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ViewExamCenterRequiredExam> ViewExamCenterRequiredExams
+		{
+			get
+			{
+				return this.GetTable<ViewExamCenterRequiredExam>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.DeleteExamModelItemByExamID")]
 		public int DeleteExamModelItemByExamID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ExamID", DbType="Int")] System.Nullable<int> examID)
 		{
@@ -759,6 +767,12 @@ namespace Qiyas.DataAccessLayer
 		public System.Nullable<int> GetWithdrawRequestSerial([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
 		{
 			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.HaveA3Packs", IsComposable=true)]
+		public System.Nullable<bool> HaveA3Packs([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
+		{
+			return ((System.Nullable<bool>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD).ReturnValue));
 		}
 	}
 	
@@ -9326,249 +9340,6 @@ namespace Qiyas.DataAccessLayer
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ViewBookPackItemPrint")]
-	public partial class ViewBookPackItemPrint
-	{
-		
-		private int _BookPackItemID;
-		
-		private System.Nullable<int> _BookPackingOperationID;
-		
-		private string _PackCode;
-		
-		private System.Nullable<int> _PackSerial;
-		
-		private System.Nullable<decimal> _Weight;
-		
-		private System.Nullable<int> _OperationStatusID;
-		
-		private System.Nullable<int> _ParentID;
-		
-		private string _Speciality;
-		
-		private string _ModelandNumber;
-		
-		private System.Nullable<int> _BookPrintingOperationID;
-		
-		private string _PackageTypeName;
-		
-		private System.Nullable<int> _StartBookSerial;
-		
-		private System.Nullable<int> _LastBookSerial;
-		
-		public ViewBookPackItemPrint()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPackItemID", DbType="Int NOT NULL")]
-		public int BookPackItemID
-		{
-			get
-			{
-				return this._BookPackItemID;
-			}
-			set
-			{
-				if ((this._BookPackItemID != value))
-				{
-					this._BookPackItemID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPackingOperationID", DbType="Int")]
-		public System.Nullable<int> BookPackingOperationID
-		{
-			get
-			{
-				return this._BookPackingOperationID;
-			}
-			set
-			{
-				if ((this._BookPackingOperationID != value))
-				{
-					this._BookPackingOperationID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackCode", DbType="NVarChar(20)")]
-		public string PackCode
-		{
-			get
-			{
-				return this._PackCode;
-			}
-			set
-			{
-				if ((this._PackCode != value))
-				{
-					this._PackCode = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackSerial", DbType="Int")]
-		public System.Nullable<int> PackSerial
-		{
-			get
-			{
-				return this._PackSerial;
-			}
-			set
-			{
-				if ((this._PackSerial != value))
-				{
-					this._PackSerial = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weight", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> Weight
-		{
-			get
-			{
-				return this._Weight;
-			}
-			set
-			{
-				if ((this._Weight != value))
-				{
-					this._Weight = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OperationStatusID", DbType="Int")]
-		public System.Nullable<int> OperationStatusID
-		{
-			get
-			{
-				return this._OperationStatusID;
-			}
-			set
-			{
-				if ((this._OperationStatusID != value))
-				{
-					this._OperationStatusID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ParentID", DbType="Int")]
-		public System.Nullable<int> ParentID
-		{
-			get
-			{
-				return this._ParentID;
-			}
-			set
-			{
-				if ((this._ParentID != value))
-				{
-					this._ParentID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Speciality", DbType="NVarChar(50)")]
-		public string Speciality
-		{
-			get
-			{
-				return this._Speciality;
-			}
-			set
-			{
-				if ((this._Speciality != value))
-				{
-					this._Speciality = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModelandNumber", DbType="NVarChar(50)")]
-		public string ModelandNumber
-		{
-			get
-			{
-				return this._ModelandNumber;
-			}
-			set
-			{
-				if ((this._ModelandNumber != value))
-				{
-					this._ModelandNumber = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPrintingOperationID", DbType="Int")]
-		public System.Nullable<int> BookPrintingOperationID
-		{
-			get
-			{
-				return this._BookPrintingOperationID;
-			}
-			set
-			{
-				if ((this._BookPrintingOperationID != value))
-				{
-					this._BookPrintingOperationID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackageTypeName", DbType="NVarChar(50)")]
-		public string PackageTypeName
-		{
-			get
-			{
-				return this._PackageTypeName;
-			}
-			set
-			{
-				if ((this._PackageTypeName != value))
-				{
-					this._PackageTypeName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartBookSerial", DbType="Int")]
-		public System.Nullable<int> StartBookSerial
-		{
-			get
-			{
-				return this._StartBookSerial;
-			}
-			set
-			{
-				if ((this._StartBookSerial != value))
-				{
-					this._StartBookSerial = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastBookSerial", DbType="Int")]
-		public System.Nullable<int> LastBookSerial
-		{
-			get
-			{
-				return this._LastBookSerial;
-			}
-			set
-			{
-				if ((this._LastBookSerial != value))
-				{
-					this._LastBookSerial = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PackageWeightView")]
 	public partial class PackageWeightView
 	{
@@ -17137,6 +16908,582 @@ namespace Qiyas.DataAccessLayer
 				if ((this._ExamCenterRequiredExamsID != value))
 				{
 					this._ExamCenterRequiredExamsID = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ViewBookPackItemPrint")]
+	public partial class ViewBookPackItemPrint
+	{
+		
+		private int _BookPackItemID;
+		
+		private System.Nullable<int> _BookPackingOperationID;
+		
+		private string _PackCode;
+		
+		private System.Nullable<int> _PackSerial;
+		
+		private System.Nullable<decimal> _Weight;
+		
+		private System.Nullable<int> _OperationStatusID;
+		
+		private System.Nullable<int> _ParentID;
+		
+		private string _Speciality;
+		
+		private string _ModelandNumber;
+		
+		private System.Nullable<int> _BookPrintingOperationID;
+		
+		private string _PackageTypeName;
+		
+		private System.Nullable<int> _StartBookSerial;
+		
+		private System.Nullable<int> _LastBookSerial;
+		
+		private System.Nullable<int> _PackagingTypeID;
+		
+		private System.Nullable<int> _ChildPackagingTypeID;
+		
+		private System.Nullable<int> _ExamModelCount;
+		
+		private System.Nullable<int> _BooksPerPackage;
+		
+		private System.Nullable<int> _ChildExamModelCount;
+		
+		private System.Nullable<int> _ChildBooksPerPackage;
+		
+		public ViewBookPackItemPrint()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPackItemID", DbType="Int NOT NULL")]
+		public int BookPackItemID
+		{
+			get
+			{
+				return this._BookPackItemID;
+			}
+			set
+			{
+				if ((this._BookPackItemID != value))
+				{
+					this._BookPackItemID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPackingOperationID", DbType="Int")]
+		public System.Nullable<int> BookPackingOperationID
+		{
+			get
+			{
+				return this._BookPackingOperationID;
+			}
+			set
+			{
+				if ((this._BookPackingOperationID != value))
+				{
+					this._BookPackingOperationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackCode", DbType="NVarChar(20)")]
+		public string PackCode
+		{
+			get
+			{
+				return this._PackCode;
+			}
+			set
+			{
+				if ((this._PackCode != value))
+				{
+					this._PackCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackSerial", DbType="Int")]
+		public System.Nullable<int> PackSerial
+		{
+			get
+			{
+				return this._PackSerial;
+			}
+			set
+			{
+				if ((this._PackSerial != value))
+				{
+					this._PackSerial = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weight", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Weight
+		{
+			get
+			{
+				return this._Weight;
+			}
+			set
+			{
+				if ((this._Weight != value))
+				{
+					this._Weight = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OperationStatusID", DbType="Int")]
+		public System.Nullable<int> OperationStatusID
+		{
+			get
+			{
+				return this._OperationStatusID;
+			}
+			set
+			{
+				if ((this._OperationStatusID != value))
+				{
+					this._OperationStatusID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ParentID", DbType="Int")]
+		public System.Nullable<int> ParentID
+		{
+			get
+			{
+				return this._ParentID;
+			}
+			set
+			{
+				if ((this._ParentID != value))
+				{
+					this._ParentID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Speciality", DbType="NVarChar(50)")]
+		public string Speciality
+		{
+			get
+			{
+				return this._Speciality;
+			}
+			set
+			{
+				if ((this._Speciality != value))
+				{
+					this._Speciality = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModelandNumber", DbType="NVarChar(50)")]
+		public string ModelandNumber
+		{
+			get
+			{
+				return this._ModelandNumber;
+			}
+			set
+			{
+				if ((this._ModelandNumber != value))
+				{
+					this._ModelandNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPrintingOperationID", DbType="Int")]
+		public System.Nullable<int> BookPrintingOperationID
+		{
+			get
+			{
+				return this._BookPrintingOperationID;
+			}
+			set
+			{
+				if ((this._BookPrintingOperationID != value))
+				{
+					this._BookPrintingOperationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackageTypeName", DbType="NVarChar(50)")]
+		public string PackageTypeName
+		{
+			get
+			{
+				return this._PackageTypeName;
+			}
+			set
+			{
+				if ((this._PackageTypeName != value))
+				{
+					this._PackageTypeName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartBookSerial", DbType="Int")]
+		public System.Nullable<int> StartBookSerial
+		{
+			get
+			{
+				return this._StartBookSerial;
+			}
+			set
+			{
+				if ((this._StartBookSerial != value))
+				{
+					this._StartBookSerial = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastBookSerial", DbType="Int")]
+		public System.Nullable<int> LastBookSerial
+		{
+			get
+			{
+				return this._LastBookSerial;
+			}
+			set
+			{
+				if ((this._LastBookSerial != value))
+				{
+					this._LastBookSerial = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackagingTypeID", DbType="Int")]
+		public System.Nullable<int> PackagingTypeID
+		{
+			get
+			{
+				return this._PackagingTypeID;
+			}
+			set
+			{
+				if ((this._PackagingTypeID != value))
+				{
+					this._PackagingTypeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChildPackagingTypeID", DbType="Int")]
+		public System.Nullable<int> ChildPackagingTypeID
+		{
+			get
+			{
+				return this._ChildPackagingTypeID;
+			}
+			set
+			{
+				if ((this._ChildPackagingTypeID != value))
+				{
+					this._ChildPackagingTypeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamModelCount", DbType="Int")]
+		public System.Nullable<int> ExamModelCount
+		{
+			get
+			{
+				return this._ExamModelCount;
+			}
+			set
+			{
+				if ((this._ExamModelCount != value))
+				{
+					this._ExamModelCount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BooksPerPackage", DbType="Int")]
+		public System.Nullable<int> BooksPerPackage
+		{
+			get
+			{
+				return this._BooksPerPackage;
+			}
+			set
+			{
+				if ((this._BooksPerPackage != value))
+				{
+					this._BooksPerPackage = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChildExamModelCount", DbType="Int")]
+		public System.Nullable<int> ChildExamModelCount
+		{
+			get
+			{
+				return this._ChildExamModelCount;
+			}
+			set
+			{
+				if ((this._ChildExamModelCount != value))
+				{
+					this._ChildExamModelCount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChildBooksPerPackage", DbType="Int")]
+		public System.Nullable<int> ChildBooksPerPackage
+		{
+			get
+			{
+				return this._ChildBooksPerPackage;
+			}
+			set
+			{
+				if ((this._ChildBooksPerPackage != value))
+				{
+					this._ChildBooksPerPackage = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ViewExamCenterRequiredExams")]
+	public partial class ViewExamCenterRequiredExam
+	{
+		
+		private int _ExamCenterRequiredExamsID;
+		
+		private System.Nullable<int> _ExamPeriodID;
+		
+		private System.Nullable<int> _ExamCenterID;
+		
+		private System.Nullable<int> _RequestPreparationStatusID;
+		
+		private string _FileNeedsPath;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<System.DateTime> _ModifiedDate;
+		
+		private System.Nullable<int> _CreatedBy;
+		
+		private System.Nullable<int> _ModifiedBy;
+		
+		private string _ExamPeriodName;
+		
+		private string _ExamCenterCode;
+		
+		private string _ExamCenterName;
+		
+		public ViewExamCenterRequiredExam()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamCenterRequiredExamsID", DbType="Int NOT NULL")]
+		public int ExamCenterRequiredExamsID
+		{
+			get
+			{
+				return this._ExamCenterRequiredExamsID;
+			}
+			set
+			{
+				if ((this._ExamCenterRequiredExamsID != value))
+				{
+					this._ExamCenterRequiredExamsID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamPeriodID", DbType="Int")]
+		public System.Nullable<int> ExamPeriodID
+		{
+			get
+			{
+				return this._ExamPeriodID;
+			}
+			set
+			{
+				if ((this._ExamPeriodID != value))
+				{
+					this._ExamPeriodID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamCenterID", DbType="Int")]
+		public System.Nullable<int> ExamCenterID
+		{
+			get
+			{
+				return this._ExamCenterID;
+			}
+			set
+			{
+				if ((this._ExamCenterID != value))
+				{
+					this._ExamCenterID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestPreparationStatusID", DbType="Int")]
+		public System.Nullable<int> RequestPreparationStatusID
+		{
+			get
+			{
+				return this._RequestPreparationStatusID;
+			}
+			set
+			{
+				if ((this._RequestPreparationStatusID != value))
+				{
+					this._RequestPreparationStatusID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileNeedsPath", DbType="NVarChar(500)")]
+		public string FileNeedsPath
+		{
+			get
+			{
+				return this._FileNeedsPath;
+			}
+			set
+			{
+				if ((this._FileNeedsPath != value))
+				{
+					this._FileNeedsPath = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this._CreatedDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this._ModifiedDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="Int")]
+		public System.Nullable<int> CreatedBy
+		{
+			get
+			{
+				return this._CreatedBy;
+			}
+			set
+			{
+				if ((this._CreatedBy != value))
+				{
+					this._CreatedBy = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedBy", DbType="Int")]
+		public System.Nullable<int> ModifiedBy
+		{
+			get
+			{
+				return this._ModifiedBy;
+			}
+			set
+			{
+				if ((this._ModifiedBy != value))
+				{
+					this._ModifiedBy = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamPeriodName", DbType="NVarChar(50)")]
+		public string ExamPeriodName
+		{
+			get
+			{
+				return this._ExamPeriodName;
+			}
+			set
+			{
+				if ((this._ExamPeriodName != value))
+				{
+					this._ExamPeriodName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamCenterCode", DbType="NVarChar(12)")]
+		public string ExamCenterCode
+		{
+			get
+			{
+				return this._ExamCenterCode;
+			}
+			set
+			{
+				if ((this._ExamCenterCode != value))
+				{
+					this._ExamCenterCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamCenterName", DbType="NVarChar(150)")]
+		public string ExamCenterName
+		{
+			get
+			{
+				return this._ExamCenterName;
+			}
+			set
+			{
+				if ((this._ExamCenterName != value))
+				{
+					this._ExamCenterName = value;
 				}
 			}
 		}
