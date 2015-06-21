@@ -499,7 +499,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\delete.png" />
+    <Content Include="images\eye.png" />
+    <Content Include="images\fork.png" />
+    <Content Include="images\new.png" />
     <Content Include="images\print.png" />
+    <Content Include="images\tags.png" />
     <Content Include="Scripts\address.js" />
     <Content Include="Scripts\application.js" />
     <Content Include="Scripts\bootstrap-colorpicker.js" />

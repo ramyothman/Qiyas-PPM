@@ -35,7 +35,7 @@ namespace Qiyas.WebAdmin.Controllers
                 {
                     if (!ExamPeriodExists(item.Name, item.ExamPeriodID))
                     {
-                        if(item.EndDate > item.StartDate)
+                        if(item.StartDate > item.EndDate)
                         {
                             ViewData["EditError"] = "تاريخ البداية يجب ان يكون اقل من تاريخ النهاية";
                         }

@@ -60,8 +60,10 @@
                     <br /><br />
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" name="SavePack" id="SavePack" value="حفظ" class="btn btn-default btn-primary" />
-                            
+                            @if (!ViewBag.IsSaved)
+                            {
+                                <input type="submit" name="SavePack" id="SavePack" value="حفظ" class="btn btn-default btn-primary" />
+                            }                        
                             <input type="button" name="BackButton" id="BackButton" value="عودة" class="btn btn-default " />
                         </div>
                     </div>

@@ -86,7 +86,7 @@ namespace Qiyas.WebAdmin.Controllers
                 if (item.PackingCalculationTypeID == 2)
                     continue;
                 var ptype = new BusinessLogicLayer.Entity.PPM.PackagingType(item.PackagingTypeID.Value);
-                if (ptype.BooksPerPackage == 1 && ptype.ExamModelCount == 3)
+                if (ptype.BooksPerPackage == 3 && ptype.ExamModelCount == 1)
                 {
                     //totalA3 += item.PackageTotal.Value;
                 }
@@ -622,7 +622,7 @@ namespace Qiyas.WebAdmin.Controllers
                         
                         AddItemToPack(items, packageTypes, pack.ChildPackingOperations, oldPacks, model, exam, ref count, ref serial, pack.MultiChildPackingOperations[j]);
                         i += pack.MultiChildPackingOperations[j].PackageTotal.Value;
-                        SubBooks += pack.SingleChildPackingOperations[j].NumberofBooksPerModel.Value;
+                        SubBooks += pack.MultiChildPackingOperations[j].NumberofBooksPerModel.Value;
                     }
                     if (SubBooks >= pack.NumberofBooksPerModel.Value)
                         break;
@@ -705,11 +705,8 @@ namespace Qiyas.WebAdmin.Controllers
         [HttpPost]
         public ActionResult NumberingPack(FormCollection form)
         {
-
             BusinessLogicLayer.Components.PPM.BookPackingOperationLogic logic = new BusinessLogicLayer.Components.PPM.BookPackingOperationLogic();
             var model = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(PrintingOperationID);
-            model.OperationStatusID = 2;
-            model.Save();
             List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> packing = logic.GetPackagingTypeByBookPrintingID(PrintingOperationID);
             List<BusinessLogicLayer.Entity.PPM.PackagingType> packageTypes = new BusinessLogicLayer.Components.PPM.PackagingTypeLogic().GetAll();
             var orderedPackageTypes = (from x in packageTypes orderby x.Total descending select x);
@@ -726,6 +723,7 @@ namespace Qiyas.WebAdmin.Controllers
 
             List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> orderedPackSingle = new List<BusinessLogicLayer.Entity.PPM.BookPackingOperation>();
             List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> orderedPackMultiple = new List<BusinessLogicLayer.Entity.PPM.BookPackingOperation>();
+            bool isValidSubPacks = true;
             foreach (BusinessLogicLayer.Entity.PPM.PackagingType pckg in orderedPackageTypes)
             {
                 var packOrder = (from x in packing where x.PackagingTypeID == pckg.PackagingTypeID select x).FirstOrDefault();
@@ -755,6 +753,45 @@ namespace Qiyas.WebAdmin.Controllers
                 }
             }
 
+            #region Validation Check for sub packs
+            foreach (BusinessLogicLayer.Entity.PPM.BookPackingOperation pack in orderedPack)
+            {
+                if(pack.ChildPackingOperations.Count > 0)
+                {
+                    int sum = 0;
+                    foreach (var packChild in pack.ChildPackingOperations)
+                    {
+                        if (packChild.NumberofBooksPerModel.HasValue)
+                            sum += packChild.NumberofBooksPerModel.Value / packChild.PackageTotalPerModel.Value;
+                    }
+                    sum = (pack.NumberofBooksPerModel.Value / pack.PackageTotalPerModel.Value) - sum;
+                    if (sum < 0)
+                        isValidSubPacks = false;
+                    var tempPackageType = (from x in packageTypes where x.PackagingTypeID == pack.PackagingTypeID.Value select x).FirstOrDefault();
+                    if (tempPackageType != null)
+                    {
+                        if (sum > tempPackageType.BooksPerPackage.Value)
+                            isValidSubPacks = false;
+                        if ((tempPackageType.BooksPerPackage.Value % sum) != 0)
+                            isValidSubPacks = false;
+                    }
+                }
+            }
+            #endregion
+            if (!isValidSubPacks)
+            {
+                ViewBag.HasError = true;
+                ViewBag.IsSaved = model.OperationStatusID > 1;
+                ViewBag.NotifyMessage = Resources.MainResource.ErrorSavingNumberPacksSubPacksProblem;
+                System.Web.Routing.RouteValueDictionary tempDict = new System.Web.Routing.RouteValueDictionary();
+                tempDict.Add("ID", MainID);
+                return View("Index", model);
+            }
+
+            
+            
+            model.OperationStatusID = 2;
+            model.Save();
 
             foreach (BusinessLogicLayer.Entity.PPM.BookPackingOperation pack in orderedPackSingle)
             {

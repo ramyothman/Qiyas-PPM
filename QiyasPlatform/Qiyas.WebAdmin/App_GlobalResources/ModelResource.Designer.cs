@@ -493,7 +493,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to كمية الطباعة لنموذج A3.
+        ///   Looks up a localized string similar to كمية الكتب لنموذج A3.
         /// </summary>
         internal static string ExamsNeededForA3 {
             get {
@@ -502,7 +502,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to كمية الطباعة لنموذج A4.
+        ///   Looks up a localized string similar to كمية الكتب لنموذج A4.
         /// </summary>
         internal static string ExamsNeededForA4 {
             get {
@@ -853,7 +853,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to كمية الطباعة للنموذج الواحد.
+        ///   Looks up a localized string similar to كمية الكتب للنموذج الواحد.
         /// </summary>
         internal static string PrintsForOneModel {
             get {

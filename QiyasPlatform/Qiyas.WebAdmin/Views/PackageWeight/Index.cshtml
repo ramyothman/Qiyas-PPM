@@ -131,7 +131,14 @@
         $('#PackageCode').focus();
         $("form").bind("keypress", function (e) {
             if (e.keyCode == 13) {
-                $('#Weight').focus();
+                if ($('#Weight').val() == '' || $('#Weight').val() == '0')
+                    $('#Weight').focus();
+                else if ($('#PackageCode').val() != '' && $('#PackageCode').val() != '0') {
+                    $("#SaveWeight").trigger('click');
+                }
+                else {
+                    $('#PackageCode').focus();
+                }
             }
         });
 </script>

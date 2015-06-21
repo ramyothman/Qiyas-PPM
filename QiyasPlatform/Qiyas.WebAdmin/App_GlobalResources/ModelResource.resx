@@ -172,13 +172,13 @@
     <value>مسلسل الإختبارات</value>
   </data>
   <data name="PrintsForOneModel" xml:space="preserve">
-    <value>كمية الطباعة للنموذج الواحد</value>
+    <value>كمية الكتب للنموذج الواحد</value>
   </data>
   <data name="ExamsNeededForA3" xml:space="preserve">
-    <value>كمية الطباعة لنموذج A3</value>
+    <value>كمية الكتب لنموذج A3</value>
   </data>
   <data name="ExamsNeededForA4" xml:space="preserve">
-    <value>كمية الطباعة لنموذج A4</value>
+    <value>كمية الكتب لنموذج A4</value>
   </data>
   <data name="ExamsNeededForCD" xml:space="preserve">
     <value>كمية المواد السمعية CD</value>

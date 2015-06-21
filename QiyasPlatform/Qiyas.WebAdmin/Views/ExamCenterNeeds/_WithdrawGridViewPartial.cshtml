@@ -11,7 +11,7 @@
         settings.SettingsBehavior.ConfirmDelete = true;
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
 
-        settings.CommandColumn.ShowNewButtonInHeader = false;
+        settings.CommandColumn.ShowNewButtonInHeader = !@ViewBag.IsSaved;
         settings.SettingsCommandButton.NewButton.Text = @Resources.MainResource.New;
         settings.SettingsCommandButton.EditButton.Text = " ";
 
@@ -26,8 +26,8 @@
         settings.CommandColumn.Width = new System.Web.UI.WebControls.Unit("60px");
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = false;
-        settings.CommandColumn.ShowDeleteButton = true;
-        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = !@ViewBag.IsSaved;
+        settings.CommandColumn.ShowEditButton = !@ViewBag.IsSaved;
 
         //settings.SettingsSearchPanel.Visible = true;
         //settings.SettingsSearchPanel.ShowClearButton = true;

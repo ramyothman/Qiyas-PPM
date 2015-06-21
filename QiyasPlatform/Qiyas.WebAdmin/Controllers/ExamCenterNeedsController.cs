@@ -106,6 +106,7 @@ namespace Qiyas.WebAdmin.Controllers
                 return RedirectToAction("Index");
             ViewBag.HasError = false;
             ViewBag.NotifyMessage = "";
+            ViewBag.IsSaved = item.RequestPreparationStatusID > 1;
             MainID = ID;
             return View(item);
         }
@@ -134,6 +135,7 @@ namespace Qiyas.WebAdmin.Controllers
                 return RedirectToAction("Index");
             ViewBag.HasError = false;
             ViewBag.NotifyMessage = "";
+            ViewBag.IsSaved = item.RequestPreparationStatusID > 1;
             MainID = ID;
             return View(item);
         }
@@ -235,6 +237,11 @@ namespace Qiyas.WebAdmin.Controllers
         public ActionResult ExamRequirementItemGridViewPartial()
         {
             var model = ExamRequirementItemLogic.GetAllByExamCenterRequiredExamsID(MainID);
+            BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam itemMain = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(MainID);
+            if (itemMain != null)
+                ViewBag.IsSaved = itemMain.RequestPreparationStatusID > 1;
+            else
+                ViewBag.IsSaved = false;
             return PartialView("_ExamRequirementItemGridViewPartial", model);
         }
 
@@ -275,6 +282,11 @@ namespace Qiyas.WebAdmin.Controllers
             else
                 ViewData["EditError"] = "Please, correct all errors.";
             var model = ExamRequirementItemLogic.GetAllByExamCenterRequiredExamsID(MainID);
+            BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam itemMain = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(MainID);
+            if (itemMain != null)
+                ViewBag.IsSaved = itemMain.RequestPreparationStatusID > 1;
+            else
+                ViewBag.IsSaved = false;
             return PartialView("_ExamRequirementItemGridViewPartial", model);
         }
         [HttpPost, ValidateInput(false)]
@@ -308,6 +320,11 @@ namespace Qiyas.WebAdmin.Controllers
             else
                 ViewData["EditError"] = "Please, correct all errors.";
             var model = ExamRequirementItemLogic.GetAllByExamCenterRequiredExamsID(MainID);
+            BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam itemMain = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(MainID);
+            if (itemMain != null)
+                ViewBag.IsSaved = itemMain.RequestPreparationStatusID > 1;
+            else
+                ViewBag.IsSaved = false;
             return PartialView("_ExamRequirementItemGridViewPartial", model);
         }
         [HttpPost, ValidateInput(false)]
@@ -327,6 +344,11 @@ namespace Qiyas.WebAdmin.Controllers
                 }
             }
             var model = ExamRequirementItemLogic.GetAllByExamCenterRequiredExamsID(MainID);
+            BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam itemMain = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(MainID);
+            if (itemMain != null)
+                ViewBag.IsSaved = itemMain.RequestPreparationStatusID > 1;
+            else
+                ViewBag.IsSaved = false;
             return PartialView("_ExamRequirementItemGridViewPartial", model);
         }
 
@@ -450,6 +472,11 @@ namespace Qiyas.WebAdmin.Controllers
         public ActionResult WithdrawGridViewPartial()
         {
             var model = WithdrawExamRequirementItemList;
+            BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam itemMain = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(MainID);
+            if (itemMain != null)
+                ViewBag.IsSaved = itemMain.RequestPreparationStatusID > 1;
+            else
+                ViewBag.IsSaved = false;
             return PartialView("_WithdrawGridViewPartial", model);
         }
 
@@ -500,6 +527,11 @@ namespace Qiyas.WebAdmin.Controllers
             else
                 ViewData["EditError"] = "Please, correct all errors.";
             var model = WithdrawExamRequirementItemList;
+            BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam itemMain = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(MainID);
+            if (itemMain != null)
+                ViewBag.IsSaved = itemMain.RequestPreparationStatusID > 1;
+            else
+                ViewBag.IsSaved = false;
             return PartialView("_WithdrawGridViewPartial", model);
         }
         [HttpPost, ValidateInput(false)]
@@ -546,6 +578,11 @@ namespace Qiyas.WebAdmin.Controllers
             else
                 ViewData["EditError"] = "Please, correct all errors.";
             var model = WithdrawExamRequirementItemList;
+            BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam itemMain = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(MainID);
+            if (itemMain != null)
+                ViewBag.IsSaved = itemMain.RequestPreparationStatusID > 1;
+            else
+                ViewBag.IsSaved = false;
             return PartialView("_WithdrawGridViewPartial", model);
         }
         [HttpPost, ValidateInput(false)]
@@ -565,6 +602,11 @@ namespace Qiyas.WebAdmin.Controllers
                 }
             }
             var model = WithdrawExamRequirementItemList;
+            BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam itemMain = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(MainID);
+            if (itemMain != null)
+                ViewBag.IsSaved = itemMain.RequestPreparationStatusID > 1;
+            else
+                ViewBag.IsSaved = false;
             return PartialView("_WithdrawGridViewPartial", model);
         }
 

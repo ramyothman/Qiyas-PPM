@@ -133,6 +133,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تجهيز.
+        /// </summary>
+        internal static string btnPrepare {
+            get {
+                return ResourceManager.GetString("btnPrepare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to إضافة طلب تجهيز.
         /// </summary>
         internal static string btnPrepareForWithdraw {
@@ -336,6 +345,15 @@ namespace Resources {
         internal static string ErrorDeletingPack {
             get {
                 return ResourceManager.GetString("ErrorDeletingPack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to يرجي مراجعة مخصص من و التأكد ان المتبقي يمكن عمل منه حزم.
+        /// </summary>
+        internal static string ErrorSavingNumberPacksSubPacksProblem {
+            get {
+                return ResourceManager.GetString("ErrorSavingNumberPacksSubPacksProblem", resourceCulture);
             }
         }
         

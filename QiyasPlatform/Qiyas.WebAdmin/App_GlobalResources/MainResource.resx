@@ -493,4 +493,10 @@
   <data name="ShippingBagTitle" xml:space="preserve">
     <value>حقائب مركز</value>
   </data>
+  <data name="ErrorSavingNumberPacksSubPacksProblem" xml:space="preserve">
+    <value>يرجي مراجعة مخصص من و التأكد ان المتبقي يمكن عمل منه حزم</value>
+  </data>
+  <data name="btnPrepare" xml:space="preserve">
+    <value>تجهيز</value>
+  </data>
 </root>
