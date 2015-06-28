@@ -763,6 +763,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الكمية المحزمة لم تتطابق مع الكمية المطلوبة.
+        /// </summary>
+        internal static string NotMatchedQuantity {
+            get {
+                return ResourceManager.GetString("NotMatchedQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to هذا المستخدم ليس موجود بالنظام.
         /// </summary>
         internal static string NoUserError {

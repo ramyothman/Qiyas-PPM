@@ -627,6 +627,7 @@ namespace Qiyas.WebAdmin.Controllers
                     if (SubBooks >= pack.NumberofBooksPerModel.Value)
                         break;
                     #endregion
+
                     #region Main Pack
                     BusinessLogicLayer.Entity.PPM.BookPackItem item = new BusinessLogicLayer.Entity.PPM.BookPackItem();
                     item.BookPackingOperationID = pack.BookPackingOperationID;
@@ -639,9 +640,11 @@ namespace Qiyas.WebAdmin.Controllers
                     bool addModelsToCount = true;
                     bookStart = bookLast + 1;
                     bookLast = bookStart + (packType.BooksPerPackage.Value - 1);
+                    bool isA3 = (packType.ExamModelCount == 1 && packType.BooksPerPackage == 3);
                     foreach (BusinessLogicLayer.Entity.PPM.ExamModelItem examModel in exam.ExamModels)
                     {
-                        if (packType.ExamModelCount > 1)
+                        
+                        if (packType.ExamModelCount > 1 || isA3)
                         {
                             
                             BusinessLogicLayer.Entity.PPM.BookPackItemModel newModel = new BusinessLogicLayer.Entity.PPM.BookPackItemModel();
@@ -681,7 +684,7 @@ namespace Qiyas.WebAdmin.Controllers
                         }
 
                     }
-                    if (packType.ExamModelCount > 1)
+                    if (packType.ExamModelCount > 1 || isA3)
                     {
                         if (!string.IsNullOrEmpty(modelCode))
                             modelCode = modelCode.Remove(modelCode.Length - 1, 1);
@@ -754,8 +757,13 @@ namespace Qiyas.WebAdmin.Controllers
             }
 
             #region Validation Check for sub packs
+            bool isValidPacks = true;
+            int sumAll = 0;
             foreach (BusinessLogicLayer.Entity.PPM.BookPackingOperation pack in orderedPack)
             {
+                var pPackType = packageTypes.Where(c => c.BooksPerPackage == 3 && c.ExamModelCount == 1).FirstOrDefault();
+                if(pPackType != null)
+                    sumAll += pack.NumberofBooksPerModel.Value;
                 if(pack.ChildPackingOperations.Count > 0)
                 {
                     int sum = 0;
@@ -777,12 +785,24 @@ namespace Qiyas.WebAdmin.Controllers
                     }
                 }
             }
+            if (sumAll < model.PrintsForOneModel.Value)
+                isValidPacks = false;
             #endregion
             if (!isValidSubPacks)
             {
                 ViewBag.HasError = true;
                 ViewBag.IsSaved = model.OperationStatusID > 1;
                 ViewBag.NotifyMessage = Resources.MainResource.ErrorSavingNumberPacksSubPacksProblem;
+                System.Web.Routing.RouteValueDictionary tempDict = new System.Web.Routing.RouteValueDictionary();
+                tempDict.Add("ID", MainID);
+                return View("Index", model);
+            }
+
+            if (!isValidPacks)
+            {
+                ViewBag.HasError = true;
+                ViewBag.IsSaved = model.OperationStatusID > 1;
+                ViewBag.NotifyMessage = Resources.MainResource.NotMatchedQuantity;
                 System.Web.Routing.RouteValueDictionary tempDict = new System.Web.Routing.RouteValueDictionary();
                 tempDict.Add("ID", MainID);
                 return View("Index", model);
@@ -882,10 +902,12 @@ namespace Qiyas.WebAdmin.Controllers
             BusinessLogicLayer.Components.PPM.PackagingTypeLogic PackagingTypeLogic = new BusinessLogicLayer.Components.PPM.PackagingTypeLogic();
             Qiyas.WebAdmin.Models.PackageOperationTotal totalObject = new Models.PackageOperationTotal();
             var model = new BusinessLogicLayer.Components.PPM.BookPackingOperationLogic().GetByBookPrintingID(PrintingOperationID);
+            BusinessLogicLayer.Entity.PPM.BookPrintingOperation printingOperation = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(PrintingOperationID);
             int totalCount = 0;
             int totalPerModel = 0;
             int totalBooksPerModel = 0;
             int totalA3 = 0;
+            var remaining = printingOperation.PrintsForOneModel.Value;
             foreach(var item in model)
             {
                 if (item.PackingCalculationTypeID == 2)
@@ -910,6 +932,7 @@ namespace Qiyas.WebAdmin.Controllers
             totalObject.TotalA3 = totalA3;
             totalObject.TotalBooksPerModel = totalBooksPerModel;
             totalObject.TotalPerModel = totalPerModel;
+            totalObject.RemainingPerModel = remaining - totalBooksPerModel;
             //totalCount + "," + totalBooksPerModel + "," + totalPerModel + "," + totalA3
             return Json(totalObject);
             

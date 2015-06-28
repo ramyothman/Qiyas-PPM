@@ -499,4 +499,7 @@
   <data name="btnPrepare" xml:space="preserve">
     <value>تجهيز</value>
   </data>
+  <data name="NotMatchedQuantity" xml:space="preserve">
+    <value>الكمية المحزمة لم تتطابق مع الكمية المطلوبة</value>
+  </data>
 </root>

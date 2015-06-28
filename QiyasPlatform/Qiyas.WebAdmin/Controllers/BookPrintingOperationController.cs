@@ -69,7 +69,8 @@ namespace Qiyas.WebAdmin.Controllers
                                 pack.ModifiedDate = DateTime.Now;
                                 pack.NumberofBooksPerModel = printing.ExamsNeededForA3;
                                 pack.PackageTotalPerModel = printing.ExamsNeededForA3 / 3;
-                                pack.PackageTotal = pack.PackageTotalPerModel * exam.ExamModels.Count;
+                                //pack.PackageTotal = pack.PackageTotalPerModel * exam.ExamModels.Count;
+                                pack.PackageTotal = pack.PackageTotalPerModel;
                                 pack.PackagingTypeID = ptype.PackagingTypeID;
                                 pack.PackingCalculationTypeID = 1;
                                 pack.PackingValue = 100;

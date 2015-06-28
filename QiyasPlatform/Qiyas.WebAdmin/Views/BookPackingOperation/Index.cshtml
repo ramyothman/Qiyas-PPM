@@ -83,6 +83,14 @@
                                     <input id="bpoTotalPackageBooksPerModel" type="text" readonly="readonly" value="0" />
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    المتبقي من كمية الكتب للنموذج
+                                </td>
+                                <td>
+                                    <input id="bpoRemainingPerModel" type="text" readonly="readonly" value="0" />
+                                </td>
+                            </tr>
                         </table>
 
                     </div>
@@ -134,7 +142,7 @@
                     $('#bpoTotalPackage').val(data.Total);
                     $('#bpoTotalPackagePerModel').val(data.TotalPerModel);
                     $('#bpoTotalPackageBooksPerModel').val(data.TotalBooksPerModel);
-
+                    $('#bpoRemainingPerModel').val(data.RemainingPerModel);
                     //totalObject.Total = totalCount;
                     //totalObject.TotalA3 = totalA3;
                     //totalObject.TotalBooksPerModel = totalBooksPerModel;
