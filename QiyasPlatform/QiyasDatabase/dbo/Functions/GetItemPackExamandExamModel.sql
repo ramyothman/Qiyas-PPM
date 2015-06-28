@@ -3,7 +3,7 @@
 -- Create date: <Create Date, ,>
 -- Description:	<Description, ,>
 -- =============================================
-CREATE FUNCTION GetItemPackExamandExamModel
+CREATE FUNCTION [dbo].[GetItemPackExamandExamModel]
 (
 	-- Add the parameters for the function here
 	@ItemPackID int
@@ -16,7 +16,14 @@ BEGIN
 	DECLARE @ExamCode nvarchar(50)
 	DECLARE @ExamModel nvarchar(50)
 	Declare @ExamModelCode nvarchar(50)
+	Declare @PackTypeID int
+	Declare @ExamModelCount int
+	Declare @BooksCount int
 	declare @au_id int
+
+	select @PackTypeID =  [PackagingTypeID] from [PPM].[BookPackingOperation] where  [BookPackingOperationID] IN(select [BookPackingOperationID] from [PPM].[BookPackItem] where [BookPackItemID] = @ItemPackID)
+	select @ExamModelCount =  [ExamModelCount] from [PPM].[PackagingType] where [PackagingTypeID] = @PackTypeID
+	select @BooksCount = [BooksPerPackage] from [PPM].[PackagingType] where [PackagingTypeID] = @PackTypeID
 	-- Add the T-SQL statements to compute the return value here
 	SELECT @ExamCode = ExamCode from  dbo.ViewBookPackItem where [BookPackItemID] = @ItemPackID
 
@@ -32,7 +39,11 @@ BEGIN
 			Set @Result = @Result + '-'
 	end
 	-- Return the result of the function
-	set @Result = @ExamCode + '/' + @Result
+	if(@ExamModelCount <> 1 and @BooksCount <> 3)
+		set @Result = @ExamCode + '/' + @Result
+	else
+		set @Result = @ExamCode
+
 	RETURN @Result
 
 END
