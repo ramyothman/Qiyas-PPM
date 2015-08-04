@@ -55,7 +55,8 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
         {
             var list = (from c in db.BookPackingOperations where c.BookPrintingOperationID == ID select new {c.PackagingTypeID}).ToList();
             var packings = (from x in db.BookPackingOperations where x.BookPrintingOperationID == ID select x);
-            var itemsList = from t1 in db.PackagingTypes join t2 in packings on t1.PackagingTypeID equals t2.PackagingTypeID select new { t1.Name, t2 };
+            var packingTypes = from x in db.PackagingTypes where x.BooksPerPackage.Value != 3 && x.ExamModelCount != 1 select x;
+            var itemsList = from t1 in packingTypes join t2 in packings on t1.PackagingTypeID equals t2.PackagingTypeID select new { t1.Name, t2 };
             List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation> operations = new List<Entity.PPM.BookPackingOperation>();
             foreach( var item in itemsList)
             {

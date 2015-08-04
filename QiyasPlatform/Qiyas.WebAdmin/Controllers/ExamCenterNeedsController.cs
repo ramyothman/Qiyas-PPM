@@ -798,6 +798,13 @@ namespace Qiyas.WebAdmin.Controllers
 
                 request.ModifiedDate = DateTime.Now;
                 request.Save();
+                BusinessLogicLayer.Components.PPM.ContainerRequestPackLogic packLogic = new BusinessLogicLayer.Components.PPM.ContainerRequestPackLogic();
+
+                bool packExists = packLogic.PackExists(itemPack.BookPackItemID);
+                if(packExists)
+                {
+                    return Json("notexists");
+                }
                 BusinessLogicLayer.Entity.PPM.ContainerRequestPack pack = new BusinessLogicLayer.Entity.PPM.ContainerRequestPack();
                 pack.BookPackItemID = itemPack.BookPackItemID;
                 pack.ContainerRequestID = request.ContainerRequestID;
