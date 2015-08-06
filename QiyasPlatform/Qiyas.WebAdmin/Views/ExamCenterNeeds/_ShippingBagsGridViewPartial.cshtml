@@ -1,0 +1,111 @@
+@{
+	var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "ShippingBagsGridView";
+        settings.CallbackRouteValues = new { Controller = "ExamCenterNeeds", Action = "ShippingBagsGridViewPartial" };
+
+				settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "ExamCenterNeeds", Action = "ShippingBagsGridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ExamCenterNeeds", Action = "ShippingBagsGridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ExamCenterNeeds", Action = "ShippingBagsGridViewPartialDelete" };
+        settings.KeyFieldName = "ShippingBagID";
+
+        settings.SettingsBehavior.ConfirmDelete = true;
+        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
+
+
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.SettingsCommandButton.NewButton.Text = @Resources.MainResource.New;
+        settings.SettingsCommandButton.EditButton.Text = " ";
+        settings.SettingsCommandButton.EditButton.Styles.Style.CssClass = "fa fa fa-pencil";
+        settings.SettingsCommandButton.DeleteButton.Text = " ";
+        settings.SettingsCommandButton.DeleteButton.Styles.Style.CssClass = "fa fa-trash-o";
+        settings.SettingsCommandButton.CancelButton.Text = @Resources.MainResource.Cancel;
+        settings.SettingsCommandButton.ClearFilterButton.Text = @Resources.MainResource.Clear;
+        settings.SettingsCommandButton.UpdateButton.Text = @Resources.MainResource.Save;
+        settings.SettingsCommandButton.UpdateButton.ButtonType = GridViewCommandButtonType.Button;
+        settings.SettingsCommandButton.CancelButton.ButtonType = GridViewCommandButtonType.Button;
+        GridViewCommandColumnCustomButton customButtonShipping = new GridViewCommandColumnCustomButton() { ID = "btnViewShippingBags", Text = " " };
+        customButtonShipping.Styles.Style.CssClass = "fa fa-tasks";
+        customButtonShipping.Image.AlternateText = Resources.MainResource.ShippingBagTitle;
+        //customButton.Image.Url = "~/images/print.png";
+        settings.CommandColumn.CustomButtons.Add(customButtonShipping);
+
+        settings.ClientSideEvents.CustomButtonClick =
+        string.Format("function(s, e) {{ CustomButtonClick(s, e, '{0}'); }}", Url.Action("ShippingBagItems", "ExamCenterNeeds"));
+        
+        settings.CommandColumn.Width = new System.Web.UI.WebControls.Unit("80px");
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.SettingsSearchPanel.Visible = true;
+        settings.SettingsSearchPanel.ShowClearButton = true;
+        settings.Styles.SearchPanel.CssClass = "dxgvSearchPanel_MetropolisBlue search_devexpress";
+
+        settings.SettingsText.CommandClearSearchPanelFilter = @Resources.MainResource.Clear;
+        settings.SettingsText.SearchPanelEditorNullText = @Resources.MainResource.SearchNullText;
+        settings.SettingsText.PopupEditFormCaption = @Resources.MainResource.ShippingBagEditFormTitle;
+        settings.SettingsText.ConfirmDelete = @Resources.MainResource.DeleteMessage;
+        settings.SettingsText.EmptyDataRow = @Resources.MainResource.NoData;
+        settings.SettingsPager.Summary.Text = Resources.MainResource.PageSummaryText;
+
+        settings.SettingsPopup.EditForm.Width = new System.Web.UI.WebControls.Unit("350px");
+        settings.SettingsPopup.EditForm.Modal = true;
+        settings.SettingsPopup.EditForm.CloseOnEscape = AutoBoolean.True;
+        settings.SettingsPopup.EditForm.HorizontalAlign = PopupHorizontalAlign.WindowCenter;
+        settings.SettingsPopup.EditForm.VerticalAlign = PopupVerticalAlign.WindowCenter;
+
+        settings.Width = new System.Web.UI.WebControls.Unit("100%");
+        settings.RightToLeft = DefaultBoolean.True;
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Styles.AlternatingRow.BackColor = System.Drawing.Color.FromName("#f9f9f9");
+
+
+				
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "ShippingBagSerial";
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.Caption = @Resources.ModelResource.ShippingBagSerial;
+
+                    column.ColumnType = MVCxGridViewColumnType.TextBox;
+                    var textProperties = column.PropertiesEdit as TextBoxProperties;
+                    textProperties.ValidationSettings.RequiredField.IsRequired = true;
+                    textProperties.ValidationSettings.RequiredField.ErrorText = "*";
+                    textProperties.ValidationSettings.Display = Display.Dynamic;
+                    textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                });
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "PackCount";
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.Caption = @Resources.ModelResource.PackCount;
+                    column.EditFormSettings.Visible = DefaultBoolean.False;
+                    column.ColumnType = MVCxGridViewColumnType.SpinEdit;
+                    //var textProperties = column.PropertiesEdit as TextBoxProperties;
+                    //textProperties.ValidationSettings.RequiredField.IsRequired = true;
+                    //textProperties.ValidationSettings.RequiredField.ErrorText = "*";
+                    //textProperties.ValidationSettings.Display = Display.Dynamic;
+                    //textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                });
+                settings.Columns.Add(column =>
+                {
+                    column.FieldName = "BookCount";
+                    column.EditFormSettings.ColumnSpan = 2;
+                    column.Caption = @Resources.ModelResource.BookCount;
+                    column.EditFormSettings.Visible = DefaultBoolean.False;
+                    column.ColumnType = MVCxGridViewColumnType.SpinEdit;
+                    //var textProperties = column.PropertiesEdit as TextBoxProperties;
+                    //textProperties.ValidationSettings.RequiredField.IsRequired = true;
+                    //textProperties.ValidationSettings.RequiredField.ErrorText = "*";
+                    //textProperties.ValidationSettings.Display = Display.Dynamic;
+                    //textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+                });
+			});
+		if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

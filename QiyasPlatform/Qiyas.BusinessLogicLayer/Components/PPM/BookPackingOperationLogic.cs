@@ -54,11 +54,31 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
         public List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation> GetPackagingTypeByBookPrintingID(int ID)
         {
             var list = (from c in db.BookPackingOperations where c.BookPrintingOperationID == ID select new {c.PackagingTypeID}).ToList();
-            var packings = (from x in db.BookPackingOperations where x.BookPrintingOperationID == ID select x);
-            var packingTypes = from x in db.PackagingTypes where x.BooksPerPackage.Value != 3 && x.ExamModelCount != 1 select x;
-            var itemsList = from t1 in packingTypes join t2 in packings on t1.PackagingTypeID equals t2.PackagingTypeID select new { t1.Name, t2 };
+            var packings = (from x in db.BookPackingOperations where x.BookPrintingOperationID == ID select x).ToList();
+            var packingTypes = (from x in db.PackagingTypes where x.Name != "A3" select x).ToList();
+            var itemsList = (from t1 in packingTypes join t2 in packings on t1.PackagingTypeID equals t2.PackagingTypeID select new { t1.Name, t2 }).ToList();
             List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation> operations = new List<Entity.PPM.BookPackingOperation>();
             foreach( var item in itemsList)
+            {
+                var p = (from x in packings where x.BookPackingOperationID == item.t2.BookPackingOperationID select x).FirstOrDefault();
+                Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation o = new Entity.PPM.BookPackingOperation(p);
+                o.PackagingTypeName = item.Name;
+                operations.Add(o);
+            }
+            if (operations == null)
+                operations = new List<Entity.PPM.BookPackingOperation>();
+            return operations;
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation> GetAllPackagingTypeByBookPrintingID(int ID)
+        {
+            var list = (from c in db.BookPackingOperations where c.BookPrintingOperationID == ID select new { c.PackagingTypeID }).ToList();
+            var packings = (from x in db.BookPackingOperations where x.BookPrintingOperationID == ID select x).ToList();
+            var packingTypes = (from x in db.PackagingTypes  select x).ToList();
+            var itemsList = (from t1 in packingTypes join t2 in packings on t1.PackagingTypeID equals t2.PackagingTypeID select new { t1.Name, t2 }).ToList();
+            List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation> operations = new List<Entity.PPM.BookPackingOperation>();
+            foreach (var item in itemsList)
             {
                 var p = (from x in packings where x.BookPackingOperationID == item.t2.BookPackingOperationID select x).FirstOrDefault();
                 Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation o = new Entity.PPM.BookPackingOperation(p);

@@ -107,6 +107,13 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             set { _PackageTypeExamModelCount = value; }
             get { return _PackageTypeExamModelCount; }
         }
+
+        private int? _PackagingTypeID;
+        public int? PackagingTypeID
+        {
+            set { _PackagingTypeID = value; }
+            get { return _PackagingTypeID; }
+        }
     }
 }
       

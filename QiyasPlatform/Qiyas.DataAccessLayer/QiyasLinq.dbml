@@ -776,22 +776,6 @@
       <Association Name="PackingCalculationType1_BookPackingOperation" Member="PackingCalculationType1" ThisKey="PackingCalculationTypeID" OtherKey="PackingCalculationTypeID" Type="PackingCalculationType1" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="PPM.ShippingBag" Member="ShippingBags">
-    <Type Name="ShippingBag">
-      <Column Name="ShippingBagID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ExamCenterRequiredExamsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ShippingBagCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="ShippingBagSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="BookCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PackCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="ShippingBag_ShippingBagItem" Member="ShippingBagItems" ThisKey="ShippingBagID" OtherKey="ShippingBagID" Type="ShippingBagItem" />
-      <Association Name="ExamCenterRequiredExam_ShippingBag" Member="ExamCenterRequiredExam" ThisKey="ExamCenterRequiredExamsID" OtherKey="ExamCenterRequiredExamsID" Type="ExamCenterRequiredExam" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
   <Table Name="dbo.ViewShippingBagItems" Member="ViewShippingBagItems">
     <Type Name="ViewShippingBagItem">
       <Column Name="ShippingBagItemID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -850,6 +834,22 @@
       <Column Name="ExamPeriodName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="ExamCenterCode" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
       <Column Name="ExamCenterName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="PPM.ShippingBag" Member="ShippingBags">
+    <Type Name="ShippingBag">
+      <Column Name="ShippingBagID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ExamCenterRequiredExamsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShippingBagCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ShippingBagSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BookCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="ShippingBag_ShippingBagItem" Member="ShippingBagItems" ThisKey="ShippingBagID" OtherKey="ShippingBagID" Type="ShippingBagItem" />
+      <Association Name="ExamCenterRequiredExam_ShippingBag" Member="ExamCenterRequiredExam" ThisKey="ExamCenterRequiredExamsID" OtherKey="ExamCenterRequiredExamsID" Type="ExamCenterRequiredExam" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Function Name="dbo.DeleteExamModelItemByExamID" Method="DeleteExamModelItemByExamID">

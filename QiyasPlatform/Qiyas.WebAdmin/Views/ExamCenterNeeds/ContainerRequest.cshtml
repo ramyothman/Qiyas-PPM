@@ -47,15 +47,16 @@
 
                         <hr />
                         <br /><br />
-
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.PackageCode, new { @class = "col-md-5  pull-right control-label" })
-                            <div class="col-md-4  pull-right">
-                                @Html.TextBoxFor(m => m.PackageCode, new { @class = "form-control" })
+                        @if ( !ViewBag.IsSaved){
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.PackageCode, new { @class = "col-md-5  pull-right control-label" })
+                                <div class="col-md-4  pull-right">
+                                    @Html.TextBoxFor(m => m.PackageCode, new { @class = "form-control" })
+                                </div>
+                                <div class="error" style="color: forestgreen;display:none;" id="packageExists">حزمة صحيحة</div>
+                                <div class="error" style="color: darkred;display:none;" id="packageDoesntExist">لا يمكن تعديل هذه الحزمة</div>
                             </div>
-                            <div class="error" style="color: forestgreen;display:none;" id="packageExists">حزمة صحيحة</div>
-                            <div class="error" style="color: darkred;display:none;" id="packageDoesntExist">لا يمكن تعديل هذه الحزمة</div>
-                        </div>
+                        }
                     </div>
                     
                     <br /><br />
@@ -64,13 +65,23 @@
 
 
                     <br /><br />
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" name="SaveContainer" id="SaveContainer" value="تجهيز" class="btn btn-default btn-primary" />
-
-                            <input type="button" name="BackButton" id="BackButton" value="عودة" class="btn btn-default " />
+                    if ( !ViewBag.IsSaved)
+                    {
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" name="SaveContainer" id="SaveContainer" value="تجهيز" class="btn btn-default btn-primary" />
+                                <input type="button" name="BackButton" id="BackButton" value="عودة" class="btn btn-default " />
+                            </div>
                         </div>
-                    </div>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="button" name="BackButton" id="BackButton" value="عودة" class="btn btn-default " />
+                            </div>
+                        </div>
+                    }
                 }
 
             </div>

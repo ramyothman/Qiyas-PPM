@@ -502,4 +502,7 @@
   <data name="NotMatchedQuantity" xml:space="preserve">
     <value>الكمية المحزمة لم تتطابق مع الكمية المطلوبة</value>
   </data>
+  <data name="QuantityForPreperationNotMatching" xml:space="preserve">
+    <value>الكمية المطلوبة للتجهيز لم تتطابق يرجي مراجعتها</value>
+  </data>
 </root>

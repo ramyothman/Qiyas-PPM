@@ -121,8 +121,24 @@ namespace Qiyas.WebAdmin.Controllers
                 return RedirectToAction("Index");
             ViewBag.HasError = false;
             ViewBag.NotifyMessage = "";
+            ViewBag.IsSaved = item.RequestPreparationStatusID > 2;
             MainID = ID;
             return View(item);
+        }
+
+        public ActionResult ContainerRequestRedirect(int ID, bool HasError,string Message)
+        {
+            if (ID == 0)
+                return RedirectToAction("Index");
+
+            BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam item = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(ID);
+            if (!item.HasObject)
+                return RedirectToAction("Index");
+            ViewBag.HasError = HasError;
+            ViewBag.NotifyMessage = Message;
+            ViewBag.IsSaved = item.RequestPreparationStatusID > 2;
+            MainID = ID;
+            return View("ContainerRequest", item);
         }
         
         public ActionResult SendItemsRequest(int ID = 0)
@@ -805,13 +821,31 @@ namespace Qiyas.WebAdmin.Controllers
                 {
                     return Json("notexists");
                 }
-                BusinessLogicLayer.Entity.PPM.ContainerRequestPack pack = new BusinessLogicLayer.Entity.PPM.ContainerRequestPack();
-                pack.BookPackItemID = itemPack.BookPackItemID;
-                pack.ContainerRequestID = request.ContainerRequestID;
-                pack.CreatedDate = DateTime.Now;
+                var model = new BusinessLogicLayer.Components.PPM.RequestWithdrawDetailLogic().ViewWithdrawalReportByExamCenterRequiredExamsID(MainID);
+                BusinessLogicLayer.Entity.PPM.BookPackingOperation op = new BusinessLogicLayer.Entity.PPM.BookPackingOperation(itemPack.BookPackingOperationID.Value);
+                if(op != null)
+                {
+                    BusinessLogicLayer.Entity.PPM.BookPrintingOperation pr = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(op.BookPrintingOperationID.Value);
+                    var checkCompatability = (from x in model where x.ExamID == pr.ExamID && x.PackagingTypeID == op.PackagingTypeID select x).FirstOrDefault();
+                    if(checkCompatability != null)
+                    {
+                        BusinessLogicLayer.Entity.PPM.ContainerRequestPack pack = new BusinessLogicLayer.Entity.PPM.ContainerRequestPack();
+                        pack.BookPackItemID = itemPack.BookPackItemID;
+                        pack.ContainerRequestID = request.ContainerRequestID;
+                        pack.CreatedDate = DateTime.Now;
 
-                pack.Save();
-                return Json("exists");
+                        pack.Save();
+                        return Json("exists");
+                    }
+                    else
+                    {
+                        return Json("notexists");
+                    }
+                }
+                else
+                {
+                    return Json("notexists");
+                }
             }
             else
             {
@@ -830,12 +864,33 @@ namespace Qiyas.WebAdmin.Controllers
         [HttpPost]
         public ActionResult SaveContainerRequest()
         {
-            BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam ecr = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(MainID);
-            ecr.RequestPreparationStatusID = 3;
-            ecr.Save();
+            var modelPacks = new BusinessLogicLayer.Components.PPM.RequestWithdrawDetailLogic().ViewWithdrawalReportByExamCenterRequiredExamsID(MainID);
+            BusinessLogicLayer.Components.PPM.ContainerRequestPackLogic packLogic = new BusinessLogicLayer.Components.PPM.ContainerRequestPackLogic();
+            var packs = packLogic.GetAllByRequestID(MainID);
+            bool match = true;
+            foreach(var item in modelPacks)
+            {
+                var packItems = (from x in packs where x.PackagingTypeID == item.PackagingTypeID && x.ExamID == item.ExamID && x.ExamModelName == item.ExamModel select x).ToList();
+                int countTotal = packItems.Count();
+                if (countTotal != item.PackCount)
+                    match = false;
+            }
+            if(match)
+            {
+                BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam ecr = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(MainID);
+                ecr.RequestPreparationStatusID = 3;
+                ecr.Save();
 
-            //BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam item = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(MainID);
-            return RedirectToAction("Index");
+                //BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam item = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(MainID);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.HasError = true;
+                ViewBag.NotifyMessage = Resources.MainResource.QuantityForPreperationNotMatching;
+                return ContainerRequestRedirect(MainID, true,Resources.MainResource.QuantityForPreperationNotMatching);
+            }
+            
         }
 
 
@@ -997,7 +1052,7 @@ namespace Qiyas.WebAdmin.Controllers
             else
             {
 
-                var itemPack = new BusinessLogicLayer.Entity.PPM.ShippingBag(MainID, Convert.ToInt32(ID));
+                var itemPack = new BusinessLogicLayer.Entity.PPM.ShippingBag(Convert.ToInt32(ID));
                 var model = new BusinessLogicLayer.Components.PPM.ShippingBagItemLogic().GetAll(MainID, itemPack.ShippingBagID);
                 return PartialView("_ShippingBagItemsGridViewPartial", model);
             }

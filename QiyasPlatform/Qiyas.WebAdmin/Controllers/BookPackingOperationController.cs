@@ -710,7 +710,7 @@ namespace Qiyas.WebAdmin.Controllers
         {
             BusinessLogicLayer.Components.PPM.BookPackingOperationLogic logic = new BusinessLogicLayer.Components.PPM.BookPackingOperationLogic();
             var model = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(PrintingOperationID);
-            List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> packing = logic.GetPackagingTypeByBookPrintingID(PrintingOperationID);
+            List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> packing = logic.GetAllPackagingTypeByBookPrintingID(PrintingOperationID);
             List<BusinessLogicLayer.Entity.PPM.PackagingType> packageTypes = new BusinessLogicLayer.Components.PPM.PackagingTypeLogic().GetAll();
             var orderedPackageTypes = (from x in packageTypes orderby x.Total descending select x);
             List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> orderedPack = new List<BusinessLogicLayer.Entity.PPM.BookPackingOperation>();
@@ -735,7 +735,9 @@ namespace Qiyas.WebAdmin.Controllers
                 {
                     if (packOrder.PackingCalculationTypeID != 2)
                     {
-                        if (pckg.ExamModelCount == 1)
+                        if (pckg.ExamModelCount == 1 && pckg.BooksPerPackage == 3)
+                            orderedPackMultiple.Add(packOrder);
+                        else if (pckg.ExamModelCount == 1)
                             orderedPackSingle.Add(packOrder);
                         else
                             orderedPackMultiple.Add(packOrder);
@@ -762,7 +764,7 @@ namespace Qiyas.WebAdmin.Controllers
             foreach (BusinessLogicLayer.Entity.PPM.BookPackingOperation pack in orderedPack)
             {
                 var pPackType = packageTypes.Where(c => c.BooksPerPackage == 3 && c.ExamModelCount == 1).FirstOrDefault();
-                if(pPackType != null)
+                if(pPackType.PackagingTypeID != pack.PackagingTypeID.Value)
                     sumAll += pack.NumberofBooksPerModel.Value;
                 if(pack.ChildPackingOperations.Count > 0)
                 {
@@ -785,7 +787,7 @@ namespace Qiyas.WebAdmin.Controllers
                     }
                 }
             }
-            if (sumAll < model.PrintsForOneModel.Value)
+            if (sumAll > model.PrintsForOneModel.Value)
                 isValidPacks = false;
             #endregion
             if (!isValidSubPacks)
