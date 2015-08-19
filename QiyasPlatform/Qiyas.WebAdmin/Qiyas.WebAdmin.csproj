@@ -1379,6 +1379,7 @@
     <EmbeddedResource Include="Common\Reports\WithdrawReport.resx">
       <DependentUpon>WithdrawReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

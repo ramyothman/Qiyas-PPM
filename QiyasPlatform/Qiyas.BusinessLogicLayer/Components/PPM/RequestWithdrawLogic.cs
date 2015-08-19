@@ -21,8 +21,8 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
 
         public List<TotalRemainingPacks> GetRemainingPacks()
         {
-            var totalPacks = db.ViewCurrentPackStockExistences;
-            var totalReserved = db.ViewReservedPacks;
+            var totalPacks = db.ViewCurrentPackStockExistences.ToList();
+            var totalReserved = db.ViewReservedPacks.ToList();
             var remainingPacks = new List<TotalRemainingPacks>();
             foreach(var item in totalPacks)
             {
@@ -73,35 +73,62 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
             return result;
         }
 
-        public List<BusinessLogicLayer.Entity.PPM.RequestWithdrawDetailItem> GetPacksForWithdrawalTotals(int TotalBookCount, int ExamID, List<BusinessLogicLayer.Entity.PPM.ExamModelItem> models, List<TotalRemainingPacks> remainingItems)
+        public List<BusinessLogicLayer.Entity.PPM.RequestWithdrawDetailItem> GetPacksForWithdrawalTotals(BusinessLogicLayer.Entity.PPM.RequestWithdrawDetail detail, int ExamID, List<BusinessLogicLayer.Entity.PPM.ExamModelItem> models, List<TotalRemainingPacks> remainingItems)
         {
+            int TotalBookCount = detail.PrintsForOneModel.Value;
+            int TotalA3 = detail.ExamsNeededForA3.Value;
+            int TotalCD = detail.ExamsNeededForCD.Value;
             List<BusinessLogicLayer.Entity.PPM.RequestWithdrawDetailItem> requestDetailItems = new List<Entity.PPM.RequestWithdrawDetailItem>();
 
             var itemsRemainingSingle  = from x in remainingItems where x.ExamID == ExamID && x.ExamModelCount == 1 orderby x.BooksPerPackage descending select x;
             var itemsRemainingMulti = from x in remainingItems where x.ExamID == ExamID && x.ExamModelCount > 1 orderby x.BooksPerPackage descending select x;
             int remainingValue = TotalBookCount;
-
+            int remainingValueA3 = TotalA3;
             foreach(var item in itemsRemainingSingle)
             {
-                int packsNeeded = remainingValue / item.BooksPerPackage;
-                foreach (var model in models)
+                if(item.BooksPerPackage == 3 && item.ExamModelCount == 1)
                 {
-                    if (remainingValue <= 0)
+                    if (remainingValueA3 <= 0)
                         break;
-                    
+                    int packsNeeded = remainingValueA3 / item.BooksPerPackage;
                     if (packsNeeded <= item.PackCount)
                     {
                         BusinessLogicLayer.Entity.PPM.RequestWithdrawDetailItem witem = new Entity.PPM.RequestWithdrawDetailItem();
                         witem.PackagingTypeID = item.PackagingTypeID;
                         witem.PackCount = packsNeeded;
-                        BusinessLogicLayer.Entity.PPM.RequestWithdrawDetailItemModel examModel = new Entity.PPM.RequestWithdrawDetailItemModel();
-                        examModel.ExamModelID = model.ExamModelID;
-                        witem.Models.Add(examModel);
+                        foreach (var model in models)
+                        {
+                            BusinessLogicLayer.Entity.PPM.RequestWithdrawDetailItemModel examModel = new Entity.PPM.RequestWithdrawDetailItemModel();
+                            examModel.ExamModelID = model.ExamModelID;
+                            witem.Models.Add(examModel);
+                        }
                         requestDetailItems.Add(witem);
-                        
+                        remainingValueA3 -= (packsNeeded * item.BooksPerPackage);
                     }
                 }
-                remainingValue -= (packsNeeded * item.BooksPerPackage);
+                else
+                {
+                    int packsNeeded = remainingValue / item.BooksPerPackage;
+                    foreach (var model in models)
+                    {
+                        if (remainingValue <= 0)
+                            break;
+
+                        if (packsNeeded <= item.PackCount)
+                        {
+                            BusinessLogicLayer.Entity.PPM.RequestWithdrawDetailItem witem = new Entity.PPM.RequestWithdrawDetailItem();
+                            witem.PackagingTypeID = item.PackagingTypeID;
+                            witem.PackCount = packsNeeded;
+                            BusinessLogicLayer.Entity.PPM.RequestWithdrawDetailItemModel examModel = new Entity.PPM.RequestWithdrawDetailItemModel();
+                            examModel.ExamModelID = model.ExamModelID;
+                            witem.Models.Add(examModel);
+                            requestDetailItems.Add(witem);
+
+                        }
+                    }
+                    remainingValue -= (packsNeeded * item.BooksPerPackage);
+                }
+                
             }
 
             foreach(var item in itemsRemainingMulti)

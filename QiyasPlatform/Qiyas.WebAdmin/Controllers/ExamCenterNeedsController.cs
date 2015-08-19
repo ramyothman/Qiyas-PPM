@@ -662,7 +662,7 @@ namespace Qiyas.WebAdmin.Controllers
                     detail.Save();
                     BusinessLogicLayer.Entity.PPM.Exam exam = new BusinessLogicLayer.Entity.PPM.Exam(item.ExamID.Value);
                     List<BusinessLogicLayer.Components.PPM.TotalRemainingPacks> remainingItems =  RequestWithdrawLogic.GetRemainingPacks();
-                    List<BusinessLogicLayer.Entity.PPM.RequestWithdrawDetailItem> wItems = RequestWithdrawLogic.GetPacksForWithdrawalTotals(detail.PrintsForOneModel.Value, item.ExamID.Value, exam.ExamModels, remainingItems);
+                    List<BusinessLogicLayer.Entity.PPM.RequestWithdrawDetailItem> wItems = RequestWithdrawLogic.GetPacksForWithdrawalTotals(detail, item.ExamID.Value, exam.ExamModels, remainingItems);
                     foreach(var m in wItems)
                     {
                         m.RequestWithdrawDetailID = detail.RequestWithdrawDetailID;
@@ -827,7 +827,7 @@ namespace Qiyas.WebAdmin.Controllers
                 {
                     BusinessLogicLayer.Entity.PPM.BookPrintingOperation pr = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(op.BookPrintingOperationID.Value);
                     var checkCompatability = (from x in model where x.ExamID == pr.ExamID && x.PackagingTypeID == op.PackagingTypeID select x).FirstOrDefault();
-                    if(checkCompatability != null)
+                    if(checkCompatability != null && checkCompatability.ExamID == pr.ExamID && checkCompatability.PackagingTypeID == op.PackagingTypeID)
                     {
                         BusinessLogicLayer.Entity.PPM.ContainerRequestPack pack = new BusinessLogicLayer.Entity.PPM.ContainerRequestPack();
                         pack.BookPackItemID = itemPack.BookPackItemID;
