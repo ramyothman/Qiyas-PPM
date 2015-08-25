@@ -717,6 +717,32 @@ namespace Qiyas.WebAdmin.Controllers
             return View();
         }
 
+        public ActionResult ShippingReport(int ID = 0)
+        {
+            if (ID == 0)
+                return RedirectToAction("Index");
+            //BusinessLogicLayer.Components.PPM.ShippingBagLogic ShippingBagLogic = new BusinessLogicLayer.Components.PPM.ShippingBagLogic();
+            
+            ViewBag.HasError = false;
+            ViewBag.NotifyMessage = "";
+            ReportID = ID;
+            this.ReportType = ReportType;
+            return View();
+        }
+
+        public ActionResult GardReport(int ID = 0)
+        {
+            if (ID == 0)
+                return RedirectToAction("Index");
+            //BusinessLogicLayer.Components.PPM.ShippingBagLogic ShippingBagLogic = new BusinessLogicLayer.Components.PPM.ShippingBagLogic();
+
+            ViewBag.HasError = false;
+            ViewBag.NotifyMessage = "";
+            ReportID = ID;
+            this.ReportType = ReportType;
+            return View();
+        }
+
         Qiyas.WebAdmin.Common.Reports.WithdrawReport report = new Qiyas.WebAdmin.Common.Reports.WithdrawReport();
 
         public ActionResult WithdrawReportDocumentViewerPartial()
@@ -729,6 +755,36 @@ namespace Qiyas.WebAdmin.Controllers
         {
             report.LoadData(ReportID, ReportType);
             return DocumentViewerExtension.ExportTo(report, Request);
+        }
+
+
+        Qiyas.WebAdmin.Common.Reports.ShippingReport reportShipping = new Qiyas.WebAdmin.Common.Reports.ShippingReport();
+
+        public ActionResult ShippingBagReportDocumentViewerPartial()
+        {
+            reportShipping.LoadData(ReportID);
+            return PartialView("_ShippingBagReportDocumentViewerPartial", reportShipping);
+        }
+
+        public ActionResult ShippingBagReportDocumentViewerPartialExport()
+        {
+            reportShipping.LoadData(ReportID);
+            return DocumentViewerExtension.ExportTo(reportShipping, Request);
+        }
+
+
+        Qiyas.WebAdmin.Common.Reports.StockingReport reportStockingReport = new Qiyas.WebAdmin.Common.Reports.StockingReport();
+
+        public ActionResult GardReportDocumentViewerPartial()
+        {
+            reportStockingReport.LoadData(ReportID);
+            return PartialView("_GardReportDocumentViewerPartial", reportStockingReport);
+        }
+
+        public ActionResult GardReportDocumentViewerPartialExport()
+        {
+            reportStockingReport.LoadData(ReportID);
+            return DocumentViewerExtension.ExportTo(reportStockingReport, Request);
         }
 
         [ValidateInput(false)]

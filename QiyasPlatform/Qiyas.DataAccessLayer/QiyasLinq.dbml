@@ -852,6 +852,24 @@
       <Association Name="ExamCenterRequiredExam_ShippingBag" Member="ExamCenterRequiredExam" ThisKey="ExamCenterRequiredExamsID" OtherKey="ExamCenterRequiredExamsID" Type="ExamCenterRequiredExam" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
+  <Table Name="dbo.ViewShippingBagsReport" Member="ViewShippingBagsReports">
+    <Type Name="ViewShippingBagsReport">
+      <Column Name="CenterCode" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="CenterName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ExamCode" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="ModelName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PackagingName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NumberofPacks" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackSerials" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ShippingBagCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ShippingBagSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BooksPerPackage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BooksTotal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShippingBagID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExamCenterRequiredExamsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExaminationCenterID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Function Name="dbo.DeleteExamModelItemByExamID" Method="DeleteExamModelItemByExamID">
     <Parameter Name="ExamID" Parameter="examID" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />

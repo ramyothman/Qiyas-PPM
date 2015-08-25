@@ -20,10 +20,13 @@ BEGIN
 	Declare @ExamModelCount int
 	Declare @BooksCount int
 	declare @au_id int
+	Declare @NameType nvarchar(50)
 
 	select @PackTypeID =  [PackagingTypeID] from [PPM].[BookPackingOperation] where  [BookPackingOperationID] IN(select [BookPackingOperationID] from [PPM].[BookPackItem] where [BookPackItemID] = @ItemPackID)
 	select @ExamModelCount =  [ExamModelCount] from [PPM].[PackagingType] where [PackagingTypeID] = @PackTypeID
 	select @BooksCount = [BooksPerPackage] from [PPM].[PackagingType] where [PackagingTypeID] = @PackTypeID
+	select @NameType = Name from [PPM].[PackagingType] where [PackagingTypeID] = @PackTypeID
+
 	-- Add the T-SQL statements to compute the return value here
 	SELECT @ExamCode = ExamCode from  dbo.ViewBookPackItem where [BookPackItemID] = @ItemPackID
 
@@ -39,7 +42,7 @@ BEGIN
 			Set @Result = @Result + '-'
 	end
 	-- Return the result of the function
-	if(@ExamModelCount <> 1 and @BooksCount <> 3)
+	if(@NameType <> 'A3')
 		set @Result = @ExamCode + '/' + @Result
 	else
 		set @Result = @ExamCode

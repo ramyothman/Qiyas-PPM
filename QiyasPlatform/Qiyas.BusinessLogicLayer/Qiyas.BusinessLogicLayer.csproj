@@ -379,6 +379,7 @@
     <Compile Include="Entity\PPM\StudentGender.Model.cs">
       <DependentUpon>StudentGender.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Reports\ShippingBagReport.cs" />
     <Compile Include="Entity\RoleSecurity\PersonRole.cs" />
     <Compile Include="Entity\RoleSecurity\Role.cs" />
     <Compile Include="Entity\RoleSecurity\UserLoginProvider.cs" />

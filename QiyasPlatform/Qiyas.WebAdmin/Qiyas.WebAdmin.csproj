@@ -263,6 +263,12 @@
     <Compile Include="Common\Reports\ShippingReport.Designer.cs">
       <DependentUpon>ShippingReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\Reports\StockingReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Common\Reports\StockingReport.Designer.cs">
+      <DependentUpon>StockingReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\Reports\TestReport.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1331,6 +1337,10 @@
     <Content Include="Views\ExamCenterNeeds\_ShippingBagsGridViewPartial.cshtml" />
     <Content Include="Views\ExamCenterNeeds\ShippingBagItems.cshtml" />
     <Content Include="Views\ExamCenterNeeds\_ShippingBagItemsGridViewPartial.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\_ShippingBagReportDocumentViewerPartial.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\ShippingReport.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\_GardReportDocumentViewerPartial.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\GardReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1372,6 +1382,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Common\Reports\ShippingReport.resx">
       <DependentUpon>ShippingReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\Reports\StockingReport.resx">
+      <DependentUpon>StockingReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Common\Reports\TestReport.resx">
       <DependentUpon>TestReport.cs</DependentUpon>

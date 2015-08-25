@@ -160,12 +160,12 @@ namespace Qiyas.DataAccessLayer
     partial void UpdateShippingBag(ShippingBag instance);
     partial void DeleteShippingBag(ShippingBag instance);
     #endregion
-
-        public QiyasLinqDataContext() :
-            base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, mappingSource)
-        {
-            OnCreated();
-        }
+		
+		public QiyasLinqDataContext() :
+        base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, mappingSource)
+		{
+			OnCreated();
+		}
 		
 		public QiyasLinqDataContext(string connection) : 
 				base(connection, mappingSource)
@@ -628,6 +628,14 @@ namespace Qiyas.DataAccessLayer
 			get
 			{
 				return this.GetTable<ShippingBag>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ViewShippingBagsReport> ViewShippingBagsReports
+		{
+			get
+			{
+				return this.GetTable<ViewShippingBagsReport>();
 			}
 		}
 		
@@ -17486,6 +17494,267 @@ namespace Qiyas.DataAccessLayer
 		{
 			this.SendPropertyChanging();
 			entity.ShippingBag = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ViewShippingBagsReport")]
+	public partial class ViewShippingBagsReport
+	{
+		
+		private string _CenterCode;
+		
+		private string _CenterName;
+		
+		private string _ExamCode;
+		
+		private string _ModelName;
+		
+		private string _PackagingName;
+		
+		private System.Nullable<int> _NumberofPacks;
+		
+		private string _PackSerials;
+		
+		private string _ShippingBagCode;
+		
+		private System.Nullable<int> _ShippingBagSerial;
+		
+		private System.Nullable<int> _BooksPerPackage;
+		
+		private System.Nullable<int> _BooksTotal;
+		
+		private int _ShippingBagID;
+		
+		private System.Nullable<int> _ExamCenterRequiredExamsID;
+		
+		private int _ExaminationCenterID;
+		
+		public ViewShippingBagsReport()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CenterCode", DbType="NVarChar(12)")]
+		public string CenterCode
+		{
+			get
+			{
+				return this._CenterCode;
+			}
+			set
+			{
+				if ((this._CenterCode != value))
+				{
+					this._CenterCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CenterName", DbType="NVarChar(150)")]
+		public string CenterName
+		{
+			get
+			{
+				return this._CenterName;
+			}
+			set
+			{
+				if ((this._CenterName != value))
+				{
+					this._CenterName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamCode", DbType="NVarChar(12)")]
+		public string ExamCode
+		{
+			get
+			{
+				return this._ExamCode;
+			}
+			set
+			{
+				if ((this._ExamCode != value))
+				{
+					this._ExamCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModelName", DbType="NVarChar(50)")]
+		public string ModelName
+		{
+			get
+			{
+				return this._ModelName;
+			}
+			set
+			{
+				if ((this._ModelName != value))
+				{
+					this._ModelName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackagingName", DbType="NVarChar(50)")]
+		public string PackagingName
+		{
+			get
+			{
+				return this._PackagingName;
+			}
+			set
+			{
+				if ((this._PackagingName != value))
+				{
+					this._PackagingName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumberofPacks", DbType="Int")]
+		public System.Nullable<int> NumberofPacks
+		{
+			get
+			{
+				return this._NumberofPacks;
+			}
+			set
+			{
+				if ((this._NumberofPacks != value))
+				{
+					this._NumberofPacks = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackSerials", DbType="NVarChar(50)")]
+		public string PackSerials
+		{
+			get
+			{
+				return this._PackSerials;
+			}
+			set
+			{
+				if ((this._PackSerials != value))
+				{
+					this._PackSerials = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShippingBagCode", DbType="NVarChar(20)")]
+		public string ShippingBagCode
+		{
+			get
+			{
+				return this._ShippingBagCode;
+			}
+			set
+			{
+				if ((this._ShippingBagCode != value))
+				{
+					this._ShippingBagCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShippingBagSerial", DbType="Int")]
+		public System.Nullable<int> ShippingBagSerial
+		{
+			get
+			{
+				return this._ShippingBagSerial;
+			}
+			set
+			{
+				if ((this._ShippingBagSerial != value))
+				{
+					this._ShippingBagSerial = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BooksPerPackage", DbType="Int")]
+		public System.Nullable<int> BooksPerPackage
+		{
+			get
+			{
+				return this._BooksPerPackage;
+			}
+			set
+			{
+				if ((this._BooksPerPackage != value))
+				{
+					this._BooksPerPackage = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BooksTotal", DbType="Int")]
+		public System.Nullable<int> BooksTotal
+		{
+			get
+			{
+				return this._BooksTotal;
+			}
+			set
+			{
+				if ((this._BooksTotal != value))
+				{
+					this._BooksTotal = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShippingBagID", DbType="Int NOT NULL")]
+		public int ShippingBagID
+		{
+			get
+			{
+				return this._ShippingBagID;
+			}
+			set
+			{
+				if ((this._ShippingBagID != value))
+				{
+					this._ShippingBagID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamCenterRequiredExamsID", DbType="Int")]
+		public System.Nullable<int> ExamCenterRequiredExamsID
+		{
+			get
+			{
+				return this._ExamCenterRequiredExamsID;
+			}
+			set
+			{
+				if ((this._ExamCenterRequiredExamsID != value))
+				{
+					this._ExamCenterRequiredExamsID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExaminationCenterID", DbType="Int NOT NULL")]
+		public int ExaminationCenterID
+		{
+			get
+			{
+				return this._ExaminationCenterID;
+			}
+			set
+			{
+				if ((this._ExaminationCenterID != value))
+				{
+					this._ExaminationCenterID = value;
+				}
+			}
 		}
 	}
 	

@@ -203,6 +203,10 @@
     <Build Include="dbo\Views\ViewShippingBagItems.sql" />
     <Build Include="dbo\Views\ViewExamCenterRequiredExams.sql" />
     <Build Include="dbo\Functions\HaveA3Packs.sql" />
+    <Build Include="dbo\Views\ViewShippingBagsTotals.sql" />
+    <Build Include="dbo\Views\ViewShippingBagsReport.sql" />
+    <Build Include="dbo\Views\ViewShippingBags.sql" />
+    <Build Include="dbo\Functions\GetShippingBookPackSerials.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompleteSchema.sql" />

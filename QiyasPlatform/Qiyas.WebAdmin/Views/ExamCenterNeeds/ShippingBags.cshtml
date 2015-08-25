@@ -36,8 +36,8 @@
                         <br /><br />
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="button" name="PrintReport" id="PrintReport" value="طباعة تقرير" class="btn btn-default btn-primary" />
-
+                                <input type="button" name="PrintReport" data-id="@Model.ExamCenterRequiredExamsID"  id="PrintReport" value="طباعة تقرير" class="btn btn-default btn-primary" />
+                                <input type="button" name="PrintReportGard" data-id="@Model.ExamCenterRequiredExamsID" id="PrintReportGard" value="طباعة تقرير جرد" class="btn btn-default btn-primary" />
                                 <input type="button" name="BackButton" id="BackButton" value="عودة" class="btn btn-default " />
                             </div>
                         </div>
@@ -53,11 +53,23 @@
 
     @section Scripts {
         <script type="text/javascript">
-    $("#PrintReport").click(function () {
-        var form = $("form#packForm");
-        form.attr("action", "@Url.Action("PrintShippingBags", "ExamCenterNeeds")");
-        form.submit();
-    });
+            $("#PrintReport").click(function () {
+                var id = $(this).attr('data-id');
+                window.location = "@Url.Action("ShippingReport", "ExamCenterNeeds")" + "/" + id;
+        @*var form = $("form#packForm");
+        form.attr("action", "@Url.Action("ShippingReport", "ExamCenterNeeds")");
+
+        form.submit();*@
+            });
+
+            $("#PrintReportGard").click(function () {
+                var id = $(this).attr('data-id');
+                window.location = "@Url.Action("GardReport", "ExamCenterNeeds")" + "/" + id;
+       @*var form = $("form#packForm");
+                form.attr("action", "@Url.Action("ShippingReport", "ExamCenterNeeds")");
+
+                form.submit();*@
+                });
 
 
 
@@ -65,24 +77,24 @@
         e.preventDefault();
         window.location = "/ExamCenterNeeds";
         return false;
-                @*var form = $("form#packForm");
+        @*var form = $("form#packForm");
             form.attr("action", "@Url.Action("PrinPacks", "BookPackingOperation", Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID)");
             form.submit();*@
-            });
+    });
 
 
-            function CustomButtonClick(s, e, url) {
-                var key = s.GetRowKey(e.visibleIndex);
+    function CustomButtonClick(s, e, url) {
+        var key = s.GetRowKey(e.visibleIndex);
 
-                
 
-                if (e.buttonID === "btnViewShippingBags") {
-                    url = "@Url.Action("ShippingBagItems", "ExamCenterNeeds")";
-                    var destUrl = url + "/" + key;
-                    window.location.href = destUrl;
-                }
 
-            }
+        if (e.buttonID === "btnViewShippingBags") {
+            url = "@Url.Action("ShippingBagItems", "ExamCenterNeeds")";
+            var destUrl = url + "/" + key;
+            window.location.href = destUrl;
+        }
+
+    }
 
         </script>
     }
