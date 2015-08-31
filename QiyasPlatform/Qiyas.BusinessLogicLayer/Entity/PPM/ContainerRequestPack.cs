@@ -11,6 +11,17 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
 {
     public partial class ContainerRequestPack
     {
+
+        public ContainerRequestPack(int ItemId, int ID)
+        {
+            BusinessLogicLayer.Entity.PPM.ContainerRequest request = new ContainerRequest(ID, true);
+            if(request.HasObject)
+            {
+                this.entity = context.ContainerRequestPacks.Where(p => p.BookPackItemID.Value == ItemId && p.ContainerRequestID == request.ContainerRequestID).FirstOrDefault();
+            }
+            
+        }
+
         private string _ExamCode;
         public string ExamCode
         {

@@ -50,7 +50,7 @@
         settings.Width = new System.Web.UI.WebControls.Unit("100%");
         settings.RightToLeft = DefaultBoolean.True;
         settings.SettingsPager.Visible = true;
-        //settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRow = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
         settings.Styles.AlternatingRow.BackColor = System.Drawing.Color.FromName("#f9f9f9");
 
@@ -61,6 +61,21 @@
             column.VisibleIndex = 1;
             column.EditFormSettings.ColumnSpan = 2;
             column.Caption = @Resources.ModelResource.ExamCode;
+
+            column.ColumnType = MVCxGridViewColumnType.TextBox;
+            var textProperties = column.PropertiesEdit as TextBoxProperties;
+            textProperties.ValidationSettings.RequiredField.IsRequired = true;
+            textProperties.ValidationSettings.RequiredField.ErrorText = "*";
+            textProperties.ValidationSettings.Display = Display.Dynamic;
+            textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "PackCode";
+            column.VisibleIndex = 1;
+            column.EditFormSettings.ColumnSpan = 2;
+            column.Caption = @Resources.ModelResource.PackageCode;
 
             column.ColumnType = MVCxGridViewColumnType.TextBox;
             var textProperties = column.PropertiesEdit as TextBoxProperties;

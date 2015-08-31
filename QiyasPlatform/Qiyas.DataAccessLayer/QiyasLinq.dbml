@@ -870,6 +870,55 @@
       <Column Name="ExaminationCenterID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.ViewExamModels" Member="ViewExamModels">
+    <Type Name="ViewExamModel">
+      <Column Name="ExamID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExamCode" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="ExamName" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ExamModelID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamModel" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ViewShippingBags" Member="ViewShippingBags">
+    <Type Name="ViewShippingBag">
+      <Column Name="ShippingBagID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExamCenterRequiredExamsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShippingBagCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ShippingBagSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BookCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BookPackItemID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BookPackingOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PackSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Weight" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="OperationStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastBookSerial" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ParentBookPackItemID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BookPackItemOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BookPrintingOperationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackagingTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackagingName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PackingValue" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageTotal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumberofBooksPerModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PackageTotalPerModel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamCode" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="CenterCode" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="CenterName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ExamPeriodName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ExamYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamName" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ModelName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ExamID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShippingBagItemID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BooksPerPackage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExamModelCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExaminationCenterID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Function Name="dbo.DeleteExamModelItemByExamID" Method="DeleteExamModelItemByExamID">
     <Parameter Name="ExamID" Parameter="examID" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />

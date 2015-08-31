@@ -251,6 +251,12 @@
     <Compile Include="Common\Reports\PackReport.Designer.cs">
       <DependentUpon>PackReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\Reports\PrintContainerPack.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Common\Reports\PrintContainerPack.Designer.cs">
+      <DependentUpon>PrintContainerPack.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\Reports\PrintItemPack.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -517,6 +523,7 @@
     <Content Include="images\new.png" />
     <Content Include="images\print.png" />
     <Content Include="images\tags.png" />
+    <Content Include="images\tasks.png" />
     <Content Include="Scripts\address.js" />
     <Content Include="Scripts\application.js" />
     <Content Include="Scripts\bootstrap-colorpicker.js" />
@@ -1341,6 +1348,8 @@
     <Content Include="Views\ExamCenterNeeds\ShippingReport.cshtml" />
     <Content Include="Views\ExamCenterNeeds\_GardReportDocumentViewerPartial.cshtml" />
     <Content Include="Views\ExamCenterNeeds\GardReport.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\_PackContainerItemReportDocumentViewerPartial.cshtml" />
+    <Content Include="Views\ExamCenterNeeds\ShippingBagReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1376,6 +1385,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Common\Reports\PackReport.resx">
       <DependentUpon>PackReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\Reports\PrintContainerPack.resx">
+      <DependentUpon>PrintContainerPack.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Common\Reports\PrintItemPack.resx">
       <DependentUpon>PrintItemPack.cs</DependentUpon>

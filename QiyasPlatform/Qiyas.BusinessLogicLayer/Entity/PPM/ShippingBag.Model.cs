@@ -25,6 +25,8 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
         {
             this.entity = context.ShippingBags.Where(p => p.ShippingBagID == ShippingBagID).FirstOrDefault();  
         }
+
+        
     
         internal ShippingBag(Qiyas.DataAccessLayer.ShippingBag entity)
         {

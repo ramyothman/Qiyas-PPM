@@ -13,12 +13,24 @@ namespace Qiyas.WebAdmin
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRoute(
+            //    name: "ShippingBagSerial",
+            //    url: "{controller}/{action}/{ID}/{ShippingBagSerial}",
+            //    defaults: new { controller = "ExamCenterNeeds", action = "ShippingBagItems", ID = 0, ShippingBagSerial = 0 }
+            //);
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
+            routes.MapRoute(
+                name: "ShippingBagSerial",
+                url: "{controller}/{action}/{ID}/{ShippingBagSerial}",
+                defaults: new { controller = "ExamCenterNeeds", action = "ShippingBagItems", ID = 0, ShippingBagSerial = 0 }
+            );
+            
             routes.MapRoute(
                 name: "PrintPacks",
                 url: "{controller}/{action}/{ID}/{PrintingID}",

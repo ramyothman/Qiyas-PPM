@@ -8,6 +8,7 @@ namespace Qiyas.BusinessLogicLayer.Entity.Reports
 {
     public class ShippingBagReport : EntityBase
     {
+        public int ExamCenterRequiredExamsID { set; get; }
         public string ExamCenterCode { set; get; }
         public string ExamCenterName { set; get; }
         public string ExamCode { set; get; }
