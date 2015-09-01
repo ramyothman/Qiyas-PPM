@@ -505,4 +505,7 @@
   <data name="QuantityForPreperationNotMatching" xml:space="preserve">
     <value>الكمية المطلوبة للتجهيز لم تتطابق يرجي مراجعتها</value>
   </data>
+  <data name="ExamSpecialityExists" xml:space="preserve">
+    <value>تخصص الاختبار و نوع الاختبار لا يمكن تكرارهم معا</value>
+  </data>
 </root>

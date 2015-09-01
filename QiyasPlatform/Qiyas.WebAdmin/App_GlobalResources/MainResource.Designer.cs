@@ -538,6 +538,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تخصص الاختبار و نوع الاختبار لا يمكن تكرارهم معا.
+        /// </summary>
+        internal static string ExamSpecialityExists {
+            get {
+                return ResourceManager.GetString("ExamSpecialityExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to إدارة تخصصات الإختبارات.
         /// </summary>
         internal static string ExamSpecialityTitle {

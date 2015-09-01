@@ -33,7 +33,7 @@ namespace Qiyas.WebAdmin.Controllers
             {
                 try
                 {
-                    if (!ExamExists(item.Name, item.ExamID))
+                    if (!ExamExists(item.ExamCode, item.ExamID))
                     {
                         BusinessLogicLayer.Entity.PPM.Exam exam = new BusinessLogicLayer.Entity.PPM.Exam();
                         exam.ExamCode = item.ExamCode;
@@ -102,7 +102,7 @@ namespace Qiyas.WebAdmin.Controllers
             {
                 try
                 {
-                    if (!ExamExists(item.Name, item.ExamID))
+                    if (!ExamExists(item.ExamCode, item.ExamID))
                     {
                         
                         BusinessLogicLayer.Entity.PPM.Exam exam = new BusinessLogicLayer.Entity.PPM.Exam(item.ExamID);
@@ -183,7 +183,7 @@ namespace Qiyas.WebAdmin.Controllers
         private bool ExamExists(string name, int id)
         {
             var currentUser = new BusinessLogicLayer.Entity.PPM.Exam(id);
-            var checkUser = new BusinessLogicLayer.Components.PPM.ExamLogic().GetByName(name);
+            var checkUser = new BusinessLogicLayer.Components.PPM.ExamLogic().GetByCode(name);
             if (checkUser == null)
                 return false;
             if (!currentUser.HasObject && checkUser != null)

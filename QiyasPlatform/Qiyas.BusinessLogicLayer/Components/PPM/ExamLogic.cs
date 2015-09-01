@@ -54,6 +54,15 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
                 examType = new Entity.PPM.Exam(ex);
             return examType;
         }
+
+        public Qiyas.BusinessLogicLayer.Entity.PPM.Exam GetByCode(string Code)
+        {
+            Qiyas.BusinessLogicLayer.Entity.PPM.Exam examType = null;
+            var ex = db.Exams.Where(c => c.ExamCode == Code).FirstOrDefault();
+            if (ex != null)
+                examType = new Entity.PPM.Exam(ex);
+            return examType;
+        }
         public bool HasDependencies(int ExaminationTypeID)
         {
             return false;

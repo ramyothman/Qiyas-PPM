@@ -32,7 +32,8 @@ namespace Qiyas.WebAdmin.Controllers
             {
                 try
                 {
-                    if (!ExamSpecialityExists(item.Name, item.ExamSpecialityID))
+                    
+                    if (!ExamSpecialityExists(item.Name, item.ExamTypeID.Value, item.ExamSpecialityID))
                     {
                         BusinessLogicLayer.Entity.PPM.ExamSpeciality speciality = new BusinessLogicLayer.Entity.PPM.ExamSpeciality();
                         speciality.Name = item.Name;
@@ -44,7 +45,7 @@ namespace Qiyas.WebAdmin.Controllers
                     }
                     else
                     {
-                        ViewData["EditError"] = Resources.MainResource.ExamSpecialityTitle;
+                        ViewData["EditError"] = Resources.MainResource.ExamSpecialityExists;
                     }
                 }
                 catch (Exception e)
@@ -67,7 +68,7 @@ namespace Qiyas.WebAdmin.Controllers
             {
                 try
                 {
-                    if (!ExamSpecialityExists(item.Name, item.ExamSpecialityID))
+                    if (!ExamSpecialityExists(item.Name, item.ExamTypeID.Value, item.ExamSpecialityID))
                     {
                         BusinessLogicLayer.Entity.PPM.ExamSpeciality speciality = new BusinessLogicLayer.Entity.PPM.ExamSpeciality(item.ExamSpecialityID);
                         speciality.ExamTypeID = item.ExamTypeID;
@@ -78,7 +79,7 @@ namespace Qiyas.WebAdmin.Controllers
                     }
                     else
                     {
-                        ViewData["EditError"] = Resources.MainResource.ExamSpecialityTitle;
+                        ViewData["EditError"] = Resources.MainResource.ExamSpecialityExists;
                     }
                 }
                 catch (Exception e)
@@ -125,10 +126,10 @@ namespace Qiyas.WebAdmin.Controllers
         #endregion
 
         #region Helpers
-        private bool ExamSpecialityExists(string name, int id)
+        private bool ExamSpecialityExists(string name, int ExamTypeID, int id)
         {
             var currentUser = new BusinessLogicLayer.Entity.PPM.ExamSpeciality(id);
-            var checkUser = new BusinessLogicLayer.Components.PPM.ExamSpecialityLogic().GetByName(name);
+            var checkUser = new BusinessLogicLayer.Components.PPM.ExamSpecialityLogic().GetByNameandType(name, ExamTypeID);
             if (checkUser == null)
                 return false;
             if (!currentUser.HasObject && checkUser != null)

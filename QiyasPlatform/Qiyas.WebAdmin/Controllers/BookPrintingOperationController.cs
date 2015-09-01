@@ -57,7 +57,7 @@ namespace Qiyas.WebAdmin.Controllers
                         printing.CreatedDate = DateTime.Now;
                         printing.Save();
 
-                        if(!BookPackingOperationLogic.HaveA3Packs(printing.BookPrintingOperationID))
+                        if(!BookPackingOperationLogic.HaveA3Packs(printing.BookPrintingOperationID) && printing.ExamsNeededForA3 > 0)
                         {
                             BusinessLogicLayer.Entity.PPM.BookPackingOperation pack = new BusinessLogicLayer.Entity.PPM.BookPackingOperation();
                             BusinessLogicLayer.Entity.PPM.Exam exam = new BusinessLogicLayer.Entity.PPM.Exam(printing.ExamID.Value);
