@@ -28,7 +28,6 @@ namespace Qiyas.BusinessLogicLayer.Entity
         {
             get
             {
-                
                 return false;
             }
         }

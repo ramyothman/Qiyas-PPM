@@ -2,6 +2,8 @@
     settings.Name = "PrintPacksDocumentViewer";
     settings.CallbackRouteValues = new { Controller = "BookPackingOperation", Action = "PrintPacksTitleDocumentViewerPartial" };
     settings.ExportRouteValues = new { Controller = "BookPackingOperation", Action = "PrintPacksTitleDocumentViewerPartialExport" };
+    settings.SettingsReportViewer.PageByPage = true;
+    
 	settings.Report = (XtraReport)Model;
     settings.Width = 680;
     settings.Report.DataSource = new Qiyas.BusinessLogicLayer.Components.PPM.BookPackItemLogic().GetAllByPrintingIDForPrinting(Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID);

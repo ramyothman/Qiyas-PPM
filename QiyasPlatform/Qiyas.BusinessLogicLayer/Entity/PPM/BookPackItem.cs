@@ -12,6 +12,33 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
     public partial class BookPackItem
     {
 
+        public BookPackItem(bool getIdentity)
+        {
+            
+            this.entity = new Qiyas.DataAccessLayer.BookPackItem();
+            var itemLast = context.BookPackItems.OrderByDescending(x => x.BookPackItemID).Select(x => x.BookPackItemID).FirstOrDefault();
+            BookPackItemID = itemLast + 1;
+            isNew = true;
+        }
+
+        public BookPackItem(bool getIdentity, int key)
+        {
+            if(getIdentity)
+            {
+                this.entity = new Qiyas.DataAccessLayer.BookPackItem();
+                var itemLast = context.BookPackItems.OrderByDescending(x => x.BookPackItemID).Select(x => x.BookPackItemID).FirstOrDefault();
+                BookPackItemID = itemLast + 1;
+                isNew = true;
+            }
+            else
+            {
+                this.entity = new Qiyas.DataAccessLayer.BookPackItem();
+                //var itemLast = context.BookPackItems.OrderByDescending(x => x.BookPackItemID).Select(x => x.BookPackItemID).FirstOrDefault();
+                BookPackItemID = key;
+                isNew = true;
+            }
+            
+        }
 
         public BookPackItem(string PackageCode)
         {
@@ -60,6 +87,19 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
                 return _ItemModels;
             }
         }
+
+        private string _ExamModelName;
+        public string ExamModelName
+        {
+            set { _ExamModelName = value; }
+            get
+            {
+                if(string.IsNullOrEmpty(_ExamModelName))
+                 _ExamModelName = context.GetExamModelNameFromPackItem(BookPackItemID);
+                return _ExamModelName;
+            }
+        }
+
 
     }
 }

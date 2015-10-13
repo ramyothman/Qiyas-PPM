@@ -123,72 +123,72 @@
 
 @section Scripts {
     <script type="text/javascript">
-        var url = "@Url.Action("GetPackingTotals", "BookPackingOperation")";
-        GetPackingTotals(url);
-        
-        
-        function GetPackingTotals(urlLink) {
+    var url = "@Url.Action("GetPackingTotals", "BookPackingOperation")";
+    GetPackingTotals(url);
 
 
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                data:  {
-                    item: 0
-                },
-                url: urlLink,
-                success: function (data) {
+    function GetPackingTotals(urlLink) {
 
-                    $('#bpoTotalPackage').val(data.Total);
-                    $('#bpoTotalPackagePerModel').val(data.TotalPerModel);
-                    $('#bpoTotalPackageBooksPerModel').val(data.TotalBooksPerModel);
-                    $('#bpoRemainingPerModel').val(data.RemainingPerModel);
-                    //totalObject.Total = totalCount;
-                    //totalObject.TotalA3 = totalA3;
-                    //totalObject.TotalBooksPerModel = totalBooksPerModel;
-                    //totalObject.TotalPerModel = totalPerModel;
-                },
-                error: function (data) {
-                    alert("e" + data);
-                    //$('#packageExists').hide();
-                    //$('#packageDoesntExist').show();
-                }
-            });
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data:  {
+                item: 0
+            },
+            url: urlLink,
+            success: function (data) {
+
+                $('#bpoTotalPackage').val(data.Total);
+                $('#bpoTotalPackagePerModel').val(data.TotalPerModel);
+                $('#bpoTotalPackageBooksPerModel').val(data.TotalBooksPerModel);
+                $('#bpoRemainingPerModel').val(data.RemainingPerModel);
+                //totalObject.Total = totalCount;
+                //totalObject.TotalA3 = totalA3;
+                //totalObject.TotalBooksPerModel = totalBooksPerModel;
+                //totalObject.TotalPerModel = totalPerModel;
+            },
+            error: function (data) {
+                alert("e" + data);
+                //$('#packageExists').hide();
+                //$('#packageDoesntExist').show();
+            }
+        });
+
+    }
+    $("#SavePack").click(function (e) {
+        var r = confirm("هل تريد حفظ التحزيم");
+        if (r == true) {
+            var form = $("form#packForm");
+            form.attr("action", "@Url.Action("SavePack", "BookPackingOperation")");
+            form.submit();
+        } else {
+            e.preventDefault();
+            return false;
+            //e.cancel = true;
 
         }
-        $("#SavePack").click(function (e) {
-            var r = confirm("هل تريد حفظ التحزيم");
-            if (r == true) {
-                var form = $("form#packForm");
-                form.attr("action", "@Url.Action("SavePack", "BookPackingOperation")");
-                form.submit();
-            } else {
-                e.preventDefault();
-                return false;
-                //e.cancel = true;
 
-            }
+    });
 
-        });
+    $("#DeletePack").click(function (e) {
+        var r = confirm("هل تريد حذف هذا التحزيم");
+        if (r == true) {
+            var form = $("form#packForm");
+            form.attr("action", "@Url.Action("DeletePack", "BookPackingOperation")");
+            form.submit();
+        } else {
+            e.preventDefault();
+            return false;
+        }
 
-        $("#DeletePack").click(function (e) {
-            var r = confirm("هل تريد حذف هذا التحزيم");
-            if (r == true) {
-                var form = $("form#packForm");
-                form.attr("action", "@Url.Action("DeletePack", "BookPackingOperation")");
-                form.submit();
-            } else {
-                e.preventDefault();
-                return false;
-            }
+    });
 
-        });
-
-        $("#NumberingPacks").click(function (e) {
-            var r = confirm("هل تريد إتمام الترقيم");
-            if (r == true) {
-                var form = $("form#packForm");
-                form.attr("action", "@Url.Action("NumberingPack", "BookPackingOperation")");
+    $("#NumberingPacks").click(function (e) {
+        var r = confirm("هل تريد إتمام الترقيم");
+        if (r == true) {
+            var form = $("form#packForm");
+            form.attr("action", "@Url.Action("NumberingPack", "BookPackingOperation")");
                 form.submit();
             } else {
                 e.preventDefault();
@@ -199,20 +199,22 @@
 
         $("#PrintPacks").click(function (e) {
             e.preventDefault();
-            window.location = "/BookPackingOperation/PrintPacks/" + @Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID;
-            return false;
-            @*var form = $("form#packForm");
+            var url = "/BookPackingOperation/PrintPacks/" + @Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID;
+            window.open(url,"_blank");
+        //window.location = "/BookPackingOperation/PrintPacks/" + @Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID;
+        return false;
+        @*var form = $("form#packForm");
             form.attr("action", "@Url.Action("PrinPacks", "BookPackingOperation", Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID)");
             form.submit();*@
-        });
+    });
 
-        $("#BackButton").click(function (e) {
-            e.preventDefault();
-            window.location = "/BookPrintingOperation";
-            return false;
-            @*var form = $("form#packForm");
+    $("#BackButton").click(function (e) {
+        e.preventDefault();
+        window.location = "/BookPrintingOperation";
+        return false;
+        @*var form = $("form#packForm");
             form.attr("action", "@Url.Action("PrinPacks", "BookPackingOperation", Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID)");
             form.submit();*@
-        });
+    });
     </script>
 }

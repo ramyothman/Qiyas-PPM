@@ -91,6 +91,8 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
                     if (remainingValueA3 <= 0)
                         break;
                     int packsNeeded = remainingValueA3 / item.BooksPerPackage;
+                    if (packsNeeded == 0)
+                        continue;
                     if (packsNeeded <= item.PackCount)
                     {
                         BusinessLogicLayer.Entity.PPM.RequestWithdrawDetailItem witem = new Entity.PPM.RequestWithdrawDetailItem();
@@ -109,6 +111,8 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
                 else
                 {
                     int packsNeeded = remainingValue / item.BooksPerPackage;
+                    if (packsNeeded == 0)
+                        continue;
                     foreach (var model in models)
                     {
                         if (remainingValue <= 0)

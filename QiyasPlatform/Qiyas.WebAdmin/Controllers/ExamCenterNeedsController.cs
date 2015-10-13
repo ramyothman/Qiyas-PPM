@@ -921,7 +921,7 @@ namespace Qiyas.WebAdmin.Controllers
                     var checkCompatability = (from x in model where x.ExamID == pr.ExamID && x.PackagingTypeID == op.PackagingTypeID select x).FirstOrDefault();
                     if(checkCompatability != null && checkCompatability.ExamID == pr.ExamID && checkCompatability.PackagingTypeID == op.PackagingTypeID)
                     {
-                        if(IsContainerMatch())
+                        if (IsContainerMatch(itemPack))
                         {
                             BusinessLogicLayer.Entity.PPM.ContainerRequestPack pack = new BusinessLogicLayer.Entity.PPM.ContainerRequestPack();
                             pack.BookPackItemID = itemPack.BookPackItemID;
@@ -992,8 +992,10 @@ namespace Qiyas.WebAdmin.Controllers
             
         }
 
-        private bool IsContainerMatch()
+        private bool IsContainerMatch(BusinessLogicLayer.Entity.PPM.BookPackItem addedItem)
         {
+            var package = new BusinessLogicLayer.Entity.PPM.BookPackingOperation(addedItem.BookPackingOperationID.Value);
+            var print = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(package.BookPrintingOperationID.Value);
             var modelPacks = new BusinessLogicLayer.Components.PPM.RequestWithdrawDetailLogic().ViewWithdrawalReportByExamCenterRequiredExamsID(MainID);
             BusinessLogicLayer.Components.PPM.ContainerRequestPackLogic packLogic = new BusinessLogicLayer.Components.PPM.ContainerRequestPackLogic();
             var packs = packLogic.GetAllByRequestID(MainID);
@@ -1001,9 +1003,15 @@ namespace Qiyas.WebAdmin.Controllers
             foreach (var item in modelPacks)
             {
                 var packItems = (from x in packs where x.PackagingTypeID == item.PackagingTypeID && x.ExamID == item.ExamID && x.ExamModelName == item.ExamModel select x).ToList();
-                int countTotal = packItems.Count() + 1;
-                if (countTotal > item.PackCount)
-                    match = false;
+
+                int countTotal = 0;
+                if (package.PackagingTypeID.Value == item.PackagingTypeID && print.ExamID.Value == item.ExamID && addedItem.ExamModelName == item.ExamModel)
+                    countTotal = packItems.Count() + 1;
+                else
+                    countTotal = packItems.Count();
+                //if (item.PackCount > 0)
+                    if (countTotal > item.PackCount)
+                        match = false;
             }
             return match;
 

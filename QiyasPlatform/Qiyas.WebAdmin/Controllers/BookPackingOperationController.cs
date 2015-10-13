@@ -8,6 +8,7 @@ using DevExpress.Web.Mvc;
 using Qiyas.BusinessLogicLayer;
 using System.Security.Cryptography;
 using System.Text;
+using System.IO;
 namespace Qiyas.WebAdmin.Controllers
 {
     [Authorize]
@@ -64,7 +65,12 @@ namespace Qiyas.WebAdmin.Controllers
             ViewBag.PrintingID = ID;
             PrintingOperationID = ID;
             ViewBag.IsSaved = model.OperationStatusID > 1;
-            return View(model);
+
+            report.DataSource = new Qiyas.BusinessLogicLayer.Components.PPM.BookPackItemLogic().GetAllByPrintingIDForPrinting(Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID);
+            var stream = new MemoryStream();
+            report.ExportToPdf(stream);
+            return File(stream.GetBuffer(), "application/pdf");
+            //return View(model);
         }
 
         #region Grid Operations
@@ -595,7 +601,7 @@ namespace Qiyas.WebAdmin.Controllers
             return View("Index", model);
         }
 
-        private void AddItemToPack(List<BusinessLogicLayer.Entity.PPM.BookPackItem> items, List<BusinessLogicLayer.Entity.PPM.PackagingType> packageTypes, List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> packing, List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> oldPacks, BusinessLogicLayer.Entity.PPM.BookPrintingOperation model, BusinessLogicLayer.Entity.PPM.Exam exam, ref int count, ref int serial, BusinessLogicLayer.Entity.PPM.BookPackingOperation pack)
+        private void AddItemToPack(List<BusinessLogicLayer.Entity.PPM.BookPackItem> items, List<BusinessLogicLayer.Entity.PPM.PackagingType> packageTypes, List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> packing, List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> oldPacks, BusinessLogicLayer.Entity.PPM.BookPrintingOperation model, BusinessLogicLayer.Entity.PPM.Exam exam, ref int count, ref int serial, BusinessLogicLayer.Entity.PPM.BookPackingOperation pack, ref int PackItemIDKey)
         {
             serial = 1;
             //incrementPacks = 0;
@@ -612,7 +618,7 @@ namespace Qiyas.WebAdmin.Controllers
                     for(int j = 0; j < pack.SingleChildPackingOperations.Count; j++)
                     {
                         
-                        AddItemToPack(items, packageTypes, pack.ChildPackingOperations, oldPacks, model, exam, ref count, ref serial, pack.SingleChildPackingOperations[j]);
+                        AddItemToPack(items, packageTypes, pack.ChildPackingOperations, oldPacks, model, exam, ref count, ref serial, pack.SingleChildPackingOperations[j], ref PackItemIDKey);
                         i += pack.SingleChildPackingOperations[j].PackageTotal.Value;
                         SubBooks += pack.SingleChildPackingOperations[j].NumberofBooksPerModel.Value;
                     }
@@ -620,7 +626,7 @@ namespace Qiyas.WebAdmin.Controllers
                     for (int j = 0; j < pack.MultiChildPackingOperations.Count; j++)
                     {
                         
-                        AddItemToPack(items, packageTypes, pack.ChildPackingOperations, oldPacks, model, exam, ref count, ref serial, pack.MultiChildPackingOperations[j]);
+                        AddItemToPack(items, packageTypes, pack.ChildPackingOperations, oldPacks, model, exam, ref count, ref serial, pack.MultiChildPackingOperations[j], ref PackItemIDKey);
                         i += pack.MultiChildPackingOperations[j].PackageTotal.Value;
                         SubBooks += pack.MultiChildPackingOperations[j].NumberofBooksPerModel.Value;
                     }
@@ -660,6 +666,7 @@ namespace Qiyas.WebAdmin.Controllers
                             
                             itemModels = new List<BusinessLogicLayer.Entity.PPM.BookPackItemModel>();
                             BusinessLogicLayer.Entity.PPM.BookPackItem itemUnit = new BusinessLogicLayer.Entity.PPM.BookPackItem();
+                            itemUnit.BookPackItemID = PackItemIDKey++;
                             itemUnit.BookPackingOperationID = pack.BookPackingOperationID;
                             itemUnit.OperationStatusID = 2;
 
@@ -690,6 +697,7 @@ namespace Qiyas.WebAdmin.Controllers
                             modelCode = modelCode.Remove(modelCode.Length - 1, 1);
                         //item.PackCode = PrintingOperationID + "-" + pack.BookPackingOperationID + "-" + pack.PackagingTypeID + "-" + modelCode + "-" + serial;
                         item.PackCode = RandomString(12);
+                        item.BookPackItemID = PackItemIDKey++;
                         item.ItemModels = itemModels;
                         items.Add(item);
 
@@ -721,9 +729,10 @@ namespace Qiyas.WebAdmin.Controllers
 
             int count = exam.ExamModels.Count;
             int serial = logic.GetLastPackSerial(exam.ExamID) + 1;
-            
-            
 
+
+            BusinessLogicLayer.Entity.PPM.BookPackItem itemID = new BusinessLogicLayer.Entity.PPM.BookPackItem(true);
+            int PackItemIDKey = itemID.BookPackItemID;
             List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> orderedPackSingle = new List<BusinessLogicLayer.Entity.PPM.BookPackingOperation>();
             List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> orderedPackMultiple = new List<BusinessLogicLayer.Entity.PPM.BookPackingOperation>();
             bool isValidSubPacks = true;
@@ -817,12 +826,12 @@ namespace Qiyas.WebAdmin.Controllers
 
             foreach (BusinessLogicLayer.Entity.PPM.BookPackingOperation pack in orderedPackSingle)
             {
-                AddItemToPack(items, packageTypes, packing, oldPacks, model, exam, ref count, ref serial, pack);
+                AddItemToPack(items, packageTypes, packing, oldPacks, model, exam, ref count, ref serial, pack, ref PackItemIDKey);
             }
 
             foreach (BusinessLogicLayer.Entity.PPM.BookPackingOperation pack in orderedPackMultiple)
             {
-                AddItemToPack(items, packageTypes, packing, oldPacks, model, exam, ref count, ref serial, pack);
+                AddItemToPack(items, packageTypes, packing, oldPacks, model, exam, ref count, ref serial, pack, ref PackItemIDKey);
             }
                 
             
@@ -840,7 +849,7 @@ namespace Qiyas.WebAdmin.Controllers
                 }
              */
             Qiyas.BusinessLogicLayer.Components.PPM.BookPackItemLogic itemLogic = new BusinessLogicLayer.Components.PPM.BookPackItemLogic();
-            itemLogic.SaveItems(items);
+            itemLogic.SaveItemsOptimized(items);
             ViewBag.HasError = false;
             ViewBag.IsSaved = model.OperationStatusID > 1;
             ViewBag.NotifyMessage = Resources.MainResource.NumberingPackSuccess;
@@ -888,12 +897,16 @@ namespace Qiyas.WebAdmin.Controllers
 
         public ActionResult PrintPacksTitleDocumentViewerPartial()
         {
+            report.DataSource = new Qiyas.BusinessLogicLayer.Components.PPM.BookPackItemLogic().GetAllByPrintingIDForPrinting(Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID);
+            //return DocumentViewerExtension.ExportTo(report, Request);
+            //report.CreateDocument(true);
             return PartialView("_PrintPacksTitleDocumentViewerPartial", report);
         }
 
         public ActionResult PrintPacksTitleDocumentViewerPartialExport()
         {
             report.DataSource = new Qiyas.BusinessLogicLayer.Components.PPM.BookPackItemLogic().GetAllByPrintingIDForPrinting(Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID);
+            
             return DocumentViewerExtension.ExportTo(report, Request);
         }
 
