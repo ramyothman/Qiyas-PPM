@@ -40,7 +40,7 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
         public int ExamID
         {            
             set{ this.entity.ExamID = value; }
-            get{ return this.entity.ExamID; }
+            get { return this.entity == null? 0 : this.entity.ExamID; }
         }
     
         [Display(Name = "ExamCode")]

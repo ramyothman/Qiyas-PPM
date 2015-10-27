@@ -199,7 +199,8 @@
 
         $("#PrintPacks").click(function (e) {
             e.preventDefault();
-            var url = "/BookPackingOperation/PrintPacks/" + @Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID;
+            var urlMain = "@Url.Action("PrintPacks", "BookPackingOperation")";
+            var url = urlMain + "/" + @Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID;
             window.open(url,"_blank");
         //window.location = "/BookPackingOperation/PrintPacks/" + @Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID;
         return false;

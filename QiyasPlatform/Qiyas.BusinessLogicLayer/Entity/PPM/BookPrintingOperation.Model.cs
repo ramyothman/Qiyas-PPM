@@ -67,7 +67,7 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
         public int? PrintsForOneModel
         {            
             set{ this.entity.PrintsForOneModel = value; }
-            get{ return this.entity.PrintsForOneModel; }
+            get{ return  this.entity == null? 0 : this.entity.PrintsForOneModel; }
         }
     
         [Display(Name = "ExamsNeededForA3")]
