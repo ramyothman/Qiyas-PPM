@@ -601,14 +601,14 @@ namespace Qiyas.WebAdmin.Controllers
             return View("Index", model);
         }
 
-        private void AddItemToPack(List<BusinessLogicLayer.Entity.PPM.BookPackItem> items, List<BusinessLogicLayer.Entity.PPM.PackagingType> packageTypes, List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> packing, List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> oldPacks, BusinessLogicLayer.Entity.PPM.BookPrintingOperation model, BusinessLogicLayer.Entity.PPM.Exam exam, ref int count, ref int serial, BusinessLogicLayer.Entity.PPM.BookPackingOperation pack, ref int PackItemIDKey)
+        private void AddItemToPack(List<BusinessLogicLayer.Entity.PPM.BookPackItem> items, List<BusinessLogicLayer.Entity.PPM.PackagingType> packageTypes, List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> packing, List<BusinessLogicLayer.Entity.PPM.BookPackingOperation> oldPacks, BusinessLogicLayer.Entity.PPM.BookPrintingOperation model, BusinessLogicLayer.Entity.PPM.Exam exam, ref int bookLast, ref int serial, BusinessLogicLayer.Entity.PPM.BookPackingOperation pack, ref int PackItemIDKey)
         {
             serial = 1;
             //incrementPacks = 0;
             var packType = (from x in packageTypes where x.PackagingTypeID == pack.PackagingTypeID select x).FirstOrDefault();
             var exists = (from x in oldPacks where x.BookPackingOperationID == pack.BookPackingOperationID select x).FirstOrDefault();
             int bookStart = 0;
-            int bookLast = 0;
+            //int bookLast = count;
             if (exists == null || !exists.HasObject)
             {
                 for (int i = 0; i < pack.PackageTotal.Value; i++)
@@ -618,15 +618,15 @@ namespace Qiyas.WebAdmin.Controllers
                     for(int j = 0; j < pack.SingleChildPackingOperations.Count; j++)
                     {
                         
-                        AddItemToPack(items, packageTypes, pack.ChildPackingOperations, oldPacks, model, exam, ref count, ref serial, pack.SingleChildPackingOperations[j], ref PackItemIDKey);
+                        AddItemToPack(items, packageTypes, pack.ChildPackingOperations, oldPacks, model, exam, ref bookLast, ref serial, pack.SingleChildPackingOperations[j], ref PackItemIDKey);
                         i += pack.SingleChildPackingOperations[j].PackageTotal.Value;
                         SubBooks += pack.SingleChildPackingOperations[j].NumberofBooksPerModel.Value;
                     }
 
                     for (int j = 0; j < pack.MultiChildPackingOperations.Count; j++)
                     {
-                        
-                        AddItemToPack(items, packageTypes, pack.ChildPackingOperations, oldPacks, model, exam, ref count, ref serial, pack.MultiChildPackingOperations[j], ref PackItemIDKey);
+
+                        AddItemToPack(items, packageTypes, pack.ChildPackingOperations, oldPacks, model, exam, ref bookLast, ref serial, pack.MultiChildPackingOperations[j], ref PackItemIDKey);
                         i += pack.MultiChildPackingOperations[j].PackageTotal.Value;
                         SubBooks += pack.MultiChildPackingOperations[j].NumberofBooksPerModel.Value;
                     }
@@ -729,7 +729,7 @@ namespace Qiyas.WebAdmin.Controllers
 
             int count = exam.ExamModels.Count;
             int serial = logic.GetLastPackSerial(exam.ExamID) + 1;
-
+            int bookSerial = 0;
 
             BusinessLogicLayer.Entity.PPM.BookPackItem itemID = new BusinessLogicLayer.Entity.PPM.BookPackItem(true);
             int PackItemIDKey = itemID.BookPackItemID;
@@ -826,12 +826,12 @@ namespace Qiyas.WebAdmin.Controllers
 
             foreach (BusinessLogicLayer.Entity.PPM.BookPackingOperation pack in orderedPackSingle)
             {
-                AddItemToPack(items, packageTypes, packing, oldPacks, model, exam, ref count, ref serial, pack, ref PackItemIDKey);
+                AddItemToPack(items, packageTypes, packing, oldPacks, model, exam, ref bookSerial, ref serial, pack, ref PackItemIDKey);
             }
 
             foreach (BusinessLogicLayer.Entity.PPM.BookPackingOperation pack in orderedPackMultiple)
             {
-                AddItemToPack(items, packageTypes, packing, oldPacks, model, exam, ref count, ref serial, pack, ref PackItemIDKey);
+                AddItemToPack(items, packageTypes, packing, oldPacks, model, exam, ref bookSerial, ref serial, pack, ref PackItemIDKey);
             }
                 
             
