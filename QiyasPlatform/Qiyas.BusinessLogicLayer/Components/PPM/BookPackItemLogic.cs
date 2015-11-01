@@ -45,16 +45,16 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
         {
             
             List<BusinessLogicLayer.Entity.PPM.BookPackItemModel> itemModels = new List<Entity.PPM.BookPackItemModel>();
-            foreach (BusinessLogicLayer.Entity.PPM.BookPackItem item in items)
-            {
-                item.Save(db, false);
-            }
+            //foreach (BusinessLogicLayer.Entity.PPM.BookPackItem item in items)
+            //{
+            //    item.Save(db, false);
+            //}
 
             foreach (BusinessLogicLayer.Entity.PPM.BookPackItem item in items)
             {
                 foreach (BusinessLogicLayer.Entity.PPM.BookPackItemModel model in item.ItemModels)
                 {
-                    model.Save(db, false);
+                    //model.Save(db, false);
                     model.BookPackItemID = item.BookPackItemID;
                     //model.BookPackItemModelID
                     itemModels.Add(model);

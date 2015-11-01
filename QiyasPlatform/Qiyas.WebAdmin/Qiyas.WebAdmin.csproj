@@ -536,7 +536,6 @@
     <Content Include="Scripts\bootstrap-wysihtml5.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="ApplicationInsights.config" />
     <Content Include="App_Assets\fonts\fontawesome-webfont.eot" />
     <Content Include="App_Assets\fonts\fontawesome-webfont.ttf" />
     <Content Include="App_Assets\fonts\fontawesome-webfont.woff" />

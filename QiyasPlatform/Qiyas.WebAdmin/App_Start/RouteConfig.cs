@@ -19,11 +19,11 @@ namespace Qiyas.WebAdmin
             //    defaults: new { controller = "ExamCenterNeeds", action = "ShippingBagItems", ID = 0, ShippingBagSerial = 0 }
             //);
 
-            routes.MapRoute(
-                name: "PPM_Default",
-                url: "PPM/{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+            //routes.MapRoute(
+            //    name: "PPM_Default",
+            //    url: "PPM/{controller}/{action}/{id}",
+            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            //);
 
 
             routes.MapRoute(

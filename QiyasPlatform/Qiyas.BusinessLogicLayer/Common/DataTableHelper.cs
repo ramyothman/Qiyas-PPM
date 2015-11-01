@@ -125,7 +125,10 @@ namespace Qiyas.BusinessLogicLayer
                                         dc.AutoIncrementStep = 1;
                                         pkList.Add(dc);
                                     }
-                                    bulkCopy_tbl_FirstTable.ColumnMappings.Add(new SqlBulkCopyColumnMapping(dc.ColumnName, dc.ColumnName));
+                                    string []columnsList = {"BookPackItemID", "BookPackingOperationID", "PackCode", "PackSerial", "Weight", "OperationStatusID"
+                                                               , "ParentID", "StartBookSerial", "LastBookSerial", "BookPackItemOperationID", "ParentBookPackItemID"};
+                                    if (columnsList.Contains(dc.ColumnName))
+                                        bulkCopy_tbl_FirstTable.ColumnMappings.Add(new SqlBulkCopyColumnMapping(dc.ColumnName, dc.ColumnName));
                                 }
 
                                 DT_tbl_FirstTable.PrimaryKey = pkList.ToArray();
@@ -161,6 +164,9 @@ namespace Qiyas.BusinessLogicLayer
                                     {
                                         continue;
                                     }
+                                   
+                                    string[] columnsList = {"BookPackItemModelID", "BookPackItemID", "ExamModelID"};
+                                    if (columnsList.Contains(dc.ColumnName))
                                     bulkCopy_tbl_SecondTable.ColumnMappings.Add(new SqlBulkCopyColumnMapping(dc.ColumnName, dc.ColumnName));
                                 }
 
