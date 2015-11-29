@@ -85,50 +85,50 @@
 
 @section Scripts {
     <script type="text/javascript">
-        $("#PrintShip").click(function () {
-            var id = $(this).attr('data-id');
-            window.location = "@Url.Action("ShippingBagReport", "ExamCenterNeeds")" + "/" + id;
-        
+    $("#PrintShip").click(function () {
+        var id = $(this).attr('data-id');
+        //window.location = "@Url.Action("ShippingBagReport", "ExamCenterNeeds")" + "/" + id;
+            window.open("@Url.Action("ShippingBagReport", "ExamCenterNeeds")" + "/" + id, "_blank");
         });
 
     $("#SaveContainer").click(function () {
         var form = $("form#packForm");
         form.attr("action", "@Url.Action("PrintShippingItems", "ExamCenterNeeds")");
-            form.submit();
-        });
+        form.submit();
+    });
 
-        $("#ShippingBagCode").change(function () {
-            var urlLink = "@Url.Action("ShippingBagAdd", "ExamCenterNeeds")";
+    $("#ShippingBagCode").change(function () {
+        var urlLink = "@Url.Action("ShippingBagAdd", "ExamCenterNeeds")";
 
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                data:  {
-                    item: $('#ShippingBagCode').val()
-                },
-                url: urlLink,
-                success: function (data) {
-                    if (data == "exists") {
-                        var shippingValue = $('#ShippingBagCode').val();
-                        ShippingBagItemsGridView.PerformCallback({ ID: '-' + shippingValue});
-                        $('#bagDoesntExist').hide();
-                        $('#bagExists').show();
-                    }
-                    else {
-                        $('#bagExists').hide();
-                        $('#bagDoesntExist').show();
-                    }
-
-                },
-                error: function (data) {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data:  {
+                item: $('#ShippingBagCode').val()
+            },
+            url: urlLink,
+            success: function (data) {
+                if (data == "exists") {
+                    var shippingValue = $('#ShippingBagCode').val();
+                    ShippingBagItemsGridView.PerformCallback({ ID: '-' + shippingValue});
+                    $('#bagDoesntExist').hide();
+                    $('#bagExists').show();
+                }
+                else {
                     $('#bagExists').hide();
                     $('#bagDoesntExist').show();
                 }
-            });
-        });
 
-        $("#PackageCode").change(function () {
-            var urlLink = "@Url.Action("ShippingPackAdd", "ExamCenterNeeds")";
+            },
+            error: function (data) {
+                $('#bagExists').hide();
+                $('#bagDoesntExist').show();
+            }
+        });
+    });
+
+    $("#PackageCode").change(function () {
+        var urlLink = "@Url.Action("ShippingPackAdd", "ExamCenterNeeds")";
 
         $.ajax({
             type: "POST",
@@ -178,7 +178,7 @@
                 return false;
             }
         });
-        
+
     });
 
     </script>

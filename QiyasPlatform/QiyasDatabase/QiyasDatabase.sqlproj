@@ -207,6 +207,7 @@
     <Build Include="dbo\Views\ViewShippingBagsReport.sql" />
     <Build Include="dbo\Views\ViewShippingBags.sql" />
     <Build Include="dbo\Functions\GetShippingBookPackSerials.sql" />
+    <Build Include="dbo\Views\ViewExamModels.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompleteSchema.sql" />

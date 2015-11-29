@@ -740,7 +740,12 @@ namespace Qiyas.WebAdmin.Controllers
             ViewBag.HasError = false;
             ViewBag.NotifyMessage = "";
             ReportID = ID;
-            return View();
+
+            containerPackReport.LoadData(ReportID);
+            var stream = new MemoryStream();
+            containerPackReport.ExportToPdf(stream);
+            return File(stream.GetBuffer(), "application/pdf");
+            //PackContainerItemReportDocumentViewerPartial
         }
 
         public ActionResult GardReport(int ID = 0)
