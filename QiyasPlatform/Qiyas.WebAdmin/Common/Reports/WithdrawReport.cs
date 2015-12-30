@@ -11,8 +11,9 @@ namespace Qiyas.WebAdmin.Common.Reports
     {
         BusinessLogicLayer.Components.PPM.RequestWithdrawDetailLogic RequestWithdrawDetailLogic = new BusinessLogicLayer.Components.PPM.RequestWithdrawDetailLogic();
 
-        public void LoadData(int ID, string reportType)
+        public void LoadData(int ID, string reportType, string Supervisor)
         {
+            this.Supervisor = Supervisor;
             switch(reportType)
             {
                 case "withdraw":
@@ -42,6 +43,44 @@ namespace Qiyas.WebAdmin.Common.Reports
         public WithdrawReport()
         {
             InitializeComponent();
+        }
+
+        private void xrLabelExamCenter_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            XRLabel cell = sender as XRLabel;
+            if (cell == null || string.IsNullOrEmpty(cell.Text))
+                return;
+
+            BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam exCenter = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(Convert.ToInt32(cell.Text));
+            if (exCenter == null)
+                return;
+            BusinessLogicLayer.Entity.PPM.ExamCenter ExamCenter = new BusinessLogicLayer.Entity.PPM.ExamCenter(exCenter.ExamCenterID.Value);
+            if (ExamCenter == null)
+                return;
+
+            cell.Text = ExamCenter.CenterCode;
+        }
+
+        private void xrLabelGender_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            XRLabel cell = sender as XRLabel;
+            if (cell == null)
+                return;
+
+            BusinessLogicLayer.Entity.PPM.Exam exCenter = new BusinessLogicLayer.Entity.PPM.Exam(cell.Text);
+            if (exCenter == null)
+                return;
+            BusinessLogicLayer.Entity.PPM.StudentGender gender = new BusinessLogicLayer.Entity.PPM.StudentGender(exCenter.StudentGenderID.Value);
+            if (gender == null)
+                return;
+
+            cell.Text = gender.Name;
+        }
+        string Supervisor;
+        private void xrTableCellSupervisor_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            XRTableCell cell = sender as XRTableCell;
+            cell.Text = Supervisor;
         }
 
     }

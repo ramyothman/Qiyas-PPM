@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.ViewRequestWithdrawDetailSubTotal
+﻿CREATE VIEW [dbo].[ViewRequestWithdrawDetailSubTotal]
 AS
 SELECT ExamRequirementItemID, SUM(PrintsForOneModel) AS PrintsForOneModel, SUM(ExamsNeededForA3) AS ExamsNeededForA3, SUM(ExamsNeededForA4) AS ExamsNeededForA4, SUM(ExamsNeededForCD) 
                   AS ExamsNeededForCD, SUM(ShippedPrintsForOneModel) AS ShippedPrintsForOneModel, SUM(ShippedExamsNeededForA3) AS ShippedExamsNeededForA3, SUM(ShippedExamsNeededForA4) 
@@ -118,4 +118,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewRequestWithdrawDetailSubTotal';
+
+
 

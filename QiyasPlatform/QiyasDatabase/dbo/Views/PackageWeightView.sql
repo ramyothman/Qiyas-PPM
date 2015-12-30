@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.PackageWeightView
+﻿CREATE VIEW [dbo].[PackageWeightView]
 AS
 SELECT PPM.PackageWeight.PackageWeightID, PPM.PackageWeight.Name, PPM.PackageWeight.Weight, PPM.PackageWeight.PackageCode, PPM.PackageWeight.CreatorID, PPM.PackageWeight.CreatedDate, 
                   PPM.PackageWeight.ModifiedByID, PPM.PackageWeight.ModifiedDate, PPM.BookPackItem.PackCode, PPM.BookPackItem.PackSerial
@@ -138,4 +138,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PackageWeightView';
+
+
 

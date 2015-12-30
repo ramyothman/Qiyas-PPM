@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.ViewExamCenter
+﻿CREATE VIEW [dbo].[ViewExamCenter]
 AS
 SELECT PPM.ExamCenter.ExaminationCenterID, PPM.ExamCenter.CenterCode, PPM.ExamCenter.Name, PPM.ExamCenter.CityID, PPM.ExamCenter.StudentGenderID, PPM.ExamCenter.IsActive, PPM.ExamCenter.CreatorID, 
                   PPM.ExamCenter.CreatedDate, PPM.ExamCenter.ModifiedByID, PPM.ExamCenter.ModifiedDate, Person.City.StateRegionID, Person.City.Name AS CityName, Person.StateProvince.Name AS StateProvinceName, 
@@ -155,6 +155,8 @@ Begin DesignProperties =
        ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewExamCenter';
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'  Filter = 1350
          Or = 1350
@@ -164,6 +166,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'  Filter =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewExamCenter';
+
+
 
 
 GO

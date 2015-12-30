@@ -102,6 +102,19 @@
         });
         settings.Columns.Add(column =>
         {
+            column.FieldName = "PackageCode";
+            column.EditFormSettings.ColumnSpan = 2;
+            column.Caption = @Resources.ModelResource.PackageCode;
+
+            column.ColumnType = MVCxGridViewColumnType.TextBox;
+            var textProperties = column.PropertiesEdit as TextBoxProperties;
+            textProperties.ValidationSettings.RequiredField.IsRequired = true;
+            textProperties.ValidationSettings.RequiredField.ErrorText = "*";
+            textProperties.ValidationSettings.Display = Display.Dynamic;
+            textProperties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.Text;
+        });
+        settings.Columns.Add(column =>
+        {
             column.FieldName = "PackSerial";
             column.VisibleIndex = 4;
             column.EditFormSettings.ColumnSpan = 2;

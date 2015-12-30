@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.ViewWithdrawalReport
+﻿CREATE VIEW [dbo].[ViewWithdrawalReport]
 AS
 SELECT PPM.RequestWithdrawDetail.RequestWithdrawDetailID, PPM.RequestWithdrawDetail.RequestWithdrawID, PPM.RequestWithdrawDetail.ExamRequirementItemID, PPM.RequestWithdrawDetail.PrintsForOneModel, 
                   PPM.RequestWithdrawDetailItem.PackagingTypeID, PPM.RequestWithdrawDetailItem.PackCount, PPM.PackagingType.Name AS PackageName, 
@@ -92,6 +92,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'= 48
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewWithdrawalReport';
+
+
 
 
 GO
@@ -230,4 +232,6 @@ Begin DesignProperties =
             Begin Extent = 
                Top = 338
                Left ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewWithdrawalReport';
+
+
 

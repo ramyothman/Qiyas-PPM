@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.ViewReservedPacks
+﻿CREATE VIEW [dbo].[ViewReservedPacks]
 AS
 SELECT SUM(rwdi.PackCount) AS PackCount, rwdi.PackagingTypeID, pt.ExamModelCount, pt.BooksPerPackage, eri.ExamID
 FROM     PPM.RequestWithdrawDetailItem AS rwdi INNER JOIN
@@ -160,4 +160,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewReservedPacks';
+
+
 

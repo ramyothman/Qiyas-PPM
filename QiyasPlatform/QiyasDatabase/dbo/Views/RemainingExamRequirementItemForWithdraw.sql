@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.RemainingExamRequirementItemForWithdraw
+﻿CREATE VIEW [dbo].[RemainingExamRequirementItemForWithdraw]
 AS
 SELECT e.ExamRequirementItemID, e.ExamCenterRequiredExamsID, e.ExamID, e.PrintsForOneModel - ISNULL(v.PrintsForOneModel, 0) AS PrintsForOneModel, e.ExamsNeededForA3 - ISNULL(v.ExamsNeededForA3, 0) 
                   AS ExamsNeededForA3, e.ExamsNeededForA4 - ISNULL(v.ExamsNeededForA4, 0) AS ExamsNeededForA4, e.ExamsNeededForCD - ISNULL(v.ExamsNeededForCD, 0) AS ExamsNeededForCD, 
@@ -128,4 +128,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'RemainingExamRequirementItemForWithdraw';
+
+
 

@@ -197,8 +197,8 @@ namespace Qiyas.WebAdmin.Common.Reports
                 return;
 
             cell.Text = city.Name + " - " + center.Name;
-            //BusinessLogicLayer.Entity.PPM.ExamPeriod period = new BusinessLogicLayer.Entity.PPM.ExamPeriod(exCenter.ExamPeriodID.Value);
-            //if (period == null)
+            //BusinessLogicLayer.Entity.PPM.ExamPeriod gender = new BusinessLogicLayer.Entity.PPM.ExamPeriod(exCenter.ExamPeriodID.Value);
+            //if (gender == null)
             //    return;
         }
 
@@ -222,6 +222,22 @@ namespace Qiyas.WebAdmin.Common.Reports
                 return;
 
             cell.Text = period.Name;
+        }
+
+        private void xrLabelGender_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            XRTableCell cell = sender as XRTableCell;
+            if (cell == null)
+                return;
+           
+            BusinessLogicLayer.Entity.PPM.Exam exCenter = new BusinessLogicLayer.Entity.PPM.Exam(cell.Text);
+            if (exCenter == null)
+                return;
+            BusinessLogicLayer.Entity.PPM.StudentGender gender = new BusinessLogicLayer.Entity.PPM.StudentGender(exCenter.StudentGenderID.Value);
+            if (gender == null)
+                return;
+
+            cell.Text = gender.Name;
         }
     }
 }

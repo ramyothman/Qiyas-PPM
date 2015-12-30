@@ -8,7 +8,9 @@ using System.IO;
 using Excel;
 using System.Data;
 using System.Text;
-
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 namespace Qiyas.WebAdmin.Controllers
 {
     public class ExamCenterNeedsController : Controller
@@ -765,28 +767,48 @@ namespace Qiyas.WebAdmin.Controllers
 
         public ActionResult WithdrawReportDocumentViewerPartial()
         {
-            report.LoadData(ReportID, ReportType);
+            var userId = SignInManager.GetVerifiedUserIdAsync();
+            var p = SignInManager.AuthenticationManager.User as System.Security.Claims.ClaimsPrincipal;
+            BusinessLogicLayer.Entity.Persons.Credential c = new BusinessLogicLayer.Components.Persons.CredentialLogic().GetByEmail(p.Identity.Name);
+            BusinessLogicLayer.Entity.Persons.Person person = new BusinessLogicLayer.Entity.Persons.Person(c.BusinessEntityId);
+            report.LoadData(ReportID, ReportType, person.DisplayName);
             return PartialView("_WithdrawReportDocumentViewerPartial", report);
         }
 
         public ActionResult WithdrawReportDocumentViewerPartialExport()
         {
-            report.LoadData(ReportID, ReportType);
+            var userId = SignInManager.GetVerifiedUserIdAsync();
+            var p = SignInManager.AuthenticationManager.User as System.Security.Claims.ClaimsPrincipal;
+            BusinessLogicLayer.Entity.Persons.Credential c = new BusinessLogicLayer.Components.Persons.CredentialLogic().GetByEmail(p.Identity.Name);
+            BusinessLogicLayer.Entity.Persons.Person person = new BusinessLogicLayer.Entity.Persons.Person(c.BusinessEntityId);
+            report.LoadData(ReportID, ReportType, person.DisplayName);
             return DocumentViewerExtension.ExportTo(report, Request);
         }
 
-
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+        }
         Qiyas.WebAdmin.Common.Reports.ShippingReport reportShipping = new Qiyas.WebAdmin.Common.Reports.ShippingReport();
-
+        
         public ActionResult ShippingBagReportDocumentViewerPartial()
         {
-            reportShipping.LoadData(ReportID);
+            var userId =  SignInManager.GetVerifiedUserIdAsync();
+            var p = SignInManager.AuthenticationManager.User as System.Security.Claims.ClaimsPrincipal;
+            BusinessLogicLayer.Entity.Persons.Credential c = new BusinessLogicLayer.Components.Persons.CredentialLogic().GetByEmail(p.Identity.Name);
+            BusinessLogicLayer.Entity.Persons.Person person = new BusinessLogicLayer.Entity.Persons.Person(c.BusinessEntityId);
+            reportShipping.LoadData(ReportID, person.DisplayName);
             return PartialView("_ShippingBagReportDocumentViewerPartial", reportShipping);
         }
 
         public ActionResult ShippingBagReportDocumentViewerPartialExport()
         {
-            reportShipping.LoadData(ReportID);
+            var userId = SignInManager.GetVerifiedUserIdAsync();
+            BusinessLogicLayer.Entity.Persons.Person person = new BusinessLogicLayer.Entity.Persons.Person(Convert.ToInt32(userId));
+            reportShipping.LoadData(ReportID, person.DisplayName);
             return DocumentViewerExtension.ExportTo(reportShipping, Request);
         }
 
@@ -1298,17 +1320,26 @@ namespace Qiyas.WebAdmin.Controllers
                 var containerPack = new BusinessLogicLayer.Entity.PPM.ContainerRequestPack(itemPack.BookPackItemID, MainID);
                 if(containerPack.HasObject)
                 {
-                    bagItem.PackCount += 1;
-                    bagItem.BookCount += (itemPack.LastBookSerial - itemPack.StartBookSerial) + 1;
-                    bagItem.Save();
+                    BusinessLogicLayer.Entity.PPM.ShippingBagItem currentItem = new BusinessLogicLayer.Entity.PPM.ShippingBagItem(bagItem.ShippingBagID, itemPack.BookPackItemID);
+                    if(currentItem.HasObject)
+                    {
+                        return Json("notexists");
+                    }
+                    else
+                    {
+                        bagItem.PackCount += 1;
+                        bagItem.BookCount += (itemPack.LastBookSerial - itemPack.StartBookSerial) + 1;
+                        bagItem.Save();
 
-                    BusinessLogicLayer.Entity.PPM.ShippingBagItem pack = new BusinessLogicLayer.Entity.PPM.ShippingBagItem();
-                    pack.BookPackItemID = itemPack.BookPackItemID;
-                    pack.ShippingBagID = bagItem.ShippingBagID;
-                    pack.CreatedDate = DateTime.Now;
-                    pack.ModifiedDate = DateTime.Now;
-                    pack.Save();
-                    return Json("exists");
+                        BusinessLogicLayer.Entity.PPM.ShippingBagItem pack = new BusinessLogicLayer.Entity.PPM.ShippingBagItem();
+                        pack.BookPackItemID = itemPack.BookPackItemID;
+                        pack.ShippingBagID = bagItem.ShippingBagID;
+                        pack.CreatedDate = DateTime.Now;
+                        pack.ModifiedDate = DateTime.Now;
+                        pack.Save();
+                        return Json("exists");
+                    }
+                    
                 }
                 else
                 {

@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.ViewBookPackItemPrintSub
+﻿CREATE VIEW [dbo].[ViewBookPackItemPrintSub]
 AS
 SELECT PPM.BookPackItem.BookPackItemID, PPM.BookPackItem.BookPackItemOperationID, PPM.BookPackItem.PackCode, PPM.BookPackItem.PackSerial, PPM.BookPackItem.Weight, PPM.BookPackItem.OperationStatusID, 
                   PPM.BookPackItem.ParentID, dbo.GetItemPackSpeciality(PPM.BookPackItem.BookPackItemID) AS Speciality, dbo.GetItemPackExamandExamModel(PPM.BookPackItem.BookPackItemID) AS ModelandNumber, 
@@ -139,4 +139,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookPackItemPrintSub';
+
+
 

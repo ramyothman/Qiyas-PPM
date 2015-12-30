@@ -82,7 +82,7 @@
             this.xrPanel1.Dpi = 96F;
             this.xrPanel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPanel1.Name = "xrPanel1";
-            this.xrPanel1.SizeF = new System.Drawing.SizeF(710F, 520F);
+            this.xrPanel1.SizeF = new System.Drawing.SizeF(400F, 328.2F);
             // 
             // xrTable1
             // 
@@ -96,7 +96,7 @@
             this.xrTableRow4,
             this.xrTableRow5,
             this.xrTableRow6});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(705F, 515F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(390F, 325.8661F);
             // 
             // xrTableRow2
             // 
@@ -288,7 +288,7 @@
             this.xrBarCode1.Module = 1.92F;
             this.xrBarCode1.Name = "xrBarCode1";
             this.xrBarCode1.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 96F);
-            this.xrBarCode1.SizeF = new System.Drawing.SizeF(674.4F, 250.8785F);
+            this.xrBarCode1.SizeF = new System.Drawing.SizeF(375F, 150.88F);
             this.xrBarCode1.StylePriority.UseBorderWidth = false;
             this.xrBarCode1.StylePriority.UseFont = false;
             this.xrBarCode1.StylePriority.UseTextAlignment = false;
@@ -307,7 +307,7 @@
             // BottomMargin
             // 
             this.BottomMargin.Dpi = 96F;
-            this.BottomMargin.HeightF = 2.8F;
+            this.BottomMargin.HeightF = 0F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 96F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -325,9 +325,9 @@
             this.BottomMargin});
             this.DataSource = this.bindingSourceItemPack;
             this.Dpi = 96F;
-            this.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 3);
-            this.PageHeight = 527;
-            this.PageWidth = 713;
+            this.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0);
+            this.PageHeight = 337;
+            this.PageWidth = 400;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.Pixels;
             this.Version = "14.2";

@@ -1,4 +1,4 @@
-﻿CREATE VIEW dbo.ExamView
+﻿CREATE VIEW [dbo].[ExamView]
 AS
 SELECT PPM.Exam.ExamID, PPM.Exam.ExamCode, PPM.Exam.Name, PPM.Exam.ExamSpecialityID, PPM.Exam.StudentGenderID, PPM.Exam.NumberofSections, PPM.Exam.NumberofPages, PPM.Exam.TimeForSection, 
                   PPM.Exam.Notes, PPM.Exam.IsActive, PPM.Exam.CreatorID, PPM.Exam.CreatedDate, PPM.Exam.ModifiedByID, PPM.Exam.ModifiedDate, PPM.ExamSpeciality.Name AS ExamSpecialityName, 
@@ -156,6 +156,8 @@ Begin DesignProperties =
     ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ExamView';
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'     Output = 720
          Append = 1400
@@ -171,6 +173,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'     Outpu
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ExamView';
+
+
 
 
 GO

@@ -69,7 +69,7 @@
                     {
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" name="SaveContainer" id="SaveContainer" value="تجهيز" class="btn btn-default btn-primary" />
+                                <input type="button" name="SaveContainer" id="SaveContainer" value="تجهيز" class="btn btn-default btn-primary" />
                                 <input type="button" name="BackButton" id="BackButton" value="عودة" class="btn btn-default " />
                             </div>
                         </div>
@@ -93,6 +93,7 @@
 @section Scripts {
     <script type="text/javascript">
         $("#SaveContainer").click(function () {
+            
         var r = confirm("هل تريد حفظ حاوية المركز");
         if (r == true) {
             var form = $("form#packForm");
@@ -120,6 +121,7 @@
                         $('#packageDoesntExist').hide();
                         $('#packageExists').show();
                         $("#PackageCode").val('');
+                        $("#PackageCode").focus();
                     }
                     else {
                         $('#packageExists').hide();
@@ -144,16 +146,17 @@
     });
 
 
-        $(document).ready(function () {
-
-
-            $("form").bind("keypress", function (e) {
-                if (e.keyCode == 13) {
-                    return false;
+        
+        $('#PackageCode').focus();
+        $("form").bind("keypress", function (e) {
+            if (e.keyCode == 13) {
+                if ($('#PackageCode').val() != '' && $('#PackageCode').val() != '0') {
+                    $("#PackageCode").trigger('change');
                 }
-            });
-            $('#PackageCode').focus();
+                else {
+                    $('#PackageCode').focus();
+                }
+            }
         });
-
     </script>
 }

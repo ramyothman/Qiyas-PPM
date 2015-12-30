@@ -129,7 +129,7 @@
 
     $("#PackageCode").change(function () {
         var urlLink = "@Url.Action("ShippingPackAdd", "ExamCenterNeeds")";
-
+        var bagCode = $('#ShippingBagCode').val();
         $.ajax({
             type: "POST",
             dataType: "json",
@@ -141,7 +141,7 @@
             success: function (data) {
                 if (data == "exists") {
                     $('#PackageCode').val('');
-                    ShippingBagItemsGridView.PerformCallback($('#ShippingBagCode').val());
+                    ShippingBagItemsGridView.PerformCallback(bagCode + '');
                     $('#packageDoesntExist').hide();
                     $('#packageExists').fadeIn('slow', function () {
                         $(this).delay(5000).fadeOut('slow');
@@ -160,10 +160,12 @@
         });
     });
 
-    $("#BackButton").click(function (e) {
-        e.preventDefault();
-        window.location = "/ExamCenterNeeds";
-        return false;
+        $("#BackButton").click(function (e) {
+            window.history.go(-1);
+            //e.preventDefault();
+            
+        //window.location = "/ExamCenterNeeds";
+        //return false;
         @*var form = $("form#packForm");
             form.attr("action", "@Url.Action("PrinPacks", "BookPackingOperation", Qiyas.WebAdmin.Controllers.BookPackingOperationController.MainID)");
             form.submit();*@
