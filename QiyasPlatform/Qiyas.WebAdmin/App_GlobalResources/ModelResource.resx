@@ -483,4 +483,10 @@
   <data name="ExamCenterCode" xml:space="preserve">
     <value>رقم المركز</value>
   </data>
+  <data name="RepackFrom" xml:space="preserve">
+    <value>اعادة تحزيم من</value>
+  </data>
+  <data name="RepackTo" xml:space="preserve">
+    <value>اعادة تحزيم الى</value>
+  </data>
 </root>

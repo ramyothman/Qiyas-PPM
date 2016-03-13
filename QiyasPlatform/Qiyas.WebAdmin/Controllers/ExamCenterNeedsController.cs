@@ -639,7 +639,11 @@ namespace Qiyas.WebAdmin.Controllers
                 BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam ecr = new BusinessLogicLayer.Entity.PPM.ExamCenterRequiredExam(MainID);
                 ecr.RequestPreparationStatusID = 2;
                 ecr.Save();
-                
+                if(User != null)
+                {
+                    BusinessLogicLayer.Entity.Persons.Credential c = new BusinessLogicLayer.Components.Persons.CredentialLogic().GetByEmail(User.Identity.Name);
+                    withdraw.CreatedBy = c.BusinessEntityId;
+                }
                 withdraw.CreatedDate = DateTime.Now;
                 withdraw.ExamCenterRequiredExamsID = MainID;
                 withdraw.ModifiedDate = DateTime.Now;
@@ -767,21 +771,41 @@ namespace Qiyas.WebAdmin.Controllers
 
         public ActionResult WithdrawReportDocumentViewerPartial()
         {
-            var userId = SignInManager.GetVerifiedUserIdAsync();
-            var p = SignInManager.AuthenticationManager.User as System.Security.Claims.ClaimsPrincipal;
-            BusinessLogicLayer.Entity.Persons.Credential c = new BusinessLogicLayer.Components.Persons.CredentialLogic().GetByEmail(p.Identity.Name);
-            BusinessLogicLayer.Entity.Persons.Person person = new BusinessLogicLayer.Entity.Persons.Person(c.BusinessEntityId);
-            report.LoadData(ReportID, ReportType, person.DisplayName);
+            string displayName = "";
+            try
+            {
+                //var userId = SignInManager.GetVerifiedUserIdAsync();
+                //var p = SignInManager.AuthenticationManager.User as System.Security.Claims.ClaimsPrincipal;
+                BusinessLogicLayer.Entity.Persons.Credential c = new BusinessLogicLayer.Components.Persons.CredentialLogic().GetByEmail(User.Identity.Name);
+                BusinessLogicLayer.Entity.Persons.Person person = new BusinessLogicLayer.Entity.Persons.Person(c.BusinessEntityId);
+                displayName = person.DisplayName;
+            }
+            catch(Exception ex)
+            {
+
+            }
+            
+            report.LoadData(ReportID, ReportType, displayName);
             return PartialView("_WithdrawReportDocumentViewerPartial", report);
         }
 
         public ActionResult WithdrawReportDocumentViewerPartialExport()
         {
-            var userId = SignInManager.GetVerifiedUserIdAsync();
-            var p = SignInManager.AuthenticationManager.User as System.Security.Claims.ClaimsPrincipal;
-            BusinessLogicLayer.Entity.Persons.Credential c = new BusinessLogicLayer.Components.Persons.CredentialLogic().GetByEmail(p.Identity.Name);
-            BusinessLogicLayer.Entity.Persons.Person person = new BusinessLogicLayer.Entity.Persons.Person(c.BusinessEntityId);
-            report.LoadData(ReportID, ReportType, person.DisplayName);
+            string displayName = "";
+            try
+            {
+                //var userId = SignInManager.GetVerifiedUserIdAsync();
+                //var p = SignInManager.AuthenticationManager.User as System.Security.Claims.ClaimsPrincipal;
+                BusinessLogicLayer.Entity.Persons.Credential c = new BusinessLogicLayer.Components.Persons.CredentialLogic().GetByEmail(User.Identity.Name);
+                BusinessLogicLayer.Entity.Persons.Person person = new BusinessLogicLayer.Entity.Persons.Person(c.BusinessEntityId);
+                displayName = person.DisplayName;
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            report.LoadData(ReportID, ReportType, displayName);
             return DocumentViewerExtension.ExportTo(report, Request);
         }
 
@@ -796,19 +820,39 @@ namespace Qiyas.WebAdmin.Controllers
         
         public ActionResult ShippingBagReportDocumentViewerPartial()
         {
-            var userId =  SignInManager.GetVerifiedUserIdAsync();
-            var p = SignInManager.AuthenticationManager.User as System.Security.Claims.ClaimsPrincipal;
-            BusinessLogicLayer.Entity.Persons.Credential c = new BusinessLogicLayer.Components.Persons.CredentialLogic().GetByEmail(p.Identity.Name);
-            BusinessLogicLayer.Entity.Persons.Person person = new BusinessLogicLayer.Entity.Persons.Person(c.BusinessEntityId);
-            reportShipping.LoadData(ReportID, person.DisplayName);
+            string displayName = "";
+            try
+            {
+                //var userId = SignInManager.GetVerifiedUserIdAsync();
+                //var p = SignInManager.AuthenticationManager.User as System.Security.Claims.ClaimsPrincipal;
+                BusinessLogicLayer.Entity.Persons.Credential c = new BusinessLogicLayer.Components.Persons.CredentialLogic().GetByEmail(User.Identity.Name);
+                BusinessLogicLayer.Entity.Persons.Person person = new BusinessLogicLayer.Entity.Persons.Person(c.BusinessEntityId);
+                displayName = person.DisplayName;
+            }
+            catch(Exception ex)
+            {
+
+            }
+            reportShipping.LoadData(ReportID, displayName);
             return PartialView("_ShippingBagReportDocumentViewerPartial", reportShipping);
         }
 
         public ActionResult ShippingBagReportDocumentViewerPartialExport()
         {
-            var userId = SignInManager.GetVerifiedUserIdAsync();
-            BusinessLogicLayer.Entity.Persons.Person person = new BusinessLogicLayer.Entity.Persons.Person(Convert.ToInt32(userId));
-            reportShipping.LoadData(ReportID, person.DisplayName);
+            string displayName = "";
+            try
+            {
+                //var userId = SignInManager.GetVerifiedUserIdAsync();
+                //var p = SignInManager.AuthenticationManager.User as System.Security.Claims.ClaimsPrincipal;
+                BusinessLogicLayer.Entity.Persons.Credential c = new BusinessLogicLayer.Components.Persons.CredentialLogic().GetByEmail(User.Identity.Name);
+                BusinessLogicLayer.Entity.Persons.Person person = new BusinessLogicLayer.Entity.Persons.Person(c.BusinessEntityId);
+                displayName = person.DisplayName;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            reportShipping.LoadData(ReportID, displayName);
             return DocumentViewerExtension.ExportTo(reportShipping, Request);
         }
 

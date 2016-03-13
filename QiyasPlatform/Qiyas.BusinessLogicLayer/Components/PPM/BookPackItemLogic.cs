@@ -92,6 +92,58 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
         }
 
         [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackItem> GetAllByPrintingIDandPackagingTypeID(int ID,int TypeID)
+        {
+            List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackItem> packItems = new List<Entity.PPM.BookPackItem>();
+            var items = (from x in db.ViewBookPackItemPrints where x.BookPrintingOperationID == ID && x.PackagingTypeID == TypeID select x);
+            foreach (var item in items)
+            {
+                Qiyas.BusinessLogicLayer.Entity.PPM.BookPackItem packItem = new Entity.PPM.BookPackItem();
+                packItem.BookPackingOperationID = item.BookPackingOperationID;
+                packItem.BookPackItemID = item.BookPackItemID;
+                packItem.isNew = false;
+                packItem.ModelandNumber = item.ModelandNumber;
+                packItem.OperationStatusID = item.OperationStatusID;
+                packItem.PackCode = item.PackCode;
+                packItem.PackageTypeName = item.PackageTypeName;
+                packItem.StartBookSerial = item.StartBookSerial;
+                packItem.LastBookSerial = item.LastBookSerial;
+                packItem.PackSerial = item.PackSerial;
+                packItem.ParentID = item.ParentID;
+                packItem.Speciality = item.Speciality;
+                packItem.Weight = item.Weight;
+                packItems.Add(packItem);
+            }
+            return packItems;
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackItem> GetAllByPrintingIDandPackagingTypeIDStored(int ID, int TypeID)
+        {
+            List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackItem> packItems = new List<Entity.PPM.BookPackItem>();
+            var items = (from x in db.ViewBookPackItemPrints where x.BookPrintingOperationID == ID && x.PackagingTypeID == TypeID && (x.OperationStatusID == 5 || x.OperationStatusID == 7) select x);
+            foreach (var item in items)
+            {
+                Qiyas.BusinessLogicLayer.Entity.PPM.BookPackItem packItem = new Entity.PPM.BookPackItem();
+                packItem.BookPackingOperationID = item.BookPackingOperationID;
+                packItem.BookPackItemID = item.BookPackItemID;
+                packItem.isNew = false;
+                packItem.ModelandNumber = item.ModelandNumber;
+                packItem.OperationStatusID = item.OperationStatusID;
+                packItem.PackCode = item.PackCode;
+                packItem.PackageTypeName = item.PackageTypeName;
+                packItem.StartBookSerial = item.StartBookSerial;
+                packItem.LastBookSerial = item.LastBookSerial;
+                packItem.PackSerial = item.PackSerial;
+                packItem.ParentID = item.ParentID;
+                packItem.Speciality = item.Speciality;
+                packItem.Weight = item.Weight;
+                packItems.Add(packItem);
+            }
+            return packItems;
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select)]
         public List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackItem> GetAllByPrintingIDForPrinting(int ID)
         {
             List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackItem> packItems = new List<Entity.PPM.BookPackItem>();

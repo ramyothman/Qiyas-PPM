@@ -934,6 +934,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اعادة تحزيم.
+        /// </summary>
+        internal static string Repack {
+            get {
+                return ResourceManager.GetString("Repack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اعادة تحزيم من.
+        /// </summary>
+        internal static string RepackFrom {
+            get {
+                return ResourceManager.GetString("RepackFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اعادة تحزيم الى.
+        /// </summary>
+        internal static string RepackTo {
+            get {
+                return ResourceManager.GetString("RepackTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to يجب ادخال كلمة المرور.
         /// </summary>
         internal static string RequiredPassword {

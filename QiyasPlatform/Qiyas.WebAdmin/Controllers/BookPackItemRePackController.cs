@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DevExpress.Web.Mvc;
 using System.Text;
+using System.Web.Routing;
 
 namespace Qiyas.WebAdmin.Controllers
 {
@@ -169,6 +170,8 @@ namespace Qiyas.WebAdmin.Controllers
         public ActionResult NumberingPack(FormCollection form)
         {
             bool isValid = CheckPackValid();
+            if (form.GetValue("PassValidation").AttemptedValue.ToString() == "true")
+                isValid = true;
             if(PrintingOperationID == null || PrintingOperationID == 0)
             {
                 return Index();
@@ -231,10 +234,13 @@ namespace Qiyas.WebAdmin.Controllers
                 url += "/" + RepackID + "/" + PrintingOperationID;
                 //Routedi
                 Dictionary<string, object> dictValues = new Dictionary<string,object>();
+                
                 dictValues.Add("ID", RepackID);
                 dictValues.Add("PrintingID", PrintingOperationID);
-                
-                return RedirectToAction("PrintPacks/" + RepackID + "/" + PrintingOperationID, "BookPackItemRePack", RepackID);
+                RouteValueDictionary routeValueDictionary = new RouteValueDictionary( 
+    new { controller = "BookPackItemRePack", action = "PrintPacks", ID = RepackID, PrintingID = PrintingOperationID } );
+
+                return RedirectToAction("PrintPacks", routeValueDictionary);
                 //Response.Redirect(url);
                 //PrintPacks(parentID, PrintingOperationID);
             }
@@ -406,6 +412,7 @@ namespace Qiyas.WebAdmin.Controllers
                                 }
 
                             }
+                            
                             if (packType.ExamModelCount > 1)
                             {
                                 if (!string.IsNullOrEmpty(modelCode))
@@ -416,8 +423,14 @@ namespace Qiyas.WebAdmin.Controllers
                                 items.Add(item);
 
                             }
-                            serial++;
-                            i++;
+                            if (parentItem.ItemModels.Count == 0)
+                                remaining = 0;
+                            else
+                            {
+                                serial++;
+                                i++;
+                            }
+                            
                             ///TODO: Add Pack Items for Sub Packs
 
                         }
@@ -819,6 +832,38 @@ namespace Qiyas.WebAdmin.Controllers
         #endregion
 
         #region Printing
+
+        
+        public ActionResult RepackGroup(int bookPrintingId, int repackFrom, int repackTo)
+        {
+            BusinessLogicLayer.Components.PPM.BookPackingOperationLogic BookPackingOperationLogic = new BusinessLogicLayer.Components.PPM.BookPackingOperationLogic();
+            BusinessLogicLayer.Components.PPM.BookPackItemLogic packItemLogic = new BusinessLogicLayer.Components.PPM.BookPackItemLogic();
+            BusinessLogicLayer.Components.PPM.BookPackItemLogic BookPackItemLogic = new BusinessLogicLayer.Components.PPM.BookPackItemLogic();
+            BusinessLogicLayer.Entity.PPM.BookPackingOperation operation = new BusinessLogicLayer.Entity.PPM.BookPackingOperation();
+            BookRepackPackageItemList.Clear();
+            BookPackItemOperationList.Clear();
+            List<BusinessLogicLayer.Entity.PPM.BookPackItem> bookPackItems = new List<BusinessLogicLayer.Entity.PPM.BookPackItem>();
+            PrintingOperationID = bookPrintingId;
+            var pitems = BookPackItemLogic.GetAllByPrintingIDandPackagingTypeIDStored(bookPrintingId, repackFrom);
+
+            int packOperationID = 0;
+            string name;
+            foreach (var item in pitems)
+            {
+                var addedItem = repackItemLogic.GetBookRepackItem(item.PackCode);
+                BookRepackPackageItemList.Add(addedItem);
+                PackID = item.BookPackItemID;
+                packOperationID = item.BookPackingOperationID.Value;
+                
+            }
+            BookPackItemOperationGridViewPartialAddNew(new BusinessLogicLayer.Entity.PPM.BookPackItemOperation() {  PackagingTypeID = repackTo, PackingCalculationTypeID = 1, PackingValue = 100 });
+            FormCollection newFormCollection = new FormCollection();
+            newFormCollection.Add("PassValidation", "true");
+            var actionResult = NumberingPack(newFormCollection);
+
+            return actionResult;
+        }
+
         Qiyas.WebAdmin.Common.Reports.PrintItemPack report = new Qiyas.WebAdmin.Common.Reports.PrintItemPack();
 
         public ActionResult PrintPacksTitleDocumentViewerPartial()

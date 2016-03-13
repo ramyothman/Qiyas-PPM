@@ -39,6 +39,10 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource();
             this.pageHeaderBand1 = new DevExpress.XtraReports.UI.PageHeaderBand();
+            this.xrLabel7 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabelGender = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabelExamCenter = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
@@ -59,10 +63,6 @@
             this.PageInfo = new DevExpress.XtraReports.UI.XRControlStyle();
             this.DataField = new DevExpress.XtraReports.UI.XRControlStyle();
             this.xrEvenStyle = new DevExpress.XtraReports.UI.XRControlStyle();
-            this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabelExamCenter = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel7 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabelGender = new DevExpress.XtraReports.UI.XRLabel();
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.GroupFooter1 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrLine1 = new DevExpress.XtraReports.UI.XRLine();
@@ -178,6 +178,66 @@
             this.xrTable1});
             this.pageHeaderBand1.HeightF = 179.1667F;
             this.pageHeaderBand1.Name = "pageHeaderBand1";
+            // 
+            // xrLabel7
+            // 
+            this.xrLabel7.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrLabel7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            this.xrLabel7.LocationFloat = new DevExpress.Utils.PointFloat(501.6667F, 105.3334F);
+            this.xrLabel7.Name = "xrLabel7";
+            this.xrLabel7.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel7.SizeF = new System.Drawing.SizeF(100F, 21.00002F);
+            this.xrLabel7.StylePriority.UseBorders = false;
+            this.xrLabel7.StylePriority.UseFont = false;
+            this.xrLabel7.StylePriority.UseTextAlignment = false;
+            this.xrLabel7.Text = "الجنس";
+            this.xrLabel7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            // 
+            // xrLabelGender
+            // 
+            this.xrLabelGender.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrLabelGender.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "ExamCode")});
+            this.xrLabelGender.Font = new System.Drawing.Font("Times New Roman", 9F);
+            this.xrLabelGender.LocationFloat = new DevExpress.Utils.PointFloat(99.16666F, 105.3333F);
+            this.xrLabelGender.Name = "xrLabelGender";
+            this.xrLabelGender.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabelGender.SizeF = new System.Drawing.SizeF(374.1668F, 20.99999F);
+            this.xrLabelGender.StylePriority.UseBorders = false;
+            this.xrLabelGender.StylePriority.UseFont = false;
+            this.xrLabelGender.StylePriority.UseTextAlignment = false;
+            this.xrLabelGender.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrLabelGender.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrLabelGender_BeforePrint);
+            // 
+            // xrLabel5
+            // 
+            this.xrLabel5.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrLabel5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(501.6667F, 72.33332F);
+            this.xrLabel5.Name = "xrLabel5";
+            this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel5.SizeF = new System.Drawing.SizeF(100F, 23F);
+            this.xrLabel5.StylePriority.UseBorders = false;
+            this.xrLabel5.StylePriority.UseFont = false;
+            this.xrLabel5.StylePriority.UseTextAlignment = false;
+            this.xrLabel5.Text = "رمز المركز";
+            this.xrLabel5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            // 
+            // xrLabelExamCenter
+            // 
+            this.xrLabelExamCenter.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrLabelExamCenter.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "ExamCenterRequiredExamsID")});
+            this.xrLabelExamCenter.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.xrLabelExamCenter.LocationFloat = new DevExpress.Utils.PointFloat(99.16666F, 71.33331F);
+            this.xrLabelExamCenter.Name = "xrLabelExamCenter";
+            this.xrLabelExamCenter.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabelExamCenter.SizeF = new System.Drawing.SizeF(374.1668F, 23.00001F);
+            this.xrLabelExamCenter.StylePriority.UseBorders = false;
+            this.xrLabelExamCenter.StylePriority.UseFont = false;
+            this.xrLabelExamCenter.StylePriority.UseTextAlignment = false;
+            this.xrLabelExamCenter.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrLabelExamCenter.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrLabelExamCenter_BeforePrint);
             // 
             // xrLabel4
             // 
@@ -370,66 +430,6 @@
             this.xrEvenStyle.Name = "xrEvenStyle";
             this.xrEvenStyle.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             // 
-            // xrLabel5
-            // 
-            this.xrLabel5.Borders = DevExpress.XtraPrinting.BorderSide.None;
-            this.xrLabel5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(501.6667F, 72.33332F);
-            this.xrLabel5.Name = "xrLabel5";
-            this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel5.SizeF = new System.Drawing.SizeF(100F, 23F);
-            this.xrLabel5.StylePriority.UseBorders = false;
-            this.xrLabel5.StylePriority.UseFont = false;
-            this.xrLabel5.StylePriority.UseTextAlignment = false;
-            this.xrLabel5.Text = "رمز المركز";
-            this.xrLabel5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            // 
-            // xrLabelExamCenter
-            // 
-            this.xrLabelExamCenter.Borders = DevExpress.XtraPrinting.BorderSide.None;
-            this.xrLabelExamCenter.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "ExamCenterRequiredExamsID")});
-            this.xrLabelExamCenter.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.xrLabelExamCenter.LocationFloat = new DevExpress.Utils.PointFloat(99.16666F, 71.33331F);
-            this.xrLabelExamCenter.Name = "xrLabelExamCenter";
-            this.xrLabelExamCenter.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabelExamCenter.SizeF = new System.Drawing.SizeF(374.1668F, 23.00001F);
-            this.xrLabelExamCenter.StylePriority.UseBorders = false;
-            this.xrLabelExamCenter.StylePriority.UseFont = false;
-            this.xrLabelExamCenter.StylePriority.UseTextAlignment = false;
-            this.xrLabelExamCenter.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrLabelExamCenter.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrLabelExamCenter_BeforePrint);
-            // 
-            // xrLabel7
-            // 
-            this.xrLabel7.Borders = DevExpress.XtraPrinting.BorderSide.None;
-            this.xrLabel7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.xrLabel7.LocationFloat = new DevExpress.Utils.PointFloat(501.6667F, 105.3334F);
-            this.xrLabel7.Name = "xrLabel7";
-            this.xrLabel7.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel7.SizeF = new System.Drawing.SizeF(100F, 21.00002F);
-            this.xrLabel7.StylePriority.UseBorders = false;
-            this.xrLabel7.StylePriority.UseFont = false;
-            this.xrLabel7.StylePriority.UseTextAlignment = false;
-            this.xrLabel7.Text = "الجنس";
-            this.xrLabel7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            // 
-            // xrLabelGender
-            // 
-            this.xrLabelGender.Borders = DevExpress.XtraPrinting.BorderSide.None;
-            this.xrLabelGender.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "ExamCode")});
-            this.xrLabelGender.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.xrLabelGender.LocationFloat = new DevExpress.Utils.PointFloat(99.16666F, 105.3333F);
-            this.xrLabelGender.Name = "xrLabelGender";
-            this.xrLabelGender.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabelGender.SizeF = new System.Drawing.SizeF(374.1668F, 20.99999F);
-            this.xrLabelGender.StylePriority.UseBorders = false;
-            this.xrLabelGender.StylePriority.UseFont = false;
-            this.xrLabelGender.StylePriority.UseTextAlignment = false;
-            this.xrLabelGender.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrLabelGender.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrLabelGender_BeforePrint);
-            // 
             // GroupHeader1
             // 
             this.GroupHeader1.Expanded = false;
@@ -504,6 +504,8 @@
             // 
             // xrTableCellSupervisor
             // 
+            this.xrTableCellSupervisor.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "RequestWithdrawID")});
             this.xrTableCellSupervisor.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrTableCellSupervisor.Name = "xrTableCellSupervisor";
             this.xrTableCellSupervisor.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 0, 0, 0, 100F);

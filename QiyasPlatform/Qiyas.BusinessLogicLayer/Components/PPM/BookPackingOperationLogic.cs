@@ -23,6 +23,15 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
         }
 
         [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation> GetByBookPrintingIDandPackagingTypeID(int ID, int TypeID)
+        {
+            List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation> operations = db.BookPackingOperations.Where(c => c.BookPrintingOperationID == ID && c.PackagingTypeID == TypeID).Select(c => new Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation(c) { context = db }).ToList();
+            if (operations == null)
+                operations = new List<Entity.PPM.BookPackingOperation>();
+            return operations;
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select)]
         public List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation> GetPackedByBookPrintingID(int ID)
         {
             List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackingOperation> operations = new List<Entity.PPM.BookPackingOperation>();

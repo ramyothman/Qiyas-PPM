@@ -535,7 +535,10 @@
     <Content Include="Scripts\bootstrap-timepicker.js" />
     <Content Include="Scripts\bootstrap-wysihtml5.js" />
     <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.min.js.map">
+      <DependentUpon>bootstrap.min.js</DependentUpon>
+    </Content>
+    <None Include="Scripts\bootstrap.min.js.old" />
     <Content Include="App_Assets\fonts\fontawesome-webfont.eot" />
     <Content Include="App_Assets\fonts\fontawesome-webfont.ttf" />
     <Content Include="App_Assets\fonts\fontawesome-webfont.woff" />
@@ -551,6 +554,7 @@
       <DependentUpon>qiyas.css</DependentUpon>
     </Content>
     <Content Include="App_Assets\scripts\main.js.coffee" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\calendar\jquery.calendars.ummalqura.min.js.map">
       <DependentUpon>jquery.calendars.ummalqura.min.js</DependentUpon>
     </Content>

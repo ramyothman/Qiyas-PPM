@@ -87,6 +87,28 @@ namespace Qiyas.BusinessLogicLayer.Entity.PPM
             }
         }
 
+        private int _RepackFrom;
+        [Display(Name = "RepackFrom")]
+        public int RepackFrom
+        {
+            set { _RepackFrom = value; }
+            get
+            {
+                return _RepackFrom;
+            }
+        }
+
+        private int _RepackTo;
+        [Display(Name = "RepackTo")]
+        public int RepackTo
+        {
+            set { _RepackTo = value; }
+            get
+            {
+                return _RepackTo;
+            }
+        }
+
         public void UpdateItemPackStatus(int StatusID)
         {
             context.UpdateItemPacksBulk(BookPrintingOperationID, StatusID);

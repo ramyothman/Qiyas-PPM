@@ -9,6 +9,7 @@
         @Resources.MainResource.BookPrintingOperationTitle
     </h1>
 </div>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="widget-container fluid-height clearfix">
@@ -20,17 +21,64 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="repackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">اعادة التحزيم</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="RepackId" />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.RepackFrom, new { @class = "col-md-5  pull-right control-label" })
+                    <div class="col-md-7  pull-right">
+                        @Html.DropDownListFor(m => m.RepackFrom, new SelectList(new Qiyas.BusinessLogicLayer.Components.PPM.PackagingTypeLogic().GetAll(), "PackagingTypeID", "Name"), new { @class = "form-control col-md-6" })
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.RepackTo, new { @class = "col-md-5  pull-right control-label" })
+                    <div class="col-md-7  pull-right">
+                        @Html.DropDownListFor(m => m.RepackTo, new SelectList(new Qiyas.BusinessLogicLayer.Components.PPM.PackagingTypeLogic().GetAll(), "PackagingTypeID", "Name"), new { @class = "form-control col-md-6" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="RepackButtonSave" onclick="RepackGroup();" class="btn btn-primary">حفظ</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">اغلاق</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 @section Scripts {
     <script type="text/javascript">
+        function RepackItems() {
+            alert('saved');
+        }
         function CustomButtonClick(s, e, url) {
             var key = s.GetRowKey(e.visibleIndex);
-
+            
             if (e.buttonID === "btnPacking") {
                 var destUrl = url + "/" + key;
                 window.location.href = destUrl;
             }
+            else if (e.buttonID === "btnRepack") {
+                $('#RepackId').val(key);
+                $('#repackModal').modal('show');
+            }
         }
+
+        function RepackGroup() {
+            var destUrl = "/BookPackItemRePack/RepackGroup/?bookPrintingId=" + $('#RepackId').val() + "&repackFrom=" + $('#RepackFrom').val() + "&repackTo=" + $('#RepackTo').val();
+            
+            window.location.href = destUrl;
+        }
+
     </script>
 }
 

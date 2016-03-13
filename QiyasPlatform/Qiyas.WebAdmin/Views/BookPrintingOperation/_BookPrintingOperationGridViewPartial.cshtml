@@ -30,6 +30,7 @@
         settings.CommandColumn.ShowDeleteButton = true;
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.CustomButtons.Add(new GridViewCommandColumnCustomButton() { ID = "btnPacking", Text = Resources.MainResource.PackCustomButton });
+        settings.CommandColumn.CustomButtons.Add(new GridViewCommandColumnCustomButton() { ID = "btnRepack", Text = Resources.MainResource.Repack });
         settings.ClientSideEvents.CustomButtonClick =
         string.Format("function(s, e) {{ CustomButtonClick(s, e, '{0}'); }}", Url.Action("PackExam", "BookPrintingOperation"));
         

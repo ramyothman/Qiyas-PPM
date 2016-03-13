@@ -508,4 +508,13 @@
   <data name="ExamSpecialityExists" xml:space="preserve">
     <value>تخصص الاختبار و نوع الاختبار لا يمكن تكرارهم معا</value>
   </data>
+  <data name="Repack" xml:space="preserve">
+    <value>اعادة تحزيم</value>
+  </data>
+  <data name="RepackFrom" xml:space="preserve">
+    <value>اعادة تحزيم من</value>
+  </data>
+  <data name="RepackTo" xml:space="preserve">
+    <value>اعادة تحزيم الى</value>
+  </data>
 </root>

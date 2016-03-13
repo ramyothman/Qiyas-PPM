@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "جرد اختبارات مركز";
+}
+
+
+<div class="page-title">
+    <h1>
+        جرد اختبارات مركز
+    </h1>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+
+                @Html.Action("GardReportDocumentViewerPartial")
+
+
+                <br />
+                <br />
+                <form>
+                    <input type="button" name="BackButton" id="BackButton" value="عودة" class="btn btn-default " />
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+    $("#BackButton").click(function (e) {
+        e.preventDefault();
+        var url = "@Url.Action("Index", "ExamCenterNeeds")";
+        window.location = url ;
+        return false;
+
+    });
+    </script>
+}
+
+

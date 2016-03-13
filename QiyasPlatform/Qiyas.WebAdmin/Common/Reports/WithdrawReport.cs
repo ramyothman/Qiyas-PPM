@@ -80,7 +80,25 @@ namespace Qiyas.WebAdmin.Common.Reports
         private void xrTableCellSupervisor_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             XRTableCell cell = sender as XRTableCell;
-            cell.Text = Supervisor;
+            if (string.IsNullOrEmpty(cell.Text))
+            {
+                cell.Text = "";
+                return;
+            }
+            BusinessLogicLayer.Entity.PPM.RequestWithdraw withdraw = new BusinessLogicLayer.Entity.PPM.RequestWithdraw(Convert.ToInt32(cell.Text));
+            if(!withdraw.CreatedBy.HasValue || withdraw.CreatedBy.Value == 0)
+            {
+                cell.Text = Supervisor;
+            }
+            else
+            {
+                BusinessLogicLayer.Entity.Persons.Person p = new BusinessLogicLayer.Entity.Persons.Person(withdraw.CreatedBy.Value);
+                if (p.HasObject)
+                    cell.Text = p.DisplayName;
+                else
+                    cell.Text = Supervisor;
+            }
+            
         }
 
     }
