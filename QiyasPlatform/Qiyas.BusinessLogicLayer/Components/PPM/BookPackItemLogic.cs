@@ -121,7 +121,7 @@ namespace Qiyas.BusinessLogicLayer.Components.PPM
         public List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackItem> GetAllByPrintingIDandPackagingTypeIDStored(int ID, int TypeID)
         {
             List<Qiyas.BusinessLogicLayer.Entity.PPM.BookPackItem> packItems = new List<Entity.PPM.BookPackItem>();
-            var items = (from x in db.ViewBookPackItemPrints where x.BookPrintingOperationID == ID && x.PackagingTypeID == TypeID && (x.OperationStatusID == 5 || x.OperationStatusID == 7) select x);
+            var items = (from x in db.ViewBookPackItemPrints where x.BookPrintingOperationID == ID && x.PackagingTypeID == TypeID && (x.OperationStatusID == 5 || x.OperationStatusID == 7 || x.OperationStatusID == 3) select x);
             foreach (var item in items)
             {
                 Qiyas.BusinessLogicLayer.Entity.PPM.BookPackItem packItem = new Entity.PPM.BookPackItem();
