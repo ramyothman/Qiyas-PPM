@@ -22,7 +22,7 @@ namespace Qiyas.DataAccessLayer
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Qiyas")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="PPM")]
 	public partial class QiyasLinqDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -652,6 +652,14 @@ namespace Qiyas.DataAccessLayer
 			get
 			{
 				return this.GetTable<ViewShippingBag>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ViewBookRepackOperation> ViewBookRepackOperations
+		{
+			get
+			{
+				return this.GetTable<ViewBookRepackOperation>();
 			}
 		}
 		
@@ -18525,6 +18533,105 @@ namespace Qiyas.DataAccessLayer
 				if ((this._ExaminationCenterID != value))
 				{
 					this._ExaminationCenterID = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ViewBookRepackOperation")]
+	public partial class ViewBookRepackOperation
+	{
+		
+		private int _BookPrintingOperationID;
+		
+		private string _PackagingTypeName;
+		
+		private string _CalculationTypeName;
+		
+		private System.Nullable<int> _PackingValue;
+		
+		private System.Nullable<int> _RepackCount;
+		
+		public ViewBookRepackOperation()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookPrintingOperationID", DbType="Int NOT NULL")]
+		public int BookPrintingOperationID
+		{
+			get
+			{
+				return this._BookPrintingOperationID;
+			}
+			set
+			{
+				if ((this._BookPrintingOperationID != value))
+				{
+					this._BookPrintingOperationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackagingTypeName", DbType="NVarChar(50)")]
+		public string PackagingTypeName
+		{
+			get
+			{
+				return this._PackagingTypeName;
+			}
+			set
+			{
+				if ((this._PackagingTypeName != value))
+				{
+					this._PackagingTypeName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CalculationTypeName", DbType="NVarChar(50)")]
+		public string CalculationTypeName
+		{
+			get
+			{
+				return this._CalculationTypeName;
+			}
+			set
+			{
+				if ((this._CalculationTypeName != value))
+				{
+					this._CalculationTypeName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackingValue", DbType="Int")]
+		public System.Nullable<int> PackingValue
+		{
+			get
+			{
+				return this._PackingValue;
+			}
+			set
+			{
+				if ((this._PackingValue != value))
+				{
+					this._PackingValue = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RepackCount", DbType="Int")]
+		public System.Nullable<int> RepackCount
+		{
+			get
+			{
+				return this._RepackCount;
+			}
+			set
+			{
+				if ((this._RepackCount != value))
+				{
+					this._RepackCount = value;
 				}
 			}
 		}

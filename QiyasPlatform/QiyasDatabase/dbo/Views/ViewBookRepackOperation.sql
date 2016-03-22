@@ -1,20 +1,30 @@
-﻿CREATE VIEW dbo.ViewBookPackItem
+﻿CREATE VIEW dbo.ViewBookRepackOperation
 AS
-SELECT PPM.BookPackItem.BookPackItemID, PPM.BookPackItem.BookPackingOperationID, PPM.BookPackItem.PackCode, PPM.BookPackItem.PackSerial, PPM.BookPackItem.Weight, PPM.BookPackItem.ParentID, 
-                  PPM.BookPackItem.OperationStatusID, PPM.BookPrintingOperation.ExamID, PPM.BookPrintingOperation.BookPrintingOperationID, PPM.BookPackingOperation.PackagingTypeID, 
-                  PPM.BookPackingOperation.PackingCalculationTypeID, PPM.BookPackingOperation.PackageTotal, PPM.BookPackingOperation.PackingValue, PPM.BookPackingOperation.AllocatedFrom, 
-                  PPM.BookPrintingOperation.PrintsForOneModel, PPM.BookPrintingOperation.ExamsNeededForA3, PPM.Exam.ExamCode, PPM.Exam.ExamSpecialityID, PPM.ExamSpeciality.Name AS SpecialityName
-FROM     PPM.BookPackItem INNER JOIN
-                  PPM.BookPackingOperation ON PPM.BookPackItem.BookPackingOperationID = PPM.BookPackingOperation.BookPackingOperationID INNER JOIN
-                  PPM.BookPrintingOperation ON PPM.BookPackingOperation.BookPrintingOperationID = PPM.BookPrintingOperation.BookPrintingOperationID INNER JOIN
-                  PPM.Exam ON PPM.BookPrintingOperation.ExamID = PPM.Exam.ExamID INNER JOIN
-                  PPM.ExamSpeciality ON PPM.Exam.ExamSpecialityID = PPM.ExamSpeciality.ExamSpecialityID
+SELECT DISTINCT bpo.BookPrintingOperationID, pt.Name AS PackagingTypeName, ct.Name AS CalculationTypeName, bpio.PackingValue,
+                      (SELECT COUNT(*) AS Expr1
+                       FROM      PPM.BookPackItem
+                       WHERE   (BookPackItemOperationID = bpio.BookPackItemOperationID)) AS RepackCount
+FROM     PPM.BookPackItem AS bpi INNER JOIN
+                  PPM.BookPackItemOperation AS bpio ON bpi.BookPackItemOperationID = bpio.BookPackItemOperationID INNER JOIN
+                  PPM.PackagingType AS pt ON bpio.PackagingTypeID = pt.PackagingTypeID INNER JOIN
+                  PPM.PackingCalculationType AS ct ON bpio.PackingCalculationTypeID = ct.PackingCalculationTypeID INNER JOIN
+                  PPM.BookPackingOperation AS bpacko ON bpacko.BookPackingOperationID = bpi.BookPackingOperationID INNER JOIN
+                  PPM.BookPrintingOperation AS bpo ON bpacko.BookPrintingOperationID = bpo.BookPrintingOperationID
+WHERE  (bpi.BookPackItemOperationID IS NOT NULL)
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookPackItem';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookRepackOperation';
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'idths = 11
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'    Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
          Column = 1440
          Alias = 900
          Table = 1170
@@ -31,11 +41,7 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'idths = 11
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookPackItem';
-
-
-
-
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookRepackOperation';
 
 
 GO
@@ -44,7 +50,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[47] 4[14] 2[20] 3) )"
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -110,52 +116,62 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "BookPackItem (PPM)"
+         Begin Table = "bpi"
             Begin Extent = 
                Top = 7
                Left = 48
                Bottom = 170
-               Right = 310
-            End
-            DisplayFlags = 280
-            TopColumn = 3
-         End
-         Begin Table = "BookPackingOperation (PPM)"
-            Begin Extent = 
-               Top = 7
-               Left = 358
-               Bottom = 170
-               Right = 625
-            End
-            DisplayFlags = 280
-            TopColumn = 9
-         End
-         Begin Table = "BookPrintingOperation (PPM)"
-            Begin Extent = 
-               Top = 7
-               Left = 673
-               Bottom = 170
-               Right = 935
+               Right = 319
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "Exam (PPM)"
+         Begin Table = "bpio"
             Begin Extent = 
-               Top = 180
-               Left = 833
-               Bottom = 343
-               Right = 1051
+               Top = 7
+               Left = 367
+               Bottom = 170
+               Right = 638
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "ExamSpeciality (PPM)"
+         Begin Table = "pt"
             Begin Extent = 
-               Top = 205
-               Left = 480
-               Bottom = 368
-               Right = 690
+               Top = 7
+               Left = 686
+               Bottom = 170
+               Right = 899
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "ct"
+            Begin Extent = 
+               Top = 7
+               Left = 947
+               Bottom = 126
+               Right = 1214
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "bpacko"
+            Begin Extent = 
+               Top = 7
+               Left = 1262
+               Bottom = 170
+               Right = 1529
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "bpo"
+            Begin Extent = 
+               Top = 126
+               Left = 947
+               Bottom = 289
+               Right = 1209
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -172,17 +188,5 @@ Begin DesignProperties =
          Width = 1200
          Width = 1200
          Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-      End
-   End
-   Begin CriteriaPane = 
-      Begin ColumnW', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookPackItem';
-
-
-
-
+     ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookRepackOperation';
 

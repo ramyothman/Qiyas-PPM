@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DevExpress.Web.Mvc;
 using System.Text;
 using System.Web.Routing;
+using System.IO;
 
 namespace Qiyas.WebAdmin.Controllers
 {
@@ -894,7 +895,11 @@ namespace Qiyas.WebAdmin.Controllers
             ViewBag.NotifyMessage = "";
             ViewBag.PrintingID = PrintingID;
             PrintingOperationID = PrintingID;
-            return View(model);
+            var stream = new MemoryStream();
+            report.DataSource = new Qiyas.BusinessLogicLayer.Components.PPM.BookPackItemLogic().GetAllByParentID(RepackID);
+            report.ExportToPdf(stream);
+            return File(stream.GetBuffer(), "application/pdf");
+            //return View(model);
         }
         #endregion
     }

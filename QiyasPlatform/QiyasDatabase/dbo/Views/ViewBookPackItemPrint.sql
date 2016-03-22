@@ -170,6 +170,8 @@ Begin DesignProperties =
 
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'       Width = 1200
          Width = 1200
@@ -195,6 +197,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'       Wid
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewBookPackItemPrint';
+
+
 
 
 

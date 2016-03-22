@@ -157,6 +157,8 @@ Begin DesignProperties =
 
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'  Filter = 1350
          Or = 1350
@@ -166,6 +168,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'  Filter =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ViewExamCenter';
+
+
 
 
 

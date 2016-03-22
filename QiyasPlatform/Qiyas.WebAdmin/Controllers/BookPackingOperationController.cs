@@ -83,6 +83,15 @@ namespace Qiyas.WebAdmin.Controllers
             return PartialView("_PackingGridViewPartial", model);
         }
 
+        [ValidateInput(false)]
+        public ActionResult RePackingGridViewPartial()
+        {
+            var model = new BusinessLogicLayer.Components.PPM.ViewBookRepackOperationLogic().GetAll(PrintingOperationID);
+            var modelPrinting = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(MainID);
+            ViewBag.IsSaved = modelPrinting.OperationStatusID > 1;
+            return PartialView("_RePackingGridViewPartial", model);
+        }
+
         public int GetTotalPerBooks()
         {
             int totalBooksPerModel = 0;

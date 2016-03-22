@@ -245,6 +245,7 @@
     <Compile Include="Components\PPM\StudentGenderLogic.Logic.cs">
       <DependentUpon>StudentGenderLogic.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\PPM\ViewBookRepackOperationLogic.cs" />
     <Compile Include="Components\RoleSecurity\PersonRoleLogic.cs" />
     <Compile Include="Components\RoleSecurity\RoleLogic.cs" />
     <Compile Include="Components\RoleSecurity\UserLoginProviderLogic.cs" />
@@ -381,6 +382,7 @@
     <Compile Include="Entity\PPM\StudentGender.Model.cs">
       <DependentUpon>StudentGender.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entity\PPM\ViewBookRepackOperation.cs" />
     <Compile Include="Entity\Reports\ShippingBagReport.cs" />
     <Compile Include="Entity\RoleSecurity\PersonRole.cs" />
     <Compile Include="Entity\RoleSecurity\Role.cs" />

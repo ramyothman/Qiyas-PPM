@@ -34,6 +34,8 @@
                     @Html.LabelFor(m => m.RepackFrom, new { @class = "col-md-5  pull-right control-label" })
                     <div class="col-md-7  pull-right">
                         @Html.DropDownListFor(m => m.RepackFrom, new SelectList(new Qiyas.BusinessLogicLayer.Components.PPM.PackagingTypeLogic().GetAll(), "PackagingTypeID", "Name"), new { @class = "form-control col-md-6" })
+                        @*@Html.Action("PackagingTypeFromComboBoxPartial")*@
+
                     </div>
                 </div>
                 <br />
@@ -60,22 +62,62 @@
         function RepackItems() {
             alert('saved');
         }
+        function PackagingTypeCombo_BeginCallback(s, e) {
+            e.customArgs['StateProvinceID'] = grid.GetEditor('StateProvinceID').GetValue();
+        }
+
+        function GetRepackFromDropDownItems() {
+            var urlLink = "@Url.Action("GetPackagingTypeFrom", "BookPrintingOperation")";
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                data:  {
+                    item: $('#RepackId').val()
+                },
+                url: urlLink,
+                success: function (data) {
+                    $("#RepackFrom").children().remove();
+                    
+                    $.each(data, function (key, value) {
+                        $('#RepackFrom')
+                         .append($("<option></option>")
+                         .attr("value", value.PackagingTypeID)
+                         .text(value.PackagingTypeName));
+                    });
+                },
+                error: function (data) {
+                    
+                }
+            });
+        }
         function CustomButtonClick(s, e, url) {
             var key = s.GetRowKey(e.visibleIndex);
-            
+
             if (e.buttonID === "btnPacking") {
                 var destUrl = url + "/" + key;
                 window.location.href = destUrl;
             }
             else if (e.buttonID === "btnRepack") {
+                s.GetRowValues(e.visibleIndex, 'OperationStatusID', OnGetRowValues);
                 $('#RepackId').val(key);
+
+            }
+        }
+
+        function OnGetRowValues(Value) {
+            if (Value == 5 || Value == 7) {
+                GetRepackFromDropDownItems();
                 $('#repackModal').modal('show');
+            }
+            else {
+                alert('لا يمكن اعادة تحزيم هذا الطلب يجب ان تكون الحزم بالمستودع');
             }
         }
 
         function RepackGroup() {
             var destUrl = "/BookPackItemRePack/RepackGroup/?bookPrintingId=" + $('#RepackId').val() + "&repackFrom=" + $('#RepackFrom').val() + "&repackTo=" + $('#RepackTo').val();
-            
+
             window.location.href = destUrl;
         }
 

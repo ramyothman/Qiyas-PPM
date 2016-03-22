@@ -1353,6 +1353,7 @@
     <Content Include="Views\ExamCenterNeeds\GardReport.cshtml" />
     <Content Include="Views\ExamCenterNeeds\_PackContainerItemReportDocumentViewerPartial.cshtml" />
     <Content Include="Views\ExamCenterNeeds\ShippingBagReport.cshtml" />
+    <Content Include="Views\BookPackingOperation\_RePackingGridViewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

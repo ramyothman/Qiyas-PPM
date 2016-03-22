@@ -281,209 +281,14 @@ namespace Qiyas.WebAdmin.Controllers
             return result;
 
         }
-        //[HttpPost]
-        //public ActionResult NumberingPack(List<BusinessLogicLayer.Entity.PPM.BookPackItem> bookPackItems)
-        //{
-        //    bool isValid = true;
-        //    if (PrintingOperationID == null || PrintingOperationID == 0)
-        //    {
-        //        return Index();
-        //    }
-        //    var model = new BusinessLogicLayer.Entity.PPM.BookPrintingOperation(PrintingOperationID);
-        //    if (isValid)
-        //    {
 
-        //        int parentID = 0;
-        //        SaveCurrentLists(out parentID);
-        //        RepackID = parentID;
-        //        BusinessLogicLayer.Components.PPM.BookPackItemOperationLogic logic = new BusinessLogicLayer.Components.PPM.BookPackItemOperationLogic();
-
-        //        List<BusinessLogicLayer.Entity.PPM.BookPackItemOperation> packing = logic.GetPackagingTypeByBookPackID(PackID);
-        //        List<BusinessLogicLayer.Entity.PPM.PackagingType> packageTypes = new BusinessLogicLayer.Components.PPM.PackagingTypeLogic().GetAll();
-        //        var orderedPackageTypes = (from x in packageTypes orderby x.Total descending select x);
-        //        List<BusinessLogicLayer.Entity.PPM.BookPackItemOperation> orderedPack = new List<BusinessLogicLayer.Entity.PPM.BookPackItemOperation>();
-        //        List<BusinessLogicLayer.Entity.PPM.BookPackItemOperation> oldPacks = logic.GetPackedByBookPackID(PackID);
-
-        //        List<BusinessLogicLayer.Entity.PPM.BookPackItem> items = new List<BusinessLogicLayer.Entity.PPM.BookPackItem>();
-        //        BusinessLogicLayer.Entity.PPM.Exam exam = new BusinessLogicLayer.Entity.PPM.Exam(model.ExamID.Value);
-
-        //        int count = exam.ExamModels.Count;
-        //        int serial = new BusinessLogicLayer.Components.PPM.BookPackingOperationLogic().GetLastPackSerial(exam.ExamID) + 1;
-
-        //        List<BusinessLogicLayer.Entity.PPM.BookPackItemOperation> orderedPackSingle = new List<BusinessLogicLayer.Entity.PPM.BookPackItemOperation>();
-        //        List<BusinessLogicLayer.Entity.PPM.BookPackItemOperation> orderedPackMultiple = new List<BusinessLogicLayer.Entity.PPM.BookPackItemOperation>();
-        //        BusinessLogicLayer.Entity.PPM.BookPackItem parentItem = new BusinessLogicLayer.Entity.PPM.BookPackItem(PackID);
-
-        //        foreach (BusinessLogicLayer.Entity.PPM.PackagingType pckg in orderedPackageTypes)
-        //        {
-        //            var packOrder = (from x in packing where x.PackagingTypeID == pckg.PackagingTypeID && x.PackingCalculationTypeID != 2 select x).FirstOrDefault();
-        //            if (packOrder != null && packOrder.HasObject)
-        //            {
-        //                if (pckg.ExamModelCount == 1)
-        //                    orderedPackSingle.Add(packOrder);
-        //                else
-        //                    orderedPackMultiple.Add(packOrder);
-        //                orderedPack.Add(packOrder);
-        //            }
-
-        //        }
-
-
-        //        foreach (BusinessLogicLayer.Entity.PPM.BookPackItemOperation pack in orderedPackSingle)
-        //        {
-        //            AddItemToPack(items, packageTypes, packing, oldPacks, model, exam, ref count, ref serial, pack, parentItem, parentID);
-        //        }
-
-        //        foreach (BusinessLogicLayer.Entity.PPM.BookPackItemOperation pack in orderedPackMultiple)
-        //        {
-        //            AddItemToPack(items, packageTypes, packing, oldPacks, model, exam, ref count, ref serial, pack, parentItem, parentID);
-        //        }
-
-        //        Qiyas.BusinessLogicLayer.Components.PPM.BookPackItemLogic itemLogic = new BusinessLogicLayer.Components.PPM.BookPackItemLogic();
-        //        itemLogic.SaveItems(items);
-        //        ViewBag.HasError = false;
-        //        ViewBag.NotifyMessage = Resources.MainResource.NumberingPackSuccess;
-        //        string url = string.Format("{0}", Url.Action("PrintPacks", "BookPackItemRePack"));
-        //        url += "/" + RepackID + "/" + PrintingOperationID;
-        //        //Routedi
-        //        Dictionary<string, object> dictValues = new Dictionary<string, object>();
-        //        dictValues.Add("ID", RepackID);
-        //        dictValues.Add("PrintingID", PrintingOperationID);
-
-        //        return RedirectToAction("PrintPacks/" + RepackID + "/" + PrintingOperationID, "BookPackItemRePack", RepackID);
-        //        //Response.Redirect(url);
-        //        //PrintPacks(parentID, PrintingOperationID);
-        //    }
-        //    else
-        //    {
-        //        ViewBag.HasError = true;
-        //        ViewBag.NotifyMessage = "يرجي مراجعه الحزم المراد اعادة تحزيمها";
-        //    }
-
-
-
-        //    return View("Index", model);
-        //}
-
-        
-
-        //private void AddItemToPack(List<BusinessLogicLayer.Entity.PPM.BookPackItem> items, List<BusinessLogicLayer.Entity.PPM.PackagingType> packageTypes, List<BusinessLogicLayer.Entity.PPM.BookPackItemOperation> packing, List<BusinessLogicLayer.Entity.PPM.BookPackItemOperation> oldPacks, BusinessLogicLayer.Entity.PPM.BookPrintingOperation model, BusinessLogicLayer.Entity.PPM.Exam exam, ref int count, ref int serial, BusinessLogicLayer.Entity.PPM.BookPackItemOperation pack, BusinessLogicLayer.Entity.PPM.BookPackItem parentItem, int parentRepackID)
-        //{
-        //    serial = 1;
-
-
-
-
-        //    BusinessLogicLayer.Components.PPM.BookPackItemLogic BookPackItemLogic = new BusinessLogicLayer.Components.PPM.BookPackItemLogic();
-
-
-
-
-
-
-
-        //    foreach (BusinessLogicLayer.Entity.PPM.BookRepackPackageItem vparentItem in BookRepackPackageItemList)
-        //    {
-        //        parentItem = new BusinessLogicLayer.Entity.PPM.BookPackItem(vparentItem.BookPackItemID.Value);
-        //        int i = 0;
-        //        var packType = (from x in packageTypes where x.PackagingTypeID == pack.PackagingTypeID select x).FirstOrDefault();
-        //        var exists = (from x in oldPacks where x.BookPackItemOperationID == pack.BookPackItemOperationID select x).FirstOrDefault();
-        //        BusinessLogicLayer.Entity.PPM.BookPackingOperation packOperation = new BusinessLogicLayer.Entity.PPM.BookPackingOperation(parentItem.BookPackingOperationID.Value);
-        //        if (i >= pack.PackageTotal.Value)
-        //            break;
-        //        if (exists == null || !exists.HasObject)
-        //        {
-        //            int bookStart = 0;
-        //            int bookLast = BookPackItemLogic.GetLastBookSerialForRePackedItem(parentItem.BookPackItemID);
-        //            if (bookLast == 0)
-        //                bookLast = 1;
-        //            var oldPackageCount = BookPackItemLogic.GetPackageBooksCount(parentItem.BookPackItemID);
-        //            int remaining = oldPackageCount;
-        //            bool isFirst = true;
-        //            while (remaining > 0)
-        //            {
-        //                BusinessLogicLayer.Entity.PPM.BookPackItem item = new BusinessLogicLayer.Entity.PPM.BookPackItem();
-        //                item.BookPackingOperationID = packOperation.BookPackingOperationID;
-        //                item.BookPackItemOperationID = pack.BookPackItemOperationID;
-        //                item.BookPackItemID = PackID;
-        //                item.OperationStatusID = 7;
-        //                item.ParentID = parentRepackID;
-        //                item.PackSerial = serial;
-        //                item.ParentBookPackItemID = parentItem.BookPackItemID;
-        //                string modelCode = "";
-        //                List<BusinessLogicLayer.Entity.PPM.BookPackItemModel> itemModels = new List<BusinessLogicLayer.Entity.PPM.BookPackItemModel>();
-
-        //                bookStart = i == 0 ? bookLast : bookLast + 1;
-        //                bookLast = bookStart + (packType.BooksPerPackage.Value - 1);
-
-        //                foreach (BusinessLogicLayer.Entity.PPM.BookPackItemModel examModel in parentItem.ItemModels)
-        //                {
-        //                    if (packType.ExamModelCount > 1)
-        //                    {
-        //                        BusinessLogicLayer.Entity.PPM.BookPackItemModel newModel = new BusinessLogicLayer.Entity.PPM.BookPackItemModel();
-        //                        newModel.BookPackItemID = item.BookPackItemID;
-        //                        newModel.ExamModelID = examModel.ExamModelID;
-        //                        modelCode += examModel.ExamModelID + "-";
-        //                        item.StartBookSerial = bookStart;
-        //                        item.LastBookSerial = bookLast;
-        //                        remaining -= packType.BooksPerPackage.Value;
-
-        //                        itemModels.Add(newModel);
-        //                    }
-        //                    else
-        //                    {
-        //                        if (isFirst)
-        //                        {
-        //                            remaining = remaining * parentItem.ItemModels.Count;
-        //                            isFirst = false;
-        //                        }
-
-        //                        itemModels = new List<BusinessLogicLayer.Entity.PPM.BookPackItemModel>();
-        //                        BusinessLogicLayer.Entity.PPM.BookPackItem itemUnit = new BusinessLogicLayer.Entity.PPM.BookPackItem();
-        //                        itemUnit.BookPackingOperationID = packOperation.BookPackingOperationID;
-        //                        itemUnit.BookPackItemOperationID = pack.BookPackItemOperationID;
-        //                        itemUnit.BookPackItemID = PackID;
-        //                        itemUnit.OperationStatusID = 7;
-        //                        itemUnit.ParentBookPackItemID = parentItem.BookPackItemID;
-        //                        itemUnit.StartBookSerial = bookStart;
-        //                        itemUnit.LastBookSerial = bookLast;
-        //                        itemUnit.PackSerial = serial;
-        //                        //itemUnit.PackCode = PrintingOperationID + "-" + pack.BookPackingOperationID + "-" + pack.PackagingTypeID + "-" + examModel.ExamModelID + "-" + serial;
-        //                        itemUnit.PackCode = RandomString(12);
-        //                        BusinessLogicLayer.Entity.PPM.BookPackItemModel newModel = new BusinessLogicLayer.Entity.PPM.BookPackItemModel();
-        //                        newModel.BookPackItemID = item.BookPackItemID;
-        //                        newModel.ExamModelID = examModel.ExamModelID;
-        //                        modelCode += examModel.ExamModelID + "-";
-        //                        itemModels.Add(newModel);
-        //                        itemUnit.ParentID = parentRepackID;
-        //                        itemUnit.ItemModels = itemModels;
-        //                        remaining -= packType.BooksPerPackage.Value;
-        //                        items.Add(itemUnit);
-        //                        //serial++;
-        //                    }
-
-        //                }
-        //                if (packType.ExamModelCount > 1)
-        //                {
-        //                    if (!string.IsNullOrEmpty(modelCode))
-        //                        modelCode = modelCode.Remove(modelCode.Length - 1, 1);
-        //                    //item.PackCode = PrintingOperationID + "-" + pack.BookPackingOperationID + "-" + pack.PackagingTypeID + "-" + modelCode + "-" + serial;
-        //                    item.PackCode = RandomString(12);
-        //                    item.ItemModels = itemModels;
-        //                    items.Add(item);
-
-        //                }
-        //                serial++;
-        //                i++;
-        //                ///TODO: Add Pack Items for Sub Packs
-
-        //            }
-        //        }
-        //    }
-
-
-
-        //}
+        [HttpPost]
+        public ActionResult GetPackagingTypeFrom(string item)
+        {
+            BusinessLogicLayer.Components.PPM.BookPackingOperationLogic poperation = new BusinessLogicLayer.Components.PPM.BookPackingOperationLogic();
+            var items = poperation.GetAllPackagingTypeByBookPrintingID(Convert.ToInt32(item));
+            return Json(items);
+        }
 
         string RandomString(int length, string allowedChars = "0123456789")
         {
@@ -530,5 +335,10 @@ namespace Qiyas.WebAdmin.Controllers
             return list;
         }
 
+
+        public ActionResult PackagingTypeFromComboBoxPartial()
+        {
+            return PartialView("_PackagingTypeFromComboBoxPartial");
+        }
     }
 }
